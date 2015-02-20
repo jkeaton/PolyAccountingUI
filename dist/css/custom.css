@@ -1,9 +1,12 @@
 body {
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #999;
+  background-color: #B2FFFF;
 }
-
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .form-signin {
   width: 100%;
   padding: 15px;
@@ -49,4 +52,7 @@ body {
 }
 .error {
     color: red;
+}
+.errorPane{
+    height: 50px;
 }
