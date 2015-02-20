@@ -37,18 +37,22 @@ html, body {
 .form-signin input[type="password"] {
     margin-bottom: 10px;/
 }
+.form-signin input[type="email"] {
+    margin-bottom: 10px;/
+}
 .col-centered{
     float: none;
     margin: 0 auto;
 }
-#signInButton{
+#signInButton, #sendEmail{
     float: left;
 }
-#helpLinks{
+#helpLinks, #returnHome{
     float: right;
 }
-#myPanel{
+.myPanel{
     width: 500px;
+    min-height: 400px; 
 }
 .error {
     color: red;
