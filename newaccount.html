@@ -173,7 +173,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Email Verification</title>
+		<title>Poly Accounting Login</title>
 
 		<!-- Bootstrap -->
 		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -201,18 +201,30 @@
                 <div class="panel-body">
                     <form class="form-signin container-fluid">
                         <div class="row">
-                            <h4 class="form-signin-heading">Enter your email to receive your password reset link</h4>
+                            <h4 class="form-signin-heading">Create a New Account</h4>
+                        </div>
+                        <div class="row">
+                            <label for="inputFname" class="sr-only">First Name</label>
+                            <input type="text" id="inputFname" class="form-control" placeholder="First Name" required autofocus>
+                        </div>
+                        <div class="row">
+                            <label for="inputLname" class="sr-only">Last Name</label>
+                            <input type="text" id="inputLname" class="form-control" placeholder="Last Name" required autofocus>
                         </div>
                         <div class="row">
                             <label for="inputEmail" class="sr-only">Email</label>
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
                         </div>
                         <div class="row">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="row">
                             <div class="button-left">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Send Reset Link</button>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
                             </div>
-                            <div id="returnHome">
-                                <a href="index.html">Return Home</a></br>
+                            <div id="helpLinks">
+                                <a href="index.html">Return Home</a>
                             </div>
                         </div>
                         <div class="row">
@@ -220,8 +232,8 @@
                                 <span class="error">
                                     <p>
                                         <?php 
-                                            if (isset($emailErr)){
-                                                echo $emailErr;      
+                                            if (isset($loginErr)){
+                                                echo $loginErr;      
                                             }
                                         ?>
                                     </p>

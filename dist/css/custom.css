@@ -1,5 +1,5 @@
 body {
-  padding-top: 100px;
+  padding-top: 70px;
   padding-bottom: 40px;
   background-color: #B2FFFF;
 }
@@ -44,15 +44,15 @@ html, body {
     float: none;
     margin: 0 auto;
 }
-#signInButton, #sendEmail{
+.button-left, .field-left{
     float: left;
 }
-#helpLinks, #returnHome{
+#helpLinks, #returnHome, .field-right{
     float: right;
 }
 .myPanel{
     width: 500px;
-    min-height: 400px; 
+    min-height: 500px; 
 }
 .error {
     color: red;
