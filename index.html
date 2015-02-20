@@ -198,13 +198,39 @@
                     <h3 class="panel-title">Poly Accounting Information Group</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin">
-                        <h4 class="form-signin-heading">Please sign in</h4>
-                        <label for="inputUsername" class="sr-only">Username</label>
-                        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <form class="form-signin container-fluid">
+                        <div class="row">
+                            <h4 class="form-signin-heading">Please sign in</h4>
+                        </div>
+                        <div class="row">
+                            <label for="inputUsername" class="sr-only">Username</label>
+                            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                        </div>
+                        <div class="row">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="row">
+                            <div id="signInButton">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            </div>
+                            <div id="helpLinks">
+                                <a href="#">Forgot my Password</a></br>
+                                <a href="#">Create new Account</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="error">
+                                <?php 
+                                    if (isset($loginErr)){
+                                        echo $loginErr;      
+                                    }
+                                    else{
+                                        echo "*";
+                                    }
+                                ?>
+                            </span> 
+                        </div>
                     </form>
                 </div>
             </div>
