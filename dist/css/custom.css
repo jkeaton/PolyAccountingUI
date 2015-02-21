@@ -54,6 +54,10 @@ html, body {
     width: 500px;
     min-height: 500px; 
 }
+.journalEntryPanel {
+    width: 95%;
+    min-height: 700px;
+}
 .error {
     color: red;
 }
@@ -70,4 +74,25 @@ html, body {
 }
 .panel-heading{
     min-height: 60px;    
+}
+.t_date {
+    width: 10%;
+}
+.t_acct_title {
+    width: 50%;
+}
+.t_src {
+    width: 4%;
+}
+.t_ref {
+    width: 6%;
+}
+.t_debit {
+    width: 10%;
+}
+.t_credit {
+    width: 10%;
+}
+.t_action {
+    width: 10%;
 }

@@ -1,0 +1,259 @@
+<!-- Connect to Database -->
+<!--
+<?php
+    session_start();
+    include "dist/common.php";
+    $usernameErr = $fnameErr = $lnameErr = $streetErr = $cityErr = $stateErr = $zipcodeErr = $emailErr = $passwordErr = "";
+    $username = $fname = $lname = $street = $city = $state = $zipcode = $email = $password = $hashed_pass = "";
+    $welcome_msg = "";
+
+    // If the current session includes a valid user, display the welcome label
+    if (isset($_SESSION['user'])){
+        $welcome_msg = ("Welcome " . $_SESSION['user']);
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Handle logout attempt
+        if (isset($_POST['logout'])){
+            return logout();
+        }
+
+        $errCount = 0;
+        // Get username
+        if (empty($_POST["username"])) {
+            ++$errCount;
+            $usernameErr = "Username is required";
+        } else {
+            $username = test_input($_POST["username"]);
+            // only allow alpha digit characters as part of the username
+            if (!preg_match("/^[a-zA-Z0-9]*$/",$username)) {
+                ++$errCount;
+                $usernameErr = "Only letters and numbers allowed";
+            }
+            if (!availableUser($username)){
+                ++$errCount;
+                $usernameErr = "Username is unavailable, please choose another";
+            }
+        }
+    
+        // Get fname  
+        if (empty($_POST["fname"])) {
+            ++$errCount;
+            $fnameErr = "First name is required";
+        } else {
+            $fname = test_input($_POST["fname"]);
+            // only allow alpha characters as part of the first name
+            if (!preg_match("/^[a-zA-Z]*$/",$fname)) {
+                ++$errCount;
+                $fnameErr = "Only letters allowed";
+            }
+        }
+        
+        // Get lname  
+        if (empty($_POST["lname"])) {
+            ++$errCount;
+            $lnameErr = "Last name is required";
+        } else {
+            $lname = test_input($_POST["lname"]);
+            // only allow alpha characters as part of the last name
+            if (!preg_match("/^[a-zA-Z]*$/",$lname)) {
+                ++$errCount;
+                $lnameErr = "Only letters allowed";
+            }
+        }
+
+        // Get street 
+        if (empty($_POST["street"])) {
+            ++$errCount;
+            $streetErr = "Street Address is required";
+        } else {
+            $street = test_input($_POST["street"]);
+            // only allow alpha digit characters as part of the street address
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/",$street)) {
+                ++$errCount;
+                $streetErr = "Only letters, numbers and spaces are allowed";
+            }
+        }
+        
+        // Get city
+        if (empty($_POST["city"])) {
+            ++$errCount;
+            $cityErr = "City is required";
+        } else {
+            $city = test_input($_POST["city"]);
+            // only allow alpha characters as part of the city
+            if (!preg_match("/^[a-zA-Z]*$/",$city)) {
+                ++$errCount;
+                $cityErr = "Only letters allowed";
+            }
+        }
+
+        // Get state 
+        if (empty($_POST["state"])) {
+            ++$errCount;
+            $stateErr = "State is required";
+        } else {
+            $state = test_input($_POST["state"]);
+            // only allow alpha characters as part of the state
+            if (!preg_match("/^[a-zA-Z]*$/",$state)) {
+                ++$errCount;
+                $stateErr = "Only letters allowed";
+            }
+        }
+
+        // Get zipcode
+        if (empty($_POST["zipcode"])) {
+            ++$errCount;
+            $zipcodeErr = "Zipcode is required";
+        } else {
+            $zipcode = test_input($_POST["zipcode"]);
+            // only allow digit characters as part of the zipcode
+            if (!preg_match("/^[0-9]*$/",$zipcode)) {
+                ++$errCount;
+                $zipcodeErr = "Only numbers allowed";
+            }
+            else{
+                if (strlen($zipcode) != 5){
+                    ++$errCount;
+                    $zipcodeErr = "Zipcode must be 5 digits long";
+                }
+            }
+        }
+
+        // Get email 
+        if (empty($_POST["email"])) {
+            ++$errCount;
+            $emailErr = "Email address is required";
+        } else {
+            $email = test_input($_POST["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                ++$errCount;
+                $emailErr = "Invalid email format";
+            }
+        }
+
+        // Get password  
+        if (empty($_POST["password"])) {
+            ++$errCount;
+            $passwordErr = "Password is required";
+        } else {
+            $password = test_input($_POST["password"]);
+            // hash password for storage
+            $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        // If no errors occured, create a user and store it in the database
+        if ($errCount == 0){
+            if (createNewAccount($username, $fname, $lname, $street, $city,
+                $state, $zipcode, $email, $hashed_pass)){
+		        header('Location: http://localhost/TicketHawk/homepage.php');
+            }
+        }
+    }
+    
+    function createNewAccount($_username, $_fname, $_lname, $_street, $_city, $_state, $_zipcode, $_email, $_password) {
+        $dbuser = 'customer';
+        $dbpass = 'userpassword';
+        $dbhost = 'localhost';
+        $dbname = 'tickethawk';
+        $cxn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+        $query = "INSERT INTO USER
+        (username, fname, lname, street_address, city, state, zipcode, email, hashed_pass)
+        VALUES ('$_username', '$_fname', '$_lname', '$_street', '$_city', '$_state', '$_zipcode', '$_email', '$_password')";
+        $results = mysqli_query($cxn, $query) or die($query);
+        return true;
+    }
+?>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Journal Entry</title>
+
+		<!-- Bootstrap -->
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom Style sheet for moving the body down below nav bar -->
+        <link href="dist/css/custom.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body role="document">
+    
+		<!--main
+		================================================== -->
+        <div class="row">
+            <div class="panel panel-primary col-centered form-group journalEntryPanel">
+                <div class="panel-heading">
+                    <img src="dist/images/AppDomainFinalProjectLogo.png" alt="PAI Logo" height="42" width="42" class="logo"> 
+                    <h3 class="panel-title">General Journal</h3>
+                </div>
+                <div class="panel">
+                <!-- Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="t_date">Date</th>
+                                <th class="t_acct_title">Account Title and Explanation</th>
+                                <th class="t_src">Src</th>
+                                <th class="t_ref">Ref</th>
+                                <th class="t_debit">Debit</th>
+                                <th class="t_credit">Credit</th>
+                                <th class="t_action">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="panel" id="events-ready">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <tr>
+                                    <td class="t_date"><input type="text" class="form-control" id="date" placeholder="Date" name="date" required></td>
+                                    <td class="t_acct_title">
+                                        <input type="text" class="form-control" id="acct_title" placeholder="Account Title" name="acct_title" required>
+                                    </td>
+                                    <td class="t_src">
+                                        <button type="submit" class="btn btn-default form-control" name="src">
+                                            <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo"> 
+                                        </button>
+                                    </td>
+                                    <td class="t_ref">
+                                        <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>
+                                    </td>
+                                    <td class="t_debit">
+                                        <input type="text" class="form-control" id="debit" placeholder="Amt" name="debit" required>
+                                    </td>
+                                    <td class="t_credit"></td>
+                                    <td class="t_action">
+                                        <button type="submit" class="btn btn-primary form-control" name="approve">
+                                            Approve
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>goodbye</td>
+                                </tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div                
+            </div>
+        </div>
+
+    </body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
