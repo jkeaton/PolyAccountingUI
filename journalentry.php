@@ -1,20 +1,20 @@
 <?php
     include "dbconnect.php";
     // Attempt to connect to the SQL Server Database
-    $cxn = db_connect();
+    //$cxn = db_connect();
+    /*
     if ( $cxn ){
         echo "Connection established.<br/>";
     }
     else{
         echo "Connection could not be established.<br/>";
-        //die (print_r( sqlsrv_errors(), true));
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         // Handle attempt to clear the entry 
         if (isset($_POST['clear'])) {
             header('Location: journalentry.php');
         }
-    }
+    }*/
 ?>
 
 <!DOCTYPE html>
