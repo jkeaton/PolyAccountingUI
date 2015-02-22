@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head id="my_header">
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Journal Entry</title>
 
         <!-- Reloadable Style Sheets -->
-		<link href="dist/css/bootstrap.min.css" rel="stylesheet" class="reloadable">
-        <link href="dist/css/custom.css" rel="stylesheet" id="reloadable">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" id="reloadable">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" class="reloadable">
+        <link href="dist/css/custom.css" rel="stylesheet" class="reloadable">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" class="reloadable">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,47 +18,74 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">
-            function reload_css() {
-                var sheet1 = document.getElementById("reload1");            
-                var sheet2 = document.getElementById("reload2");            
-                var sheet3 = document.getElementById("reload3");            
+            reload_css_sheets = null;
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                function reloadStyleSheets() {
+                    var queryString = '?reload=' + new Date().getTime();
+                    $('link[rel="stylesheet"]').each(function () {
+                        this.href = this.href.replace(/\?.*|$/, queryString);
+                    });
+                    return 0;
+                }
+                reload_css_sheets = reloadStyleSheets;
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            function reload_css(){
+                var links = document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++){
+                    var link = links[i];
+                    if (link.rel === "stylesheet"){
+                        link.href += "?";
+                    }
+                }
             }
 
             $(document).ready(function(){
                 $(".add_debit").click(function(){
                     $("#debits").append(
                         '<tr>' +
-                            '<td class=&quot;t_date&quot;></td>' +
-                            '<td class=&quot;t_acct_title&quot;>' +
-                                '<div class=&quot;form-group&quot;>' +
-                                    '<div class=&apos;input-group input-ammend debit_acct_name&apos; id=&apos;event-date&apos;>' +
-                                        '<select class=&quot;form-control&quot; id=&quot;acct_title&quot; placeholder=&quot;Select Account&quot; name=&quot;acct_title&quot; required>'+
+                            '<td class="t_date"></td>' +
+                            '<td class="t_acct_title">' +
+                                '<div class="form-group">' +
+                                    '<div class="input-group input-ammend debit_acct_name" id="event-date">' +
+                                        '<select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title" required>'+
                                             '<option>Select...</option>' +
                                         '</select>' +
-                                        '<span class=&quot;input-group-addon btn add_debit&quot;>' +
-                                            '<span class=&quot;glyphicon glyphicon-plus&quot;></span>' +
+                                        '<span class="input-group-addon btn add_debit">' +
+                                            '<span class="glyphicon glyphicon-plus"></span>' +
                                         '</span>' +
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
-                            '<td class=&quot;t_src&quot;>' +
-                                '<button type=&quot;submit&quot; class=&quot;btn btn-default form-control&quot; name=&quot;src&quot;>' +
-                                    '<img src=&quot;dist/images/document_icon.png&quot; alt=&quot;Source Doc&quot; height=&quot;16&quot; width=&quot;16&quot; class=&quot;logo&quot;>' + 
+                            '<td class="t_src">' +
+                                '<button type="submit" class="btn btn-default form-control" name="src">' +
+                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' + 
                                 '</button>' +
                             '</td>' +
-                            '<td class=&quot;t_ref&quot;>' +
-                                '<input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;ref&quot; placeholder=&quot;Ref&quot; name=&quot;reference&quot; required>' +
+                            '<td class="t_ref">' +
+                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>' +
                             '</td>' +
-                            '<td class=&quot;t_debit&quot;>' +
-                                '<input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;debit&quot; placeholder=&quot;Amt&quot; name=&quot;debit&quot; required>' +
+                            '<td class="t_debit">' +
+                                '<input type="text" class="form-control" id="debit" placeholder="Amt" name="debit" required>' +
                             '</td>' +
-                            '<td class=&quot;t_credit&quot;></td>' +
-                            '<td class=&quot;t_action&quot;></td>' +
+                            '<td class="t_credit"></td>' +
+                            '<td class="t_action"></td>' +
                         '</tr>'
                     );
-                    reload_css();
+                    /**
+                     * This is where we'd call the css reload functions, after
+                     * the dynamically added elements are there.
+                     */
+                    //reload_css();
+                    //reload_css_sheets();
                 });
 
                 $(".add_credit").click(function(){
@@ -69,7 +96,7 @@
 	</head>
 
 	<body role="document">
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <img src="dist/images/AppDomainFinalProjectLogo.png"
@@ -104,8 +131,8 @@
                 </div>
                 <div class="panel" id="events-ready">
                     <table class="table">
-                        <tbody>
-                            <tr id="debits">
+                        <tbody id="debits">
+                            <tr>
                                 <tr>
                                     <td class="t_date"><input type="text" class="form-control" id="date" placeholder="Date" name="date" required></td>
                                     <td class="t_acct_title">
