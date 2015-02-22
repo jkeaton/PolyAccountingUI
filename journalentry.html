@@ -112,8 +112,8 @@
 		================================================== -->
         <div class="container">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">General Journal</h3>
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">General Journal</h3>
                 </div>
                 <div class="panel">
                 <!-- Table -->
@@ -161,7 +161,7 @@
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button type="submit" class="btn btn-danger form-control" name="clear">
+                                    <button id="clear_entry" type="submit" class="btn btn-danger form-control" name="clear">
                                         Clear
                                     </button>
                                 </td>
@@ -203,7 +203,11 @@
                                 <td class="t_ref"></td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit"></td>
-                                <td class="t_action"></td>
+                                <td class="t_action">
+                                    <button type="submit" id="attempt_post"class="btn btn-primary form-control" name="submit">
+                                        Submit
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
