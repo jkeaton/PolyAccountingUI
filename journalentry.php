@@ -1,3 +1,12 @@
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        // Handle attempt to clear the entry 
+        if (isset($_POST['clear'])) {
+            header('Location: journalentry.php');
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head id="my_header">
@@ -35,7 +44,7 @@
                         '<tr id="debit_' + (dr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select class="form-control debit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title" required>'+
+                                '<select class="form-control debit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
                                     '<option>Select...</option>' +
                                     '<option>1</option>' +
                                     '<option>2</option>' +
@@ -48,10 +57,10 @@
                                 '</button>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>' +
+                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
                             '</td>' +
                             '<td class="t_debit">' +
-                                '<input type="text" class="form-control dr_amt" placeholder="Amt" name="debit" required>' +
+                                '<input type="text" class="form-control dr_amt" placeholder="Amt" name="debit">' +
                             '</td>' +
                             '<td class="t_credit"></td>' +
                             '<td class="t_action"></td>' +
@@ -67,7 +76,7 @@
                         '<tr id="credit_' + (cr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select class="form-control credit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title" required>'+
+                                '<select class="form-control credit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
                                     '<option>Select...</option>' +
                                     '<option>1</option>' +
                                     '<option>2</option>' +
@@ -80,11 +89,11 @@
                                 '</button>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>' +
+                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
                             '</td>' +
                             '<td class="t_debit"></td>' +
                             '<td class="t_credit">'+
-                                '<input type="text" class="form-control cr_amt" placeholder="Amt" name="credit" required>' +
+                                '<input type="text" class="form-control cr_amt" placeholder="Amt" name="credit">' +
                             '</td>' +
                             '<td class="t_action"></td>' +
                         '</tr>'
@@ -111,6 +120,8 @@
 		<!--main
 		================================================== -->
         <div class="container">
+            <form role="form"  method="post" action="<?php echo
+                htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading text-center">
                     <h3 class="panel-title">General Journal</h3>
@@ -135,11 +146,11 @@
                     <table class="table my_table">
                         <tbody id="debits">
                             <tr id="debit_1">
-                                <td class="t_date"><input type="text" class="form-control" id="date" placeholder="Date" name="date" required></td>
+                                <td class="t_date"><input type="text" class="form-control" id="date" placeholder="Date" name="date"></td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend debit_acct_name' id='event-date'>
-                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title" required>
+                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
                                                 <option>Select...</option>
                                             </select>
                                             <span class="add_debit input-group-addon btn">
@@ -154,10 +165,10 @@
                                     </button>
                                 </td>
                                 <td class="t_ref">
-                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>
+                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
                                 </td>
                                 <td class="t_debit">
-                                    <input type="text" class="form-control" id="debit" placeholder="Amt" name="debit" required>
+                                    <input type="text" class="form-control" id="debit" placeholder="Amt" name="debit">
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
@@ -171,7 +182,7 @@
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend credit_acct_name' id='event-date'>
-                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title" required>
+                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
                                                 <option>Select...</option>
                                             </select>
                                             <span class="add_credit input-group-addon btn">
@@ -186,18 +197,18 @@
                                     </button>
                                 </td>
                                 <td class="t_ref">
-                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference" required>
+                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
                                 </td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit">
-                                    <input type="text" class="form-control cr_amt" placeholder="Amt" name="credit" required>
+                                    <input type="text" class="form-control cr_amt" placeholder="Amt" name="credit">
                                 </td>
                                 <td class="t_action"></td>
                             </tr>
                             <tr id="desc_1">
                                 <td class="t_date"></td>
                                 <td class="t_acct_title">
-                                    <input type="text" class="form-control trans_desc" id="trans_desc" placeholder="Description" name="trans_desc" required>
+                                    <input type="text" class="form-control trans_desc" id="trans_desc" placeholder="Description" name="trans_desc">
                                 </td>
                                 <td class="t_src"></td>
                                 <td class="t_ref"></td>
@@ -213,6 +224,7 @@
                     </table>
                 </div>                
             </div>
+            </form>
         </div>
 
     </body>
