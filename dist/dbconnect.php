@@ -1,8 +1,9 @@
 <?php
     function db_connect(){
-        $serverName = "TEST-MESBROOK\SWE_SQLEXPRESS";
-        $connectionInfo = array("Database"=>"master", "UID"=>"sa", "PWD"=>"Spsu20!4");
-        $conn = sqlsrv_connect( $serverName, $connectionInfo );
-        return $conn;
+        $serverName = "(local)";
+        $connectionOptions = array("Database"=>"master", "UID"=>"sa", "PWD"=>"Spsu20!4");
+	$link = sqlsrv_connect($serverName, $connectionOptions)
+            or die();
+        return $link;
     }
 ?>

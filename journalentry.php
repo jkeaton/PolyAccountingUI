@@ -1,20 +1,7 @@
 <?php
-    include "dbconnect.php";
+    include "dist/dbconnect.php";
     // Attempt to connect to the SQL Server Database
-    //$cxn = db_connect();
-    /*
-    if ( $cxn ){
-        echo "Connection established.<br/>";
-    }
-    else{
-        echo "Connection could not be established.<br/>";
-    }
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        // Handle attempt to clear the entry 
-        if (isset($_POST['clear'])) {
-            header('Location: journalentry.php');
-        }
-    }*/
+    $dbConnection = db_connect();
 ?>
 
 <!DOCTYPE html>
