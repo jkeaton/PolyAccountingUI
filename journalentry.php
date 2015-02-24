@@ -23,6 +23,10 @@
         }
         return $output;
     }
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        // Add code to be run when the user attempts to submit a journal entry 
+    }
 ?>
 
 <!DOCTYPE html>
@@ -68,9 +72,10 @@
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
-                                '<button type="submit" class="btn btn-default form-control" name="src">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' + 
-                                '</button>' +
+                                '<div class="fileUpload btn btn-default form-control">' +
+                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
+                                    '<input type="file" class="upload">' +
+                                '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
                                 '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
@@ -100,9 +105,10 @@
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
-                                '<button type="submit" class="btn btn-default form-control" name="src">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' + 
-                                '</button>' +
+                                '<div class="fileUpload btn btn-default form-control">' +
+                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
+                                    '<input type="file" class="upload">' +
+                                '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
                                 '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
@@ -136,8 +142,7 @@
 		<!--main
 		================================================== -->
         <div class="container">
-            <form role="form"  method="post" action="<?php echo
-                htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+            <form role="form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading text-center">
                     <h3 class="panel-title">General Journal</h3>
@@ -177,9 +182,10 @@
                                     </div>
                                 </td>
                                 <td class="t_src">
-                                    <button type="submit" class="btn btn-default form-control" name="src">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo"> 
-                                    </button>
+                                    <div class="fileUpload btn btn-default form-control">
+                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
+                                        <input type="file" class="upload">
+                                    </div>
                                 </td>
                                 <td class="t_ref">
                                     <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
@@ -189,7 +195,7 @@
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button id="clear_entry" type="submit" class="btn btn-danger form-control" name="clear">
+                                    <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger form-control" name="clear">
                                         Clear
                                     </button>
                                 </td>
@@ -210,9 +216,10 @@
                                     </div>
                                 </td>
                                 <td class="t_src">
-                                    <button type="submit" class="btn btn-default form-control" name="src">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo"> 
-                                    </button>
+                                    <div class="fileUpload btn btn-default form-control">
+                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
+                                        <input type="file" class="upload">
+                                    </div>
                                 </td>
                                 <td class="t_ref">
                                     <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
