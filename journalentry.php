@@ -2,6 +2,27 @@
     include "dist/dbconnect.php";
     // Attempt to connect to the SQL Server Database
     $dbConnection = db_connect();
+    $acct_names = get_acct_names();
+
+    function get_acct_names(){
+        global $dbConnection;
+        $sql = "SELECT * FROM Account";
+        $result = sqlsrv_query( $dbConnection, $sql );
+        $output = array();
+        while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
+            array_push($output, $row['Name']); 
+        }
+        return $output;
+    }
+
+    function gen_select_options(){
+        global $acct_names;
+        $output = "";
+        foreach ($acct_names as &$value){
+            $output .= ("<option>".$value."</option>");
+        }
+        return $output;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,9 +64,7 @@
                             '<td class="t_acct_title">' +
                                 '<select class="form-control debit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
                                     '<option>Select...</option>' +
-                                    '<option>1</option>' +
-                                    '<option>2</option>' +
-                                    '<option>3</option>' +
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -149,6 +168,7 @@
                                         <div class='input-group input-ammend debit_acct_name' id='event-date'>
                                             <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
                                                 <option>Select...</option>
+                                                '<?php echo gen_select_options(); ?>'
                                             </select>
                                             <span class="add_debit input-group-addon btn">
                                                 <span class="glyphicon glyphicon-plus"></span>
@@ -181,6 +201,7 @@
                                         <div class='input-group input-ammend credit_acct_name' id='event-date'>
                                             <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
                                                 <option>Select...</option>
+                                                '<?php echo gen_select_options(); ?>'
                                             </select>
                                             <span class="add_credit input-group-addon btn">
                                                 <span class="glyphicon glyphicon-plus"></span>
