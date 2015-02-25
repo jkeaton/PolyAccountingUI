@@ -1,3 +1,75 @@
+<!-- Connect to Database -->
+<?php
+    include "dist/dbconnect.php";
+    include "dist/common.php";
+    // Attempt to connect to the SQL Server Database
+    $dbConnection = db_connect();
+    $userEmails = get_user_emails();
+    $currUser = $email = $emailErr = "";
+    
+    // Deal with the form being submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        // Handle insert event attempt
+        if (isset($_POST['submit'])) {
+            validateFields();
+        }
+    }
+
+    function get_user_emails(){
+        global $dbConnection;
+        $sql = "select * from AppUser";
+        $result = sqlsrv_query( $dbConnection, $sql );
+        $output = array();
+        while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
+            $output[$row['Email']] = $row['UserName'];
+        }
+        return $output;
+    }
+
+    function validateFields(){
+        global $email;
+        $errCount = 0;
+        if (empty($_POST["email"])) {
+            ++$errCount;
+            $emailErr = "Email address is required";
+        }
+        else {
+            $email = test_input($_POST["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                ++$errCount;
+                $emailErr = "Invalid email format";
+            }
+        }
+        if ($errCount == 0){
+            if (send_reset_code()){
+                $_POST = array();
+		        //header('Location: verifyresetcode.php');
+            }
+        }
+    } 
+
+    function send_reset_code(){
+        global $currUser;
+        global $userEmails;
+        global $email;
+        if ( array_key_exists( $email, $userEmails )){
+            $subject = "Poly Accounting Password Reset";
+            srand();
+            $rand_code = rand();
+            $currUser = $userEmails[$email];
+            $message = ("Greetings ".$currUser."!\r\n\r\nYour reset code is '".$rand_code."'. Go to the site listed below and enter your reset code in order to reset your account password:\r\nhttp://137.135.120.135/verifyresetcode.php\r\n\r\nWe thank you for your business and hope you have a great day.\r\n\r\nRegards,\r\n\r\nPoly Accounting Information Group");
+            $message = wordwrap($message, 70, "\r\n");
+            // Send reset email to user
+            mail($email, $subject, $message);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,21 +102,17 @@
                     <h3 class="panel-title">Poly Accounting Information Group</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin container-fluid" method="post">
-                    <!--<form role="form-signin container-fluid"  method="post"
-                        action="<?php echo
-                        htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
-                        enctype="multipart/form-data">-->
+                    <form role="form" class="form-signin container-fluid" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                         <div class="row">
                             <h4 class="form-signin-heading">Enter your email to receive your password reset link</h4>
                         </div>
                         <div class="row">
                             <label for="inputEmail" class="sr-only">Email</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus>
                         </div>
                         <div class="row">
                             <div class="button-left">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Send Reset Link</button>
+                                <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Send Reset Link</button>
                             </div>
                             <div id="returnHome">
                                 <a href="index.html">Return Home</a></br>
