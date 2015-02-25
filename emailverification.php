@@ -30,7 +30,11 @@
                     <h3 class="panel-title">Poly Accounting Information Group</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin container-fluid">
+                    <form class="form-signin container-fluid" method="post">
+                    <!--<form role="form-signin container-fluid"  method="post"
+                        action="<?php echo
+                        htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                        enctype="multipart/form-data">-->
                         <div class="row">
                             <h4 class="form-signin-heading">Enter your email to receive your password reset link</h4>
                         </div>

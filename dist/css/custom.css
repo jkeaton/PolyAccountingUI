@@ -10,6 +10,7 @@ html, body {
   width: 100%;
   padding: 15px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -57,7 +58,7 @@ html, body {
     max-height: 80%;
 }
 .main_div {
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .error {
     color: red;
@@ -115,7 +116,7 @@ html, body {
 }
 .my_table {
     max-height: 85%;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 #my_table_body {
     overflow-y: scroll;
