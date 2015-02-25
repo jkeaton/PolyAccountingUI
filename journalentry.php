@@ -99,9 +99,7 @@
                             '<td class="t_acct_title">' +
                                 '<select class="form-control credit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
                                     '<option>Select...</option>' +
-                                    '<option>1</option>' +
-                                    '<option>2</option>' +
-                                    '<option>3</option>' +
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
