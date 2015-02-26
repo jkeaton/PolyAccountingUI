@@ -134,6 +134,11 @@
                     alt="PAI Logo" height="30" width="30" class="logo-top nav"> 
                     <a class="navbar-brand" href="#">Poly Accounting Information Group</a>
                 </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.php">Log Out</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     

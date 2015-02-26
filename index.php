@@ -1,3 +1,69 @@
+<!-- Connect to Database -->
+<?php
+    include "dist/dbconnect.php";
+    include "dist/common.php";
+    // Attempt to connect to the SQL Server Database
+    $dbConnection = db_connect();
+    $usernameErr = $passErr = "";
+    $username = $pass = $hashed_pass = "";
+
+    // Deal with the form being submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        // Handle insert event attempt
+        if (isset($_POST['submit'])) {
+            validateFields();
+        }
+    }
+
+    function validateFields(){
+        global $usernameErr, $passErr, $username, $pass, $hashed_pass;
+        $errCount = 0;
+
+        // Get username 
+        if (empty($_POST["username"])) {
+            ++$errCount;
+            $usernameErr = "Username is required";
+        } 
+        else {
+            $username = test_input($_POST["username"]);
+        }
+
+        // Get password  
+        if (empty($_POST["pass"])) {
+            ++$errCount;
+            $passErr = "Password is required";
+        } 
+        else {
+            $pass = test_input($_POST["pass"]);
+            // hash password for validation (ensure we use the same salt)
+            $hashed_pass = crypt($pass, '$5$rounds=5000$bluefootedboobyandbigbrother$');
+        }
+
+        if ($errCount == 0){
+            if (creds_match()){
+                $_POST = array();
+                // if all's well, let them through to the post-login screen
+                // for now we are going directly to the journalentry.php screen
+		        header('Location: journalentry.php');
+            }
+        } 
+    }
+
+    function creds_match(){
+        global $dbConnection, $hashed_pass, $username;     
+        $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
+        $results = sqlsrv_query( $dbConnection, $sql );
+        // Only care about the first row (should be the only row)
+        $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
+        if ($hashed_pass !== $row['PWHash']){
+            return false;
+        }
+        else{
+            return true;  
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -46,15 +112,15 @@
                         </div>
                         <div class="row">
                             <label for="inputUsername" class="sr-only">Username</label>
-                            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                            <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
                         </div>
                         <div class="row">
                             <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="row">
                             <div class="button-left">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                                <button name="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                             </div>
                             <div id="helpLinks">
                                 <a href="emailverification.php">Forgot my Password</a></br>
