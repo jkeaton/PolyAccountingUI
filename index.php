@@ -40,7 +40,7 @@
                     <h3 class="panel-title">Poly Accounting Information Group</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin container-fluid">
+                    <form role="form" class="form-signin container-fluid" method="post" id="sign_up_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="row">
                             <h4 class="form-signin-heading">Please sign in</h4>
                         </div>

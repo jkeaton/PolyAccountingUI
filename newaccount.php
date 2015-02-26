@@ -68,7 +68,7 @@
         else {
             $pass = test_input($_POST["pass"]);
             // hash password for storage
-            $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+            $hashed_pass = crypt($pass, '$5$rounds=5000$bluefootedboobyandbigbrother$');
         }
 
         if ($errCount == 0){
@@ -84,11 +84,18 @@
 
     function createUser(){
         global $fname, $lname, $email, $hashed_pass, $dbConnection;
-        $userNameAttempt = (strtolower($fname)[0].substr(strtolower($lname), 1));
-        $sql = "SELECT * FROM AppUser WHERE UserName LIKE'%".$userNameAttempt."%'";
+        $similar_ct = 0;
+        $userNameAttempt = (strtolower($fname)[0].strtolower($lname));
+        $sql = "SELECT * FROM AppUser WHERE UserName LIKE '".$userNameAttempt."%'";
+        // Ask the database how many usernames begin the same as this one
         $results = sqlsrv_query( $dbConnection, $sql );
         // Modify the attempted username to account for similar ones
-        $userNameAttempt = ($userNameAttempt.strval(mysqli_num_rows($results)));
+        while ($row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC)){
+            ++$similar_ct;
+        } // the php function sqlsrv_num_rows( $results ) is not working for me, but this simple algorithm works
+        if ($similar_ct > 0){
+            $userNameAttempt = ($userNameAttempt.strval($similar_ct));
+        }
         $sql = "INSERT INTO AppUser (UserName, FName, LName, UType, Email, PWHash) VALUES ('".$userNameAttempt."', '".$fname."', '".$lname."', 0, '".$email."', '".$hashed_pass."')";
         $results = sqlsrv_query( $dbConnection, $sql );
         return true;
@@ -152,7 +159,7 @@
                                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Create Account</button>
                             </div>
                             <div id="helpLinks">
-                                <a href="index.html">Return Home</a>
+                                <a href="index.php">Return Home</a>
                             </div>
                         </div>
                         <div class="row">

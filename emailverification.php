@@ -115,7 +115,7 @@
                                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Send Reset Link</button>
                             </div>
                             <div id="returnHome">
-                                <a href="index.html">Return Home</a></br>
+                                <a href="index.php">Return Home</a></br>
                             </div>
                         </div>
                         <div class="row">
