@@ -6,10 +6,11 @@
 
     function get_acct_names(){
         global $dbConnection;
-        $sql = "SELECT * FROM Account";
-        $result = sqlsrv_query( $dbConnection, $sql );
+        $sql = "SELECT * FROM Account where IsActive = 1 "
+                . "order by AccTypeID, SortOrder, AccNumber";
+        $result = mssql_query( $sql, $dbConnection );
         $output = array();
-        while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
+        while ($row = mssql_fetch_array( $result, MSSQL_BOTH) ){
             array_push($output, $row['Name']); 
         }
         return $output;
