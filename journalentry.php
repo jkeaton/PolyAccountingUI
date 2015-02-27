@@ -1,8 +1,8 @@
 <?php
     include "dist/dbconnect.php";
     // Attempt to connect to the SQL Server Database
-    $dbConnection = db_connect();
-    $acct_names = get_acct_names();
+    //$dbConnection = db_connect();
+    //$acct_names = get_acct_names();
 
     function get_acct_names(){
         global $dbConnection;
@@ -16,16 +16,68 @@
     }
 
     function gen_select_options(){
+        $output = "<option>testing</option>";
+        /*
         global $acct_names;
         $output = "";
         foreach ($acct_names as &$value){
             $output .= ("<option>".$value."</option>");
-        }
+        }*/
         return $output;
     }
     
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        // Add code to be run when the user attempts to submit a journal entry 
+        if (isset($_POST['submit'])) {
+            validateFields();
+        }
+    }
+
+    function validateFields(){
+        insert_entry();
+    }
+
+    function insert_entry(){
+        $test = $_POST['i'];
+        $row_ct = $_POST["row_ct_for_php"];
+        $filled = new SplFixedArray($row_ct*6);
+        foreach ($filled as $val){
+            $val = NULL;
+        }
+        //echo "<p>Size: ".count($test)."<p><br/><p>Total Max: ".($row_ct*6)."</p><br/>";
+        foreach ($test as $key => $value){
+            $filled[$key] = $value;
+        }
+        /* -- At this point we have all the field necessary for the insertion
+        foreach ($filled as $key => $value){
+            echo "<p>i[".$key."] => ".$value."</p>";
+        }*/
+        $tmp_syntax = 'Create table #tmp ([page] int null,'
+            . '[Entry] int null,'
+            . '[Date] datetime null,'
+            . 'PostDate datetime null,'
+            . 'Name varchar(150) null,'
+            . '[Ref#] int null,'
+            . '[Desc] varchar(150) null,'
+            . 'Amount money not null,'
+            . 'IsDebit bit not null,'
+            . 'AccountID int not null)';
+        if (create_tmp_view($tmp_syntax)){
+            for ($i = 0; $i < $row_ct; $i++){
+                if ($filled[$i*6] !== NULL){
+                     
+                }
+            }  
+        }        
+    }
+     
+    function create_tmp_view($input){
+        global $dbConnection;
+        $sql = $input;
+        $result = sqlsrv_query( $dbConnection, $sql );
+        if (!$result){
+            return false;
+        }
+        return true;
     }
 ?>
 
@@ -52,6 +104,7 @@
         <script type="text/javascript">
             var dr_ct = 2;
             var cr_ct = 2;
+            var curr_row = 3;
             var last_dr_id = "debit_1";
             var last_cr_id = "credit_1";
         </script>
@@ -62,11 +115,12 @@
 
             $(document).ready(function(){
                 $(".add_debit").click(function(){
+                    var start_at = curr_row * 6;
                     var new_line = (
                         '<tr id="debit_' + (dr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select class="form-control debit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
+                                '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
                                     '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
@@ -74,14 +128,14 @@
                             '<td class="t_src">' +
                                 '<div class="fileUpload btn btn-default form-control">' +
                                     '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
-                                    '<input type="file" class="upload">' +
+                                    '<input name="img_'+curr_row+'"type="file" class="upload">' +
                                 '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
+                                '<input name="i['+(start_at+3)+']"type="text" class="form-control" id="ref" placeholder="Ref">' +
                             '</td>' +
                             '<td class="t_debit">' +
-                                '<input type="text" class="form-control dr_amt" placeholder="Amt" name="debit">' +
+                                '<input name="i['+(start_at+4)+']"type="text" class="form-control dr_amt" placeholder="Amt">' +
                             '</td>' +
                             '<td class="t_credit"></td>' +
                             '<td class="t_action"></td>' +
@@ -90,14 +144,17 @@
                     $(new_line).insertAfter("#"+last_dr_id);
                     last_dr_id = ("debit_" + dr_ct);
                     ++dr_ct;
+                    ++curr_row;
+                    inc_row_ct();
                 });
                 
                 $(".add_credit").click(function(){
+                    var start_at = curr_row * 6;
                     var new_line = (
                         '<tr id="credit_' + (cr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select class="form-control credit_acct_name" id="acct_title" placeholder="Select Account" name="acct_title">'+
+                                '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
                                     '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
@@ -105,15 +162,15 @@
                             '<td class="t_src">' +
                                 '<div class="fileUpload btn btn-default form-control">' +
                                     '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
-                                    '<input type="file" class="upload">' +
+                                    '<input name="img_'+curr_row+'" type="file" class="upload">' +
                                 '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">' +
+                                '<input name="i['+(start_at+3)+']" type="text" class="form-control" placeholder="Ref">' +
                             '</td>' +
                             '<td class="t_debit"></td>' +
                             '<td class="t_credit">'+
-                                '<input type="text" class="form-control cr_amt" placeholder="Amt" name="credit">' +
+                                '<input name="i['+(start_at+5)+']" type="text" class="form-control cr_amt" placeholder="Amt">' +
                             '</td>' +
                             '<td class="t_action"></td>' +
                         '</tr>'
@@ -121,8 +178,15 @@
                     $(new_line).insertAfter("#"+last_cr_id);
                     last_cr_id = ("credit_" + cr_ct);
                     ++cr_ct;
+                    ++curr_row;
+                    inc_row_ct();
                 });
+                
             });
+
+            function inc_row_ct(){
+                document.getElementById("row_ct").setAttribute("value", curr_row)
+            }
         </script>
 	</head>
 
@@ -169,12 +233,15 @@
                 <div class="panel" id="my_table_body">
                     <table class="table my_table">
                         <tbody id="debits">
+                            <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
                             <tr id="debit_1">
-                                <td class="t_date"><input type="text" class="form-control" id="date" placeholder="Date" name="date"></td>
+                                <td class="t_date">
+                                    <input type="text" name="i[0]" class="form-control" id="date" placeholder="Date">
+                                </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend debit_acct_name' id='event-date'>
-                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
+                                            <select name="i[1]" class="form-control" id="acct_title" placeholder="Select Account">
                                                 <option>Select...</option>
                                                 '<?php echo gen_select_options(); ?>'
                                             </select>
@@ -187,14 +254,14 @@
                                 <td class="t_src">
                                     <div class="fileUpload btn btn-default form-control">
                                         <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
-                                        <input type="file" class="upload">
+                                        <input name="img_0" type="file" class="upload">
                                     </div>
                                 </td>
                                 <td class="t_ref">
-                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
+                                    <input name="i[3]" type="text" class="form-control" id="ref" placeholder="Ref">
                                 </td>
                                 <td class="t_debit">
-                                    <input type="text" class="form-control" id="debit" placeholder="Amt" name="debit">
+                                    <input name="i[4]" type="text" class="form-control" id="debit" placeholder="Amt">
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
@@ -208,7 +275,7 @@
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend credit_acct_name' id='event-date'>
-                                            <select class="form-control" id="acct_title" placeholder="Select Account" name="acct_title">
+                                            <select name="i[7]" class="form-control" id="acct_title" placeholder="Select Account">
                                                 <option>Select...</option>
                                                 '<?php echo gen_select_options(); ?>'
                                             </select>
@@ -221,22 +288,22 @@
                                 <td class="t_src">
                                     <div class="fileUpload btn btn-default form-control">
                                         <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
-                                        <input type="file" class="upload">
+                                        <input name="img_1" type="file" class="upload">
                                     </div>
                                 </td>
                                 <td class="t_ref">
-                                    <input type="text" class="form-control" id="ref" placeholder="Ref" name="reference">
+                                    <input name="i[9]" type="text" class="form-control" id="ref" placeholder="Ref">
                                 </td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit">
-                                    <input type="text" class="form-control cr_amt" placeholder="Amt" name="credit">
+                                    <input name="i[11]" type="text" class="form-control cr_amt" placeholder="Amt">
                                 </td>
                                 <td class="t_action"></td>
                             </tr>
                             <tr id="desc_1">
                                 <td class="t_date"></td>
                                 <td class="t_acct_title">
-                                    <input type="text" class="form-control trans_desc" id="trans_desc" placeholder="Description" name="trans_desc">
+                                    <input name="i[13]" type="text" class="form-control trans_desc" id="trans_desc" placeholder="Description">
                                 </td>
                                 <td class="t_src"></td>
                                 <td class="t_ref"></td>
