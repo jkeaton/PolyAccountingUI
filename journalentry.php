@@ -2,8 +2,8 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    $dbConnection = db_connect();
-    $acct_names = get_acct_names();
+    //$dbConnection = db_connect();
+    //$acct_names = get_acct_names();
 
     function get_acct_names(){
         global $dbConnection;
@@ -123,20 +123,29 @@
 
         <!-- Style Sheets -->
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/bootstrap.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
-        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">-->
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <link href="dist/css/datepicker.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
-        <script>
-            $(function() {
-                $( ".datepicker" ).datepicker();
+        <link href="dist/css/bootstrap-timepicker.css" rel="stylesheet">
+
+        <!-- External Javascript Files -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+   	    <script src="dist/js/main.js"></script>
+        <script type="text/javascript" src="dist/js/transition.js"></script>
+        <script type="text/javascript" src="dist/js/collapse.js"></script>
+        <script src="dist/js/moment.js"></script>
+        <script src="dist/js/moment-with-locales.js"></script>
+        <script src="dist/js/bootstrap-datepicker.js"></script>
+        <script src="dist/js/bootstrap-timepicker.js"></script>
+
+        <!-- Call the datepicker function when the date field is clicked -->
+        <script type="text/javascript">
+            $(function () {
+                $('.datepicker').datepicker()
             });
         </script>
-
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -166,7 +175,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    '<?php echo gen_select_options(); ?>' +
+                                    /*'<?php echo gen_select_options(); ?>' +*/
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -200,7 +209,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    '<?php echo gen_select_options(); ?>' +
+                                    /*'<?php echo gen_select_options(); ?>' +*/
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -372,5 +381,5 @@
 </html>
 
 <!--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="dist/js/bootstrap.min.js"></script>-->
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
