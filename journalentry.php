@@ -2,8 +2,12 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    //$dbConnection = db_connect();
-    //$acct_names = get_acct_names();
+    $dbConnection = db_connect();
+    $acct_names = get_acct_names();
+    
+    $input_err = "";
+    $filled = array();
+    $either_dr_or_cr = 0;
 
     function get_acct_names(){
         global $dbConnection;
@@ -18,7 +22,6 @@
     }
 
     function gen_select_options(){
-        $output = "<option>testing</option>";
         global $acct_names;
         $output = "";
         foreach ($acct_names as &$value){
@@ -34,14 +37,7 @@
     }
 
     function validateFields(){
-        insert_entry();
-        $_POST = array();
-    }
-
-    function insert_entry(){
-        global $dbConnection;
-        // Start a transaction so we can rollback if something fails
-        sqlsrv_begin_transaction($dbConnection);
+        global $filled, $input_err;
         $test = $_POST['i'];
         $row_ct = $_POST["row_ct_for_php"];
         $filled = new SplFixedArray($row_ct*6);
@@ -51,6 +47,141 @@
         foreach ($test as $key => $value){
             $filled[$key] = $value;
         }
+        if (valid()){
+            $_POST = array();
+            popup("Successfully submitted Journal Entry");
+            insert_entry($filled);
+		    header('Location: journalentry.php');
+        }
+        else{
+            popup($input_err);
+        }
+    }
+
+    function valid(){
+        global $filled, $input_err, $either_dr_or_cr;
+        $err_ct = 0;
+        $dr_amt = 0;
+        $cr_amt = 0;
+        // First Check the Date
+        $err_ct += valid_date(0);
+
+        // Now Check the Rest
+        for ($i = 0; $i < (count($filled)/6); $i++){
+            for ($j = 0; $j < 6; $j++){
+                if ($j == 1){
+                    $err_ct += valid_acct_title(($i*6)+$j);  
+                }
+                if (4 <= $j && $j <= 5 && $i<((count($filled)/6)-1)){
+                    if ($j == 4){
+                       $dr_amt += $filled[($i*6)+$j];
+                    }
+                    elseif ($j == 5){
+                       $cr_amt += $filled[($i*6)+$j];
+                    }
+                    $err_ct += valid_monetary_amt(($i*6)+$j);
+                }
+            }
+            if ($either_dr_or_cr > 1){
+                $err_ct++;
+                $input_err = "You must enter all debit and credit fields.";
+                return false;
+            }
+            else{
+                // Reset this to be checked for the next row
+                $either_dr_or_cr = 0;
+            }
+        } 
+
+        if ($dr_amt != $cr_amt){
+            $err_ct++;
+            $input_err = "Total debits do not equal total credits.";
+            return false;
+        }
+        
+        if ($err_ct == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    function valid_date($index){
+        global $filled, $input_err;
+        if ($filled[$index] === NULL) {
+            $input_err = "You must provide a date";
+            return 1;
+        } 
+        else {
+            $filled[$index] = test_input($filled[$index]);
+            $filled[$index] = DateTime::createFromFormat('m/d/Y', $filled[$index]);
+            if (!$filled[$index]){
+                $input_err = "Invalid Date";
+                return 1;
+            }
+            else {
+                $year = (int) ($filled[$index]->format("Y"));
+                $month = (int) ($filled[$index]->format("m"));
+                $day = (int) ($filled[$index]->format("d"));
+                $filled[$index] = $filled[$index]->format("m/d/Y");
+                if (!checkdate ($month , $day , $year )){
+                    $input_err = "Not a valid Gregorian Date";
+                    return 1;
+                }
+            }
+        }
+    }
+
+    function valid_acct_title($index){
+        global $filled, $input_err;
+        if ($filled[$index] === NULL){
+            $input_err = "Must enter a description for the journal entry";
+            return 1;
+        }
+        else if ($filled[$index] == "Select..." && (count($filled)-$index) >= 7){
+            $input_err = "Must select an account name from the list";
+            return 1;
+        }
+        else{
+            $filled[$index] = test_input($filled[$index]);
+            return 0;
+        }
+    }
+
+    function valid_monetary_amt($index){
+        global $filled, $input_err, $either_dr_or_cr;
+        if ($filled[$index] === NULL) {
+            if ((count($filled)-$index) >= 7){
+                $either_dr_or_cr++;
+            }
+        } else {
+            $filled[$index] = test_input($filled[$index]);
+            if (!is_numeric ($filled[$index])){
+                $input_err = "Price must be a numeric value.";
+                return 1;
+            }
+            elseif (!preg_match("/^[0-9\.]*$/", $filled[$index])) {
+                $input_err = "Only digits and a radix point allowed";
+                return 1;
+            }
+            else{
+                $filled[$index] = floatval($filled[$index]);
+                if ($filled[$index] <= 0){
+                    $input_err = "Amount must be positive";
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    function insert_entry(){
+        global $dbConnection, $filled;
+        // Start a transaction so we can rollback if something fails
+        sqlsrv_begin_transaction($dbConnection);
         // -- At this point we have all the fields necessary for the insertion
         $tmp_syntax = ("IF OBJECT_ID('tempdb..#tmp') is null "
             . "BEGIN "
@@ -175,7 +306,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    /*'<?php echo gen_select_options(); ?>' +*/
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -209,7 +340,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    /*'<?php echo gen_select_options(); ?>' +*/
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
