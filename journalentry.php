@@ -2,8 +2,8 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    //$dbConnection = db_connect();
-    //$acct_names = get_acct_names();
+    $dbConnection = db_connect();
+    $acct_names = get_acct_names();
 
     function get_acct_names(){
         global $dbConnection;
@@ -19,12 +19,11 @@
 
     function gen_select_options(){
         $output = "<option>testing</option>";
-        /*
         global $acct_names;
         $output = "";
         foreach ($acct_names as &$value){
             $output .= ("<option>".$value."</option>");
-        }*/
+        }
         return $output;
     }
     
@@ -52,7 +51,7 @@
         foreach ($test as $key => $value){
             $filled[$key] = $value;
         }
-        // -- At this point we have all the field necessary for the insertion
+        // -- At this point we have all the fields necessary for the insertion
         /*
         foreach ($filled as $key => $value){
             echo "<p>i[".$key."] => ".$value."</p>";
@@ -131,7 +130,6 @@
             . "select AccountID, ".(string)$is_debit.", ".$amt." "
             . "from Account where Name = '".$acct_name."'");
     }
-
 
     function get_date_row($d){
         return ('insert into #tmp (AccountID, [Date], IsDebit, Amount) '
