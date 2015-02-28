@@ -2,8 +2,8 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    //$dbConnection = db_connect();
-    //$acct_names = get_acct_names();
+    $dbConnection = db_connect();
+    $acct_names = get_acct_names();
 
     function get_acct_names(){
         global $dbConnection;
@@ -175,7 +175,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    /*'<?php echo gen_select_options(); ?>' +*/
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -209,7 +209,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    /*'<?php echo gen_select_options(); ?>' +*/
+                                    '<?php echo gen_select_options(); ?>' +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
