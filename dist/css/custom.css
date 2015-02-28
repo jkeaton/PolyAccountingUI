@@ -67,7 +67,13 @@ html, body {
     height: 50px;
 }
 .logo{
-    float: left;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*float: left;*/
 }
 .logo-top {
     float: left;
@@ -76,32 +82,31 @@ html, body {
 }
 .panel-title{
     padding: 10px;
-    padding-left: 60px;
     float: none;
 }
 .panel-heading{
     min-height: 60px;    
 }
 .t_date {
-    width: 10%;
+    width: 12%;
 }
 .t_acct_title {
     width: 50%;
 }
 .t_src {
-    width: 4%;
+    width: 6%;
 }
 .t_ref {
     width: 6%;
 }
 .t_debit {
-    width: 10%;
+    width: 9%;
 }
 .t_credit {
-    width: 10%;
+    width: 9%;
 }
 .t_action {
-    width: 10%;
+    width: 8%;
 }
 .debit_acct_name {
     width: 80%;
@@ -119,8 +124,11 @@ html, body {
     overflow-x: hidden;
 }
 #my_table_body {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 380px;
+}
+#header_table{
+    padding-right: 20px;
 }
 .fileUpload {
 	position: relative;
