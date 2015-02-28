@@ -40,7 +40,7 @@
     function insert_entry(){
         global $dbConnection;
         // Start a transaction so we can rollback if something fails
-        mssql_begin_transaction();
+        sqlsrv_begin_transaction($dbConnection);
         $test = $_POST['i'];
         $row_ct = $_POST["row_ct_for_php"];
         $filled = new SplFixedArray($row_ct*6);
@@ -67,14 +67,14 @@
             . 'IsDebit bit not null,'
             . 'AccountID int not null)';
         if (!submit_query($tmp_syntax)){
-            mssql_rollback();
+            sqlsrv_rollback($dbConnection); 
         }
         for ($i = 0; $i < $row_ct; $i++){
             // First check if this is a row with a valid date in position 0
             if ($filled[$i*6] !== NULL){
                 $tmp_syntax = get_date_row($filled[$i*6]);
                 if (!submit_query($tmp_syntax)){
-                    mssql_rollback();
+                    sqlsrv_rollback($dbConnection); 
                 }
             }
             // The way the rows are retrieved from the form, the first row
@@ -85,7 +85,7 @@
                 && $filled[($i*6)+5] === NULL){
                 $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+4], 1);
                 if (!submit_query($tmp_syntax)){
-                    mssql_rollback();
+                    sqlsrv_rollback($dbConnection); 
                 }
             }
             // Now check if the current row is a valid credit. At most 2 of these
@@ -97,7 +97,7 @@
                 && $filled[($i*6)+4] === NULL){
                 $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+5], 0);
                 if (!submit_query($tmp_syntax)){
-                    mssql_rollback();
+                    sqlsrv_rollback($dbConnection); 
                 }
             }
             // Now check if the current row is a valid description row
@@ -105,18 +105,18 @@
                 && $filled[($i*6)+4] === NULL && $filled[($i*6)+5] === NULL){
                 $tmp_syntax = get_desc_row($filled[($i*6)+1]);
                 if (!submit_query($tmp_syntax)){
-                    mssql_rollback();
+                    sqlsrv_rollback($dbConnection); 
                 }
             }
         }
         $tmp_syntax = "insert into Journal select * from #tmp ";
         if (!submit_query($tmp_syntax)){
-            mssql_rollback();
+            sqlsrv_rollback($dbConnection); 
         }
 
         $tmp_syntax = "truncate table #tmp";
         if (!submit_query($tmp_syntax)){
-            mssql_rollback();
+            sqlsrv_rollback($dbConnection); 
         }
     }
 
@@ -138,7 +138,7 @@
      
     function submit_query($sql){
         global $dbConnection;
-        $result = mssql_query( $dbConnection, $sql );
+        $result = sqlsrv_query( $dbConnection, $sql );
         if (!$result){
             return false;
         }
