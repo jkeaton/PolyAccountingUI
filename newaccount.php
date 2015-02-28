@@ -88,16 +88,16 @@
         $userNameAttempt = (strtolower($fname)[0].strtolower($lname));
         $sql = "SELECT * FROM AppUser WHERE UserName LIKE '".$userNameAttempt."%'";
         // Ask the database how many usernames begin the same as this one
-        $results = mssql_query( $sql, $dbConnection );
+        $results = sqlsrv_query( $dbConnection, $sql );
         // Modify the attempted username to account for similar ones
-        while ($row = mssql_fetch_array( $results, MSSQL_BOTH)){
+        while ($row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC)){
             ++$similar_ct;
-        } // the php function mssql_num_rows( $results ) is not working for me, but this simple algorithm works
+        } // the php function sqlsrv_num_rows( $results ) is not working for me, but this simple algorithm works
         if ($similar_ct > 0){
             $userNameAttempt = ($userNameAttempt.strval($similar_ct));
         }
         $sql = "INSERT INTO AppUser (UserName, FName, LName, UType, Email, PWHash) VALUES ('".$userNameAttempt."', '".$fname."', '".$lname."', 0, '".$email."', '".$hashed_pass."')";
-        $results = mssql_query( $sql, $dbConnection );
+        $results = sqlsrv_query( $dbConnection, $sql );
         return true;
     } 
 ?>

@@ -9,9 +9,9 @@
         global $dbConnection;
         $sql = "SELECT * FROM Account where IsActive = 1 "
                 . "order by AccTypeID, SortOrder, AccNumber";
-        $result = mssql_query( $sql, $dbConnection );
+        $result = sqlsrv_query( $dbConnection, $sql);
         $output = array();
-        while ($row = mssql_fetch_array( $result, MSSQL_BOTH) ){
+        while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
             array_push($output, $row['Name']); 
         }
         return $output;

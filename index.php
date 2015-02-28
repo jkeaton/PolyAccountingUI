@@ -52,9 +52,9 @@
     function creds_match(){
         global $dbConnection, $hashed_pass, $username;     
         $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
-        $results = mssql_query( $sql, $dbConnection );
+        $results = sqlsrv_query( $dbConnection, $sql);
         // Only care about the first row (should be the only row)
-        $row = mssql_fetch_array( $results, MSSQL_BOTH);
+        $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
         if ($hashed_pass !== $row['PWHash']){
             return false;
         }
