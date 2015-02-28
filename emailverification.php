@@ -18,9 +18,9 @@
     function get_user_emails(){
         global $dbConnection;
         $sql = "select * from AppUser";
-        $result = mssql_query( $sql, $dbConnection );
+        $result = sqlsrv_query( $dbConnection, $sql );
         $output = array();
-        while ($row = mssql_fetch_array( $result, MSSQL_BOTH) ){
+        while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
             $output[$row['Email']] = $row['UserName'];
         }
         return $output;

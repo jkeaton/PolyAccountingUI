@@ -10,5 +10,13 @@
     function php_print($input){
         echo "<p>".$input."</p><br/>";
     }
-?>
     
+    function submit_query($sql){
+        global $dbConnection;
+        $result = sqlsrv_query( $dbConnection, $sql );
+        if (!$result){
+            return false;
+        }
+        return true;
+    }
+?>
