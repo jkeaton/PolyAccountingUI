@@ -34,7 +34,8 @@
     }
 
     function validateFields(){
-        php_print((string)insert_entry());
+        insert_entry();
+        $_POST = array();
     }
 
     function insert_entry(){
@@ -47,41 +48,19 @@
         foreach ($filled as $val){
             $val = NULL;
         }
-        //echo "<p>Size: ".count($test)."<p><br/><p>Total Max: ".($row_ct*6)."</p><br/>";
         foreach ($test as $key => $value){
             $filled[$key] = $value;
         }
         // -- At this point we have all the fields necessary for the insertion
-        /*
-        foreach ($filled as $key => $value){
-            echo "<p>i[".$key."] => ".$value."</p>";
-        }*/
-        $tmp_syntax = 'Create table #tmp ([page] int null,'
-            . '[Entry] int null,'
-            . '[Date] datetime null,'
-            . 'PostDate datetime null,'
-            . 'Name varchar(150) null,'
-            . '[Ref#] int null,'
-            . '[Desc] varchar(150) null,'
-            . 'Amount money not null,'
-            . 'IsDebit bit not null,'
-            . 'AccountID int not null)';
-        php_print($tmp_syntax);
-        if (!submit_query($tmp_syntax)){
-            sqlsrv_rollback($dbConnection); 
-            php_print(print_r( sqlsrv_errors(), true));
-            return -1;
-        }
+        $tmp_syntax = ("IF OBJECT_ID('tempdb..#tmp') is null "
+            . "BEGIN "
+            . "Create table #tmp ([page] int null,[Entry] int null,[Date] datetime null,PostDate datetime null,Name varchar(150) null,[Ref#] int null,[Desc] varchar(150) null,Amount money not null,IsDebit bit not null,AccountID int not null) "
+            . "END; ");
+        $tmp_syntax .= "truncate table #tmp; ";
         for ($i = 0; $i < $row_ct; $i++){
             // First check if this is a row with a valid date in position 0
             if ($filled[$i*6] !== NULL){
-                $tmp_syntax = get_date_row($filled[$i*6]);
-                php_print($tmp_syntax);
-                if (!submit_query($tmp_syntax)){
-                    sqlsrv_rollback($dbConnection); 
-                    php_print(print_r( sqlsrv_errors(), true));
-                    return -2;
-                }
+                $tmp_syntax .= get_date_row($filled[$i*6]);
             }
             // The way the rows are retrieved from the form, the first row
             // also contains a valid debit transaction. Here, check if this
@@ -89,13 +68,7 @@
             if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
                 && isset($filled[($i*6)+4]) && floatval($filled[($i*6)+4]) !== 0
                 && $filled[($i*6)+5] === NULL){
-                $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+4], 1);
-                php_print($tmp_syntax);
-                if (!submit_query($tmp_syntax)){
-                    sqlsrv_rollback($dbConnection); 
-                    php_print(print_r( sqlsrv_errors(), true));
-                    return -3;
-                }
+                $tmp_syntax .= get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+4], 1);
             }
             // Now check if the current row is a valid credit. At most 2 of these
             // conditions should be satisfied. The first and second conditions
@@ -104,57 +77,39 @@
             if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
                 && isset($filled[($i*6)+5]) && floatval($filled[($i*6)+5]) !== 0
                 && $filled[($i*6)+4] === NULL){
-                $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+5], 0);
-                php_print($tmp_syntax);
-                if (!submit_query($tmp_syntax)){
-                    sqlsrv_rollback($dbConnection); 
-                    php_print(print_r( sqlsrv_errors(), true));
-                    return -4;
-                }
+                $tmp_syntax .= get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+5], 0);
             }
             // Now check if the current row is a valid description row
             if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
                 && $filled[($i*6)+4] === NULL && $filled[($i*6)+5] === NULL){
-                $tmp_syntax = get_desc_row($filled[($i*6)+1]);
-                php_print($tmp_syntax);
-                if (!submit_query($tmp_syntax)){
-                    sqlsrv_rollback($dbConnection); 
-                    php_print(print_r( sqlsrv_errors(), true));
-                    return -5;
-                }
+                $tmp_syntax .= get_desc_row($filled[($i*6)+1]);
             }
         }
-        $tmp_syntax = "insert into Journal select * from #tmp ";
-        php_print($tmp_syntax);
+        $tmp_syntax .= "insert into Journal select * from #tmp; ";
         if (!submit_query($tmp_syntax)){
             sqlsrv_rollback($dbConnection); 
             php_print(print_r( sqlsrv_errors(), true));
-            return -6;
+            popup("Failed to submit a valid Journal Entry");
         }
-
-        $tmp_syntax = "truncate table #tmp";
-        php_print($tmp_syntax);
-        if (!submit_query($tmp_syntax)){
-            sqlsrv_rollback($dbConnection); 
-            php_print(print_r( sqlsrv_errors(), true));
-            return -7;
+        else{
+            sqlsrv_commit($dbConnection);
         }
     }
 
     function get_desc_row($desc){
         return ("insert into #tmp (AccountID, [Desc], IsDebit, Amount) "
-            . "values (1, '".$desc."', 1, 0)");
+            . "values (1, '".$desc."', 1, 0); ");
     }
 
     function get_dr_cr_row($acct_name, $amt, $is_debit){
         return ("insert into #tmp (AccountID, IsDebit, Amount) "
             . "select AccountID, ".(string)$is_debit.", ".$amt." "
-            . "from Account where Name = '".$acct_name."'");
+            . "from Account where Name = '".$acct_name."'; ");
     }
 
     function get_date_row($d){
         return ("insert into #tmp (AccountID, [Date], IsDebit, Amount) "
-            . "values (1, '".($d)."', 1, 0)");
+            . "values (1, '".($d)."', 1, 0); ");
     }
 ?>
 
