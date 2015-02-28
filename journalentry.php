@@ -1,5 +1,6 @@
 <?php
     include "dist/dbconnect.php";
+    include "dist/common.php";
     // Attempt to connect to the SQL Server Database
     //$dbConnection = db_connect();
     //$acct_names = get_acct_names();
@@ -38,6 +39,9 @@
     }
 
     function insert_entry(){
+        global $dbConnection;
+        // Start a transaction so we can rollback if something fails
+        mssql_begin_transaction();
         $test = $_POST['i'];
         $row_ct = $_POST["row_ct_for_php"];
         $filled = new SplFixedArray($row_ct*6);
@@ -48,7 +52,8 @@
         foreach ($test as $key => $value){
             $filled[$key] = $value;
         }
-        /* -- At this point we have all the field necessary for the insertion
+        // -- At this point we have all the field necessary for the insertion
+        /*
         foreach ($filled as $key => $value){
             echo "<p>i[".$key."] => ".$value."</p>";
         }*/
@@ -62,23 +67,84 @@
             . 'Amount money not null,'
             . 'IsDebit bit not null,'
             . 'AccountID int not null)';
-        if (create_tmp_view($tmp_syntax)){
-            for ($i = 0; $i < $row_ct; $i++){
-                if ($filled[$i*6] !== NULL){
-                     
+        if (!submit_query($tmp_syntax)){
+            mssql_rollback();
+        }
+        for ($i = 0; $i < $row_ct; $i++){
+            // First check if this is a row with a valid date in position 0
+            if ($filled[$i*6] !== NULL){
+                $tmp_syntax = get_date_row($filled[$i*6]);
+                if (!submit_query($tmp_syntax)){
+                    mssql_rollback();
                 }
-            }  
-        }        
+            }
+            // The way the rows are retrieved from the form, the first row
+            // also contains a valid debit transaction. Here, check if this
+            // row is also a valid debit.
+            if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
+                && isset($filled[($i*6)+4]) && floatval($filled[($i*6)+4]) !== 0
+                && $filled[($i*6)+5] === NULL){
+                $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+4], 1);
+                if (!submit_query($tmp_syntax)){
+                    mssql_rollback();
+                }
+            }
+            // Now check if the current row is a valid credit. At most 2 of these
+            // conditions should be satisfied. The first and second conditions
+            // should be satisfied for the first row of the form. For each row
+            // after the first, only one condition should be satisfied.
+            if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
+                && isset($filled[($i*6)+5]) && floatval($filled[($i*6)+5]) !== 0
+                && $filled[($i*6)+4] === NULL){
+                $tmp_syntax = get_dr_cr_row($filled[($i*6)+1], $filled[($i*6)+5], 0);
+                if (!submit_query($tmp_syntax)){
+                    mssql_rollback();
+                }
+            }
+            // Now check if the current row is a valid description row
+            if (isset($filled[($i*6)+1]) && $filled[($i*6)+1] !== 'Select...'
+                && $filled[($i*6)+4] === NULL && $filled[($i*6)+5] === NULL){
+                $tmp_syntax = get_desc_row($filled[($i*6)+1]);
+                if (!submit_query($tmp_syntax)){
+                    mssql_rollback();
+                }
+            }
+        }
+        $tmp_syntax = "insert into Journal select * from #tmp ";
+        if (!submit_query($tmp_syntax)){
+            mssql_rollback();
+        }
+
+        $tmp_syntax = "truncate table #tmp";
+        if (!submit_query($tmp_syntax)){
+            mssql_rollback();
+        }
+    }
+
+    function get_desc_row($desc){
+        return ("insert into #tmp (AccountID, [Desc], IsDebit, Amount) "
+            . "values (1, '".$desc."', 1, 0)");
+    }
+
+    function get_dr_cr_row($acct_name, $amt, $is_debit){
+        return ("insert into #tmp (AccountID, IsDebit, Amount) "
+            . "select AccountID, ".(string)$is_debit.", ".$amt." "
+            . "from Account where Name = '".$acct_name."'");
+    }
+
+
+    function get_date_row($d){
+        return ('insert into #tmp (AccountID, [Date], IsDebit, Amount) '
+            . 'values (1, '.($d).', 1, 0)');
     }
      
-    function create_tmp_view($input){
+    function submit_query($sql){
         global $dbConnection;
-        $sql = $input;
-        $result = sqlsrv_query( $dbConnection, $sql );
+        $result = mssql_query( $dbConnection, $sql );
         if (!$result){
             return false;
         }
-        return true;
+        return $result;
     }
 ?>
 
