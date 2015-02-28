@@ -121,10 +121,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Journal Entry</title>
 
-        <!-- Reloadable Style Sheets -->
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet" class="reloadable">
-        <link href="dist/css/custom.css" rel="stylesheet" class="reloadable">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" class="reloadable">
+        <!-- Style Sheets -->
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/custom.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">-->
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <link href="dist/css/datepicker.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+        <script>
+            $(function() {
+                $( ".datepicker" ).datepicker();
+            });
+        </script>
+
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -141,7 +153,7 @@
             var last_cr_id = "credit_1";
         </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 
         <script type="text/javascript">
 
@@ -223,6 +235,8 @@
 	</head>
 
 	<body role="document">
+        <!--<p>Date: <input type="text" id="datepicker"></p>-->
+
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -268,7 +282,7 @@
                             <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                    <input type="text" name="i[0]" class="form-control" id="date" placeholder="Date">
+                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
@@ -352,11 +366,11 @@
                 </div>                
             </div>
             </form>
-        </div>
-
+        </div>>
     </body>
 
 </html>
 
+<!--
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>-->
