@@ -82,7 +82,7 @@
                     $err_ct += valid_monetary_amt(($i*6)+$j);
                 }
             }
-            if ($either_dr_or_cr > 1){
+            if ($either_dr_or_cr != 1){
                 $err_ct++;
                 $input_err = "You must enter all debit and credit fields.";
                 return false;
@@ -154,6 +154,9 @@
         if ($filled[$index] === NULL) {
             if ((count($filled)-$index) >= 7){
                 $either_dr_or_cr++;
+            }
+            else{
+                $either_dr_or_cr--;
             }
         } else {
             $filled[$index] = test_input($filled[$index]);
