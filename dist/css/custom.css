@@ -67,6 +67,9 @@ html, body {
     height: 50px;
 }
 .logo{
+    float: left;
+}
+.logo-je{
     position: absolute;
     margin: auto;
     top: 0;
@@ -82,6 +85,7 @@ html, body {
 }
 .panel-title{
     padding: 10px;
+    padding-left: 60px;
     float: none;
 }
 .panel-heading{

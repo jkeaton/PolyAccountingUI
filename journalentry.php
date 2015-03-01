@@ -321,7 +321,7 @@
                             '</td>' +
                             '<td class="t_src">' +
                                 '<div class="fileUpload btn btn-default form-control">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
+                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">' +
                                     '<input name="img_'+curr_row+'"type="file" class="upload">' +
                                 '</div>' +
                             '</td>' +
@@ -355,7 +355,7 @@
                             '</td>' +
                             '<td class="t_src">' +
                                 '<div class="fileUpload btn btn-default form-control">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">' +
+                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">' +
                                     '<input name="img_'+curr_row+'" type="file" class="upload">' +
                                 '</div>' +
                             '</td>' +
@@ -449,7 +449,7 @@
                                 </td>
                                 <td class="t_src">
                                     <div class="fileUpload btn btn-default form-control">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
+                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">
                                         <input name="img_0" type="file" class="upload">
                                     </div>
                                 </td>
@@ -483,7 +483,7 @@
                                 </td>
                                 <td class="t_src">
                                     <div class="fileUpload btn btn-default form-control">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo">
+                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">
                                         <input name="img_1" type="file" class="upload">
                                     </div>
                                 </td>
