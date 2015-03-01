@@ -47,18 +47,18 @@
         foreach ($test as $key => $value){
             $filled[$key] = $value;
         }
-        if (valid()){
+        if (valid($num_rows)){
             $_POST = array();
-            popup("Passed Form Validation!");
+            //popup("Passed Form Validation!");
             insert_entry($num_rows);
-		    header('Location: journalentry.php');
+		    header('Location: http://137.135.120.135/journalentry.php');
         }
         else{
             popup($input_err);
         }
     }
 
-    function valid(){
+    function valid($row_ct){
         global $filled, $input_err, $either_dr_or_cr;
         $err_ct = 0;
         $dr_amt = 0;
@@ -67,12 +67,15 @@
         $err_ct += valid_date(0);
 
         // Now Check the Rest
-        for ($i = 0; $i < (count($filled)/6); $i++){
+        for ($i = 0; $i < $row_ct; $i++){
             for ($j = 0; $j < 6; $j++){
                 if ($j == 1){
                     $err_ct += valid_acct_title(($i*6)+$j);  
                 }
-                if (4 <= $j && $j <= 5 && $i<((count($filled)/6)-1)){
+                // Row with index 2 is always the description line
+                // Extra rows that are added enter the array in groups of 6
+                // starting at index 18...
+                if (4 <= $j && $j <= 5 && $i != 2){
                     if ($j == 4){
                        $dr_amt += $filled[($i*6)+$j];
                     }
@@ -82,7 +85,7 @@
                     $err_ct += valid_monetary_amt(($i*6)+$j);
                 }
             }
-            if ($either_dr_or_cr != 1){
+            if ($either_dr_or_cr != 0){
                 $err_ct++;
                 $input_err = "You must enter all debit and credit fields.";
                 return false;
@@ -139,7 +142,8 @@
             $input_err = "Must enter a description for the journal entry";
             return 1;
         }
-        else if ($filled[$index] == "Select..." && (count($filled)-$index) >= 7){
+        // Also here, ensure we're not checking the description
+        else if ($filled[$index] == "Select..." && $index != 13){
             $input_err = "Must select an account name from the list";
             return 1;
         }
@@ -152,12 +156,15 @@
     function valid_monetary_amt($index){
         global $filled, $input_err, $either_dr_or_cr;
         if ($filled[$index] === NULL) {
-            if ((count($filled)-$index) >= 7){
-                $either_dr_or_cr++;
-            }
-        } else {
-            if ((count($filled)-$index) >= 7){
+            // Make sure we're not checking the description line
+            if ($index < 12 || $index > 17){
                 $either_dr_or_cr--;
+            }
+        } 
+        else {
+            // Make sure we're not checking the description line
+            if ($index < 12 || $index > 17){
+                $either_dr_or_cr++;
             }
             $filled[$index] = test_input($filled[$index]);
             if (!is_numeric ($filled[$index])){
