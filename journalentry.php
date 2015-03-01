@@ -155,10 +155,10 @@
             if ((count($filled)-$index) >= 7){
                 $either_dr_or_cr++;
             }
-            else{
+        } else {
+            if ((count($filled)-$index) >= 7){
                 $either_dr_or_cr--;
             }
-        } else {
             $filled[$index] = test_input($filled[$index]);
             if (!is_numeric ($filled[$index])){
                 $input_err = "Price must be a numeric value.";
