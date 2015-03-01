@@ -39,8 +39,8 @@
     function validateFields(){
         global $filled, $input_err;
         $test = $_POST['i'];
-        $row_ct = $_POST["row_ct_for_php"];
-        $filled = new SplFixedArray($row_ct*6);
+        $num_rows = $_POST["row_ct_for_php"];
+        $filled = new SplFixedArray($num_rows*6);
         foreach ($filled as $val){
             $val = NULL;
         }
@@ -49,8 +49,8 @@
         }
         if (valid()){
             $_POST = array();
-            popup("Successfully submitted Journal Entry");
-            insert_entry($filled);
+            popup("Passed Form Validation!");
+            insert_entry($num_rows);
 		    header('Location: journalentry.php');
         }
         else{
@@ -178,7 +178,7 @@
         }
     }
 
-    function insert_entry(){
+    function insert_entry($row_ct){
         global $dbConnection, $filled;
         // Start a transaction so we can rollback if something fails
         sqlsrv_begin_transaction($dbConnection);
