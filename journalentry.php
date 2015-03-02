@@ -1,6 +1,8 @@
 <?php
+    session_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
+    bounce();
     // Attempt to connect to the SQL Server Database
     $dbConnection = db_connect();
     $acct_names = get_acct_names();
@@ -12,6 +14,9 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['submit'])) {
             validateFields();
+        }
+        elseif (isset($_POST['logout'])){
+            return logout();
         }
     }
 
@@ -395,7 +400,9 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php">Log Out</a></li>
+                    <form role="form" class="navbar-form navbar-nav" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-danger" name="logout">Log Out</button>
+                    </form>
                     </ul>
                 </div>
             </div>

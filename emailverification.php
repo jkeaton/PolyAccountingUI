@@ -1,5 +1,5 @@
-<!-- Connect to Database -->
 <?php
+    session_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database

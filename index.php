@@ -1,5 +1,5 @@
-<!-- Connect to Database -->
 <?php
+    session_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
@@ -42,6 +42,7 @@
         if ($errCount == 0){
             if (creds_match()){
                 $_POST = array();
+                $_SESSION['authenticated'] = true;
                 // if all's well, let them through to the post-login screen
                 // for now we are going directly to the journalentry.php screen
 		        header('Location: journalentry.php');

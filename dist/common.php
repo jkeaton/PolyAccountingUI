@@ -23,4 +23,22 @@
     function popup($msg){
         echo "<script type='text/javascript'>alert('$msg');</script>";
     }
+
+    function logout(){
+        session_unset(); 
+        session_destroy();
+        header('Location: index.php');
+        return 0;
+    }
+
+    function bounce(){
+        if (!isset($_SESSION['authenticated'])) {
+            header('Location: index.php');    
+            return;
+        }
+        if ($_SESSION['authenticated'] === false){
+            header('Location: index.php');    
+            return;
+        }
+    }
 ?>
