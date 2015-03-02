@@ -9,6 +9,12 @@
     $filled = array();
     $either_dr_or_cr = 0;
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if (isset($_POST['submit'])) {
+            validateFields();
+        }
+    }
+
     function get_acct_names(){
         global $dbConnection;
         $sql = "SELECT * FROM Account where IsActive = 1 "
@@ -30,12 +36,6 @@
         return $output;
     }
     
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        if (isset($_POST['submit'])) {
-            validateFields();
-        }
-    }
-
     function validateFields(){
         global $filled, $input_err;
         $test = $_POST['i'];
@@ -49,9 +49,8 @@
         }
         if (valid($num_rows)){
             $_POST = array();
-            //popup("Passed Form Validation!");
             insert_entry($num_rows);
-		    header('Location: http://137.135.120.135/journalentry.php');
+		    header('Location: journalentry.php');
         }
         else{
             popup($input_err);
@@ -138,7 +137,7 @@
 
     function valid_acct_title($index){
         global $filled, $input_err;
-        if ($filled[$index] === NULL){
+        if ($filled[$index] === NULL || $filled[$index] == ""){
             $input_err = "Must enter a description for the journal entry";
             return 1;
         }
@@ -516,11 +515,9 @@
                 </div>                
             </div>
             </form>
-        </div>>
+        </div>
     </body>
 
 </html>
 
-<!--
-<script
-src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
