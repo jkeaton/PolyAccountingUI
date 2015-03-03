@@ -74,7 +74,7 @@
         if ($errCount == 0){
             if (createUser()){
                 $_POST = array();
-		        header('Location: index.html');
+		        header('Location: index.php');
             }
         } 
         else {
