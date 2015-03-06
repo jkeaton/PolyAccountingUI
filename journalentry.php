@@ -2,7 +2,7 @@
     session_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
-    bounce();
+	bounce();
     // Attempt to connect to the SQL Server Database
     $dbConnection = db_connect();
     $acct_names = get_acct_names();
@@ -264,6 +264,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<title>Journal Entry</title>
 
         <!-- Style Sheets -->

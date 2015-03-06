@@ -1,0 +1,477 @@
+
+/* Define default spinner */
+.ui-icon-loading {
+	background: url("files/resources/lib/jquerymobile/1.4.4/images/ajax-loader.gif") repeat scroll 0 0 / 46px 46px transparent!important;
+}
+/* mobilecontainer */
+.ui-content.startScreen_mobilecontainer {
+	padding: 5% 20% 20% 20%;
+	background-color: #AAF2ED;
+	
+}
+/* spacer_29 */
+.startScreen_spacer_29 {
+	width: 260px; height: 34px;
+	margin: 4px 0px 4px 0px;
+}
+/* mobilegrid_21 */
+.startScreen_mobilegrid_21 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;	
+}
+.startScreen_mobilegrid_21_wrapper {
+    border: 5px solid black;
+	border-radius: 25px;
+	margin: 14px 10px 14px 10px;
+	background-color: #48B1D4;
+
+}
+.startScreen_mobilegrid_21 > tr > td {
+	vertical-align: top;
+	
+}
+.startScreen_mobilegrid_21_row_0, .startScreen_mobilegrid_21_row_0 > td {
+	height: 30px
+}
+.startScreen_mobilegrid_21_row_1, .startScreen_mobilegrid_21_row_1 > td {
+	height: 30px
+}
+.startScreen_mobilegrid_21_row_2, .startScreen_mobilegrid_21_row_2 > td {
+	height: 30px
+}
+.startScreen_mobilegrid_21_row_3, .startScreen_mobilegrid_21_row_3 > td {
+	height: 30px
+}
+/* mobilegridcell_22 */
+.startScreen_mobilegridcell_22 {
+	height:auto;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	border: 5px solid black;
+	border-top-style: hidden;
+	border-left-style: hidden;
+	border-right-style: hidden;
+	
+	
+}
+.startScreen_mobilegridcell_22 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegrid_30 */
+.startScreen_mobilegrid_30 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_30_wrapper {
+
+}
+.startScreen_mobilegrid_30 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_30_row_0, .startScreen_mobilegrid_30_row_0 > td {
+	height: 30px
+}
+/* mobilegridcell_31 */
+.startScreen_mobilegridcell_31 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_31 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* label_software_name */
+.startScreen_label_software_name {
+	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 16px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+	white-space: normal;
+}
+/* mobilegridcell_32 */
+.startScreen_mobilegridcell_32 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_32 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* label_welcome */
+.startScreen_label_welcome {
+	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 18px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+	white-space: normal;
+	background-color: white;
+	border-radius: 6px;
+	height: 30px;
+	padding: 4px 4px 2px 4px
+}
+/* mobilegridcell_35 */
+.startScreen_mobilegridcell_35 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_35 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* btn_logout */
+#startScreen_btn_logout {
+ width: 10em;
+ margin: 0px auto 0px auto;
+ background-color: #1F18ED;
+ 
+}
+.ui-btn.startScreen_btn_logout {
+	margin: 4px 5px 4px 5px;
+}
+/* mobilegridcell_24 */
+.startScreen_mobilegridcell_24 {
+	height:30px !important;
+	width:auto;
+	background-color: white;
+	
+}
+.startScreen_mobilegridcell_24 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegrid_38 */
+.startScreen_mobilegrid_38 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_38_wrapper {
+    margin: 14px 14px 14px 14px;
+	border: 3px solid black;
+	border-radius: 15px;
+	background-color: #9CF0A7;
+
+}
+.startScreen_mobilegrid_38 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_38_row_0, .startScreen_mobilegrid_38_row_0 > td {
+	height: 30px
+}
+.startScreen_mobilegrid_38_row_1, .startScreen_mobilegrid_38_row_1 > td {
+	height: 30px
+}
+/* mobilegridcell_39 */
+.startScreen_mobilegridcell_39 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_39 > .cell-wrapper {
+	padding: 0;
+	
+	
+}
+/* label_view */
+.startScreen_label_view {
+	text-decoration: none; font-weight: bold; text-align: center; font-family: Helvetica; font-size: 16px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+	white-space: normal;
+}
+/* mobilegridcell_41 */
+.startScreen_mobilegridcell_41 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	
+	border: 3px solid black;
+	border-bottom-style: hidden;
+	border-right-style: hidden;
+	border-left-style: hidden;
+}
+.startScreen_mobilegridcell_41 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegridcell_26 */
+.startScreen_mobilegridcell_26 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	background-color: white;
+	
+}
+.startScreen_mobilegridcell_26 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegrid_44 */
+.startScreen_mobilegrid_44 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_44_wrapper {
+margin: 4px 14px 14px 14px;
+	border: 3px solid black;
+	border-radius: 15px;
+	background-color: #A2ECF5;
+
+}
+.startScreen_mobilegrid_44 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_44_row_0, .startScreen_mobilegrid_44_row_0 > td {
+	height: 30px
+}
+.startScreen_mobilegrid_44_row_1, .startScreen_mobilegrid_44_row_1 > td {
+	height: 30px
+}
+/* mobilegridcell_45 */
+.startScreen_mobilegridcell_45 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	
+}
+.startScreen_mobilegridcell_45 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* label_record */
+.startScreen_label_record {
+	text-decoration: none; font-weight: bold; text-align: center; font-family: Helvetica; font-size: 16px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+	white-space: normal;
+}
+/* mobilegridcell_47 */
+.startScreen_mobilegridcell_47 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	border: 3px solid black;
+	border-bottom-style: hidden;
+	border-right-style: hidden;
+	border-left-style: hidden;
+}
+.startScreen_mobilegridcell_47 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegridcell_27 */
+.startScreen_mobilegridcell_27 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+	border: 5px solid black;
+	border-bottom-style: hidden;
+	border-right-style: hidden;
+	border-left-style: hidden;
+}
+.startScreen_mobilegridcell_27 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegrid_50 */
+.startScreen_mobilegrid_50 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_50_wrapper {
+
+}
+.startScreen_mobilegrid_50 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_50_row_0, .startScreen_mobilegrid_50_row_0 > td {
+	height: 30px
+}
+/* mobilegridcell_51 */
+.startScreen_mobilegridcell_51 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_51 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* btn_openEmail */
+#startScreen_btn_openEmail {
+ width: 10em;
+ margin: 0px 10px 0px 20px;
+ background-color: #1F18ED;
+ 
+
+}
+.ui-btn.startScreen_btn_openEmail {
+	margin: 4px 5px 4px 5px;
+	
+}
+/* mobilegridcell_52 */
+.startScreen_mobilegridcell_52 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_52 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilefooter */
+.startScreen_mobilefooter {
+	min-height:38px;
+}
+/* panel_2 */
+.startScreen_panel_2 .ui-panel-inner {
+	padding: 15px 15px 15px 15px;
+	background-color: #F5CDB3;
+}
+.startScreen_panel_2:focus {
+	outline: 0;
+}
+/* label_sendEmail */
+.startScreen_label_sendEmail {
+	text-decoration: none; font-weight: bold; text-align: center; font-family: Helvetica; font-size: 16px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+	white-space: normal;
+}
+/* spacer_5 */
+.startScreen_spacer_5 {
+	width: 260px; height: 34px;
+	margin: 4px 0px 4px 0px;
+}
+/* input_recipients */
+.startScreen_input_recipients {
+	margin: 4px 0px 4px 0px;
+}
+/* mobilegrid_6 */
+.startScreen_mobilegrid_6 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_6_wrapper {
+
+}
+.startScreen_mobilegrid_6 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_6_row_0, .startScreen_mobilegrid_6_row_0 > td {
+	height: 30px
+}
+/* mobilegridcell_7 */
+.startScreen_mobilegridcell_7 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_7 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* btn_findRecipients */
+#startScreen_btn_findRecipients {
+background-color: #1F18ED;
+
+}
+.ui-btn.startScreen_btn_findRecipients {
+	margin: 4px 5px 4px 5px;
+}
+/* mobilegridcell_8 */
+.startScreen_mobilegridcell_8 {
+	height:30px !important;
+	width:30%;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_8 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilegrid_12 */
+.startScreen_mobilegrid_12 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.startScreen_mobilegrid_12_wrapper {
+
+}
+.startScreen_mobilegrid_12 > tr > td {
+	vertical-align: top;
+}
+.startScreen_mobilegrid_12_row_0, .startScreen_mobilegrid_12_row_0 > td {
+	height: 30px
+}
+/* mobilegridcell_13 */
+.startScreen_mobilegridcell_13 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_13 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* btn_addAttachmnt */
+#startScreen_btn_addAttachmnt {
+background-color: #1F18ED;
+
+}
+.ui-btn.startScreen_btn_addAttachmnt {
+	margin: 4px 5px 4px 5px;
+}
+/* mobilegridcell_14 */
+.startScreen_mobilegridcell_14 {
+	height:30px !important;
+	width:30%;
+	padding: 2px 2px 2px 2px;
+}
+.startScreen_mobilegridcell_14 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* textarea_emailMsg */
+.startScreen_textarea_emailMsg {
+	margin: 4px 0px 4px 0px;
+}
+/* spacer_19 */
+.startScreen_spacer_19 {
+	width: 260px; height: 34px;
+	margin: 4px 0px 4px 0px;
+}
+/* btn_sendMail */
+#startScreen_btn_sendMail {
+background-color: #1F18ED;
+
+}
+.ui-btn.startScreen_btn_sendMail {
+	margin: 4px 5px 4px 5px;
+}
+
+.view_list {
+	padding: 8px 8px 8px 12px;
+	color: black;
+}

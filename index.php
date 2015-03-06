@@ -45,7 +45,8 @@
                 $_SESSION['authenticated'] = true;
                 // if all's well, let them through to the post-login screen
                 // for now we are going directly to the journalentry.php screen
-		        header('Location: journalentry.php');
+		        //header('Location: journalentry.php');
+				header('Location: mark_landing/startScreen.html');
             }
         } 
     }
