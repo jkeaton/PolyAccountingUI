@@ -414,8 +414,8 @@
         <div class="container">
             <form role="form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
-                <div class="panel-heading text-center">
-                    <h3 class="panel-title">General Journal</h3>
+                <div class="panel-heading panel-heading-lg text-center">
+                    <h3 class="panel-title panel-title-with-logo">General Journal</h3>
                 </div>
                 <div class="panel">
                 <!-- Table -->

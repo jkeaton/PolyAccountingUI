@@ -129,9 +129,9 @@
 		================================================== -->
         <div class="row">
             <div class="panel panel-primary col-centered form-group myPanel">
-                <div class="panel-heading">
-                    <img src="dist/images/AppDomainFinalProjectLogo.png" alt="PAI Logo" height="42" width="42" class="logo"> 
-                    <h3 class="panel-title">Poly Accounting Information Group</h3>
+                <div class="panel-heading panel-heading-lg">
+                    <img src="dist/images/AppDomainFinalProjectLogo.png" alt="PAI Logo" height="42" width="42" class="logo">
+                    <h3 class="panel-title panel-title-with-logo">Poly Accounting Information Group</h3>
                 </div>
                 <div class="panel-body">
                     <form role="form" class="form-signin container-fluid" method="post" id="sign_up_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

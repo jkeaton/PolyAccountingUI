@@ -1,11 +1,11 @@
 body {
     overflow: auto;
 }
-
+/*
 a {
     outline: none;
     color: black;
-}
+}*/
 
 td {
     vertical-align: top;
