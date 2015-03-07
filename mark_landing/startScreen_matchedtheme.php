@@ -9,6 +9,8 @@
             return logout();
         }
     }
+
+    $welcome_msg = "Welcome ".$_SESSION['user'];
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +44,17 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                    <form role="form" class="navbar-form navbar-nav" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-danger" name="logout">Log Out</button>
-                    </form>
+                        <?php
+                            if (isset($_SESSION['user'])){
+                                echo "<li class=\"navbar-left\">
+                                <a>".$welcome_msg."</a></li><li
+                                class=\"navbar-left\"><form role=\"form\"
+                                class=\"navbar-form navbar-left\" method=\"post\"
+                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                                type=\"submit\" class=\"btn btn-danger\"
+                                name=\"logout\">Log Out</button></form></li>";
+                            }
+                        ?>   
                     </ul>
                 </div>
             </div>
