@@ -109,7 +109,7 @@
                                     <div class="row top-buffer">
                                         <input type="text" class="form-control" id="recipients" placeholder="Recipients">
                                     </div>
-
+                                    <div class="row top-buffer">
                                         <textarea class="form-control" rows="5" id="message" placeholder="Message"></textarea>
                                     </div>
                                     <div class="row top-buffer no-gutter">
