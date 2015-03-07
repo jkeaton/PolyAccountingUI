@@ -46,7 +46,7 @@
                 // if all's well, let them through to the post-login screen
                 // for now we are going directly to the journalentry.php screen
 		        //header('Location: journalentry.php');
-				header('Location: mark_landing/startScreen.html');
+				header('Location: http://137.135.120.135/mark_landing/startScreen_matchedtheme.php');
             }
         } 
     }
@@ -120,11 +120,11 @@
                             <label for="inputPassword" class="sr-only">Password</label>
                             <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
                         </div>
-                        <div class="row">
-                            <div class="button-left">
+                        <div class="row no-gutter">
+                            <div class="col-xs-6 col-sm-3 left-btn">
                                 <button name="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <div id="helpLinks">
+                            <div id="helpLinks" class="col-xs-6 col-sm-6 col-sm-offset-3 text-right right-btn">
                                 <a href="emailverification.php">Forgot my Password</a></br>
                                 <a href="newaccount.php">Create new Account</a>
                             </div>

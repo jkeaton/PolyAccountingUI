@@ -54,10 +54,10 @@ html, body {
 }
 }
 .button-left, .field-left{
-    float: left;
+    float: left !important;
 }
 #helpLinks, #returnHome, .field-right{
-    float: right;
+    float: right !important; 
 }
 .journalEntryPanel {
     max-height: 80%;
@@ -162,4 +162,18 @@ html, body {
 }
 .top-buffer{
     margin-top: 10px;
+}
+.panel-buffer{
+    margin-top: 15px !important;
+}
+.no-gutter [class*="left-btn"] {
+    padding-left: 0 !important;
+    padding-right: 10px !important;
+}
+.no-gutter [class*="left-btn-solo"] {
+    padding-left: 0 !important;
+}
+.no-gutter [class*="right-btn"] {
+    padding-left: 10 !important;
+    padding-right: 0px !important;
 }

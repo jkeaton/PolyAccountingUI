@@ -397,7 +397,7 @@
                 <div class="navbar-header">
                     <img src="dist/images/AppDomainFinalProjectLogo.png"
                     alt="PAI Logo" height="30" width="30" class="logo-top nav"> 
-                    <a class="navbar-brand" href="#">Poly Accounting Information Group</a>
+                    <a class="navbar-brand" href="./mark_landing/startScreen_matchedtheme.php">Poly Accounting Information Group</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -439,7 +439,7 @@
                             <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">Y
+                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">

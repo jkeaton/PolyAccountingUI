@@ -1,6 +1,19 @@
+<?php
+    session_start();
+    include "../dist/dbconnect.php";
+    include "../dist/common.php";
+	bounce();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if (isset($_POST['logout'])){
+            return logout();
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <title>
             startScreen
@@ -67,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-info">
+                        <div class="panel panel-info panel-buffer">
                             <div class="panel-heading panel-heading-sm text-center">
                                 <h3 class="panel-title centered-y-sm">Record</h3>
                             </div>
@@ -79,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-danger form-group col-centered">
+                        <div class="panel panel-danger form-group col-centered panel-buffer">
                             <div class="panel-heading panel-heading-sm text-center">
                                 <h3 class="panel-title centered-y-sm">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#main-page" href="#email-panel" aria-expanded="false" aria-controls="email-panel">
@@ -96,21 +109,21 @@
                                     <div class="row top-buffer">
                                         <input type="text" class="form-control" id="recipients" placeholder="Recipients">
                                     </div>
-                                    <div class="row top-buffer">
+
                                         <textarea class="form-control" rows="5" id="message" placeholder="Message"></textarea>
                                     </div>
-                                    <div class="row top-buffer">
-                                        <div class="col-xs-6 col-sm-3">
+                                    <div class="row top-buffer no-gutter">
+                                        <div class="col-xs-6 col-sm-3 left-btn">
                                             <button id="contacts" type="button" class="btn btn-primary form-control" name="contacts">
                                                 Find Recipients
                                             </button>
                                         </div>
-                                        <div class="col-xs-6 col-sm-3">
+                                        <div class="col-xs-6 col-sm-3 left-btn">
                                             <button id="attach" type="button" class="btn btn-primary form-control" name="attach">
                                                 Upload Attachment
                                             </button>
                                         </div>
-                                        <div class="col-xs-6 col-sm-3 col-sm-offset-3">
+                                        <div class="col-xs-6 col-sm-3 col-sm-offset-3 right-btn">
                                             <button id="send" type="button" class="btn btn-primary form-control" name="send">
                                                 Send
                                             </button>

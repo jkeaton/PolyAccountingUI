@@ -110,11 +110,11 @@
                             <label for="inputEmail" class="sr-only">Email</label>
                             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus>
                         </div>
-                        <div class="row">
-                            <div class="button-left">
+                        <div class="row no-gutter">
+                            <div class="col-xs-6 col-sm-5 left-btn">
                                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Send Reset Link</button>
                             </div>
-                            <div id="returnHome">
+                            <div id="returnHome" class="right-btn">
                                 <a href="index.php">Return Home</a></br>
                             </div>
                         </div>

@@ -154,8 +154,8 @@
                             <label for="inputPassword" class="sr-only">Password</label>
                             <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
                         </div>
-                        <div class="row">
-                            <div class="button-left">
+                        <div class="row no-gutter">
+                            <div class="button-left col-xs-6 col-sm-5 left-btn">
                                 <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Create Account</button>
                             </div>
                             <div id="helpLinks">
