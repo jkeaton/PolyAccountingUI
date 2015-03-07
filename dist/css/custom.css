@@ -52,6 +52,7 @@ html, body {
     float: none;
     margin: 0 auto;
 }
+}
 .button-left, .field-left{
     float: left;
 }
@@ -80,7 +81,6 @@ html, body {
     left: 0;
     right: 0;
     bottom: 0;
-    /*float: left;*/
 }
 .logo-top {
     float: left;
@@ -159,4 +159,7 @@ html, body {
 	cursor: pointer;
 	opacity: 0;
 	filter: alpha(opacity=0);
+}
+.top-buffer{
+    margin-top: 10px;
 }

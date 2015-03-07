@@ -439,7 +439,7 @@
                             <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">
+                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">Y
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
