@@ -47,7 +47,7 @@
                 // for now we are going directly to the journalentry.php screen
 		        //header('Location: journalentry.php');
                 $_SESSION['user'] = $username;
-				header('Location: http://137.135.120.135/mark_landing/startScreen_matchedtheme.php');
+				header('Location: /mark_landing/startScreen_matchedtheme.php');
             }
         } 
     }

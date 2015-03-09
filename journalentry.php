@@ -200,7 +200,7 @@
         // -- At this point we have all the fields necessary for the insertion
         $tmp_syntax = ("IF OBJECT_ID('tempdb..#tmp') is null "
             . "BEGIN "
-            . "Create table #tmp ([page] int null,[Entry] int null,[Date] datetime null,PostDate datetime null,Name varchar(150) null,[Ref#] int null,[Desc] varchar(150) null,Amount money not null,IsDebit bit not null,AccountID int not null) "
+            . "Create table #tmp ([Date] datetime null, [Desc] varchar(150) null, Amount money not null, IsDebit bit not null, AccountID int not null) "
             . "END; ");
         $tmp_syntax .= "truncate table #tmp; ";
         for ($i = 0; $i < $row_ct; $i++){
@@ -231,7 +231,7 @@
                 $tmp_syntax .= get_desc_row($filled[($i*6)+1]);
             }
         }
-        $tmp_syntax .= "insert into Journal select * from #tmp; ";
+        $tmp_syntax .= "insert into Journal (AccountID,  [Date], [Desc], IsDebit, Amount) select AccountID,  [Date], [Desc], IsDebit, Amount from #tmp; ";
         if (!submit_query($tmp_syntax)){
             sqlsrv_rollback($dbConnection); 
             php_print(print_r( sqlsrv_errors(), true));
