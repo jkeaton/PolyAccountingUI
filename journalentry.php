@@ -322,7 +322,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    '<?php echo gen_select_options(); ?>' +
+                                    "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
@@ -356,7 +356,7 @@
                             '<td class="t_acct_title">' +
                                 '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
-                                    '<?php echo gen_select_options(); ?>' +
+                                    "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
                             '</td>' +
                             '<td class="t_src">' +
