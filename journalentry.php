@@ -244,13 +244,13 @@
 
     function get_desc_row($desc){
         return ("insert into #tmp (AccountID, [Desc], IsDebit, Amount) "
-            . "values (1, '".$desc."', 1, 0); ");
+            . "values (1, '".escape_quotes($desc)."', 1, 0); ");
     }
 
     function get_dr_cr_row($acct_name, $amt, $is_debit){
         return ("insert into #tmp (AccountID, IsDebit, Amount) "
             . "select AccountID, ".(string)$is_debit.", ".$amt." "
-            . "from Account where Name = '".$acct_name."'; ");
+            . "from Account where Name = '".escape_quotes($acct_name)."'; ");
     }
 
     function get_date_row($d){

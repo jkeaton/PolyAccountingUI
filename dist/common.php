@@ -41,4 +41,8 @@
             return;
         }
     }
+
+    function escape_quotes($input){
+        return str_replace("'", "''", $input);
+    }
 ?>
