@@ -71,4 +71,42 @@
             return strtotime($d);
         }
     }
+
+    function mysplit($delims, $string){
+        if (!$delims || !$string){
+            return NULL;
+        }
+        $formatted = str_replace($delims, $delims[0], $string);
+        return explode($delims[0], $formatted);
+    }
+
+    function send_email(){
+        global $recipients, $subject, $message, $dbConnection;
+        if (!isset($_POST['recipients'])){
+            return -1;
+        }
+        elseif (!isset($_POST['subject'])){
+            return -1;
+        }
+        elseif (!isset($_POST['message'])){
+            return -1;
+        }
+        else{
+            $recipients = mysplit(array(' ', ','), $_POST['recipients']);
+            $subject = $_POST['subject'];
+            $message = $_POST['message'];
+            $date = new DateTime("now");
+            foreach ($recipients as $recipient){
+                if (strlen($recipient) > 0){
+                    $formatted_datetime = $date->format("Y-m-d\TH:i:s");
+                    $sql = "insert into Email (sender, recipient, [time], [subject], [message], deleted, seen) values ('".$_SESSION['user']."', '".$recipient."', CONVERT(datetime, '".$formatted_datetime."', 126), '".$subject."', '".$message."', 0, 0)";
+                    if (!submit_query($sql)){
+                        var_dump($sql);
+                        die(php_print(print_r(sqlsrv_errors(), true)));
+                    }
+                }
+            } 
+        }
+        return 0;
+    }
 ?>

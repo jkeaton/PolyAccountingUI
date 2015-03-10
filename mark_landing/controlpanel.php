@@ -10,11 +10,17 @@
         if (isset($_POST['logout'])){
             return logout();
         }
+        if (isset($_POST['send'])){
+            send_email();
+            $_POST = array();
+        }
     }
 
     $welcome_msg = "Welcome ".$_SESSION['user'];
     $inbox = get_inbox($_SESSION['user']);
     $inbox_ct = count($inbox);
+    $recipients = array();
+    $subject = $message = "";
 ?>
 
 <!DOCTYPE html>
@@ -142,14 +148,14 @@
                             <!-- Side Panel for sending Email -->
                             <div role="tabpanel" id="email-panel" class="panel-collapse collapse panel-body">
                                 <form role="form" class="form-signin container-fluid" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <h4 class="form-signin-heading">Send Email</h4>
+                                    <div class="row top-buffer">
+                                        <input type="text" class="form-control" id="recipients" name="recipients" placeholder="Recipients">
                                     </div>
                                     <div class="row top-buffer">
-                                        <input type="text" class="form-control" id="recipients" placeholder="Recipients">
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
                                     </div>
                                     <div class="row top-buffer">
-                                        <textarea class="form-control" rows="5" id="message" placeholder="Message"></textarea>
+                                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Message"></textarea>
                                     </div>
                                     <div class="row top-buffer no-gutter">
                                         <div class="col-xs-6 col-sm-3 left-btn">
@@ -163,7 +169,7 @@
                                             </button>
                                         </div>
                                         <div class="col-xs-6 col-sm-3 col-sm-offset-3 right-btn">
-                                            <button id="send" type="button" class="btn btn-primary form-control" name="send">
+                                            <button id="send" type="submit" class="btn btn-primary form-control" name="send">
                                                 Send
                                             </button>
                                         </div>
