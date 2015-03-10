@@ -6,6 +6,7 @@
     $dbConnection = db_connect();
     $usernameErr = $passErr = "";
     $username = $pass = $hashed_pass = "";
+    $utype = 100;
 
     // Deal with the form being submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -16,7 +17,7 @@
     }
 
     function validateFields(){
-        global $usernameErr, $passErr, $username, $pass, $hashed_pass;
+        global $usernameErr, $passErr, $username, $pass, $hashed_pass, $utype;
         $errCount = 0;
 
         // Get username 
@@ -47,13 +48,25 @@
                 // for now we are going directly to the journalentry.php screen
 		        //header('Location: journalentry.php');
                 $_SESSION['user'] = $username;
-				header('Location: /mark_landing/startScreen_matchedtheme.php');
+                $_SESSION['level'] = $utype;
+                if ($_SESSION['level'] === 0){
+				    header('Location: /mark_landing/adminpanel.php');
+                }
+                elseif ($_SESSION['level'] === 1){
+				    header('Location: /mark_landing/controlpanel.php');
+                }
+                elseif ($_SESSION['level'] === 2){
+				    header('Location: /mark_landing/controlpanel.php');
+                }
+                else{
+                    var_dump ($_SESSION['level']);
+                }
             }
         } 
     }
 
     function creds_match(){
-        global $dbConnection, $hashed_pass, $username;     
+        global $dbConnection, $hashed_pass, $username, $utype;     
         $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
         $results = sqlsrv_query( $dbConnection, $sql);
         // Only care about the first row (should be the only row)
@@ -62,7 +75,8 @@
             return false;
         }
         else{
-            return true;  
+            $utype = $row['UType'];
+            return true;
         }
     }
 ?>
@@ -126,7 +140,7 @@
                                 <button name="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                             </div>
                             <div id="helpLinks" class="col-xs-6 col-sm-6 col-sm-offset-3 text-right right-btn">
-                                <a href="emailverification.php">Forgot my Password</a></br>
+                                <a href="passwordreset.php">Forgot my Password</a></br>
                                 <a href="newaccount.php">Create new Account</a>
                             </div>
                         </div>

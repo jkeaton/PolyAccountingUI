@@ -27,7 +27,7 @@
     function logout(){
         session_unset(); 
         session_destroy();
-        header('Location: index.php');
+        header('Location: http://137.135.120.135/index.php');
         return 0;
     }
 

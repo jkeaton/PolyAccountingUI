@@ -257,6 +257,21 @@
         return ("insert into #tmp (AccountID, [Date], IsDebit, Amount) "
             . "values (1, '".($d)."', 1, 0); ");
     }
+
+    function get_main_menu(){
+        if ($_SESSION['level'] === 0){
+            return './mark_landing/adminpanel.php';
+        }
+        elseif ($_SESSION['level'] === 1){
+            return './mark_landing/controlpanel.php';
+        }
+        elseif ($_SESSION['level'] === 2){
+            return './mark_landing/controlpanel.php';
+        }
+        else{
+            var_dump($_SESSION['level']);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -398,7 +413,7 @@
                 <div class="navbar-header">
                     <img src="dist/images/AppDomainFinalProjectLogo.png"
                     alt="PAI Logo" height="30" width="30" class="logo-top nav"> 
-                    <a class="navbar-brand" href="./mark_landing/startScreen_matchedtheme.php">Poly Accounting Information Group</a>
+                    <a class="navbar-brand" href="<?php echo get_main_menu(); ?>">Poly Accounting Information Group</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
