@@ -6,6 +6,9 @@
     // Attempt to connect to the SQL Server Database
     $dbConnection = db_connect();
     $acct_names = get_acct_names();
+
+    $inbox = get_inbox($_SESSION['user']);
+    $inbox_ct = count($inbox);
     
     $input_err = "";
     $filled = array();
@@ -418,9 +421,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <?php
+                            global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button

@@ -4,6 +4,8 @@
     include "../dist/common.php";
 	bounce();
 
+    $dbConnection = db_connect();
+
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
             return logout();
@@ -11,6 +13,8 @@
     }
 
     $welcome_msg = "Welcome ".$_SESSION['user'];
+    $inbox = get_inbox($_SESSION['user']);
+    $inbox_ct = count($inbox);
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +49,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <?php
+                            global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
@@ -69,35 +74,35 @@
                     <div class="panel-body">
                         <div class="panel panel-success">
                             <div class="panel-heading panel-heading-sm text-center">
-                                <h3 class="panel-title centered-y-sm">View</h3>
+                                <h3 class="panel-title centered-y-sm">Users</h3>
                             </div>
                             <div class="panel-body container-fluid">
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Chart of Accounts</a>
+                                        <a href="">Create New User</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Transactions by Date Range</a>
+                                        <a href="">Reset User's Password</a>
                                     </div>  
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">All Un-posted Transactions</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="">Trial Balance</a>
-                                    </div>  
+                                        <a href="">Deactivate User Account</a>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
                         <div class="panel panel-info panel-buffer">
                             <div class="panel-heading panel-heading-sm text-center">
-                                <h3 class="panel-title centered-y-sm">Record</h3>
+                                <h3 class="panel-title centered-y-sm">Account</h3>
                             </div>
                             <div class="panel-body container-fluid">
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="../journalentry.php">Transactions</a>
+                                        <a href="">Add New Account</a>
+                                    </div>  
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Deactivate/Activate an Account</a>
                                     </div>  
                                 </div>
                             </div>

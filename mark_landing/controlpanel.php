@@ -4,6 +4,8 @@
     include "../dist/common.php";
 	bounce();
 
+    $dbConnection = db_connect();
+
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
             return logout();
@@ -11,6 +13,8 @@
     }
 
     $welcome_msg = "Welcome ".$_SESSION['user'];
+    $inbox = get_inbox($_SESSION['user']);
+    $inbox_ct = count($inbox);
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +49,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <?php
+                            global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
@@ -88,6 +93,22 @@
                                         <a href="">Trial Balance</a>
                                     </div>  
                                 </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Income Statement</a>
+                                    </div>  
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Balance Sheet</a>
+                                    </div>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Statement of Owner's Equity</a>
+                                    </div>  
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Cash Flow Statement</a>
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                         <div class="panel panel-info panel-buffer">
@@ -97,7 +118,15 @@
                             <div class="panel-body container-fluid">
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="../journalentry.php">Transactions</a>
+                                        <a href="../journalentry.php">Transaction</a>
+                                    </div>  
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Adjusting Entry</a>
+                                    </div>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6">
+                                        <a href="">Closing Entry</a>
                                     </div>  
                                 </div>
                             </div>

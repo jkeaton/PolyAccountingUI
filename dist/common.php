@@ -45,4 +45,30 @@
     function escape_quotes($input){
         return str_replace("'", "''", $input);
     }
+
+    function get_inbox($input){
+        global $dbConnection;
+        $rows = array();
+        $sql = ("SELECT * FROM Email WHERE recipient='".$input."' AND deleted=0;");
+        $results = sqlsrv_query( $dbConnection, $sql );
+        if ($results === false){
+            die (php_print( print_r( sqlsrv_errors(), true)));
+        }
+        else{
+            $rows = array();
+            while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
+                array_push($rows, $row);  
+            }
+        }
+        return $rows;
+    }
+
+    function normalize($d){
+        if ($d instanceof DateTime){
+            return $d->getTimestamp();
+        }
+        else{
+            return strtotime($d);
+        }
+    }
 ?>
