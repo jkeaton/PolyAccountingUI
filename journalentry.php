@@ -24,6 +24,15 @@
         }
     }
 
+    function get_filled_by_index($index){
+        if (isset($filled[$index])){
+            return $filled[$index];
+        }
+        else{
+            return "";
+        }
+    }
+
     function get_acct_names(){
         global $dbConnection;
         $sql = "SELECT * FROM Account where IsActive = 1 "
@@ -60,9 +69,6 @@
             $_POST = array();
             insert_entry($num_rows);
 		    header('Location: journalentry.php');
-        }
-        else{
-            popup($input_err);
         }
     }
 
@@ -197,7 +203,7 @@
     }
 
     function insert_entry($row_ct){
-        global $dbConnection, $filled;
+        global $dbConnection, $filled, $input_err;
         // Start a transaction so we can rollback if something fails
         sqlsrv_begin_transaction($dbConnection);
         // -- At this point we have all the fields necessary for the insertion
@@ -238,7 +244,7 @@
         if (!submit_query($tmp_syntax)){
             sqlsrv_rollback($dbConnection); 
             php_print(print_r( sqlsrv_errors(), true));
-            popup("Failed to submit a valid Journal Entry");
+            $input_err = "Failed to submit a valid Journal Entry";
         }
         else{
             sqlsrv_commit($dbConnection);
@@ -327,8 +333,6 @@
             var last_cr_id = "credit_1";
         </script>
 
-        <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-
         <script type="text/javascript">
 
             $(document).ready(function(){
@@ -399,7 +403,6 @@
                     ++curr_row;
                     inc_row_ct();
                 });
-                
             });
 
             function inc_row_ct(){
@@ -437,8 +440,6 @@
             </div>
         </nav>
     
-		<!--main
-		================================================== -->
         <div class="container">
             <form role="form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
@@ -541,7 +542,7 @@
                                 <td class="t_debit"></td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button type="submit" id="attempt_post"class="btn btn-primary form-control" name="submit">
+                                    <button type="submit" id="attempt_post" class="btn btn-primary form-control" name="submit">
                                         Submit
                                     </button>
                                 </td>
@@ -549,11 +550,12 @@
                         </tbody>
                     </table>
                 </div>                
+                <div class="panel-footer">
+                <p class="error"><?php echo $input_err; ?></p>
+                </div>
             </div>
             </form>
         </div>
     </body>
 
 </html>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->

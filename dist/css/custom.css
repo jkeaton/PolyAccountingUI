@@ -12,6 +12,9 @@ html, body {
   margin: 0 auto;
   overflow-x: hidden;
 }
+.error{
+    color: red;
+}
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
