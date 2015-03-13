@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GeneralSite.Master.cs" Inherits="AccountingJournal.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Poly Accounting Information Group</title>
+    <link rel="shortcut icon" href="~/Images/AppDomainFinalProjectLogo.png" />
+    <!--<link rel="stylesheet" type="text/css" href="~/Style/StyleSheet.css" />-->
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function mainmenu() {
+            $(" #NAV ul ").css({ display: "none" });
+
+            $(" #NAV li ").hover(function () {
+                $(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400);
+            }
+            , function () {
+                $(this).find('ul:first').css({ visibility: "hidden" });
+            });
+        }
+        $(document).ready(function () {
+            mainmenu();
+        });
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="navbar">
+            <div>
+                <asp:Label ID="SignInLb" runat="server" ForeColor="White" Text="SignIn"></asp:Label>
+                <asp:LinkButton ID="SignInLkB" runat="server" ForeColor="White" Text="SignOut" OnClick="SignInLkB_Click"></asp:LinkButton>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div id="headername">
+                <a runat="server" href="~/Manager/ManagerHome.aspx">
+                    <img src="../Images/AppDomainFinalProjectLogo.png" style="width: 100px; height: 100px; vertical-align: middle;" />
+                    Poly Accounting Information Group</a>
+            </div>
+            <div>
+                <%-- Navigation Bar --%>
+                <table id="banner">
+                    <tr>
+                        <td>
+                            <ul id="NAV">
+                                <li style="background-color: #0a88f3"><a href="#" style="align-items:center; top:10px;">Home</a></li>
+                                <li style="background-color: #0a88f3"><a href="#">Record Transaction</a>
+                                    <ul>
+                                        <li style="background-color: #0a88f3"><a href="#">Journal Entry</a></li>
+                                        <li style="background-color: #0a88f3"><a href="#">Adjusting Entry</a></li>
+                                        <li style="background-color: #0a88f3"><a href="#">Closing Entry</a></li>
+                                    </ul>
+                                </li>
+                                <li style="background-color: #0a88f3"><a href="../Journal and Ledger/General Journal.aspx" style="align-items:center; top:10px;">General Journal</a></li>
+                                <li style="background-color: #0a88f3"><a href="#">Unpost Transaction</a></li>
+                                <li style="background-color: #0a88f3"><a href="../Financial Statement/TrialBalance.aspx" style="align-items:center; top:10px;">Trial Balance</a></li>
+                                <li style="background-color: #0a88f3"><a href="#">Financal Statement</a>
+                                    <ul>
+                                        <li style="background-color: #0a88f3"><a href="../Financial Statement/IncomeStatement.aspx">Income Statement</a></li>
+                                        <li style="background-color: #0a88f3"><a href="#">Balance Sheet</a></li>
+                                        <li style="background-color: #0a88f3"><a href="#">Statement of Owner’s Equity</a></li>
+                                        <li style="background-color: #0a88f3"><a href="#">Cash Flow Statement </a></li>
+                                    </ul>
+                                </li>
+                                <li style="background-color: #0a88f3"><a href="../Financial Statement/Chart of Account.aspx" style="align-items:center; top:10px;">Chart of Account</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="Content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="footer">
+                <div style="text-align: center; background-color: forestgreen; color: white; height: 30px; font-size: large; vertical-align: central; font-weight: bold">
+                    Send Email
+                </div>
+                <div style="border: thick; border-color: forestgreen">
+                    <table id="tblEmail">
+                        <tr>
+                            <td style="text-align: right;">Receipients:</td>
+                            <td>
+                                <asp:TextBox ID="Receipients" runat="server" placeholder="Receipients" CssClass="Emailbox"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; margin-bottom: 10px">Attachment:</td>
+                            <td>
+                                <asp:FileUpload ID="UpladAtt" runat="server" placeholder="Upload Attachment" CssClass="t_box" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">Description:
+                            </td>
+                            <td>
+                                <asp:TextBox ID="EmailBody" runat="server" TextMode="MultiLine" Width="800px" Height="200px" placeholder="Description..." CssClass="Emailbox"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <asp:Button ID="SendEmail" runat="server" Text="Send" CssClass="butt" BackColor="#0a88f3" Width="80px" OnClick="SendEmail_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <asp:Label ID="SendEmailMess" runat="server" ForeColor="Red"></asp:Label>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+        <footer>
+        </footer>
+    </form>
+</body>
+</html>
