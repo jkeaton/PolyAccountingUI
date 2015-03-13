@@ -1,0 +1,246 @@
+﻿body {
+    font-family: Arial,"Times New Roman", serif;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+#wrapper {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #wrapper div {
+        margin-bottom: 10px;
+    }
+
+
+#navbar {
+    background-color: black;
+    color: white;
+    text-align: right;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+
+    #navbar div {
+        margin-right: 100px;
+    }
+
+#headername a {
+    position: relative;
+    font-size: xx-large;
+    text-decoration: none;
+    color: black;
+}
+
+#banner {
+    width: 1000px;
+}
+
+#Content {
+    border: groove;
+    border-color: darkblue;
+    background-color: #c6e1f3;
+}
+
+
+
+#footer {
+    border: groove;
+    border-color: forestgreen;
+    background-color: #e3f8dc;
+}
+
+
+
+/*Navigation Bar*/
+#NAV {
+    display: table;
+    list-style: none;
+    left: -50px;
+    margin-left: 0px;
+    width:1000px;
+}
+
+    #NAV li {
+        float: left;
+        position: relative;
+        height: 40px;
+        border-right: 1px solid white;
+        border-color: white;
+        border-width: 2px;
+        width:140px;
+        left:-40px;            
+    }
+
+
+        #NAV li a {
+            margin: auto;
+            display: block;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            width:120px;
+            height:40px;
+            font-size:15px;
+            text-align:center;
+
+            }
+        #NAV li a div{
+            margin-top:auto;
+            margin-bottom:auto;
+        }
+
+    #NAV ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        left: 0;
+    }
+#NAV li ul li {
+    background-image: url('../Images/navigationbar.png');
+    background-repeat: repeat;
+    border: 1px solid #e3e3e3;
+    text-align: center;
+    position: relative;
+    z-index: 999999;
+    left: auto;
+    width: 300px;
+    /*display:none;*/
+}
+
+        #NAV li ul li a {
+            margin: auto;
+            display: block;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            width:300px;
+            height:40px;
+            top:10px;
+}
+/*End Navigation Bar*/
+
+.Emailbox {
+    height: 30px;
+    width: 700px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-color: darkblue;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.butt {
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#tblEmail {
+    width: 1000px;
+}
+
+/*General Journal*/
+.t_box {
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.Dr_box {
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/*content*/
+#body table {
+    width: 1067px;
+}
+
+.SignBox {
+    height: 40px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#SignContent table tr td table {
+    width: 450px;
+}
+
+
+#Jourtab tr td{
+    border-right: solid; 
+    border-right-color: black; 
+    border-left: solid; 
+    border-left-color: black;
+}
+
+#Jourtab{
+     /*background-color: white;*/
+     width: 900px; 
+     text-align: center; 
+     margin-right: auto; 
+     margin-left: auto; 
+     border: solid; 
+     border-color: black; 
+     border-collapse: collapse;
+}
+
+
+.AjaxCalendar{
+    background-color:lightskyblue;
+    border:solid thin;
+    border-bottom-color:darkblue;
+}
+
+
+.AjaxCalendar .ajax__calendar_header  {
+background-color: #ffffff;
+margin-bottom: 4px;
+}
+
+.AjaxCalendar .ajax__calendar_body    {
+background-color: #ffffff;
+border: solid 1px #77D5F7;
+}
+
+.AjaxCalendar .ajax__calendar_dayname {
+text-align:center;
+font-weight:bold;
+margin-bottom: 4px;
+margin-top: 2px;
+color: #004080;
+}
+
+.AjaxCalendar .ajax__calendar_day {
+color: #004080;
+text-align:center;
+}

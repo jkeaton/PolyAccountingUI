@@ -1,0 +1,332 @@
+﻿using AccountingJournal.Financial_Statement.Statement_Model;
+using AccountingJournal.Journal_and_Ledger.Model;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+
+namespace AccountingJournal.Code
+{
+    public class Connection
+    {
+        private static SqlConnection conn;
+        private static SqlCommand cmd;
+        private static int count;
+        static Connection()
+        {
+            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDBConnectionString"].ToString();
+            conn = new SqlConnection(ConnectionString);
+            cmd = new SqlCommand("", conn);
+        }
+
+        public static int GetNumofUserByUsernameAndPassword(string usn, string pass)
+        {
+            string query = string.Format("SELECT count(*)"
+                                        + " FROM         [User] INNER JOIN UserType ON [User].UType = UserType.TypeID "
+                                        + " WHERE		[User].UserName = '{0}' "
+                                        + " AND			[User].PWHash = '{1}'", usn, pass);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    count = reader.GetInt32(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return count;
+        }
+
+        public static ArrayList GetUserByUsernameAndPassword(string usn, string pass)
+        {
+            ArrayList list = new ArrayList();
+            User user = new User();
+            string query = string.Format("SELECT [User].ID, [User].FName, [User].LName, [User].UserName, [User].PWHash, isnull([User].Email,''), UserType.Name "
+                                        + " FROM         [User] INNER JOIN UserType ON [User].UType = UserType.TypeID "
+                                        + " WHERE		[User].UserName = '{0}' "
+                                        + " AND			[User].PWHash = '{1}'", usn, pass);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    user.ID = reader.GetInt32(0);
+                    user.FirstName = reader.GetString(1);
+                    user.LastName = reader.GetString(2);
+                    user.Username = reader.GetString(3);
+                    user.Password = reader.GetString(4);
+                    user.Email = reader.GetString(5);
+                    user.UserType = reader.GetString(6);
+
+                    list.Add(user);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayIncomeStatement()
+        {
+            ArrayList list = new ArrayList();
+            IncDetail income;
+            string query = string.Format("SELECT ct.Type as AccountType, c.Name as AccountName, c.Balance as Total, "
+				                            +" ROW_NUMBER() OVER(PARTITION BY ct.type ORDER BY AccNumber) as [RANK], "
+                                            +" CASE WHEN c.[IsDebit] = 0 then 'Credit' else 'Debit' END as IsDebit"
+                                            +" FROM            Account c INNER JOIN"
+                                            +"                 AccType ct ON c.AccTypeID = ct.TypeID"
+                                            +" WHERE ct.Type IN('Expense','Revenue')"
+                                            +" Order BY ct.TypeID, 3 asc");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    income = new IncDetail();
+                    income.AccountType = reader.GetString(0);
+                    income.Account = reader.GetString(1);
+                    income.total = reader.GetDecimal(2);
+                    income.Rank = Int32.Parse(reader.GetValue(3).ToString());
+                    income.IsDebit = reader.GetString(4);
+                    list.Add(income);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayTrialBalance()
+        {
+            ArrayList list = new ArrayList();
+            TrialBl trb;
+            string query = string.Format("SELECT [Name],CASE WHEN a.[IsDebit] = 0 then 'Credit' else 'Debit' END as IsDebit,a.Balance as total "
+                                            + ", ROW_NUMBER() OVER(PARTITION BY a.isDebit order by AccNumber) as [Rank],AccNumber "
+                                            + "FROM [TransactionDB].[dbo].[Account] a "
+                                            + "order by AccNumber");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    trb = new TrialBl();
+                    trb.Name = reader.GetString(0);
+                    trb.IsDebit = reader.GetString(1);
+                    trb.Total = reader.GetDecimal(2);
+                    trb.Rank = Int32.Parse(reader.GetValue(3).ToString());
+                    trb.AccNum = reader.GetInt32(4);
+                    list.Add(trb);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayChartofAcc()
+        {
+            ArrayList list = new ArrayList();
+            ChartofAcc CAcc;
+            string query = string.Format("SELECT * FROM [TransactionDB].[dbo].[Chart_of_Accounts] order by 2");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CAcc = new ChartofAcc();
+                    CAcc.AccType = reader.GetString(0);
+                    CAcc.ID = reader.GetInt32(1);                  
+                    CAcc.Account = reader.GetString(2);
+                    list.Add(CAcc);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayGenLedger(string id)
+        {
+            ArrayList list = new ArrayList();
+            Ledger G_Ledger;
+            string query = string.Format("EXECUTE DisplayLedger {0}", id);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    G_Ledger = new Ledger();
+                    G_Ledger.AccNumber = reader.GetInt32(1);
+                    G_Ledger.Account = reader.GetString(2);
+                    G_Ledger.date = reader.GetDateTime(3);
+                    G_Ledger.Description = reader.GetString(4);
+                    G_Ledger.Ref = reader.GetString(5);
+                    if (!reader.IsDBNull(6))
+                    {
+                        G_Ledger.Debit = reader.GetDecimal(6);
+                    } 
+                    if (!reader.IsDBNull(7))
+                    {
+                        G_Ledger.Credit = reader.GetDecimal(7);
+                    }
+                    G_Ledger.Balance = reader.GetDecimal(8);
+                    G_Ledger.TranxID = reader.GetInt32(9);
+                    list.Add(G_Ledger);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayIndiJournal(string id)
+        {
+            ArrayList list = new ArrayList();
+            IndiJournal Journal;
+            string query = string.Format("EXECUTE [DisplayIndivJournal] {0}", id);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Journal = new IndiJournal();
+                    Journal.date = reader.GetDateTime(0);
+                    Journal.Account = reader.GetString(1);
+                    Journal.Desc = reader.GetString(2);
+                    Journal.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Journal.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Journal.Credit = reader.GetDecimal(5);
+                    }
+                    Journal.IsDebit = reader.GetString(6);
+                    Journal.postdate = reader.GetDateTime(7);
+                    Journal.TranxID = reader.GetInt32(8);
+                    list.Add(Journal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayJournal()
+        {
+            ArrayList list = new ArrayList();
+            IndiJournal Journal;
+            string query = string.Format("SELECT [Date]"
+                                 + " ,[Name]"
+                                 + " ,[Desc]"
+                                 + " , AccNumber"
+                                 + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
+                                 + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+                                 + " , CASE WHEN IsDebit =1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , PostDate"
+                                 + " , TranxID"
+                                 + "   FROM [TransactionDB].[dbo].[Journal]");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Journal = new IndiJournal();
+                    Journal.date = reader.GetDateTime(0);
+                    Journal.Account = reader.GetString(1);
+                    Journal.Desc = reader.GetString(2);
+                    Journal.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Journal.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Journal.Credit = reader.GetDecimal(5);
+                    }
+                    Journal.IsDebit = reader.GetString(6);
+                    if (!reader.IsDBNull(7))
+                    {
+                        Journal.postdate = reader.GetDateTime(7);
+                    }
+                    Journal.TranxID = reader.GetInt32(8);
+                    list.Add(Journal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+    }
+
+
+}
