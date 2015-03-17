@@ -342,7 +342,7 @@
                         '<tr id="debit_' + (dr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select name="i['+(start_at+1)+']" class="form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
+                                '<select name="i['+(start_at+1)+']" class="stored_val form-control debit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
                                     "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
@@ -354,10 +354,10 @@
                                 '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input name="i['+(start_at+3)+']"type="text" class="form-control" id="ref" placeholder="Ref">' +
+                                '<input name="i['+(start_at+3)+']"type="text" class="stored_val form-control" id="ref" placeholder="Ref">' +
                             '</td>' +
                             '<td class="t_debit">' +
-                                '<input name="i['+(start_at+4)+']"type="text" class="form-control dr_amt" placeholder="Amt">' +
+                                '<input name="i['+(start_at+4)+']"type="text" class="stored_val form-control dr_amt" placeholder="Amt">' +
                             '</td>' +
                             '<td class="t_credit"></td>' +
                             '<td class="t_action"></td>' +
@@ -376,7 +376,7 @@
                         '<tr id="credit_' + (cr_ct) + '">' +
                             '<td class="t_date"></td>' +
                             '<td class="t_acct_title">' +
-                                '<select name="i['+(start_at+1)+']" class="form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
+                                '<select name="i['+(start_at+1)+']" class="stored_val form-control credit_acct_name" id="acct_title" placeholder="Select Account">'+
                                     '<option>Select...</option>' +
                                     "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
@@ -388,11 +388,11 @@
                                 '</div>' +
                             '</td>' +
                             '<td class="t_ref">' +
-                                '<input name="i['+(start_at+3)+']" type="text" class="form-control" placeholder="Ref">' +
+                                '<input name="i['+(start_at+3)+']" type="text" class="stored_val form-control" placeholder="Ref">' +
                             '</td>' +
                             '<td class="t_debit"></td>' +
                             '<td class="t_credit">'+
-                                '<input name="i['+(start_at+5)+']" type="text" class="form-control cr_amt" placeholder="Amt">' +
+                                '<input name="i['+(start_at+5)+']" type="text" class="stored_val form-control cr_amt" placeholder="Amt">' +
                             '</td>' +
                             '<td class="t_action"></td>' +
                         '</tr>'
@@ -403,6 +403,25 @@
                     ++curr_row;
                     inc_row_ct();
                 });
+                
+                $(".attempt_post").click(function(){
+                    //store_form_fields();
+                });
+
+                function store_form_fields(){
+                    var elems = document.getElementsByClassName("stored_val");
+                    var matching_elems = new Array();
+                    var count = 0;
+                    for (var elem in elems){
+                        if (elem.nodeType != 1){
+                            matching_elems.push(elem.nodeType);
+                        }
+                        else{
+                            matching_elems.push("---");
+                        }
+                    }
+                    alert(matching_elems.join());
+                }
             });
 
             function inc_row_ct(){
@@ -412,8 +431,6 @@
 	</head>
 
 	<body role="document">
-        <!--<p>Date: <input type="text" id="datepicker"></p>-->
-
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -468,12 +485,12 @@
                             <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                    <input type="text" name="i[0]" class="datepicker form-control" placeholder="Date">
+                                    <input type="text" name="i[0]" class="stored_val datepicker form-control" placeholder="Date">
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend debit_acct_name' id='event-date'>
-                                            <select name="i[1]" class="form-control" id="acct_title" placeholder="Select Account">
+                                            <select name="i[1]" class="stored_val form-control" id="acct_title" placeholder="Select Account">
                                                 <option>Select...</option>
                                                 '<?php echo gen_select_options(); ?>'
                                             </select>
@@ -490,10 +507,10 @@
                                     </div>
                                 </td>
                                 <td class="t_ref">
-                                    <input name="i[3]" type="text" class="form-control" id="ref" placeholder="Ref">
+                                    <input name="i[3]" type="text" class="stored_val form-control" id="ref" placeholder="Ref">
                                 </td>
                                 <td class="t_debit">
-                                    <input name="i[4]" type="text" class="form-control" id="debit" placeholder="Amt">
+                                    <input name="i[4]" type="text" class="stored_val form-control" id="debit" placeholder="Amt">
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
@@ -507,7 +524,7 @@
                                 <td class="t_acct_title">
                                     <div class="form-group">
                                         <div class='input-group input-ammend credit_acct_name' id='event-date'>
-                                            <select name="i[7]" class="form-control" id="acct_title" placeholder="Select Account">
+                                            <select name="i[7]" class="stored_val form-control" id="acct_title" placeholder="Select Account">
                                                 <option>Select...</option>
                                                 '<?php echo gen_select_options(); ?>'
                                             </select>
@@ -524,25 +541,25 @@
                                     </div>
                                 </td>
                                 <td class="t_ref">
-                                    <input name="i[9]" type="text" class="form-control" id="ref" placeholder="Ref">
+                                    <input name="i[9]" type="text" class="stored_val form-control" id="ref" placeholder="Ref">
                                 </td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit">
-                                    <input name="i[11]" type="text" class="form-control cr_amt" placeholder="Amt">
+                                    <input name="i[11]" type="text" class="stored_val form-control cr_amt" placeholder="Amt">
                                 </td>
                                 <td class="t_action"></td>
                             </tr>
                             <tr id="desc_1">
                                 <td class="t_date"></td>
                                 <td class="t_acct_title">
-                                    <input name="i[13]" type="text" class="form-control trans_desc" id="trans_desc" placeholder="Description">
+                                    <input name="i[13]" type="text" class="stored_val form-control trans_desc" id="trans_desc" placeholder="Description">
                                 </td>
                                 <td class="t_src"></td>
                                 <td class="t_ref"></td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button type="submit" id="attempt_post" class="btn btn-primary form-control" name="submit">
+                                    <button type="submit" id="attempt_post" class="attempt_post btn btn-primary form-control" name="submit">
                                         Submit
                                     </button>
                                 </td>
