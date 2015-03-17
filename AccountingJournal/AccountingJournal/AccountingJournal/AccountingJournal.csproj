@@ -110,6 +110,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Financial Statement\Chart of Account.aspx" />
     <Content Include="Financial Statement\IncomeStatement.aspx" />
+    <Content Include="Financial Statement\OwnerEquityState.aspx" />
     <Content Include="Financial Statement\TrialBalance.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="GeneralAccounter\AccounterHome.aspx" />
@@ -226,8 +227,16 @@
     <Compile Include="Financial Statement\IncomeStatement.aspx.designer.cs">
       <DependentUpon>IncomeStatement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Financial Statement\OwnerEquityState.aspx.cs">
+      <DependentUpon>OwnerEquityState.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Financial Statement\OwnerEquityState.aspx.designer.cs">
+      <DependentUpon>OwnerEquityState.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Financial Statement\Statement Model\ChartofAcc.cs" />
     <Compile Include="Financial Statement\Statement Model\IncDetail.cs" />
+    <Compile Include="Financial Statement\Statement Model\OEStatement.cs" />
     <Compile Include="Financial Statement\Statement Model\TrialBl.cs" />
     <Compile Include="Financial Statement\TrialBalance.aspx.cs">
       <DependentUpon>TrialBalance.aspx</DependentUpon>
@@ -261,6 +270,9 @@
       <DependentUpon>General Ledger.aspx</DependentUpon>
     </Compile>
     <Compile Include="Journal and Ledger\Model\IndiJournal.cs" />
+    <Compile Include="Journal and Ledger\Model\JourDesc.cs" />
+    <Compile Include="Journal and Ledger\Model\JourHeader.cs" />
+    <Compile Include="Journal and Ledger\Model\JourLine.cs" />
     <Compile Include="Journal and Ledger\Model\Ledger.cs" />
     <Compile Include="journalentry.aspx.cs">
       <DependentUpon>journalentry.aspx</DependentUpon>

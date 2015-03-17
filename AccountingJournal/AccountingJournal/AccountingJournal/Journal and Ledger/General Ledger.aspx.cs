@@ -24,19 +24,21 @@ namespace AccountingJournal.Journal_and_Legend
             string id = Request.QueryString["ID"];
             List<Ledger> LedgerList = Connection.DisplayGenLedger(id).Cast<Ledger>().ToList();
             StringBuilder sb = new StringBuilder();
+            string Acc = "";
             foreach (Ledger l in LedgerList)
             {
+                Acc = l.Account;
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td style='text-align:left; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'><div style='margin-left:10px'>{0}</div></td>", l.date.ToShortDateString()));
-                sb.Append(string.Format(@"<td style='text-align:left; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'><div style='margin-left:10px'>{0}</div></td>", l.Description));
-                sb.Append(string.Format(@"<td style='text-align:center; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'><a href='../Journal and Ledger/General Journal.aspx?Accnum={1}' style='color:black'>{0}</a></td>", l.Ref, l.TranxID));
-                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'>{0}</td>", string.Format("{0:#,##0.00}", l.Debit)));
-                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'>{0}</td>", string.Format("{0:#,##0.00}", l.Credit)));
-                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin; border-bottom-color:black; border-right:solid; border-right-color:blue;border-top:solid thin; border-top-color:black; border-left:solid; border-left-color:blue'>{0}</td>", l.Balance.ToString("#,##0.00")));
+                sb.Append(string.Format(@"<td>{0}</td>", l.date.ToShortDateString()));
+                sb.Append(string.Format(@"<td class='text-left'>{0}</td>", l.Description));
+                sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Journal.aspx?Accnum={1}' style='color:black'>{0}</a></td>", l.Ref, l.TranxID));
+                sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", l.Debit)));
+                sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", l.Credit)));
+                sb.Append(string.Format(@"<td class='text-right'>{0}</td>", l.Balance.ToString("#,##0.00")));
                 sb.Append(string.Format(@"</tr>"));
             }
             GL_Detail.Text = sb.ToString();
-            GL_Title.Text = LedgerList[0].Account;
+            GL_Title.Text = Acc;
             GL_Number.Text = "NO. "+id;
         }
     }

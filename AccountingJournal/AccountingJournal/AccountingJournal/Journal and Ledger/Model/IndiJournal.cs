@@ -16,5 +16,6 @@ namespace AccountingJournal.Journal_and_Ledger.Model
         public string IsDebit { get; set; }
         public DateTime? postdate { get; set; }
         public int TranxID { get; set; }
+        public int TotalAccEff { get; set; }
     }
 }

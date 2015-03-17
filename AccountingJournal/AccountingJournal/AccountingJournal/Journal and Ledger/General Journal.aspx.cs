@@ -30,39 +30,92 @@ namespace AccountingJournal.Journal_and_Ledger
             }
             StringBuilder sb = new StringBuilder();
             List<int> id = new List<int>();
+            List<JourHeader> Journalheader = new List<JourHeader>();
+            List<JourLine> JournalLine = new List<JourLine>();
+            List<JourDesc> JournalDes = new List<JourDesc>();
             foreach (IndiJournal j in Jour)
             {
-                id.Add(j.TranxID);
+                if (!id.Contains(j.TranxID))
+                {
+                    id.Add(j.TranxID);
+
+                }
+                JourHeader newJournal = new JourHeader(j.TranxID, j.date, j.postdate, j.TotalAccEff);
+                if (!Journalheader.Contains(newJournal))
+                {
+                    Journalheader.Add(newJournal);
+                }
+                if (!JournalLine.Contains(new JourLine(j.TranxID, j.Account, j.AccNum, j.Debit, j.Credit, j.IsDebit)))
+                {
+                    JournalLine.Add(new JourLine(j.TranxID, j.Account, j.AccNum, j.Debit, j.Credit, j.IsDebit));
+                }
+
+                if (!JournalDes.Contains(new JourDesc(j.TranxID, j.Desc)))
+                {
+                    JournalDes.Add(new JourDesc(j.TranxID, j.Desc));
+                }
+
             }
-            foreach (IndiJournal j in Jour)
+            for (int i = 0; i < Journalheader.Count; i++)
             {
-                sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td>{0}</td>", j.date.ToShortDateString()));
-                if (j.IsDebit == "Debit")
+                int reset = 0;
+                for (int j = 0; j < JournalLine.Count; j++)
                 {
-                    sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;color:black'>{0}</a></td>", j.Account, j.AccNum));
+                    if (Journalheader[i].id == JournalLine[j].id)
+                    {
+                        if (reset == 0)
+                        {
+                            reset = 1;
+                            sb.Append(string.Format(@"<tr>"));
+                            sb.Append(string.Format(@"<td class='text-center' rowspan='{1}'>{0}</td>", Journalheader[i].Date.ToShortDateString(), Journalheader[i].TotalAccEff+1));
+                            if (JournalLine[j].IsDebit == "Debit")
+                            {
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                            }
+                            else
+                            {
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                            }
+                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
+                            sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
+                            sb.Append(string.Format(@"<td class='text-center vcenter' rowspan='{1}'>{0}</td>", Journalheader[i].PostDate != null ? Journalheader[i].PostDate.Value.ToString("MM/dd/yyy") : "", Journalheader[i].TotalAccEff+1));
+                            sb.Append(string.Format(@"</tr>"));
+                        }
+                        else
+                        {
+                            sb.Append(string.Format(@"<tr>"));
+                            if (JournalLine[j].IsDebit == "Debit")
+                            {
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                            }
+                            else
+                            {
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                            }
+                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
+                            sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
+                            sb.Append(string.Format(@"</tr>"));
+                        }
+                    }                   
                 }
-                else
-                {
-                    sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", j.Account, j.AccNum));
-                }
-                sb.Append(string.Format(@"<td>{0}</td>",j.postdate != null? j.postdate.Value.ToString("MM/dd/yyy"):""));
-                sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", j.AccNum, j.AccNum));
-                sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", string.Format("{0:#,##0.00}", j.Debit)));
-                sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", string.Format("{0:#,##0.00}", j.Credit)));
-                sb.Append(string.Format(@"</tr>"));
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td style='height:50px;'>"));
-                sb.Append(string.Format(@"{0}", "(" + j.Desc + ")"));
+                sb.Append(string.Format(@"<td class='text-center'>"));
+                for (int j = 0; j < JournalDes.Count; j++)
+                {
+                    if (Journalheader[i].id == JournalDes[j].id)
+                    {
+                        sb.Append(string.Format(@"<div>({0})</div>", JournalDes[j].Desc));
+                    }
+                }
                 sb.Append(string.Format(@"</td>"));
                 sb.Append(string.Format(@"<td></td>"));
                 sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td></td>"));
+                sb.Append(string.Format(@"<td></td>")); 
                 sb.Append(string.Format(@"</tr>"));
             }
-            IndJour.Text = sb.ToString();            
+            IndJour.Text = sb.ToString();
         }
     }
 }

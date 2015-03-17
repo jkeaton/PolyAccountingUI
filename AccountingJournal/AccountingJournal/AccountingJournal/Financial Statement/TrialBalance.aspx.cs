@@ -27,7 +27,7 @@ namespace AccountingJournal.Financial_Statement
             foreach (TrialBl Trial in tr)
             {
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td>"));
+                sb.Append(string.Format(@"<td  class='text-left'>"));
                 sb.Append(string.Format(@"<a href='#'>{0}<a>", Trial.Name));
                 sb.Append(string.Format(@"</td>"));
                 if (Trial.IsDebit == "Debit")

@@ -174,7 +174,12 @@ namespace AccountingJournal.Code
                     CAcc = new ChartofAcc();
                     CAcc.AccType = reader.GetString(0);
                     CAcc.ID = reader.GetInt32(1);                  
-                    CAcc.Account = reader.GetString(2);
+                    CAcc.AccNum = reader.GetInt32(2);
+                    CAcc.Account = reader.GetString(3);
+                    CAcc.AccDate = reader.GetDateTime(4);
+                    CAcc.Balance = reader.GetDecimal(5);
+                    CAcc.NorBal = reader.GetString(6);
+                    CAcc.Group = reader.GetString(7);
                     list.Add(CAcc);
                 }
             }
@@ -259,6 +264,7 @@ namespace AccountingJournal.Code
                     Journal.IsDebit = reader.GetString(6);
                     Journal.postdate = reader.GetDateTime(7);
                     Journal.TranxID = reader.GetInt32(8);
+                    Journal.TotalAccEff = reader.GetInt32(9);
                     list.Add(Journal);
                 }
             }
@@ -286,7 +292,8 @@ namespace AccountingJournal.Code
                                  + " , CASE WHEN IsDebit =1 then 'Debit' else 'Credit' end as IsDebit"
                                  + " , PostDate"
                                  + " , TranxID"
-                                 + "   FROM [TransactionDB].[dbo].[Journal]");
+                                 + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
+                                 + "   FROM [TransactionDB].[dbo].[Journal] j");
             try
             {
                 conn.Open();
@@ -313,6 +320,7 @@ namespace AccountingJournal.Code
                         Journal.postdate = reader.GetDateTime(7);
                     }
                     Journal.TranxID = reader.GetInt32(8);
+                    Journal.TotalAccEff = reader.GetInt32(9);
                     list.Add(Journal);
                 }
             }
@@ -326,6 +334,40 @@ namespace AccountingJournal.Code
             }
             return list;
         }
+
+        public static ArrayList DisplayOEStatement()
+        {
+            ArrayList list = new ArrayList();
+            OEStatement OwnEq;
+            string query = string.Format("EXEC DisplayOEStatement");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    OwnEq = new OEStatement();
+                    OwnEq.StartPeriod = reader.GetDateTime(0);
+                    OwnEq.EndPeriod = reader.GetDateTime(1);
+                    OwnEq.StartAmount = reader.GetDecimal(2);
+                    OwnEq.Investment = reader.GetDecimal(3);
+                    OwnEq.Drawing = reader.GetDecimal(4);
+                    OwnEq.Net = reader.GetDecimal(5);
+                    list.Add(OwnEq);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
     }
 
 

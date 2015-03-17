@@ -3,46 +3,91 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="text-align: center; background-color: darkblue; color: white; height: 30px; font-size: large; vertical-align: central; font-weight: bold">
-        Chart of Account
-    </div>
-    <div>
-        <table style="width: 800px; margin-left: auto; margin-right: auto">
-            <tr>
-                <td rowspan="2" style=" vertical-align:top">
-                    <table style="width: 500px;">
-                        <asp:Label ID="Asset" runat="server"></asp:Label>
-                    </table>
-                </td>
-                <td style=" vertical-align:top">
-                    <table style="width: 300px;">
-                        <asp:Label ID="Lia" runat="server"></asp:Label>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style=" vertical-align:top">
-                    <table style="width: 300px;">
-                        <asp:Label ID="OEqu" runat="server"></asp:Label>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <table style="width: 800px; margin-left: auto; margin-right: auto;">
-            <tr>
-                <td style=" vertical-align:top">
-                    <table style="width: 500px;">
-                        <asp:Label ID="Expe" runat="server"></asp:Label>
-                    </table>
-                </td>
-                <td style=" vertical-align:top">
-                    <table style="width: 300px;">
-                        <asp:Label ID="Reve" runat="server"></asp:Label>
-                    </table>
-                </td>
-            </tr>
-        </table>
+    <div class="container">
+        <div class="panel panel-primary form-group text-center">
+            <div class="panel-heading ">
+                Chart of Account
+            </div>
+            <div class="panel-body" style="background-color: #e3edf5">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td colspan="6">Assets</td>
+                    </tr>
+                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                        <td class="text-left">Account Name</td>
+                        <td>Account Number</td>
+                        <td>Create Date</td>
+                        <td>Group</td>
+                        <td class="text-right">Balance</td>
+                        <td>Normal Balance</td>
+                    </tr>
+                    <asp:Label ID="ChrAsset" runat="server"></asp:Label>
+                </table>
+            </div>
+            <div class="panel-body" style="background-color: #e3edf5">
+                <table class="table table-bordered table-hover">
+                    <tr class="active">
+                        <td colspan="6">Liability</td>
+                    </tr>
+                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                        <td class="text-left">Account Name</td>
+                        <td>Account Number</td>
+                        <td>Create Date</td>
+                        <td>Group</td>
+                        <td class="text-right">Balance</td>
+                        <td>Normal Balance</td>
+                    </tr>
+                    <asp:Label ID="ChrLiab" runat="server"></asp:Label>
+                </table>
+            </div>
+            <div class="panel-body" style="background-color: #e3edf5">
+                <table class="table table-bordered table-hover">
+                    <tr class="active">
+                        <td colspan="6">Owner's Equity</td>
+                    </tr>
+                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                        <td class="text-left">Account Name</td>
+                        <td>Account Number</td>
+                        <td>Create Date</td>
+                        <td>Group</td>
+                        <td class="text-right">Balance</td>
+                        <td>Normal Balance</td>
+                    </tr>
+                    <asp:Label ID="ChrOw" runat="server"></asp:Label>
+                </table>
+            </div>
+            <div class="panel-body" style="background-color: #e3edf5">
+                <table class="table table-bordered table-hover">
+                    <tr class="active">
+                        <td colspan="6">Revenue</td>
+                    </tr>
+                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                        <td class="text-left">Account Name</td>
+                        <td>Account Number</td>
+                        <td>Create Date</td>
+                        <td>Group</td>
+                        <td class="text-right">Balance</td>
+                        <td>Normal Balance</td>
+                    </tr>
+                    <asp:Label ID="ChrRev" runat="server"></asp:Label>
+                </table>
+            </div>
+            <div class="panel-body" style="background-color: #e3edf5">
+                <table class="table table-bordered table-hover">
+                    <tr class="active">
+                        <td colspan="6">Expenses</td>
+                    </tr>
+                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                        <td class="text-left">Account Name</td>
+                        <td>Account Number</td>
+                        <td>Create Date</td>
+                        <td>Group</td>
+                        <td class="text-right">Balance</td>
+                        <td>Normal Balance</td>
+                    </tr>
+                    <asp:Label ID="ChrExp" runat="server"></asp:Label>
+                </table>
+            </div>
+        </div>
     </div>
 </asp:Content>

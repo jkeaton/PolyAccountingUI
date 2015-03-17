@@ -13,48 +13,48 @@ namespace AccountingJournal.Financial_Statement {
     public partial class Chart_of_Account {
         
         /// <summary>
-        /// Asset control.
+        /// ChrAsset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Asset;
+        protected global::System.Web.UI.WebControls.Label ChrAsset;
         
         /// <summary>
-        /// Lia control.
+        /// ChrLiab control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Lia;
+        protected global::System.Web.UI.WebControls.Label ChrLiab;
         
         /// <summary>
-        /// OEqu control.
+        /// ChrOw control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label OEqu;
+        protected global::System.Web.UI.WebControls.Label ChrOw;
         
         /// <summary>
-        /// Expe control.
+        /// ChrRev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Expe;
+        protected global::System.Web.UI.WebControls.Label ChrRev;
         
         /// <summary>
-        /// Reve control.
+        /// ChrExp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Reve;
+        protected global::System.Web.UI.WebControls.Label ChrExp;
     }
 }

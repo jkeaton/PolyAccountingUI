@@ -25,6 +25,28 @@
             mainmenu();
         });
     </script>
+    <style type="text/css">
+        a:link {
+            text-decoration:none;
+        }
+        #NAV a {
+            color: #FFF;
+            text-decoration: none;
+        }
+
+        #NAV li {
+            background-color:blue;
+            width: 150px;
+            border-radius:0;
+        }
+
+        #NAV li ul li {
+            width: 250px;
+            margin-bottom:0;
+            margin-top:0;
+
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -39,80 +61,107 @@
         <div id="wrapper">
             <div id="headername">
                 <a runat="server" href="~/Manager/ManagerHome.aspx">
-                    <img src="../Images/AppDomainFinalProjectLogo.png" style="width: 100px; height: 100px; vertical-align: middle;" />
-                    Poly Accounting Information Group</a>
+                    <h1>
+                        <img src="../Images/AppDomainFinalProjectLogo.png" style="width: 100px; height: 100px; vertical-align: middle;" />
+                        Accounting Information Group</h1>
+                </a>
             </div>
             <div>
-                <%-- Navigation Bar --%>
-                <table id="banner">
-                    <tr>
-                        <td>
-                            <ul id="NAV">
-                                <li style="background-color: #0a88f3"><a href="#" style="align-items:center; top:10px;">Home</a></li>
-                                <li style="background-color: #0a88f3"><a href="#">Record Transaction</a>
-                                    <ul>
-                                        <li style="background-color: #0a88f3"><a href="#">Journal Entry</a></li>
-                                        <li style="background-color: #0a88f3"><a href="#">Adjusting Entry</a></li>
-                                        <li style="background-color: #0a88f3"><a href="#">Closing Entry</a></li>
-                                    </ul>
+                <div class="container">
+                    <ul id="NAV" class="list-inline text-center">
+                        <li class="panel panel-primary">
+                            <h5><a href="#" style="align-items: center">Home</a></h5>
+                        </li>
+                        <li class="panel panel-primary dropdown">
+                            <h5><a href="#" class="dropdown-toggle" data-toggle="dropdown">Record Transaction</a></h5>
+                            <ul class="dropdown-menu">
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Journal Entry</a></h5>
                                 </li>
-                                <li style="background-color: #0a88f3"><a href="../Journal and Ledger/General Journal.aspx" style="align-items:center; top:10px;">General Journal</a></li>
-                                <li style="background-color: #0a88f3"><a href="#">Unpost Transaction</a></li>
-                                <li style="background-color: #0a88f3"><a href="../Financial Statement/TrialBalance.aspx" style="align-items:center; top:10px;">Trial Balance</a></li>
-                                <li style="background-color: #0a88f3"><a href="#">Financal Statement</a>
-                                    <ul>
-                                        <li style="background-color: #0a88f3"><a href="../Financial Statement/IncomeStatement.aspx">Income Statement</a></li>
-                                        <li style="background-color: #0a88f3"><a href="#">Balance Sheet</a></li>
-                                        <li style="background-color: #0a88f3"><a href="#">Statement of Owner’s Equity</a></li>
-                                        <li style="background-color: #0a88f3"><a href="#">Cash Flow Statement </a></li>
-                                    </ul>
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Adjusting Entry</a></h5>
                                 </li>
-                                <li style="background-color: #0a88f3"><a href="../Financial Statement/Chart of Account.aspx" style="align-items:center; top:10px;">Chart of Account</a></li>
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Closing Entry</a></h5>
+                                </li>
                             </ul>
-                        </td>
-                    </tr>
-                </table>
+                        </li>
+                        <li class="panel panel-primary">
+                            <h5><a href="../Journal and Ledger/General Journal.aspx" style="align-items: center; top: 10px;">General Journal</a></h5>
+                        </li>
+                        <li class="panel panel-primary">
+                            <h5><a href="#">Unpost Transaction</a></h5>
+                        </li>
+                        <li class="panel panel-primary">
+                            <h5><a href="../Financial Statement/TrialBalance.aspx" style="align-items: center; top: 10px;">Trial Balance</a></h5>
+                        </li>
+                        <li class="panel panel-primary dropdown">
+                            <h5><a href="#" class="dropdown-toggle" data-toggle="dropdown">Financial Statement</a></h5>
+                            <ul class="dropdown-menu">
+                                <li class="panel panel-primary">
+                                    <h5><a href="../Financial Statement/IncomeStatement.aspx">Income Statement</a></h5>
+                                </li>
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Balance Sheet</a></h5>
+                                </li>
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Statement of Owner’s Equity</a></h5>
+                                </li>
+                                <li class="panel panel-primary">
+                                    <h5><a href="#">Cash Flow Statement </a></h5>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="panel panel-primary">
+                            <h5><a href="../Financial Statement/Chart of Account.aspx">Chart of Account</a></h5>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
             <div id="Content">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <div id="footer">
-                <div style="text-align: center; background-color: forestgreen; color: white; height: 30px; font-size: large; vertical-align: central; font-weight: bold">
-                    Send Email
+            <div id="footer" class="container">
+                <div class="panel panel-success form-group">
+                    <div class="panel-heading text-center">
+                        Send Email
+                    </div>
+                    <div class="panel-body">
+                        <table id="tblEmail">
+                            <tr>
+                                <td style="text-align: right;">Receipients:</td>
+                                <td>
+                                    <asp:TextBox ID="Receipients" runat="server" placeholder="Receipients" CssClass="form-control"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; margin-bottom: 10px">Attachment:</td>
+                                <td>
+                                    <asp:FileUpload ID="UpladAtt" runat="server" placeholder="Upload Attachment" CssClass="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Description:
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="EmailBody" runat="server" TextMode="MultiLine" Width="800px" Height="200px" placeholder="Description..." CssClass="form-control"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <asp:Button ID="SendEmail" runat="server" Text="Send" CssClass="btn btn-primary" OnClick="SendEmail_Click" Width="100px" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <asp:Label ID="SendEmailMess" runat="server" ForeColor="Red"></asp:Label>
+                    </div>
                 </div>
-                <div style="border: thick; border-color: forestgreen">
-                    <table id="tblEmail">
-                        <tr>
-                            <td style="text-align: right;">Receipients:</td>
-                            <td>
-                                <asp:TextBox ID="Receipients" runat="server" placeholder="Receipients" CssClass="Emailbox"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; margin-bottom: 10px">Attachment:</td>
-                            <td>
-                                <asp:FileUpload ID="UpladAtt" runat="server" placeholder="Upload Attachment" CssClass="t_box" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">Description:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="EmailBody" runat="server" TextMode="MultiLine" Width="800px" Height="200px" placeholder="Description..." CssClass="Emailbox"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:Button ID="SendEmail" runat="server" Text="Send" CssClass="butt" BackColor="#0a88f3" Width="80px" OnClick="SendEmail_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div>
-                    <asp:Label ID="SendEmailMess" runat="server" ForeColor="Red"></asp:Label>
-                </div>
+
             </div>
 
         </div>
