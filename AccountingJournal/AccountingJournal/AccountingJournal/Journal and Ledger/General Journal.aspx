@@ -2,41 +2,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .borderless td {
-            border: none;
-        }
-
-        .AjaxCalendar {
-            background-color: lightskyblue;
-            border: solid thin;
-            border-bottom-color: darkblue;
-        }
-
-
-            .AjaxCalendar .ajax__calendar_header {
-                background-color: #ffffff;
-                margin-bottom: 4px;
-            }
-
-            .AjaxCalendar .ajax__calendar_body {
-                background-color: #ffffff;
-                border: solid 1px #77D5F7;
-            }
-
-            .AjaxCalendar .ajax__calendar_dayname {
-                text-align: center;
-                font-weight: bold;
-                margin-bottom: 4px;
-                margin-top: 2px;
-                color: #004080;
-            }
-
-            .AjaxCalendar .ajax__calendar_day {
-                color: #004080;
-                text-align: center;
-            }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
