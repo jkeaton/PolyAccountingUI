@@ -8,7 +8,7 @@
             <div class="panel-heading ">
                 Trial Balance
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table">
                     <tr>
                         <td></td>

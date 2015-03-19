@@ -6,168 +6,89 @@
 <head runat="server">
     <title>Poly Accounting Information Group</title>
     <link rel="shortcut icon" href="~/Images/AppDomainFinalProjectLogo.png" />
-    <!--<link rel="stylesheet" type="text/css" href="~/Style/StyleSheet.css" />-->
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
     <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-        function mainmenu() {
-            $(" #NAV ul ").css({ display: "none" });
-
-            $(" #NAV li ").hover(function () {
-                $(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400);
-            }
-            , function () {
-                $(this).find('ul:first').css({ visibility: "hidden" });
-            });
-        }
-        $(document).ready(function () {
-            mainmenu();
-        });
-    </script>
-    <style type="text/css">
-        a:link {
-            text-decoration:none;
-        }
-        #NAV a {
-            color: #FFF;
-            text-decoration: none;
-        }
-
-        #NAV li {
-            background-color:blue;
-            width: 150px;
-            border-radius:0;
-        }
-
-        #NAV li ul li {
-            width: 250px;
-            margin-bottom:0;
-            margin-top:0;
-
-        }
-    </style>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/transition.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/collapse.js"></script>
+    
+    <!--
     <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    </asp:ContentPlaceHolder>-->
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div id="navbar">
-            <div>
-                <asp:Label ID="SignInLb" runat="server" ForeColor="White" Text="SignIn"></asp:Label>
-                <asp:LinkButton ID="SignInLkB" runat="server" ForeColor="White" Text="SignOut" OnClick="SignInLkB_Click"></asp:LinkButton>
-            </div>
-        </div>
-        <div id="wrapper">
-            <div id="headername">
-                <a runat="server" href="~/Manager/ManagerHome.aspx">
-                    <h1>
-                        <img src="../Images/AppDomainFinalProjectLogo.png" style="width: 100px; height: 100px; vertical-align: middle;" />
-                        Accounting Information Group</h1>
-                </a>
-            </div>
-            <div>
-                <div class="container">
-                    <ul id="NAV" class="list-inline text-center">
-                        <li class="panel panel-primary">
-                            <h5><a href="#" style="align-items: center">Home</a></h5>
-                        </li>
-                        <li class="panel panel-primary dropdown">
-                            <h5><a href="#" class="dropdown-toggle" data-toggle="dropdown">Record Transaction</a></h5>
-                            <ul class="dropdown-menu">
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Journal Entry</a></h5>
-                                </li>
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Adjusting Entry</a></h5>
-                                </li>
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Closing Entry</a></h5>
-                                </li>
+    <div id="wrapper" class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
+                    alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
+                    <a class="navbar-brand" href="">Poly Accounting Information Group</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                View
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
+                                <li><a href="#">Transactions by Date Range</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
+                                <li><a href="#">Balance Sheet</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
+                                <li><a href="#">Cash Flow Statement</a></li>
                             </ul>
                         </li>
-                        <li class="panel panel-primary">
-                            <h5><a href="../Journal and Ledger/General Journal.aspx" style="align-items: center; top: 10px;">General Journal</a></h5>
-                        </li>
-                        <li class="panel panel-primary">
-                            <h5><a href="#">Unpost Transaction</a></h5>
-                        </li>
-                        <li class="panel panel-primary">
-                            <h5><a href="../Financial Statement/TrialBalance.aspx" style="align-items: center; top: 10px;">Trial Balance</a></h5>
-                        </li>
-                        <li class="panel panel-primary dropdown">
-                            <h5><a href="#" class="dropdown-toggle" data-toggle="dropdown">Financial Statement</a></h5>
-                            <ul class="dropdown-menu">
-                                <li class="panel panel-primary">
-                                    <h5><a href="../Financial Statement/IncomeStatement.aspx">Income Statement</a></h5>
-                                </li>
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Balance Sheet</a></h5>
-                                </li>
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Statement of Owner’s Equity</a></h5>
-                                </li>
-                                <li class="panel panel-primary">
-                                    <h5><a href="#">Cash Flow Statement </a></h5>
-                                </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
                             </ul>
                         </li>
-                        <li class="panel panel-primary">
-                            <h5><a href="../Financial Statement/Chart of Account.aspx">Chart of Account</a></h5>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--
+                        <?php
+                            global $inbox_ct;
+                            if (isset($_SESSION['user'])){
+                                echo "<li class=\"navbar-left\">
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                class=\"navbar-left\"><form role=\"form\"
+                                class=\"navbar-form navbar-left\" method=\"post\"
+                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                                type=\"submit\" class=\"btn btn-danger\"
+                                name=\"logout\">Log Out</button></form></li>";
+                            }
+                        ?>-->
+                        <li class="navbar-nav">
+                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">
+                                Inbox
+                                <span class="badge"></span>
+                            </a>
+                        </li>
+                        <li class="navbar-left">
+                            <form role="form" class="navbar-form navbar-left" method="post">
+                                <button type="submit" class="btn btn-danger" name="logout">
+                                    Log Out
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
-
             </div>
-            <div id="Content">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-            <div id="footer" class="container">
-                <div class="panel panel-success form-group">
-                    <div class="panel-heading text-center">
-                        Send Email
-                    </div>
-                    <div class="panel-body">
-                        <table id="tblEmail">
-                            <tr>
-                                <td style="text-align: right;">Receipients:</td>
-                                <td>
-                                    <asp:TextBox ID="Receipients" runat="server" placeholder="Receipients" CssClass="form-control"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right; margin-bottom: 10px">Attachment:</td>
-                                <td>
-                                    <asp:FileUpload ID="UpladAtt" runat="server" placeholder="Upload Attachment" CssClass="form-control" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Description:
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="EmailBody" runat="server" TextMode="MultiLine" Width="800px" Height="200px" placeholder="Description..." CssClass="form-control"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <asp:Button ID="SendEmail" runat="server" Text="Send" CssClass="btn btn-primary" OnClick="SendEmail_Click" Width="100px" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div>
-                        <asp:Label ID="SendEmailMess" runat="server" ForeColor="Red"></asp:Label>
-                    </div>
-                </div>
-
-            </div>
-
+        </nav>
+        <div id="Content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-        <hr />
-        <footer>
-        </footer>
-    </form>
+    </div>
 </body>
 </html>

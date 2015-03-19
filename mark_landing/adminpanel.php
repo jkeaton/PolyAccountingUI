@@ -16,6 +16,8 @@
         }
     }
 
+    send_to_main();
+
     $welcome_msg = "Welcome ".$_SESSION['user'];
     $inbox = get_inbox($_SESSION['user']);
     $inbox_ct = count($inbox);
@@ -56,7 +58,7 @@
                             global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button

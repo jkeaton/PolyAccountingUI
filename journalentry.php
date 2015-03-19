@@ -269,13 +269,13 @@
 
     function get_main_menu(){
         if ($_SESSION['level'] === 0){
-            return './mark_landing/adminpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php';
         }
         elseif ($_SESSION['level'] === 1){
-            return './mark_landing/controlpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php';
         }
         elseif ($_SESSION['level'] === 2){
-            return './mark_landing/controlpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php';
         }
         else{
             var_dump($_SESSION['level']);
@@ -422,6 +422,10 @@
                     }
                     alert(matching_elems.join());
                 }
+
+                function valid_fields(){
+                    return false;
+                }
             });
 
             function inc_row_ct(){
@@ -439,12 +443,38 @@
                     <a class="navbar-brand" href="<?php echo get_main_menu(); ?>">Poly Accounting Information Group</a>
                 </div>
                 <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                View
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
+                                <li><a href="#">Transactions by Date Range</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
+                                <li><a href="#">Balance Sheet</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
+                                <li><a href="#">Cash Flow Statement</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <?php
                             global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
@@ -458,7 +488,7 @@
         </nav>
     
         <div class="container">
-            <form role="form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+            <form role="form"  method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading panel-heading-lg text-center">
                     <h3 class="panel-title panel-title-with-logo">General Journal</h3>

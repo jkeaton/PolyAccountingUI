@@ -14,8 +14,9 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadPage();
+
         }
+        /*
         public void LoadPage()
         {
             HttpCookie cookie = Request.Cookies["UserInfo"];
@@ -41,8 +42,9 @@ namespace AccountingJournal
                 SignInLb.Visible = false;
                 SignInLkB.Text = "(SignIn)";
             }
-        }
+        }*/
 
+        /*
         protected void SignInLkB_Click(object sender, EventArgs e)
         {
             HttpCookie cookie = Request.Cookies["UserInfo"];
@@ -73,6 +75,7 @@ namespace AccountingJournal
                 Response.Redirect("~/SignIn/Login.aspx");
             }
         }
+        */
         private bool IsValid(string emailaddress)
         {
             try
@@ -87,6 +90,7 @@ namespace AccountingJournal
             }
         }
 
+        /*
         protected void SendEmail_Click(object sender, EventArgs e)
         {
             if (!IsValid(Receipients.Text))
@@ -117,6 +121,6 @@ namespace AccountingJournal
                 SendEmailMess.Text = "Email was sent successfully.";
             }
         }
-
+        */
     }
 }

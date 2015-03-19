@@ -27,18 +27,31 @@
     function logout(){
         session_unset(); 
         session_destroy();
-        header('Location: http://137.135.120.135/index.php');
+        header('Location: http://test-mesbrook.cloudapp.net/index.php');
         return 0;
     }
 
     function bounce(){
         if (!isset($_SESSION['authenticated'])) {
-            header('Location: index.php');    
+            header('Location: http://test-mesbrook.cloudapp.net/index.php');    
             return;
         }
         if ($_SESSION['authenticated'] === false){
-            header('Location: index.php');    
+            header('Location: http://test-mesbrook.cloudapp.net/index.php');    
             return;
+        }
+    }
+
+    function send_to_main(){
+        if ($_SESSION['level'] === 0){
+            if (strcmp(strtolower("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), strtolower("http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php")) !== 0){
+                header('Location: http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php');
+            }
+        }
+        elseif ($_SESSION['level'] === 1 || $_SESSION['level'] === 2){
+            if (strcmp(strtolower("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), strtolower("http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php")) !== 0){
+                header('Location: http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php');
+            }
         }
     }
 
