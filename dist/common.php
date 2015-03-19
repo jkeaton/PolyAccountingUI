@@ -27,17 +27,17 @@
     function logout(){
         session_unset(); 
         session_destroy();
-        header('Location: http://137.135.120.135/index.php');
+        header('Location: http://test-mesbrook.cloudapp.net/index.php');
         return 0;
     }
 
     function bounce(){
         if (!isset($_SESSION['authenticated'])) {
-            header('Location: index.php');    
+            header('Location: http://test-mesbrook.cloudapp.net/index.php');    
             return;
         }
         if ($_SESSION['authenticated'] === false){
-            header('Location: index.php');    
+            header('Location: http://test-mesbrook.cloudapp.net/index.php');    
             return;
         }
     }

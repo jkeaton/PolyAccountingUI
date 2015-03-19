@@ -269,13 +269,13 @@
 
     function get_main_menu(){
         if ($_SESSION['level'] === 0){
-            return './mark_landing/adminpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php';
         }
         elseif ($_SESSION['level'] === 1){
-            return './mark_landing/controlpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php';
         }
         elseif ($_SESSION['level'] === 2){
-            return './mark_landing/controlpanel.php';
+            return 'http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php';
         }
         else{
             var_dump($_SESSION['level']);
@@ -444,7 +444,7 @@
                             global $inbox_ct;
                             if (isset($_SESSION['user'])){
                                 echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://137.135.120.135/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
                                 class=\"navbar-left\"><form role=\"form\"
                                 class=\"navbar-form navbar-left\" method=\"post\"
                                 action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button

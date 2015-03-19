@@ -85,7 +85,7 @@
                             <div class="panel-body container-fluid">
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Chart of Accounts</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
                                         <a href="">Transactions by Date Range</a>
@@ -93,15 +93,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">All Un-posted Transactions</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Trial Balance</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a>
                                     </div>  
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Income Statement</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
                                         <a href="">Balance Sheet</a>
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Statement of Owner's Equity</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
                                         <a href="">Cash Flow Statement</a>
