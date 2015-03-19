@@ -6,11 +6,11 @@
     <div class="container">
         <div class="panel panel-primary form-group text-center">
             <div class="panel-heading ">
-                Chart of Account
+                Chart of Accounts
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover">
-                    <tr>
+                    <tr class="active">
                         <td colspan="6">Assets</td>
                     </tr>
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
@@ -24,10 +24,10 @@
                     <asp:Label ID="ChrAsset" runat="server"></asp:Label>
                 </table>
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover">
                     <tr class="active">
-                        <td colspan="6">Liability</td>
+                        <td colspan="6">Liabilities</td>
                     </tr>
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
                         <td class="text-left">Account Name</td>
@@ -40,7 +40,7 @@
                     <asp:Label ID="ChrLiab" runat="server"></asp:Label>
                 </table>
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover">
                     <tr class="active">
                         <td colspan="6">Owner's Equity</td>
@@ -56,7 +56,7 @@
                     <asp:Label ID="ChrOw" runat="server"></asp:Label>
                 </table>
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover">
                     <tr class="active">
                         <td colspan="6">Revenue</td>
@@ -72,7 +72,7 @@
                     <asp:Label ID="ChrRev" runat="server"></asp:Label>
                 </table>
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover">
                     <tr class="active">
                         <td colspan="6">Expenses</td>
