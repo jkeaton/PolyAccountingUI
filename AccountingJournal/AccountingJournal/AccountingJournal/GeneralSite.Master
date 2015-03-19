@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
     <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/transition.js"></script>
     <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/collapse.js"></script>
     
@@ -34,22 +35,22 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Chart of Accounts</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
                                 <li><a href="#">Transactions by Date Range</a></li>
-                                <li><a href="#">All Un-posted Transactions</a></li>
-                                <li><a href="#">Trial Balance</a></li>
-                                <li><a href="#">Income Statement</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
                                 <li><a href="#">Balance Sheet</a></li>
-                                <li><a href="#">Statement of Owner's Equity</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
                                 <li><a href="#">Cash Flow Statement</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Journal Entry</a></li>
-                                <li><a href="#">Adjusting Entry</a></li>
-                                <li><a href="#">Closing Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
                             </ul>
                         </li>
                     </ul>
