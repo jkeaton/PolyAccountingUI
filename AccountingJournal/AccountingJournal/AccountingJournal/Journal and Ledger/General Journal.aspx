@@ -9,8 +9,9 @@
             <div class="panel-heading text-center">
                 General Journal
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <div id="filter" runat="server">
+                    <form runat="server">
                     <table>
                         <tr>
                             <td>Start Date</td>
@@ -38,6 +39,7 @@
                             </td>
                         </tr>
                     </table>
+                    </form>
                 </div>
                 <table class="table borderless" id="Jourtab">
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
