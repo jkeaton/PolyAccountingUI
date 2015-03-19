@@ -11,7 +11,7 @@
                 For the Month Ended <%=Enddate.ToLongDateString() %>
             </div>
             <div class="container">
-                <table class="table table-hover">
+                <table class="table table-hover" style="width:600px; margin-left:auto; margin-right:auto">
                     <tr>
                         <td colspan="2">Owner's Capital,
                             <asp:Label ID="StrDat" runat="server"></asp:Label></td>
@@ -20,7 +20,7 @@
                             <asp:Label ID="StrAmt" runat="server"></asp:Label></td>
                     </tr>
                     <tr>
-                        <td>Add:</td>
+                        <td style="width:50px">Add:</td>
                         <td>Investments</td>
                         <td class="text-right">
                             <asp:Label ID="InvAmt" runat="server"></asp:Label></td>

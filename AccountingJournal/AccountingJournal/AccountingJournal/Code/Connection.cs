@@ -96,6 +96,7 @@ namespace AccountingJournal.Code
                                             +" FROM            Account c INNER JOIN"
                                             +"                 AccType ct ON c.AccTypeID = ct.TypeID"
                                             +" WHERE ct.Type IN('Expense','Revenue')"
+                                            +" AND isActive =1 "
                                             +" Order BY ct.TypeID, 3 asc");
             try
             {
@@ -293,7 +294,8 @@ namespace AccountingJournal.Code
                                  + " , PostDate"
                                  + " , TranxID"
                                  + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
-                                 + "   FROM [TransactionDB].[dbo].[Journal] j");
+                                 + "   FROM [TransactionDB].[dbo].[Journal] j"
+                                 + "   WHERE PostDate IS NOT NULL");
             try
             {
                 conn.Open();
@@ -368,6 +370,68 @@ namespace AccountingJournal.Code
             return list;
         }
 
+
+        //need to take out the not
+        public static ArrayList DisplayUnpostTranx()
+        {
+            ArrayList list = new ArrayList();
+            IndiJournal Journal;
+            string query = string.Format("SELECT [Date]"
+                                 + " ,[Name]"
+                                 + " ,[Desc]"
+                                 + " , AccNumber"
+                                 + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
+                                 + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+                                 + " , CASE WHEN IsDebit =1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , PostDate"
+                                 + " , TranxID"
+                                 + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
+                                 + "   FROM [TransactionDB].[dbo].[Journal] j"
+                                 + "   WHERE PostDate IS NULL"
+                                 + "   AND NOT EXISTS"
+		                         + "   ("
+		                         + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
+		                         + "   )");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Journal = new IndiJournal();
+                    Journal.date = reader.GetDateTime(0);
+                    Journal.Account = reader.GetString(1);
+                    Journal.Desc = reader.GetString(2);
+                    Journal.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Journal.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Journal.Credit = reader.GetDecimal(5);
+                    }
+                    Journal.IsDebit = reader.GetString(6);
+                    if (!reader.IsDBNull(7))
+                    {
+                        Journal.postdate = reader.GetDateTime(7);
+                    }
+                    Journal.TranxID = reader.GetInt32(8);
+                    Journal.TotalAccEff = reader.GetInt32(9);
+                    list.Add(Journal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
     }
 
 

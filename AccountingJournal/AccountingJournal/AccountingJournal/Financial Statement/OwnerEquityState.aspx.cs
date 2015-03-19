@@ -24,7 +24,7 @@ namespace AccountingJournal.Financial_Statement
             {
                 StrDat.Text = e.StartPeriod.ToString("MMMM dd, yyyy");
                 StrAmt.Text = e.StartAmount.ToString("#,##0.00");
-                InvAmt.Text = e.Investment.ToString("#,##0.00");
+                InvAmt.Text = "$ "+e.Investment.ToString("#,##0.00");
                 if (e.Net < 0)
                 {
                     NetLabel.Text = "Net Loss";
