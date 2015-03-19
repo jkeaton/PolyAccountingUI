@@ -76,10 +76,7 @@
                         </li>
                         <li class="navbar-left">
                             <form role="form" class="navbar-form navbar-left" method="post" runat="server">
-<%--                                <asp:button Cssclass="btn btn-danger" name="logout">
-                                    Log Out
-                                </asp:button>--%>
-                                <asp:Button ID="logout" runat="server" Text="Log Out" Cssclass="btn btn-danger" OnClick="logout_Click"/>
+                                <a class="btn btn-danger" name="logout" href="http://test-mesbrook.cloudapp.net/index.php" role="button">Log Out</a>
                             </form>
                         </li>
                     </ul>

@@ -30,7 +30,7 @@ namespace AccountingJournal.Financial_Statement
                 if (ca[i].AccType == "Asset")
                 {
                     asSb.Append(string.Format(@"<tr class='info'>"));
-                    asSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].ID));
+                    asSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].AccNum));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
