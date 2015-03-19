@@ -75,10 +75,11 @@
                             </a>
                         </li>
                         <li class="navbar-left">
-                            <form role="form" class="navbar-form navbar-left" method="post">
-                                <button type="submit" class="btn btn-danger" name="logout">
+                            <form role="form" class="navbar-form navbar-left" method="post" runat="server">
+<%--                                <asp:button Cssclass="btn btn-danger" name="logout">
                                     Log Out
-                                </button>
+                                </asp:button>--%>
+                                <asp:Button ID="logout" runat="server" Text="Log Out" Cssclass="btn btn-danger" OnClick="logout_Click"/>
                             </form>
                         </li>
                     </ul>

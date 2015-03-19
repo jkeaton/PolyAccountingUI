@@ -16,66 +16,6 @@ namespace AccountingJournal
         {
 
         }
-        /*
-        public void LoadPage()
-        {
-            HttpCookie cookie = Request.Cookies["UserInfo"];
-            if (cookie != null)
-            {
-                if (cookie["id"] != null)
-                {
-                    if (cookie["FirstName"] == null)
-                        SignInLb.Text = "Welcome, <a href='../Account/ManageAccount.aspx'>" + cookie["Username"] + "<a>";
-                    else
-                        SignInLb.Text = "Welcome, <a href='../Account/ManageAccount.aspx'>" + (cookie["FirstName"] + " " + cookie["LastName"]) + "<a>";
-                    SignInLb.Visible = true;
-                    SignInLkB.Text = "(SignOut)";
-                }
-                else
-                {
-                    SignInLb.Visible = false;
-                    SignInLkB.Text = "(SignIn)";
-                }
-            }
-            else
-            {
-                SignInLb.Visible = false;
-                SignInLkB.Text = "(SignIn)";
-            }
-        }*/
-
-        /*
-        protected void SignInLkB_Click(object sender, EventArgs e)
-        {
-            HttpCookie cookie = Request.Cookies["UserInfo"];
-            if (cookie != null)
-            {
-                if (cookie["id"] == null)
-                {
-                    SignInLb.Text = "";
-                    SignInLb.Visible = false;
-                    Response.Redirect("~/SignIn/Login.aspx");
-                }
-                else
-                {
-                    cookie = Request.Cookies["UserInfo"];
-                    Response.Cookies.Remove("UserInfo");
-                    cookie.Value = null;
-                    Response.SetCookie(cookie);
-                    SignInLb.Text = "";
-                    SignInLb.Visible = false;
-                    SignInLkB.Text = "(LogIn)";
-
-                }
-            }
-            else
-            {
-                SignInLb.Text = "";
-                SignInLb.Visible = false;
-                Response.Redirect("~/SignIn/Login.aspx");
-            }
-        }
-        */
         private bool IsValid(string emailaddress)
         {
             try
@@ -88,6 +28,13 @@ namespace AccountingJournal
             {
                 return false;
             }
+        }
+
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Clear();
+            Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
         }
 
         /*
