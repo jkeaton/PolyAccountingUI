@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li class="navbar-left">
-                            <form role="form" class="navbar-form navbar-left" method="post" runat="server">
+                            <form role="form" class="navbar-form navbar-left" method="post">
                                 <a class="btn btn-danger" name="logout" href="http://test-mesbrook.cloudapp.net/index.php" role="button">Log Out</a>
                             </form>
                         </li>
