@@ -16,6 +16,8 @@
         }
     }
 
+    send_to_main();
+
     $welcome_msg = "Welcome ".$_SESSION['user'];
     $inbox = get_inbox($_SESSION['user']);
     $inbox_ct = count($inbox);

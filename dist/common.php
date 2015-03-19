@@ -42,6 +42,19 @@
         }
     }
 
+    function send_to_main(){
+        if ($_SESSION['level'] === 0){
+            if (strcmp(strtolower("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), strtolower("http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php")) !== 0){
+                header('Location: http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php');
+            }
+        }
+        elseif ($_SESSION['level'] === 1 || $_SESSION['level'] === 2){
+            if (strcmp(strtolower("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), strtolower("http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php")) !== 0){
+                header('Location: http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php');
+            }
+        }
+    }
+
     function escape_quotes($input){
         return str_replace("'", "''", $input);
     }
