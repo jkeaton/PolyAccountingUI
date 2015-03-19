@@ -18,79 +18,77 @@
     </asp:ContentPlaceHolder>-->
 </head>
 <body>
-    <form role="form" class="navbar-form navbar-left" method="post" runat="server">
-        <div id="wrapper" class="container">
-            <div class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
-                        alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
-                        <a class="navbar-brand" href="">Poly Accounting Information Group</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    View
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Chart of Accounts</a></li>
-                                    <li><a href="#">Transactions by Date Range</a></li>
-                                    <li><a href="#">All Un-posted Transactions</a></li>
-                                    <li><a href="#">Trial Balance</a></li>
-                                    <li><a href="#">Income Statement</a></li>
-                                    <li><a href="#">Balance Sheet</a></li>
-                                    <li><a href="#">Statement of Owner's Equity</a></li>
-                                    <li><a href="#">Cash Flow Statement</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Journal Entry</a></li>
-                                    <li><a href="#">Adjusting Entry</a></li>
-                                    <li><a href="#">Closing Entry</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <!--
-                            <?php
-                                global $inbox_ct;
-                                if (isset($_SESSION['user'])){
-                                    echo "<li class=\"navbar-left\">
-                                    <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
-                                    class=\"navbar-left\"><form role=\"form\"
-                                    class=\"navbar-form navbar-left\" method=\"post\"
-                                    action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
-                                    type=\"submit\" class=\"btn btn-danger\"
-                                    name=\"logout\">Log Out</button></form></li>";
-                                }
-                            ?>-->
-                            <li class="navbar-nav">
-                                <a href="http://test-mesbrook.cloudapp.net/inbox.php">
-                                    Inbox
-                                    <span class="badge"></span>
-                                </a>
-                            </li>
-                            <li class="navbar-left">
+    <div id="wrapper" class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
+                    alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
+                    <a class="navbar-brand" href="">Poly Accounting Information Group</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                View
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Chart of Accounts</a></li>
+                                <li><a href="#">Transactions by Date Range</a></li>
+                                <li><a href="#">All Un-posted Transactions</a></li>
+                                <li><a href="#">Trial Balance</a></li>
+                                <li><a href="#">Income Statement</a></li>
+                                <li><a href="#">Balance Sheet</a></li>
+                                <li><a href="#">Statement of Owner's Equity</a></li>
+                                <li><a href="#">Cash Flow Statement</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Journal Entry</a></li>
+                                <li><a href="#">Adjusting Entry</a></li>
+                                <li><a href="#">Closing Entry</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--
+                        <?php
+                            global $inbox_ct;
+                            if (isset($_SESSION['user'])){
+                                echo "<li class=\"navbar-left\">
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                class=\"navbar-left\"><form role=\"form\"
+                                class=\"navbar-form navbar-left\" method=\"post\"
+                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                                type=\"submit\" class=\"btn btn-danger\"
+                                name=\"logout\">Log Out</button></form></li>";
+                            }
+                        ?>-->
+                        <li class="navbar-nav">
+                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">
+                                Inbox
+                                <span class="badge"></span>
+                            </a>
+                        </li>
+                        <li class="navbar-left">
+                            <form role="form" class="navbar-form navbar-left" method="post">
                                 <button type="submit" class="btn btn-danger" name="logout">
                                     Log Out
                                 </button>
-                            </li>
-                        </ul>
-                    </div>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div id="Content">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
+        </nav>
+        <div id="Content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-        <hr />
-    </form>
+    </div>
+    <hr />
 </body>
 </html>
