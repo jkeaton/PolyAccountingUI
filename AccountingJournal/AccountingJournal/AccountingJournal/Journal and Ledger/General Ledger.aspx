@@ -8,7 +8,7 @@
             <div class="panel-heading ">
                 General Ledger
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover text-center">
                     <tr>
                         <td colspan="6">
