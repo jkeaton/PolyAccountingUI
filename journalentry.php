@@ -347,15 +347,7 @@
                                     "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
                             '</td>' +
-                            '<td class="t_src">' +
-                                '<div class="fileUpload btn btn-default form-control">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">' +
-                                    '<input name="img_'+curr_row+'"type="file" class="upload">' +
-                                '</div>' +
-                            '</td>' +
-                            '<td class="t_ref">' +
-                                '<input name="i['+(start_at+3)+']"type="text" class="stored_val form-control" id="ref" placeholder="Ref">' +
-                            '</td>' +
+                            '<td class="t_src"></td>' +
                             '<td class="t_debit">' +
                                 '<input name="i['+(start_at+4)+']"type="text" class="stored_val form-control dr_amt" placeholder="Amt">' +
                             '</td>' +
@@ -381,15 +373,7 @@
                                     "'<?php echo gen_select_options(); ?>'" +
                                 '</select>' +
                             '</td>' +
-                            '<td class="t_src">' +
-                                '<div class="fileUpload btn btn-default form-control">' +
-                                    '<img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">' +
-                                    '<input name="img_'+curr_row+'" type="file" class="upload">' +
-                                '</div>' +
-                            '</td>' +
-                            '<td class="t_ref">' +
-                                '<input name="i['+(start_at+3)+']" type="text" class="stored_val form-control" placeholder="Ref">' +
-                            '</td>' +
+                            '<td class="t_src"></td>' +
                             '<td class="t_debit"></td>' +
                             '<td class="t_credit">'+
                                 '<input name="i['+(start_at+5)+']" type="text" class="stored_val form-control cr_amt" placeholder="Amt">' +
@@ -498,13 +482,12 @@
                     <table class="table" id="header_table">
                         <thead>
                             <tr>
-                                <th class="t_date">Date</th>
-                                <th class="t_acct_title">Account Title and Explanation</th>
-                                <th class="t_src">Src</th>
-                                <th class="t_ref">Ref</th>
-                                <th class="t_debit">Debit</th>
-                                <th class="t_credit">Credit</th>
-                                <th class="t_action">Action</th>
+                                <th class="t_date text-left">Date</th>
+                                <th class="t_acct_title text-left">Account Title and Explanation</th>
+                                <th class="t_src text-left">Src</th>
+                                <th class="t_debit text-left">Debit</th>
+                                <th class="t_credit text-left">Credit</th>
+                                <th class="t_action text-left">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -530,22 +513,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="t_src">
-                                    <div class="fileUpload btn btn-default form-control">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">
-                                        <input name="img_0" type="file" class="upload">
-                                    </div>
-                                </td>
-                                <td class="t_ref">
-                                    <input name="i[3]" type="text" class="stored_val form-control" id="ref" placeholder="Ref">
-                                </td>
+                                <td class="t_src"></td>
                                 <td class="t_debit">
                                     <input name="i[4]" type="text" class="stored_val form-control" id="debit" placeholder="Amt">
                                 </td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger form-control" name="clear">
-                                        Clear
+                                    <button type="submit" id="attempt_post" class="attempt_post btn btn-primary form-control" name="submit">
+                                        Submit
                                     </button>
                                 </td>
                             </tr>
@@ -564,15 +539,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="t_src">
-                                    <div class="fileUpload btn btn-default form-control">
-                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">
-                                        <input name="img_1" type="file" class="upload">
-                                    </div>
-                                </td>
-                                <td class="t_ref">
-                                    <input name="i[9]" type="text" class="stored_val form-control" id="ref" placeholder="Ref">
-                                </td>
+                                <td class="t_src"></td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit">
                                     <input name="i[11]" type="text" class="stored_val form-control cr_amt" placeholder="Amt">
@@ -584,13 +551,17 @@
                                 <td class="t_acct_title">
                                     <input name="i[13]" type="text" class="stored_val form-control trans_desc" id="trans_desc" placeholder="Description">
                                 </td>
-                                <td class="t_src"></td>
-                                <td class="t_ref"></td>
+                                <td class="t_src">
+                                    <div class="fileUpload btn btn-default form-control">
+                                        <img src="dist/images/document_icon.png" alt="Source Doc" height="16" width="16" class="logo-je">
+                                        <input name="img_1" type="file" class="upload">
+                                    </div>
+                                </td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit"></td>
                                 <td class="t_action">
-                                    <button type="submit" id="attempt_post" class="attempt_post btn btn-primary form-control" name="submit">
-                                        Submit
+                                    <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger form-control" name="clear">
+                                        Clear
                                     </button>
                                 </td>
                             </tr>
