@@ -70,13 +70,13 @@ namespace AccountingJournal.Journal_and_Ledger
                             sb.Append(string.Format(@"<td class='text-center' rowspan='{1}'>{0}</td>", Journalheader[i].Date.ToShortDateString(), Journalheader[i].TotalAccEff+1));
                             if (JournalLine[j].IsDebit == "Debit")
                             {
-                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
                             else
                             {
-                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
-                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
                             sb.Append(string.Format(@"<td class='text-center vcenter' rowspan='{1}'>{0}</td>", Journalheader[i].PostDate != null ? Journalheader[i].PostDate.Value.ToString("MM/dd/yyy") : "", Journalheader[i].TotalAccEff+1));
@@ -87,13 +87,13 @@ namespace AccountingJournal.Journal_and_Ledger
                             sb.Append(string.Format(@"<tr>"));
                             if (JournalLine[j].IsDebit == "Debit")
                             {
-                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='text-decoration:none;'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
                             else
                             {
-                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
+                                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
-                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
                             sb.Append(string.Format(@"</tr>"));
@@ -101,12 +101,12 @@ namespace AccountingJournal.Journal_and_Ledger
                     }                   
                 }
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td class='text-center'>"));
+                sb.Append(string.Format(@"<td>"));
                 for (int j = 0; j < JournalDes.Count; j++)
                 {
                     if (Journalheader[i].id == JournalDes[j].id)
                     {
-                        sb.Append(string.Format(@"<div>({0})</div>", JournalDes[j].Desc));
+                        sb.Append(string.Format(@"<p style='text-decoration:none; margin-left:40px;'>({0})</p>", JournalDes[j].Desc));
                     }
                 }
                 sb.Append(string.Format(@"</td>"));

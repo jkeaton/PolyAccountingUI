@@ -46,8 +46,8 @@
                         <td class="text-center">Date</td>
                         <td>Account Titles and Explanation</td>
                         <td>Ref.</td>
-                        <td class="text-right">Debit</td>
-                        <td class="text-right">Credit</td>
+                        <td class="text-center">Debit</td>
+                        <td class="text-center">Credit</td>
                         <td class="text-center">Posted Date</td>
                     </tr>
                     <asp:Label ID="IndJour" runat="server"></asp:Label>
