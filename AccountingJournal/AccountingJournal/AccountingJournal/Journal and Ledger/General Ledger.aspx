@@ -22,11 +22,11 @@
                     </tr>
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
                         <td>Date</td>
-                        <td class='text-left'>Description</td>
+                        <td class='text-center'>Description</td>
                         <td>Ref.</td>
-                        <td class='text-right'>Debit</td>
-                        <td class='text-right'>Credit</td>
-                        <td class='text-right'>Balance</td>
+                        <td class='text-center'>Debit</td>
+                        <td class='text-center'>Credit</td>
+                        <td class='text-center'>Balance</td>
                     </tr>
                     <asp:Label ID="GL_Detail" runat="server"></asp:Label>
                 </table>

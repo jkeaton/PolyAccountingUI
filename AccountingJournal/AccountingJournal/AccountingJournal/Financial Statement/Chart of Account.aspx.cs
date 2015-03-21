@@ -30,7 +30,7 @@ namespace AccountingJournal.Financial_Statement
                 if (ca[i].AccType == "Asset")
                 {
                     asSb.Append(string.Format(@"<tr class='info'>"));
-                    asSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].AccNum));
+                    asSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none;'>{0}</a></td>", ca[i].Account, ca[i].AccNum));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     asSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
@@ -41,7 +41,7 @@ namespace AccountingJournal.Financial_Statement
                 else if (ca[i].AccType == "Liability")
                 {
                     liSb.Append(string.Format(@"<tr class='info'>"));
-                    liSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].ID));
+                    liSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-align:left; text-decoration:none;'>{0}</a></td>", ca[i].Account, ca[i].ID));
                     liSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     liSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     liSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
@@ -52,7 +52,7 @@ namespace AccountingJournal.Financial_Statement
                 else if (ca[i].AccType == "Owner's Equity")
                 {
                     OWSb.Append(string.Format(@"<tr>"));
-                    OWSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].ID));
+                    OWSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none;'>{0}</a></td>", ca[i].Account, ca[i].ID));
                     OWSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     OWSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     OWSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
@@ -63,7 +63,7 @@ namespace AccountingJournal.Financial_Statement
                 else if (ca[i].AccType == "Revenue")
                 {
                     ReSb.Append(string.Format(@"<tr>"));
-                    ReSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].ID));
+                    ReSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none;'>{0}</a></td>", ca[i].Account, ca[i].ID));
                     ReSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     ReSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     ReSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
@@ -74,7 +74,7 @@ namespace AccountingJournal.Financial_Statement
                 else if (ca[i].AccType == "Expense")
                 {
                     ExpSb.Append(string.Format(@"<tr>"));
-                    ExpSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; color:black;'>{0}</a></td>", ca[i].Account, ca[i].ID));
+                    ExpSb.Append(string.Format(@"<td class='text-left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none;'>{0}</a></td>", ca[i].Account, ca[i].ID));
                     ExpSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccNum));
                     ExpSb.Append(string.Format(@"<td>{0}</td>", ca[i].AccDate.ToShortDateString()));
                     ExpSb.Append(string.Format(@"<td>{0}</td>", ca[i].Group));
