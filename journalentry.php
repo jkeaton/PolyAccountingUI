@@ -405,7 +405,7 @@
                 });
                 
                 $(".attempt_post").click(function(){
-                    //store_form_fields();
+                    store_form_fields();
                 });
 
                 function store_form_fields(){
