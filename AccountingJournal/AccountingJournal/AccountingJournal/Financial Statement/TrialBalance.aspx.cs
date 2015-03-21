@@ -26,54 +26,56 @@ namespace AccountingJournal.Financial_Statement
             StringBuilder sb = new StringBuilder();
             foreach (TrialBl Trial in tr)
             {
-                sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td  class='text-left'>"));
-                sb.Append(string.Format(@"<a href='../Journal and Ledger/General Ledger.aspx?ID={1}'>{0}<a>", Trial.Name, Trial.AccNum));
-                sb.Append(string.Format(@"</td>"));
-                if (Trial.IsDebit == "Debit")
+                if (Trial.Total > 0)
                 {
-                    if (Trial.Rank == 1)
+                    sb.Append(string.Format(@"<tr>"));
+                    sb.Append(string.Format(@"<td  class='text-left'>"));
+                    sb.Append(string.Format(@"<a href='../Journal and Ledger/General Ledger.aspx?ID={1}'>{0}<a>", Trial.Name, Trial.AccNum));
+                    sb.Append(string.Format(@"</td>"));
+                    if (Trial.IsDebit == "Debit")
                     {
-                        sb.Append(string.Format(@"<td style='text-align: Right'>"));
-                        sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
-                        sb.Append(string.Format(@"</td>"));
-                        sb.Append(string.Format(@"<td>"));
-                        sb.Append(string.Format(@"</td>"));
-                    }
-                    else
-                    {
-                        sb.Append(string.Format(@"<td style='text-align: Right'>"));
-                        sb.Append(string.Format(@"{0}", Trial.Total.ToString("#,##0.00")));
-                        sb.Append(string.Format(@"</td>"));
-                        sb.Append(string.Format(@"<td>"));
-                        sb.Append(string.Format(@"</td>"));
-                    }
+                        if (Trial.Rank == 1)
+                        {
+                            sb.Append(string.Format(@"<td style='text-align: Right'>"));
+                            sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
+                            sb.Append(string.Format(@"</td>"));
+                            sb.Append(string.Format(@"<td>"));
+                            sb.Append(string.Format(@"</td>"));
+                        }
+                        else
+                        {
+                            sb.Append(string.Format(@"<td style='text-align: Right'>"));
+                            sb.Append(string.Format(@"{0}", Trial.Total.ToString("#,##0.00")));
+                            sb.Append(string.Format(@"</td>"));
+                            sb.Append(string.Format(@"<td>"));
+                            sb.Append(string.Format(@"</td>"));
+                        }
 
-                    totlDeb += (float)Trial.Total;
+                        totlDeb += (float)Trial.Total;
+                    }
+                    else if (Trial.IsDebit == "Credit")
+                    {
+                        if (Trial.Rank == 1)
+                        {
+                            sb.Append(string.Format(@"<td>"));
+                            sb.Append(string.Format(@"</td>"));
+                            sb.Append(string.Format(@"<td style='text-align: Right'>"));
+                            sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
+                            sb.Append(string.Format(@"</td>"));
+                        }
+                        else
+                        {
+                            sb.Append(string.Format(@"<td>"));
+                            sb.Append(string.Format(@"</td>"));
+                            sb.Append(string.Format(@"<td style='text-align: Right'>"));
+                            sb.Append(string.Format(@"{0}", Trial.Total.ToString("#,##0.00")));
+                            sb.Append(string.Format(@"</td>"));
+                        }
+
+                        totlCre += (float)Trial.Total;
+                    }
+                    sb.Append(string.Format(@"</tr>"));
                 }
-                else if (Trial.IsDebit == "Credit")
-                {
-                    if (Trial.Rank == 1)
-                    {
-                        sb.Append(string.Format(@"<td>"));
-                        sb.Append(string.Format(@"</td>"));
-                        sb.Append(string.Format(@"<td style='text-align: Right'>"));
-                        sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
-                        sb.Append(string.Format(@"</td>"));
-                    }
-                    else
-                    {
-                        sb.Append(string.Format(@"<td>"));
-                        sb.Append(string.Format(@"</td>"));
-                        sb.Append(string.Format(@"<td style='text-align: Right'>"));
-                        sb.Append(string.Format(@"{0}", Trial.Total.ToString("#,##0.00")));
-                        sb.Append(string.Format(@"</td>"));
-                    }
-
-                    totlCre += (float)Trial.Total;
-                }
-                sb.Append(string.Format(@"</tr>"));
-
             }
             T_Balance.Text = sb.ToString();
             TotalCre.Text = totlCre.ToString("#,##0.00");
