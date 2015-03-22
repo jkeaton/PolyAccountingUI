@@ -12,33 +12,29 @@
             <div class="panel-body">
                 <div id="filter" runat="server">
                     <form runat="server">
-                    <table>
-                        <tr>
-                            <td>Start Date</td>
-                            <td>
-                                <asp:TextBox ID="StarDat" runat="server"></asp:TextBox></td>
-                            <td>
-                                <asp:ImageButton ID="StCalButton" src="../Images/CalBut.png" runat="server" Width="30px" Height="30px" />
-                                <asp:ScriptManager ID="asm" runat="server"></asp:ScriptManager>
-                                <cc1:CalendarExtender ID="StartCald" runat="server" PopupButtonID="StCalButton"
-                                    CssClass="AjaxCalendar"
-                                    TargetControlID="StarDat" Format="MMMM d, yy">
-                                </cc1:CalendarExtender>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>End Date</td>
-                            <td>
-                                <asp:TextBox ID="EndDat" runat="server"></asp:TextBox></td>
-                            <td>
-                                <asp:ImageButton ID="EdCalButt" src="../Images/CalBut.png" runat="server" Width="30px" Height="30px" />
-                                <cc1:CalendarExtender ID="EndCald" runat="server" PopupButtonID="EdCalButt"
-                                    CssClass="AjaxCalendar"
-                                    TargetControlID="EndDat" Format="MMMM d, yy">
-                                </cc1:CalendarExtender>
-                            </td>
-                        </tr>
-                    </table>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="startDate">Start Date: </label>
+                                    <div class="input-group">
+                                        <input type='text' class="datepicker form-control" placeholder="Start Date" name='startDate'/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="endDate">End Date: </label>
+                                    <div class="input-group">
+                                        <input type='text' class="datepicker form-control" placeholder="End Date" name='endDate'/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style='height: 15px;'></div>
+                        </div>
                     </form>
                 </div>
                 <table class="table borderless" id="Jourtab">
