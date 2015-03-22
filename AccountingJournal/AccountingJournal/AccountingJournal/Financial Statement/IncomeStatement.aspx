@@ -19,8 +19,10 @@
                             <div style="margin-left: 20px">Total Expenses</div>
                         </td>
                         <td></td>
-                        <td style="text-align: right">
-                            <asp:Label ID="tol_expense" runat="server" Style="border-bottom: solid thin"></asp:Label>
+                        <td style="text-align: right;">
+                            <span style="border-bottom: solid thin;">
+                                <asp:Label ID="tol_expense" runat="server"></asp:Label>
+                            </span>
                         </td>
                     </tr>
                     <tr>
@@ -28,7 +30,7 @@
                         <td colspan="2">Net Income</td>
                         <td></td>
                         <td>
-                            <div style="text-align: right; color: red">
+                            <div style="text-align: right;">
                                 <asp:Label ID="Net_Inc" runat="server" Style="border-bottom: double"></asp:Label>
                             </div>
                         </td>
