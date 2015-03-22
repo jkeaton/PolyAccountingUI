@@ -40,7 +40,7 @@ namespace AccountingJournal.Financial_Statement
                 sb.Append(string.Format(@"<tr>"));
                 sb.Append(string.Format(@"<td colspan='2'>{0}</td>", AccType[i]));
                 sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td><td>"));
+                sb.Append(string.Format(@"<td></td>"));
                 sb.Append(string.Format(@"</tr>"));
                 for (int j = 0; j < incsta.Count; j++)
                 {

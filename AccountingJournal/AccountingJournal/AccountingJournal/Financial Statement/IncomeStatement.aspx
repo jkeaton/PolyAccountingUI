@@ -26,7 +26,6 @@
                         </td>
                     </tr>
                     <tr>
-
                         <td colspan="2">Net Income</td>
                         <td></td>
                         <td>
