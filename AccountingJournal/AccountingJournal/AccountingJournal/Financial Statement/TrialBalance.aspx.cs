@@ -24,6 +24,8 @@ namespace AccountingJournal.Financial_Statement
         {
             ArrayList tr = Connection.DisplayTrialBalance();
             StringBuilder sb = new StringBuilder();
+            Boolean firstDr = false;
+            Boolean firstCr = false;
             foreach (TrialBl Trial in tr)
             {
                 if (Trial.Total > 0)
@@ -34,13 +36,14 @@ namespace AccountingJournal.Financial_Statement
                     sb.Append(string.Format(@"</td>"));
                     if (Trial.IsDebit == "Debit")
                     {
-                        if (Trial.Rank == 1)
+                        if (!firstDr)
                         {
                             sb.Append(string.Format(@"<td style='text-align: Right'>"));
                             sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
                             sb.Append(string.Format(@"</td>"));
                             sb.Append(string.Format(@"<td>"));
                             sb.Append(string.Format(@"</td>"));
+                            firstDr = true;
                         }
                         else
                         {
@@ -55,13 +58,14 @@ namespace AccountingJournal.Financial_Statement
                     }
                     else if (Trial.IsDebit == "Credit")
                     {
-                        if (Trial.Rank == 1)
+                        if (!firstCr)
                         {
                             sb.Append(string.Format(@"<td>"));
                             sb.Append(string.Format(@"</td>"));
                             sb.Append(string.Format(@"<td style='text-align: Right'>"));
                             sb.Append(string.Format(@"$ {0}", Trial.Total.ToString("#,##0.00")));
                             sb.Append(string.Format(@"</td>"));
+                            firstCr = true;
                         }
                         else
                         {
@@ -78,8 +82,8 @@ namespace AccountingJournal.Financial_Statement
                 }
             }
             T_Balance.Text = sb.ToString();
-            TotalCre.Text = totlCre.ToString("#,##0.00");
-            TotalDeb.Text = totlDeb.ToString("#,##0.00");
+            TotalCre.Text = string.Format(@"$ {0}", totlCre.ToString("#,##0.00"));
+            TotalDeb.Text = string.Format(@"$ {0}", totlDeb.ToString("#,##0.00"));
         }
     }
 }
