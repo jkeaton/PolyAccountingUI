@@ -8,11 +8,18 @@
     <link rel="shortcut icon" href="~/Images/AppDomainFinalProjectLogo.png" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
     <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/transition.js"></script>
     <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/collapse.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker()
+        });
+    </script>
     
     
     <asp:ContentPlaceHolder ID="head" runat="server">

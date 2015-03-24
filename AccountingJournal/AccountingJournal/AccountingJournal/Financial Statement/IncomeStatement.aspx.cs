@@ -33,67 +33,78 @@ namespace AccountingJournal.Financial_Statement
                 }
             }
 
+            Boolean firstDr = false;
+            Boolean firstCr = false;
             for (int i = 0; i < AccType.Count; i++)
             {
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td colspan='2'>{0}</td>",AccType[i]));
+                sb.Append(string.Format(@"<td colspan='2'>{0}</td>", AccType[i]));
                 sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td><td>"));
+                sb.Append(string.Format(@"<td></td>"));
                 sb.Append(string.Format(@"</tr>"));
                 for (int j = 0; j < incsta.Count; j++)
                 {
-                    if (incsta[j].AccountType == AccType[i] && incsta[j].Rank == 1)
+                    if (incsta[j].total > 0)
                     {
-                        if (incsta[j].IsDebit == "Debit")
+                        if (incsta[j].AccountType == AccType[i] && (!firstDr || !firstCr))
                         {
-                            sb.Append(string.Format(@"<tr>"));
-                            sb.Append(string.Format(@"<td style='width:30px'></td>"));
-                            sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
-                            sb.Append(string.Format(@"<td style='width:250; text-align:right'>$ {0}</td>", incsta[j].total.ToString("#,##0.00")));
-                            sb.Append(string.Format(@"<td></td>"));
-                            sb.Append(string.Format(@"</tr>"));
-                            tot_exp += (float)incsta[j].total;
-                        }
-                        else
-                        {
-                            sb.Append(string.Format(@"<tr>"));
-                            sb.Append(string.Format(@"<td style='width:30px'></td>"));
-                            sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
-                            sb.Append(string.Format(@"<td></td>"));
-                            sb.Append(string.Format(@"<td style='width:250; text-align:right'>$ {0}</td>", incsta[j].total.ToString("#,##0.00")));
-                            sb.Append(string.Format(@"</tr>"));
-                            tot_rev += (float)incsta[j].total;
-                        }
-                    }
-                    else if (incsta[j].AccountType == AccType[i] && incsta[j].Rank != 1)
-                    {
-                        if (incsta[j].IsDebit == "Debit")
-                        {
-                            sb.Append(string.Format(@"<tr>"));
-                            sb.Append(string.Format(@"<td style='width:30px'></td>"));
-                            sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
-                            if (j == incsta.Count - 1)
+                            if (incsta[j].IsDebit == "Debit" && !firstDr)
                             {
+<<<<<<< HEAD
                                 sb.Append(string.Format(@"<td style='width:250; text-align:right;border-bottom:solid thin;'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
+=======
+                                sb.Append(string.Format(@"<tr>"));
+                                sb.Append(string.Format(@"<td style='width:30px'></td>"));
+                                sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
+                                sb.Append(string.Format(@"<td style='width:250; text-align:right'>$ {0}</td>", incsta[j].total.ToString("#,##0.00")));
+                                sb.Append(string.Format(@"<td></td>"));
+                                sb.Append(string.Format(@"</tr>"));
+                                tot_exp += (float)incsta[j].total;
+                                firstDr = true;
+>>>>>>> a3260b11ebeaca1f46e876f78cf29aa45b272474
                             }
-                            else
+                            else if (!firstCr)
                             {
-                            sb.Append(string.Format(@"<td style='width:250; text-align:right'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
-
+                                sb.Append(string.Format(@"<tr>"));
+                                sb.Append(string.Format(@"<td style='width:30px'></td>"));
+                                sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
+                                sb.Append(string.Format(@"<td></td>"));
+                                sb.Append(string.Format(@"<td style='width:250; text-align:right'>$ {0}</td>", incsta[j].total.ToString("#,##0.00")));
+                                sb.Append(string.Format(@"</tr>"));
+                                tot_rev += (float)incsta[j].total;
+                                firstCr = true;
                             }
-                            sb.Append(string.Format(@"<td></td>"));
-                            sb.Append(string.Format(@"</tr>"));
-                            tot_exp += (float)incsta[j].total;
                         }
-                        else
+                        else if (incsta[j].AccountType == AccType[i])
                         {
-                            sb.Append(string.Format(@"<tr>"));
-                            sb.Append(string.Format(@"<td style='width:30px'></td>"));
-                            sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
-                            sb.Append(string.Format(@"<td></td>"));
-                            sb.Append(string.Format(@"<td style='width:250; text-align:right'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
-                            sb.Append(string.Format(@"</tr>"));
-                            tot_rev += (float)incsta[j].total;
+                            if (incsta[j].IsDebit == "Debit" && firstDr)
+                            {
+                                sb.Append(string.Format(@"<tr>"));
+                                sb.Append(string.Format(@"<td style='width:30px'></td>"));
+                                sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
+                                if (j == incsta.Count - 1)
+                                {
+                                    sb.Append(string.Format(@"<td style='width:250; text-align:right;'><span style='border-bottom: solid thin'>{0}</span></td>", incsta[j].total.ToString("#,##0.00")));
+                                }
+                                else
+                                {
+                                    sb.Append(string.Format(@"<td style='width:250; text-align:right'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
+
+                                }
+                                sb.Append(string.Format(@"<td></td>"));
+                                sb.Append(string.Format(@"</tr>"));
+                                tot_exp += (float)incsta[j].total;
+                            }
+                            else if(firstCr)
+                            {
+                                sb.Append(string.Format(@"<tr>"));
+                                sb.Append(string.Format(@"<td style='width:30px'></td>"));
+                                sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
+                                sb.Append(string.Format(@"<td></td>"));
+                                sb.Append(string.Format(@"<td style='width:250; text-align:right'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
+                                sb.Append(string.Format(@"</tr>"));
+                                tot_rev += (float)incsta[j].total;
+                            }
                         }
                     }
                 }

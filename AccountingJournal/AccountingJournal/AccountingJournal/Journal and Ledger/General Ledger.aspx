@@ -8,7 +8,7 @@
             <div class="panel-heading ">
                 General Ledger
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table table-bordered table-hover text-center">
                     <tr>
                         <td colspan="6">
@@ -22,11 +22,11 @@
                     </tr>
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
                         <td>Date</td>
-                        <td class='text-left'>Description</td>
+                        <td class='text-center'>Description</td>
                         <td>Ref.</td>
-                        <td class='text-right'>Debit</td>
-                        <td class='text-right'>Credit</td>
-                        <td class='text-right'>Balance</td>
+                        <td class='text-center'>Debit</td>
+                        <td class='text-center'>Credit</td>
+                        <td class='text-center'>Balance</td>
                     </tr>
                     <asp:Label ID="GL_Detail" runat="server"></asp:Label>
                 </table>

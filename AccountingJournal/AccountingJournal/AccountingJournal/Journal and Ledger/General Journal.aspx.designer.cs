@@ -22,69 +22,6 @@ namespace AccountingJournal.Journal_and_Ledger {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl filter;
         
         /// <summary>
-        /// StarDat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StarDat;
-        
-        /// <summary>
-        /// StCalButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton StCalButton;
-        
-        /// <summary>
-        /// asm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager asm;
-        
-        /// <summary>
-        /// StartCald control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender StartCald;
-        
-        /// <summary>
-        /// EndDat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EndDat;
-        
-        /// <summary>
-        /// EdCalButt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton EdCalButt;
-        
-        /// <summary>
-        /// EndCald control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender EndCald;
-        
-        /// <summary>
         /// IndJour control.
         /// </summary>
         /// <remarks>

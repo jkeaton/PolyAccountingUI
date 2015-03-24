@@ -111,12 +111,9 @@ html, body {
     width: 12%;
 }
 .t_acct_title {
-    width: 50%;
+    width: 56%;
 }
 .t_src {
-    width: 6%;
-}
-.t_ref {
     width: 6%;
 }
 .t_debit {
