@@ -9,7 +9,7 @@
                 Trial Balance
             </div>
             <div class="panel-body">
-                <table class="table">
+                <table class="table" style="width:800px; margin-left:auto; margin-right:auto">
                     <tr>
                         <td></td>
                         <td  class='text-right'>Debit</td>

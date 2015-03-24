@@ -74,7 +74,7 @@ namespace AccountingJournal.Financial_Statement
                             sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
                             if (j == incsta.Count - 1)
                             {
-                                sb.Append(string.Format(@"<td style='width:250; text-align:right; border-bottom:solid thin'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
+                                sb.Append(string.Format(@"<td style='width:250; text-align:right;border-bottom:solid thin;'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
                             }
                             else
                             {
@@ -101,6 +101,14 @@ namespace AccountingJournal.Financial_Statement
             tol_expense.Text = tot_exp.ToString("#,##0.00");
             Net_Inc.Text = "$ " + (tot_rev - tot_exp).ToString("#,##0.00");
             IncState.Text = sb.ToString();
+            if ((tot_rev - tot_exp) < 0)
+            {
+                Net_Inc.Attributes["style"] = "color:red; border-bottom:double;";
+            }
+            else
+            {
+                Net_Inc.Attributes["style"] = "color:blue; border-bottom:double;";
+            }
         }
     }
 }

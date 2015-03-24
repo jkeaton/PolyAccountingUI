@@ -32,7 +32,7 @@ namespace AccountingJournal
 
         protected void logout_Click(object sender, EventArgs e)
         {
-            //Session.Clear();
+            Session.Clear();
             Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
         }
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -97,7 +98,8 @@ namespace AccountingJournal.Code
                                             +"                 AccType ct ON c.AccTypeID = ct.TypeID"
                                             +" WHERE ct.Type IN('Expense','Revenue')"
                                             +" AND isActive =1 "
-                                            +" Order BY ct.TypeID, 3 asc");
+                                            +" AND c.Balance > 0"
+                                            +" Order BY ct.TypeID, 4 asc");
             try
             {
                 conn.Open();
@@ -132,6 +134,7 @@ namespace AccountingJournal.Code
             string query = string.Format("SELECT [Name],CASE WHEN a.[IsDebit] = 0 then 'Credit' else 'Debit' END as IsDebit,a.Balance as total "
                                             + ", ROW_NUMBER() OVER(PARTITION BY a.isDebit order by AccNumber) as [Rank],AccNumber "
                                             + "FROM [TransactionDB].[dbo].[Account] a "
+                                            + "WHERE Balance <> 0"
                                             + "order by AccNumber");
             try
             {
@@ -382,7 +385,7 @@ namespace AccountingJournal.Code
                                  + " , AccNumber"
                                  + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                  + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
-                                 + " , CASE WHEN IsDebit =1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
                                  + " , PostDate"
                                  + " , TranxID"
                                  + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
@@ -431,6 +434,46 @@ namespace AccountingJournal.Code
                 conn.Close();
             }
             return list;
+        }
+
+        public static DataTable ManageAccDisplay()
+        {
+            string query = string.Format("EXEC [ManageAccount]");
+            DataTable dt = new DataTable();
+            try
+            {
+                conn.Open();
+                SqlDataAdapter adpt = new SqlDataAdapter(query, conn);
+                adpt.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return dt;
+        }
+
+        public static void UpdateActiveAcc(int ID, bool isactive)
+        {
+             string query = string.Format("[ActivateAccount] {0}, {1}", ID, isactive == true ? 1 : 0 );
+             try
+             {
+                 conn.Open();
+                 cmd.CommandText = query;
+                 SqlDataReader reader = cmd.ExecuteReader();
+             }
+             //catch (Exception e)
+             //{
+             //    Console.WriteLine(e);
+             //}
+             finally
+             {
+                 conn.Close();
+             }
         }
     }
 

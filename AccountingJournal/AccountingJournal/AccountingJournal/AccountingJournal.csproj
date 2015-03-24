@@ -135,6 +135,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Financial Statement\Chart of Account.aspx" />
+    <Content Include="Financial Statement\ManageAccount.aspx" />
     <Content Include="Financial Statement\IncomeStatement.aspx" />
     <Content Include="Financial Statement\OwnerEquityState.aspx" />
     <Content Include="Financial Statement\TrialBalance.aspx" />
@@ -251,6 +252,13 @@
     </Compile>
     <Compile Include="Financial Statement\Chart of Account.aspx.designer.cs">
       <DependentUpon>Chart of Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Financial Statement\ManageAccount.aspx.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Financial Statement\ManageAccount.aspx.designer.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Financial Statement\IncomeStatement.aspx.cs">
       <DependentUpon>IncomeStatement.aspx</DependentUpon>
