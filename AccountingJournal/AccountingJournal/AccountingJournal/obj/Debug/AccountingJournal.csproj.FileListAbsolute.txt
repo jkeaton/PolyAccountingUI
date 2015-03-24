@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll.config
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.pdb
@@ -32,38 +32,3 @@ C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJour
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.dll
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.pdb
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache
-=======
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll.config
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.pdb
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Antlr3.Runtime.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AspNet.ScriptManager.bootstrap.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AspNet.ScriptManager.jQuery.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.AspNet.FriendlyUrls.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.ScriptManager.MSAjax.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.ScriptManager.WebForms.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.Web.Infrastructure.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Newtonsoft.Json.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Helpers.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Mvc.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Optimization.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Razor.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.Deployment.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.Razor.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\WebGrease.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Helpers.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Mvc.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Razor.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.Deployment.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.WebPages.Razor.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\System.Web.Optimization.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Antlr3.Runtime.pdb
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Newtonsoft.Json.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.AspNet.FriendlyUrls.xml
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.dll
-C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.pdb
->>>>>>> a3260b11ebeaca1f46e876f78cf29aa45b272474
