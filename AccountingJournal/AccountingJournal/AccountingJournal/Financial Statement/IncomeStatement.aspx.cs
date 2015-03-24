@@ -50,9 +50,7 @@ namespace AccountingJournal.Financial_Statement
                         {
                             if (incsta[j].IsDebit == "Debit" && !firstDr)
                             {
-<<<<<<< HEAD
-                                sb.Append(string.Format(@"<td style='width:250; text-align:right;border-bottom:solid thin;'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
-=======
+                                //sb.Append(string.Format(@"<td style='width:250; text-align:right;border-bottom:solid thin;'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
                                 sb.Append(string.Format(@"<tr>"));
                                 sb.Append(string.Format(@"<td style='width:30px'></td>"));
                                 sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
@@ -61,7 +59,6 @@ namespace AccountingJournal.Financial_Statement
                                 sb.Append(string.Format(@"</tr>"));
                                 tot_exp += (float)incsta[j].total;
                                 firstDr = true;
->>>>>>> a3260b11ebeaca1f46e876f78cf29aa45b272474
                             }
                             else if (!firstCr)
                             {
