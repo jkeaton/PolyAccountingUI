@@ -21,9 +21,9 @@
         });
     </script>
     
-    <!--
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>-->
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <div id="wrapper" class="container">
@@ -34,6 +34,7 @@
                     alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
                     <a class="navbar-brand" href="http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php">Poly Accounting Information Group</a>
                 </div>
+                <%--<a href="fonts/">fonts/</a>--%>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">

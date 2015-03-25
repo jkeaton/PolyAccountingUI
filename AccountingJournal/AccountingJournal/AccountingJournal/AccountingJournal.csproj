@@ -127,19 +127,15 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\ForgetPassword.aspx" />
-    <Content Include="Account\Register.aspx" />
-    <Content Include="Account\SignIn.aspx" />
-    <Content Include="Administrator\AdminHome.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Financial Statement\Chart of Account.aspx" />
+    <Content Include="Financial Statement\ManageAccount.aspx" />
     <Content Include="Financial Statement\IncomeStatement.aspx" />
     <Content Include="Financial Statement\OwnerEquityState.aspx" />
     <Content Include="Financial Statement\TrialBalance.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="GeneralAccounter\AccounterHome.aspx" />
     <Content Include="Images\AppDomainFinalProjectLogo.png" />
     <Content Include="Images\document_icon.png" />
     <Content Include="Images\CalBut.png" />
@@ -147,12 +143,10 @@
     <Content Include="Journal and Ledger\General Ledger.aspx" />
     <Content Include="Journal and Ledger\UnpostTransaction.aspx" />
     <Content Include="journalentry.aspx" />
-    <Content Include="Manager\ManagerHome.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Account\Empty.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -206,41 +200,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Empty.Master.cs">
-      <DependentUpon>Empty.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Empty.Master.designer.cs">
-      <DependentUpon>Empty.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ForgetPassword.aspx.cs">
-      <DependentUpon>ForgetPassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ForgetPassword.aspx.designer.cs">
-      <DependentUpon>ForgetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\SignIn.aspx.cs">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\SignIn.aspx.designer.cs">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administrator\AdminHome.aspx.cs">
-      <DependentUpon>AdminHome.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administrator\AdminHome.aspx.designer.cs">
-      <DependentUpon>AdminHome.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Connection.cs" />
@@ -251,6 +210,13 @@
     </Compile>
     <Compile Include="Financial Statement\Chart of Account.aspx.designer.cs">
       <DependentUpon>Chart of Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Financial Statement\ManageAccount.aspx.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Financial Statement\ManageAccount.aspx.designer.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Financial Statement\IncomeStatement.aspx.cs">
       <DependentUpon>IncomeStatement.aspx</DependentUpon>
@@ -276,13 +242,6 @@
     </Compile>
     <Compile Include="Financial Statement\TrialBalance.aspx.designer.cs">
       <DependentUpon>TrialBalance.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="GeneralAccounter\AccounterHome.aspx.cs">
-      <DependentUpon>AccounterHome.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GeneralAccounter\AccounterHome.aspx.designer.cs">
-      <DependentUpon>AccounterHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -319,13 +278,6 @@
     </Compile>
     <Compile Include="journalentry.aspx.designer.cs">
       <DependentUpon>journalentry.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\ManagerHome.aspx.cs">
-      <DependentUpon>ManagerHome.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Manager\ManagerHome.aspx.designer.cs">
-      <DependentUpon>ManagerHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Mobile.Master.cs">

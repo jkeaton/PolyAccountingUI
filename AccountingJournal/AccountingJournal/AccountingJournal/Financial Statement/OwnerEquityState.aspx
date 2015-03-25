@@ -16,48 +16,18 @@
                         <td colspan="2">Owner's Capital,
                             <asp:Label ID="StrDat" runat="server"></asp:Label></td>
                         <td></td>
+                        <td style="width:20px;"></td>
                         <td class="text-right">$
                             <asp:Label ID="StrAmt" runat="server"></asp:Label></td>
                     </tr>
-                    <tr>
-                        <td style="width:50px">Add:</td>
-                        <td>Investments</td>
-                        <td class="text-right">
-                            <asp:Label ID="InvAmt" runat="server"></asp:Label></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <asp:Label ID="NetLabel" runat="server"></asp:Label></td>
-                        <td class="text-right">
-                            <asp:Label ID="NetAmt" runat="server"></asp:Label></td>
-                        <td class="text-right">
-                            <asp:Label ID="AddTot" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right">
-                            <asp:Label ID="subtotal" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Less:</td>
-                        <td>Drawing</td>
-                        <td></td>
-                        <td class="text-right">
-                            <asp:Label ID="DrwAmt" runat="server"></asp:Label>
-                        </td>
-                    </tr>
+                    <asp:Label ID="OEDetail" runat="server"></asp:Label>
                     <tr>
                         <td colspan="2">Owner's Capital, 
                             <asp:Label ID="EndDat" runat="server"></asp:Label>
                         </td>
                         <td></td>
-                        <td class="text-right">
+                        <td></td>
+                        <td class="text-right" style="border-bottom:double">
                             <asp:Label ID="Endtot" runat="server"></asp:Label>
                         </td>
                     </tr>

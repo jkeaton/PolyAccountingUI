@@ -7903,7 +7903,8 @@ jQuery.extend({
 			// URL without anti-cache param
 			cacheURL,
 			// Response headers as string
-			responseHeadersString,
+			response
+ersString,
 			// timeout handle
 			timeoutTimer,
 

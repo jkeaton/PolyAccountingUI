@@ -50,6 +50,7 @@ namespace AccountingJournal.Financial_Statement
                         {
                             if (incsta[j].IsDebit == "Debit" && !firstDr)
                             {
+                                //sb.Append(string.Format(@"<td style='width:250; text-align:right;border-bottom:solid thin;'>{0}</td>", incsta[j].total.ToString("#,##0.00")));
                                 sb.Append(string.Format(@"<tr>"));
                                 sb.Append(string.Format(@"<td style='width:30px'></td>"));
                                 sb.Append(string.Format(@"<td style='width:400px'>{0}</td>", incsta[j].Account));
@@ -108,6 +109,14 @@ namespace AccountingJournal.Financial_Statement
             tol_expense.Text = tot_exp.ToString("#,##0.00");
             Net_Inc.Text = "$ " + (tot_rev - tot_exp).ToString("#,##0.00");
             IncState.Text = sb.ToString();
+            if ((tot_rev - tot_exp) < 0)
+            {
+                Net_Inc.Attributes["style"] = "color:red; border-bottom:double;";
+            }
+            else
+            {
+                Net_Inc.Attributes["style"] = "border-bottom:double;";
+            }
         }
     }
 }

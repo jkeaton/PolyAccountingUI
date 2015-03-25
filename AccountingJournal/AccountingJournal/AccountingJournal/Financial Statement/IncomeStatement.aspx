@@ -11,7 +11,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <table class="table">
+                <table class="table" style="width:auto; margin-left:auto; margin-right:auto">
                     <asp:Label ID="IncState" runat="server" Text="Label"></asp:Label>
                     <tr>
                         <td></td>

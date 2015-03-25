@@ -82,7 +82,7 @@ namespace AccountingJournal.Financial_Statement
                     ExpSb.Append(string.Format(@"<td>{0}</td>", ca[i].NorBal));
                     ExpSb.Append(string.Format(@"</tr>"));
                 }
-            }
+            }            
             ChrAsset.Text = asSb.ToString();
             ChrLiab.Text = liSb.ToString();
             ChrOw.Text = OWSb.ToString();

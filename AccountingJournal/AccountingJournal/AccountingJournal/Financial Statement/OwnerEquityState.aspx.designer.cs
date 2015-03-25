@@ -31,58 +31,13 @@ namespace AccountingJournal.Financial_Statement {
         protected global::System.Web.UI.WebControls.Label StrAmt;
         
         /// <summary>
-        /// InvAmt control.
+        /// OEDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label InvAmt;
-        
-        /// <summary>
-        /// NetLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NetLabel;
-        
-        /// <summary>
-        /// NetAmt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NetAmt;
-        
-        /// <summary>
-        /// AddTot control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AddTot;
-        
-        /// <summary>
-        /// subtotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label subtotal;
-        
-        /// <summary>
-        /// DrwAmt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DrwAmt;
+        protected global::System.Web.UI.WebControls.Label OEDetail;
         
         /// <summary>
         /// EndDat control.
