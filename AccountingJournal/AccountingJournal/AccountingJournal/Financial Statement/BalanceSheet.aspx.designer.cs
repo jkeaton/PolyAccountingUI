@@ -10,42 +10,51 @@
 namespace AccountingJournal.Financial_Statement {
     
     
-    public partial class IncomeStatement {
+    public partial class BalanceSheet {
         
         /// <summary>
-        /// CurPeriod control.
+        /// CurDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CurPeriod;
+        protected global::System.Web.UI.WebControls.Label CurDate;
         
         /// <summary>
-        /// IncState control.
+        /// AssetList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IncState;
+        protected global::System.Web.UI.WebControls.Label AssetList;
         
         /// <summary>
-        /// tol_expense control.
+        /// TotalAssets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tol_expense;
+        protected global::System.Web.UI.WebControls.Label TotalAssets;
         
         /// <summary>
-        /// Net_Inc control.
+        /// LiaOWList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Net_Inc;
+        protected global::System.Web.UI.WebControls.Label LiaOWList;
+        
+        /// <summary>
+        /// TotalLiaOE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalLiaOE;
     }
 }

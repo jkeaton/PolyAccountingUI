@@ -130,6 +130,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Financial Statement\BalanceSheet.aspx" />
     <Content Include="Financial Statement\Chart of Account.aspx" />
     <Content Include="Financial Statement\ManageAccount.aspx" />
     <Content Include="Financial Statement\IncomeStatement.aspx" />
@@ -204,6 +205,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Connection.cs" />
     <Compile Include="Code\User.cs" />
+    <Compile Include="Financial Statement\BalanceSheet.aspx.cs">
+      <DependentUpon>BalanceSheet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Financial Statement\BalanceSheet.aspx.designer.cs">
+      <DependentUpon>BalanceSheet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Financial Statement\Chart of Account.aspx.cs">
       <DependentUpon>Chart of Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -232,6 +240,7 @@
     <Compile Include="Financial Statement\OwnerEquityState.aspx.designer.cs">
       <DependentUpon>OwnerEquityState.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Financial Statement\Statement Model\BalanceSheet.cs" />
     <Compile Include="Financial Statement\Statement Model\ChartofAcc.cs" />
     <Compile Include="Financial Statement\Statement Model\IncDetail.cs" />
     <Compile Include="Financial Statement\Statement Model\OEStatement.cs" />

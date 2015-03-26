@@ -18,6 +18,8 @@ namespace AccountingJournal.Financial_Statement
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadIncomeStatement();
+
+            CurPeriod.Text = "For the Month Ended " + LastDayofMonth(DateTime.Now).ToString("MMMM dd, yyyy");
         }
 
         private void LoadIncomeStatement()
@@ -92,7 +94,7 @@ namespace AccountingJournal.Financial_Statement
                                 sb.Append(string.Format(@"</tr>"));
                                 tot_exp += (float)incsta[j].total;
                             }
-                            else if(firstCr)
+                            else if (firstCr)
                             {
                                 sb.Append(string.Format(@"<tr>"));
                                 sb.Append(string.Format(@"<td style='width:30px'></td>"));
@@ -115,8 +117,18 @@ namespace AccountingJournal.Financial_Statement
             }
             else
             {
-                Net_Inc.Attributes["style"] = "color:blue; border-bottom:double;";
+                Net_Inc.Attributes["style"] = "border-bottom:double;";
             }
+        }
+        public DateTime LastDayofMonth(DateTime dt)
+        {
+
+            dt = new DateTime(dt.Year, dt.Month, 1);
+            dt = dt.AddMonths(1);
+
+            dt = dt.AddDays(-1);
+            return dt;
+
         }
     }
 }

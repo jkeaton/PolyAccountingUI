@@ -8,6 +8,8 @@
             <div class="panel-heading text-center">
                 <h3 class="panel-title">
                     Income Statement
+                    <br />
+                    <asp:Label ID="CurPeriod" runat="server"></asp:Label>
                 </h3>
             </div>
             <div class="panel-body">
@@ -37,7 +39,5 @@
                 </table>
             </div>
         </div>
-    </div>
-
-   
+    </div>   
 </asp:Content>
