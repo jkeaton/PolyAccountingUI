@@ -9,12 +9,16 @@
                 Manage Accounts
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-hover">
-                    <%--<asp:Label ID="ChrAsset" runat="server"></asp:Label>--%>
+   <%--              <table class="table table-bordered table-hover">
+                   <asp:Label ID="ChrAsset" runat="server"></asp:Label>
                     <tr>
-                        <td>
+                        <td>--%>
+                            <div class="container">
                             <form runat="server">
-                                <asp:GridView ID="GridView1" runat="server" DataKeyNames="AccountID" AutoGenerateColumns="False"  style="margin-left:auto; margin-right:auto">
+                                <asp:GridView ID="GridView1" runat="server" DataKeyNames="AccountID" AutoGenerateColumns="False"  
+                                    style="margin-left:auto; margin-right:auto" CssClass="table" CellPadding="4" ForeColor="#333333"
+                                     GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
                                     <Columns>
                                         <asp:TemplateField HeaderText="Activation">
                                             <EditItemTemplate>
@@ -33,15 +37,28 @@
                                         </asp:BoundField>
                                         <asp:BoundField DataField="AccNumber" HeaderText="Account Number" SortExpression="AccNumber" />
                                         <asp:BoundField DataField="Cre_Date" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Create Date" SortExpression="Cre_Date" />
-                                        <asp:BoundField DataField="Balance" DataFormatString="{0:#,##0.00}" HeaderText="Balance" SortExpression="Balance" />
+                                        <asp:BoundField DataField="Balance" DataFormatString="{0:#,##0.00}" HeaderText="Balance" SortExpression="Balance" >
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
                                         <asp:BoundField DataField="NormalBalance" HeaderText="Normal Balance" SortExpression="NormalBalance" />
                                         <asp:BoundField DataField="AccountType" HeaderText="Account Type" SortExpression="AccountType" />
                                     </Columns>
+                                    <EditRowStyle BackColor="#2461BF" />
+                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" />
+                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
                                 </asp:GridView>
                             </form>
-                        </td>
+                            </div>
+                       <%-- </td>
                     </tr>
-                </table>
+                </table>--%>
             </div>
         </div>
     </div>
