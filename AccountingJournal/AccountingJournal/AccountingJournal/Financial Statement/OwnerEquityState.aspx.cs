@@ -109,14 +109,9 @@ namespace AccountingJournal.Financial_Statement
                 Endtot.Text = (e.Investment + e.Net + e.StartAmount - e.Drawing).ToString("#,##0.00");
                 Enddate = e.EndPeriod;
                 EndDat.Text = e.EndPeriod.ToString("MMMM dd, yyyy");
-                if ((e.Investment + e.Net + e.StartAmount - e.Drawing) > 0)
-                {
-                    Endtot.Attributes["Style"] = "color: blue;";
-                }
-                else
+                if ((e.Investment + e.Net + e.StartAmount - e.Drawing) < 0)
                 {
                     Endtot.Attributes["Style"] = "color: red;";
-
                 }
             }
         }
