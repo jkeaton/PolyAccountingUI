@@ -18,6 +18,7 @@ namespace AccountingJournal.Financial_Statement
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadTrialBalance();
+            CruDate.Text = DateTime.Now.ToString("MMMM dd, yyyy");
         }
 
         private void LoadTrialBalance()

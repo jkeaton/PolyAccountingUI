@@ -8,7 +8,7 @@
             <div class="panel-heading text-center">
                 Owner's Equity Statement
                 <br />
-                For the Month Ended <%=Enddate.ToLongDateString() %>
+                For the Month Ended <%=Enddate.ToString("MMMM dd, yyyy") %>
             </div>
             <div class="container">
                 <table class="table table-hover" style="width:600px; margin-left:auto; margin-right:auto">

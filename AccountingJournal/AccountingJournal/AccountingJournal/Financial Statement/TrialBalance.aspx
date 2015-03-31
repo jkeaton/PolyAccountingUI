@@ -7,6 +7,8 @@
         <div class="panel panel-primary form-group text-center">
             <div class="panel-heading ">
                 Trial Balance
+                <br />
+                <asp:Label ID="CruDate" runat="server"></asp:Label>
             </div>
             <div class="panel-body">
                 <table class="table" style="width: 800px; margin-left: auto; margin-right: auto">

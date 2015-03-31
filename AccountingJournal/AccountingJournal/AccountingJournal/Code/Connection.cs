@@ -373,8 +373,38 @@ namespace AccountingJournal.Code
             return list;
         }
 
+        public static ArrayList DisplayBalanceSheet()
+        {
+            ArrayList list = new ArrayList();
+            BalSheet bs = new BalSheet();
+            string query = string.Format("EXEC DisplayBalancesheet");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    bs = new BalSheet();
+                    bs.type = reader.GetString(0);
+                    bs.Name = reader.GetString(1);
+                    bs.Total = reader.GetDecimal(2);
+                    bs.Rank = Int32.Parse(reader.GetValue(3).ToString());
+                    list.Add(bs);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
 
-        //need to take out the not
+
         public static ArrayList DisplayUnpostTranx()
         {
             ArrayList list = new ArrayList();
