@@ -17,14 +17,31 @@ namespace AccountingJournal.Financial_Statement
             if (!IsPostBack)
             {
                 Bind_Data();
-            }
+            }            
         }
         private void Bind_Data()
         {
             DataTable ManAcc = Connection.ManageAccDisplay();
             GridView1.DataSource = ManAcc;
             GridView1.DataBind();
-
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                CheckBox chk = GridView1.Rows[i].FindControl("chkStatus") as CheckBox;
+                if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) != 0 && chk.Checked == true)
+                {
+                    chk.Attributes.Add("onclick", "if(!confirm('The Balance is not 0. Do you want to Deactivate it?')) {return false};");
+                    chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
+                    chk.Attributes.Add("AutoPostBack", "True");
+                    chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
+                }
+                else
+                {
+                    chk.Attributes.Add("onclick", "if(!confirm('Do you want to Activate/Deactivate it?')){return false};;");
+                    chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
+                    chk.Attributes.Add("AutoPostBack", "True");
+                    chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
+                }
+            }
         }
 
         [WebMethod]

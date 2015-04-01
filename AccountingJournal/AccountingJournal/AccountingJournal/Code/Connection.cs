@@ -424,7 +424,7 @@ namespace AccountingJournal.Code
                                  + "   AND NOT EXISTS"
 		                         + "   ("
 		                         + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
-		                         + "   )");
+		                         + "   ) order by 1 desc");
             try
             {
                 conn.Open();
