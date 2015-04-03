@@ -387,38 +387,52 @@
                     ++curr_row;
                     inc_row_ct();
                 });
-                
+                /*
                 $(".attempt_post").click(function(){
                     store_form_fields();
-                });
+                });*/
 
                 function store_form_fields(){
-                    var elems = document.getElementsByClassName("stored_val");
+                    /*var elems = document.getElementsByClassName("stored_val");*/
+                    var elems = document.body.getElementsByTagName("*");
                     var matching_elems = new Array();
                     var count = 0;
                     for (var elem in elems){
-                        if (elem.nodeType != 1){
-                            matching_elems.push(elem.nodeType);
-                        }
-                        else{
-                            matching_elems.push("---");
-                        }
+                        matching_elems.push(elem.id);
                     }
                     alert(matching_elems.join());
                 }
-
-                function valid_fields(){
-                    return false;
-                }
             });
+
+            function valid_fields(){
+                var input_elems = document.forms["myForm"].getElementsByTagName("input");
+                var select_elems = document.forms["myForm"].getElementsByTagName("select");
+                var form = document.forms["myForm"];
+                var matching_elems = new Array();
+                var re = new RegExp("i\[[0-9]*\]");
+                for (var elem in input_elems){
+                    if (re.test(elem.toString())){
+                        //matching_elems.push(elem.toString());
+                        matching_elems.push(form[elem.toString()].value);
+                    }
+                }
+                for (var elem in select_elems){
+                    if (re.test(elem.toString())){
+                        //matching_elems.push(elem.toString());  
+                        matching_elems.push(form[elem.toString()].value);
+                    }
+                }
+                alert(matching_elems.join());
+                return false;
+            }
 
             function inc_row_ct(){
                 document.getElementById("row_ct").setAttribute("value", curr_row)
             }
-        </script>
-	</head>
+            </script>
+    </head>
 
-	<body role="document">
+    <body role="document">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -439,7 +453,7 @@
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
-                                <li><a href="#">Balance Sheet</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
                                 <li><a href="#">Cash Flow Statement</a></li>
                             </ul>
@@ -454,25 +468,25 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <?php
-                            global $inbox_ct;
-                            if (isset($_SESSION['user'])){
-                                echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
-                                class=\"navbar-left\"><form role=\"form\"
-                                class=\"navbar-form navbar-left\" method=\"post\"
-                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
-                                type=\"submit\" class=\"btn btn-danger\"
-                                name=\"logout\">Log Out</button></form></li>";
-                            }
-                        ?>   
+<?php
+    global $inbox_ct;
+    if (isset($_SESSION['user'])){
+        echo "<li class=\"navbar-left\">
+            <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+            class=\"navbar-left\"><form role=\"form\"
+                class=\"navbar-form navbar-left\" method=\"post\"
+                    action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                    type=\"submit\" class=\"btn btn-danger\"
+                    name=\"logout\">Log Out</button></form></li>";
+    }
+?>   
                     </ul>
                 </div>
             </div>
         </nav>
-    
+
         <div class="container">
-            <form role="form"  method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+            <form role="form"  name="myForm" method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading panel-heading-lg text-center">
                     <h3 class="panel-title panel-title-with-logo">General Journal</h3>
