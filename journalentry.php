@@ -387,22 +387,32 @@
                 var form = document.forms["myForm"];
                 var matching_elems = new Array();
                 var re = new RegExp("i\[[0-9]*\]");
+                set_filled(); // Get the array ready to be set with the form field values
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
-                        //matching_elems.push(elem.toString());
-                        matching_elems.push(form[elem.toString()].value);
+                        set_index(elem.toString(), form);
                     }
                 }
                 for (var elem in select_elems){
                     if (re.test(elem.toString())){
-                        //matching_elems.push(elem.toString());  
-                        matching_elems.push(form[elem.toString()].value);
+                        set_index(elem.toString(), form);
                     }
                 }
-                alert(matching_elems.join());
+                // At this point, the 'filled' array has been set with the values of the form fields
+                alert(filled.join());
                 document.getElementById("error_msg").innerHTML = "test error";
-                set_filled();
                 return false;
+            }
+        
+            /**
+             * Function that takes in the name of a form field, parses it's index
+             * and uses that index to set the correct index in the 'filled' array
+             */
+            function set_index(n, f) {
+                var pos1 = n.indexOf('[');
+                var pos2 = n.indexOf(']');
+                var index = parseInt(n.substring(pos1+1, pos2));
+                filled[index] = f[n].value;
             }
 
             function set_filled(){
