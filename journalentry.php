@@ -322,6 +322,7 @@
             var curr_row = 3;
             var last_dr_id = "debit_1";
             var last_cr_id = "credit_1";
+            var filled = null;
         </script>
 
         <script type="text/javascript">
@@ -400,7 +401,17 @@
                 }
                 alert(matching_elems.join());
                 document.getElementById("error_msg").innerHTML = "test error";
+                set_filled();
                 return false;
+            }
+
+            function set_filled(){
+                var len = (document.getElementById("row_ct").value * 6);
+                filled = new Array(len);    
+                for (var i = 0; i < len; ++i){
+                    filled[i] = null;
+                }
+                alert("Length of filled array: "+len);
             }
 
             function inc_row_ct(){
