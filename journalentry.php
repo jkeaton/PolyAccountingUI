@@ -24,15 +24,6 @@
         }
     }
 
-    function get_filled_by_index($index){
-        if (isset($filled[$index])){
-            return $filled[$index];
-        }
-        else{
-            return "";
-        }
-    }
-
     function get_acct_names(){
         global $dbConnection;
         $sql = "SELECT * FROM Account where IsActive = 1 "
@@ -387,21 +378,6 @@
                     ++curr_row;
                     inc_row_ct();
                 });
-                /*
-                $(".attempt_post").click(function(){
-                    store_form_fields();
-                });*/
-
-                function store_form_fields(){
-                    /*var elems = document.getElementsByClassName("stored_val");*/
-                    var elems = document.body.getElementsByTagName("*");
-                    var matching_elems = new Array();
-                    var count = 0;
-                    for (var elem in elems){
-                        matching_elems.push(elem.id);
-                    }
-                    alert(matching_elems.join());
-                }
             });
 
             function valid_fields(){
@@ -423,6 +399,7 @@
                     }
                 }
                 alert(matching_elems.join());
+                document.getElementById("error_msg").innerHTML = "test error";
                 return false;
             }
 
@@ -468,18 +445,18 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-<?php
-    global $inbox_ct;
-    if (isset($_SESSION['user'])){
-        echo "<li class=\"navbar-left\">
-            <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
-            class=\"navbar-left\"><form role=\"form\"
-                class=\"navbar-form navbar-left\" method=\"post\"
-                    action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
-                    type=\"submit\" class=\"btn btn-danger\"
-                    name=\"logout\">Log Out</button></form></li>";
-    }
-?>   
+                        <?php
+                            global $inbox_ct;
+                            if (isset($_SESSION['user'])){
+                                echo "<li class=\"navbar-left\">
+                                    <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php\">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                    class=\"navbar-left\"><form role=\"form\"
+                                    class=\"navbar-form navbar-left\" method=\"post\"
+                                    action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                                    type=\"submit\" class=\"btn btn-danger\"
+                                    name=\"logout\">Log Out</button></form></li>";
+                            }
+                        ?>   
                     </ul>
                 </div>
             </div>
@@ -583,7 +560,7 @@
                     </table>
                 </div>                
                 <div class="panel-footer">
-                <p class="error"><?php echo $input_err; ?></p>
+                    <p id="error_msg" class="error"></p>
                 </div>
             </div>
             </form>
