@@ -324,6 +324,8 @@
             var last_cr_id = "credit_1";
             var filled = null;
             var either_dr_or_cr = 0;
+            var dr_rows = [0];
+            var cr_rows = [1];
             var error_set = false;
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
@@ -331,12 +333,13 @@
                 "Date is invalid",
                 "For each debit or credit row, please select an account from the dropdown menu",
                 "For each debit or credit row, please enter the amount debited or credited",
-                "Debit amount is invalid",
-                "Credit amount is invalid",
+                "Debit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
+                "Credit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
                 "All amounts must be greater than 0.00",
                 "Total debits do not equal total credits"
             ];
             var selected_err = list_of_errors.length;
+            var highlighted_field = 0;
 
         </script>
 
@@ -344,6 +347,7 @@
 
             $(document).ready(function(){
                 $(".add_debit").click(function(){
+                    dr_rows.push(curr_row);
                     var start_at = curr_row * 6;
                     var new_line = (
                         '<tr id="debit_' + (dr_ct) + '">' +
@@ -370,6 +374,7 @@
                 });
                 
                 $(".add_credit").click(function(){
+                    cr_rows.push(curr_row);
                     var start_at = curr_row * 6;
                     var new_line = (
                         '<tr id="credit_' + (cr_ct) + '">' +
@@ -417,7 +422,12 @@
                 }
                 // At this point, the 'filled' array has been set with the values of the form fields
                 if (!valid(document.getElementById("row_ct").value)){
-                    document.getElementById("error_msg").innerHTML = list_of_errors[selected_err];
+                    if (selected_err < list_of_errors.length){
+                        document.getElementById("error_msg").innerHTML = list_of_errors[selected_err];
+                    }
+                    else {
+                        document.getElementById("error_msg").innerHTML = "Un handled error";
+                    }
                 }
                 else{
                     document.getElementById("error_msg").innerHTML = "Success!";
@@ -530,7 +540,54 @@
             }
 
             function valid_monetary_amt(index){
-                return 0;
+                var money_re = new RegExp("^[0-9]*\.{0,1}[0-9]{0,2}$");
+                var negative_money_re = new RegExp("^-{0,1}[0-9]*\.{0,1}[0-9]{0,2}$");
+                var isDebit = true;
+                if (!filled[index]) {
+                    // Make sure we're not checking the description line
+                    if (index < 12 || index > 17){
+                        either_dr_or_cr--;
+                    }
+                } 
+                else {
+                    // Make sure we're not checking the description line
+                    if (index < 12 || index > 17){
+                        either_dr_or_cr++;
+                    }
+                    // Determine if this row is a debit or credit row
+                    if (isInArray(index/6, dr_rows)){
+                        isDebit = true;       
+                    }
+                    else {
+                        if (isInArray(index/6, cr_rows)){
+                            isDebit = false;
+                        }
+                    }
+                    // Find out if the value is a valid monetary amount
+                    if (!negative_money_re.test(filled[index])){
+                        if (isDebit) {
+                            selected_err = Math.min(4, selected_err);
+                        }
+                        else {
+                            selected_err = Math.min(5, selected_err);
+                        }
+                        return 1;
+                    }
+                    // Now determine if the amount is greater than 0.00,
+                    else{
+                        if (!money_re.test(filled[index])){
+                            selected_err = Math.min(6, selected_err);
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                }
+            }
+
+            function isInArray(val, arr){
+                return arr.indexOf(val) > -1;
             }
 
             /**
