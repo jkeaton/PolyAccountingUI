@@ -6,6 +6,7 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
+                <h3>Poly Accounting Information</h3>
                 <h3 class="panel-title">Statement of Cash Flow
                     <br />
                     <asp:Label ID="CurDate" runat="server"></asp:Label>

@@ -6,9 +6,11 @@
     <div class="container">
         <div class="panel panel-primary form-group text-center">
             <div class="panel-heading ">
-                Trial Balance
+                <h3>Poly Accounting Information</h3>
+                <h3 class="panel-title">Trial Balance
                 <br />
-                <asp:Label ID="CruDate" runat="server"></asp:Label>
+                    <asp:Label ID="CruDate" runat="server"></asp:Label>
+                </h3>
             </div>
             <div class="panel-body">
                 <table class="table" style="width: 800px; margin-left: auto; margin-right: auto">
