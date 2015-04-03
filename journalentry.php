@@ -323,6 +323,8 @@
             var last_dr_id = "debit_1";
             var last_cr_id = "credit_1";
             var filled = null;
+            var err_msg = "";
+            var either_dr_or_cr = 0;
         </script>
 
         <script type="text/javascript">
@@ -385,7 +387,6 @@
                 var input_elems = document.forms["myForm"].getElementsByTagName("input");
                 var select_elems = document.forms["myForm"].getElementsByTagName("select");
                 var form = document.forms["myForm"];
-                var matching_elems = new Array();
                 var re = new RegExp("i\[[0-9]*\]");
                 set_filled(); // Get the array ready to be set with the form field values
                 for (var elem in input_elems){
@@ -403,7 +404,108 @@
                 document.getElementById("error_msg").innerHTML = "test error";
                 return false;
             }
+
+            function valid(row_ct){
+                var err_ct = 0;
+                var dr_amt = 0;
+                var cr_amt = 0;
+                // First Check the Date
+                err_ct += valid_date(0);
+                // Now Check the Rest
+                for (i = 0; i < row_ct; i++){
+                    for (j = 0; j < 6; j++){
+                        if (j == 1){
+                            err_ct += valid_acct_title((i*6)+j);  
+                        }
+                        // Row with index 2 is always the description line
+                        // Extra rows that are added enter the array in groups of 6
+                        // starting at index 18...
+                        if (4 <= j && j <= 5 && i != 2){
+                            if (j == 4){
+                                dr_amt += filled[(i*6)+j];
+                            }
+                            else{
+                                if (j == 5){
+                                    cr_amt += filled[(i*6)+j];
+                                }
+                            }
+                            err_ct += valid_monetary_amt((i*6)+j);
+                        }
+                    }
+                    if (either_dr_or_cr != 0){
+                        err_ct++;
+                        err_msg = "You must enter all debit and credit fields.";
+                        return false;
+                    }
+                    else{
+                        // Reset this to be checked for the next row
+                        either_dr_or_cr = 0;
+                    }
+                } 
+
+                if (dr_amt != cr_amt){
+                    err_ct++;
+                    err_msg = "Total debits do not equal total credits.";
+                    return false;
+                }
         
+                if (err_ct == 0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            function valid_date(index){
+                var date_str = filled[index];
+                if (date_str == null){
+                    err_msg = "You must provide a date";
+                    return 1;
+                }
+                // First check for the pattern
+                if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date_str)){
+                    err_msg = "Date is invalid";
+                    return 1;
+                }
+
+                // Parse the date parts to integers
+                var parts = date_str.split("/");
+                var day = parseInt(parts[1], 10);
+                var month = parseInt(parts[0], 10);
+                var year = parseInt(parts[2], 10);
+
+                // Check the ranges of month and year
+                if(year < 1000 || year > 3000 || month == 0 || month > 12){
+                    err_msg = "Date is invalid";
+                    return 1;
+                }
+
+                var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+                // Adjust for leap years
+                if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)){
+                    monthLength[1] = 29;
+                }
+
+                // Check the range of the day
+                if (!(day > 0 && day <= monthLength[month - 1])){
+                    err_msg = "Date is invalid";
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            }
+
+            function valid_acct_title(index){
+                return 1;
+            }
+
+            function valid_monetary_amt(index){
+                return 1;
+            }
+
             /**
              * Function that takes in the name of a form field, parses it's index
              * and uses that index to set the correct index in the 'filled' array
@@ -412,7 +514,7 @@
                 var pos1 = n.indexOf('[');
                 var pos2 = n.indexOf(']');
                 var index = parseInt(n.substring(pos1+1, pos2));
-                filled[index] = f[n].value;
+                filled[index] = (f[n].value).trim();
             }
 
             function set_filled(){
