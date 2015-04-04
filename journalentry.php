@@ -335,7 +335,7 @@
             var list_of_errors = [
                 "Please enter a date",
                 "Date is invalid",
-                "For each debit or credit row, please select an account from the dropdown menu",
+                "For each debit and credit row, please select an account from the dropdown menu",
                 "The same account cannot be both debited and credited",
                 "An account can only be used once per entry",
                 "For each debit or credit row, please enter the amount debited or credited",
