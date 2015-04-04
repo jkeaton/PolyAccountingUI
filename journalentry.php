@@ -627,16 +627,16 @@
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
-                        if (!money_re.test(filled[index]) || filled[index] <= 0.00){
+                        if (!money_re.test(filled[index]) || parseFloat(filled[index]) <= 0.00){
                             set_error(8);
                             return 1;
                         }
                         else {
                             if (dr) {
-                                dr_amt += filled[index];
+                                dr_amt += parseFloat(filled[index]);
                             }
                             else {
-                                cr_amt += filled[index];
+                                cr_amt += parseFloat(filled[index]);
                             }
                             return 0;
                         }
@@ -660,17 +660,7 @@
                 var pos1 = n.indexOf('[');
                 var pos2 = n.indexOf(']');
                 var index = parseInt(n.substring(pos1+1, pos2));
-                if (index % 6 == 4 || index % 6 == 5){
-                    if (!isNaN(parseFloat((f[n].value).trim()))){
-                        filled[index] = parseFloat((f[n].value).trim());
-                    }
-                    else {
-                        filled[index] = (f[n].value).trim();
-                    }
-                }
-                else{
-                    filled[index] = (f[n].value).trim();
-                }
+                filled[index] = (f[n].value).trim();
             }
 
             function set_filled(){
