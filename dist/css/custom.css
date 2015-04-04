@@ -117,13 +117,10 @@ html, body {
     width: 6%;
 }
 .t_debit {
-    width: 9%;
+    width: 13%;
 }
 .t_credit {
-    width: 9%;
-}
-.t_action {
-    width: 8%;
+    width: 13%;
 }
 .debit_acct_name {
     width: 80%;

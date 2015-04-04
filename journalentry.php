@@ -366,10 +366,9 @@
                             '</td>' +
                             '<td class="t_src"></td>' +
                             '<td class="t_debit">' +
-                                '<input name="i['+(start_at+4)+']"type="text" class="stored_val form-control dr_amt" placeholder="Amt">' +
+                                '<input name="i['+(start_at+4)+']"type="text" class="stored_val form-control dr_amt" placeholder="0.00">' +
                             '</td>' +
                             '<td class="t_credit"></td>' +
-                            '<td class="t_action"></td>' +
                         '</tr>'
                     );
                     $(new_line).insertAfter("#"+last_dr_id);
@@ -394,9 +393,8 @@
                             '<td class="t_src"></td>' +
                             '<td class="t_debit"></td>' +
                             '<td class="t_credit">'+
-                                '<input name="i['+(start_at+5)+']" type="text" class="stored_val form-control cr_amt" placeholder="Amt">' +
+                                '<input name="i['+(start_at+5)+']" type="text" class="stored_val form-control cr_amt" placeholder="0.00">' +
                             '</td>' +
-                            '<td class="t_action"></td>' +
                         '</tr>'
                     );
                     $(new_line).insertAfter("#"+last_cr_id);
@@ -734,7 +732,8 @@
             <form role="form"  name="myForm" method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading panel-heading-lg text-center">
-                    <h3 class="panel-title panel-title-with-logo">General Journal</h3>
+                    <h3 class="panel-title">Poly Accounting Information Group</h3>
+                    <h3 class="panel-title">General Journal</h3>
                 </div>
                 <div class="panel">
                 <!-- Table -->
@@ -746,7 +745,6 @@
                                 <th class="t_src text-left">Src</th>
                                 <th class="t_debit text-left">Debit</th>
                                 <th class="t_credit text-left">Credit</th>
-                                <th class="t_action text-left">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -774,14 +772,9 @@
                                 </td>
                                 <td class="t_src"></td>
                                 <td class="t_debit">
-                                    <input name="i[4]" type="text" class="stored_val form-control" id="debit" placeholder="Amt">
+                                    <input name="i[4]" type="text" class="stored_val form-control" id="debit" placeholder="0.00">
                                 </td>
                                 <td class="t_credit"></td>
-                                <td class="t_action">
-                                    <button type="submit" id="attempt_post" class="attempt_post btn btn-primary form-control" name="submit">
-                                        Submit
-                                    </button>
-                                </td>
                             </tr>
                             <tr id="credit_1">
                                 <td class="t_date"></td>
@@ -801,9 +794,8 @@
                                 <td class="t_src"></td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit">
-                                    <input name="i[11]" type="text" class="stored_val form-control cr_amt" placeholder="Amt">
+                                    <input name="i[11]" type="text" class="stored_val form-control cr_amt" placeholder="0.00">
                                 </td>
-                                <td class="t_action"></td>
                             </tr>
                             <tr id="desc_1">
                                 <td class="t_date"></td>
@@ -818,17 +810,23 @@
                                 </td>
                                 <td class="t_debit"></td>
                                 <td class="t_credit"></td>
-                                <td class="t_action">
-                                    <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger form-control" name="clear">
-                                        Clear
-                                    </button>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>                
-                <div class="panel-footer">
+                <div class="panel-footer text-center">
                     <p id="error_msg" class="error"></p>
+                    <div class="form-group" role="group">
+                        <button type="submit" id="attempt_post" class="attempt_post btn btn-success" name="submit">
+                            Save & Exit
+                        </button>
+                        <button type="submit" id="attempt_post_2" class="attempt_post btn btn-success" name="submit">
+                            Save & New
+                        </button>
+                        <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger" name="clear">
+                            Clear
+                        </button>
+                    </div>
                 </div>
             </div>
             </form>
