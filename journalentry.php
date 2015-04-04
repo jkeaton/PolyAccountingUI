@@ -466,16 +466,15 @@
                         }
                     }
                     if (either_dr_or_cr != 0){
-                        selected_err = Math.min(3, selected_err);
+                        set_error(3);
                         err_ct++;
                         either_dr_or_cr = 0;
                     }
                 } 
 
                 if (dr_amt != cr_amt){
-                    selected_err = Math.min(7, selected_err);
+                    set_error(7);
                     err_ct++;
-                    alert("dr_amt = "+dr_amt+"; cr_amt = "+cr_amt);
                 }
         
                 return (err_ct == 0);
@@ -484,12 +483,12 @@
             function valid_date(index){
                 var date_str = filled[index];
                 if (!date_str){
-                    selected_err = Math.min(0, selected_err);
+                    set_error(0);
                     return 1;
                 }
                 // First check for the pattern
                 if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date_str)){
-                    selected_err = Math.min(1, selected_err);
+                    set_error(1);
                     return 1;
                 }
 
@@ -501,7 +500,7 @@
 
                 // Check the ranges of month and year
                 if(year < 1000 || year > 3000 || month == 0 || month > 12){
-                    selected_err = Math.min(1, selected_err);
+                    set_error(1);
                     return 1;
                 }
 
@@ -514,7 +513,7 @@
 
                 // Check the range of the day
                 if (!(day > 0 && day <= monthLength[month - 1])){
-                    selected_err = Math.min(1, selected_err);
+                    set_error(1);
                     return 1;
                 }
                 else{
@@ -525,7 +524,7 @@
             function valid_acct_title(index){
                 // Ensure we're not checking the description
                 if (filled[index] == "Select..." && index != 13){
-                    selected_err = Math.min(2, selected_err);
+                    set_error(2);
                     return 1;
                 }
                 else {
@@ -542,6 +541,7 @@
                     if (index < 12 || index > 17){
                         either_dr_or_cr--;
                     }
+                    return 0;
                 } 
                 else {
                     // Make sure we're not checking the description line
@@ -549,28 +549,28 @@
                         either_dr_or_cr++;
                     }
                     // Determine if this row is a debit or credit row
-                    if (isInArray(index/6, dr_rows)){
+                    if (isInArray(Math.floor(index/6), dr_rows)){
                         isDebit = true;       
                     }
                     else {
-                        if (isInArray(index/6, cr_rows)){
+                        if (isInArray(Math.floor(index/6), cr_rows)){
                             isDebit = false;
                         }
                     }
                     // Find out if the value is a valid monetary amount
                     if (!negative_money_re.test(filled[index])){
                         if (isDebit) {
-                            selected_err = Math.min(4, selected_err);
+                            set_error(4);
                         }
                         else {
-                            selected_err = Math.min(5, selected_err);
+                            set_error(5);
                         }
                         return 1;
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
-                        if (!money_re.test(filled[index])){
-                            selected_err = Math.min(6, selected_err);
+                        if (!money_re.test(filled[index]) || filled[index] <= 0.00){
+                            set_error(6);
                             return 1;
                         }
                         else {
@@ -586,8 +586,12 @@
                 }
             }
 
+            function set_error(num){
+                selected_err = Math.min(num, selected_err);
+            }
+
             function isInArray(val, arr){
-                return arr.indexOf(val) > -1;
+                return (arr.indexOf(val) > -1);
             }
 
             /**
