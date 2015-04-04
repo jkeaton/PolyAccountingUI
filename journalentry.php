@@ -327,6 +327,8 @@
             var dr_rows = [0];
             var cr_rows = [1];
             var error_set = false;
+            var dr_amt = 0.0;
+            var cr_amt = 0.0;
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
                 "Please enter a date",
@@ -409,6 +411,8 @@
                 set_filled(); // Get the array ready to be set with the form field values
                 // Reset error so we pick the right one to display after validation
                 selected_err = list_of_errors.length;
+                // Reset the counter ensuring they enter all amount fields
+                either_dr_or_cr = 0;
 
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
@@ -426,7 +430,7 @@
                         document.getElementById("error_msg").innerHTML = list_of_errors[selected_err];
                     }
                     else {
-                        document.getElementById("error_msg").innerHTML = "Un handled error";
+                        document.getElementById("error_msg").innerHTML = "Unhandled error";
                     }
                 }
                 else{
@@ -437,8 +441,8 @@
 
             function valid(row_ct){
                 var err_ct = 0;
-                var dr_amt = 0;
-                var cr_amt = 0;
+                dr_amt = 0;
+                cr_amt = 0;
                 // First Check the Date
                 err_ct += valid_date(0);
                 // Now Check the Rest
@@ -452,39 +456,29 @@
                         // starting at index 18...
                         if (4 <= j && j <= 5 && i != 2){
                             if (j == 4){
-                                dr_amt += filled[(i*6)+j];
+                                err_ct += valid_monetary_amt((i*6)+j, true);
                             }
                             else{
                                 if (j == 5){
-                                    cr_amt += filled[(i*6)+j];
+                                    err_ct += valid_monetary_amt((i*6)+j, false);
                                 }
                             }
-                            err_ct += valid_monetary_amt((i*6)+j);
                         }
                     }
                     if (either_dr_or_cr != 0){
-                        err_ct++;
                         selected_err = Math.min(3, selected_err);
-                        return false;
-                    }
-                    else{
-                        // Reset this to be checked for the next row
+                        err_ct++;
                         either_dr_or_cr = 0;
                     }
                 } 
 
                 if (dr_amt != cr_amt){
-                    err_ct++;
                     selected_err = Math.min(7, selected_err);
-                    return false;
+                    err_ct++;
+                    alert("dr_amt = "+dr_amt+"; cr_amt = "+cr_amt);
                 }
         
-                if (err_ct == 0){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                return (err_ct == 0);
             }
 
             function valid_date(index){
@@ -539,7 +533,7 @@
                 }
             }
 
-            function valid_monetary_amt(index){
+            function valid_monetary_amt(index, dr){
                 var money_re = new RegExp("^[0-9]*\.{0,1}[0-9]{0,2}$");
                 var negative_money_re = new RegExp("^-{0,1}[0-9]*\.{0,1}[0-9]{0,2}$");
                 var isDebit = true;
@@ -580,6 +574,12 @@
                             return 1;
                         }
                         else {
+                            if (dr) {
+                                dr_amt += filled[index];
+                            }
+                            else {
+                                cr_amt += filled[index];
+                            }
                             return 0;
                         }
                     }
