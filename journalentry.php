@@ -329,11 +329,14 @@
             var error_set = false;
             var dr_amt = 0.0;
             var cr_amt = 0.0;
+            var debited_accts = new Array();
+            var credited_accts = new Array();
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
                 "Please enter a date",
                 "Date is invalid",
                 "For each debit or credit row, please select an account from the dropdown menu",
+                "You cannot debit and credit the same account",
                 "For each debit or credit row, please enter the amount debited or credited",
                 "Debit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
                 "Credit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
@@ -465,19 +468,33 @@
                             }
                         }
                     }
-                    if (either_dr_or_cr != 0){
+
+                    if (intersection_exists(debited_accts, credited_accts)){
                         set_error(3);
+                        err_ct++;
+                    }
+
+                    if (either_dr_or_cr != 0){
+                        set_error(4);
                         err_ct++;
                         either_dr_or_cr = 0;
                     }
                 } 
 
                 if (dr_amt != cr_amt){
-                    set_error(7);
+                    set_error(8);
                     err_ct++;
                 }
         
                 return (err_ct == 0);
+            }
+
+            function intersection_exists(a1, a2){
+                return (a1.filter(
+                    function(n) {
+                        return a2.indexOf(n) != -1
+                    }
+                )).length > 0;
             }
 
             function valid_date(index){
@@ -528,6 +545,14 @@
                     return 1;
                 }
                 else {
+                    if (isInArray(Math.floor(index/6), dr_rows)){
+                        debited_accts.push(filled[index]);        
+                    }
+                    else {
+                        if (isInArray(Math.floor(index/6), cr_rows)){
+                            credited_accts.push(filled[index]);
+                        }
+                    }
                     return 0;
                 }
             }
@@ -560,17 +585,17 @@
                     // Find out if the value is a valid monetary amount
                     if (!negative_money_re.test(filled[index])){
                         if (isDebit) {
-                            set_error(4);
+                            set_error(5);
                         }
                         else {
-                            set_error(5);
+                            set_error(6);
                         }
                         return 1;
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
                         if (!money_re.test(filled[index]) || filled[index] <= 0.00){
-                            set_error(6);
+                            set_error(7);
                             return 1;
                         }
                         else {
