@@ -336,7 +336,8 @@
                 "Please enter a date",
                 "Date is invalid",
                 "For each debit or credit row, please select an account from the dropdown menu",
-                "You cannot debit and credit the same account",
+                "The same account cannot be both debited and credited",
+                "An account can only be used once per entry",
                 "For each debit or credit row, please enter the amount debited or credited",
                 "Debit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
                 "Credit amount is invalid, some examples of valid amounts are '500', '230.4', '1999.99', '.50' , and '300.'",
@@ -416,6 +417,10 @@
                 selected_err = list_of_errors.length;
                 // Reset the counter ensuring they enter all amount fields
                 either_dr_or_cr = 0;
+                // Reset the debited and credited account lists
+                debited_accts = new Array();
+                credited_accts = new Array();
+
 
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
@@ -469,20 +474,25 @@
                         }
                     }
 
-                    if (intersection_exists(debited_accts, credited_accts)){
-                        set_error(3);
-                        err_ct++;
-                    }
-
                     if (either_dr_or_cr != 0){
-                        set_error(4);
+                        set_error(5);
                         err_ct++;
                         either_dr_or_cr = 0;
                     }
                 } 
+                   
+                if (intersection_exists(debited_accts, credited_accts)){
+                    set_error(3);
+                    err_ct++;
+                }
+
+                if (duplicates_exist(debited_accts) || duplicates_exist(credited_accts)){
+                    set_error(4);
+                    err_ct++;
+                }
 
                 if (dr_amt != cr_amt){
-                    set_error(8);
+                    set_error(9);
                     err_ct++;
                 }
         
@@ -490,11 +500,34 @@
             }
 
             function intersection_exists(a1, a2){
-                return (a1.filter(
-                    function(n) {
-                        return a2.indexOf(n) != -1
+                if (a1.length == 0 || a2.length == 0){
+                    return false;
+                }
+                else {
+                    return (a1.filter(
+                        function(n) {
+                            return a2.indexOf(n) != -1;
+                        }
+                    )).length > 0;
+                }
+            }
+
+            function duplicates_exist(arr){
+                if (arr.length == 0){
+                    return false;
+                }
+                else {
+                    var tmp = new Array();
+                    for (i = 0; i < arr.length; i++){
+                        if (tmp.indexOf(arr[i].toString()) == -1){
+                            tmp.push(arr[i].toString());
+                        }
+                        else {
+                            return true;
+                        }
                     }
-                )).length > 0;
+                    return false;
+                }
             }
 
             function valid_date(index){
@@ -585,17 +618,17 @@
                     // Find out if the value is a valid monetary amount
                     if (!negative_money_re.test(filled[index])){
                         if (isDebit) {
-                            set_error(5);
+                            set_error(6);
                         }
                         else {
-                            set_error(6);
+                            set_error(7);
                         }
                         return 1;
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
                         if (!money_re.test(filled[index]) || filled[index] <= 0.00){
-                            set_error(7);
+                            set_error(8);
                             return 1;
                         }
                         else {
