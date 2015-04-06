@@ -331,6 +331,11 @@
             var cr_amt = 0.0;
             var debited_accts = new Array();
             var credited_accts = new Array();
+            var precise_unselected_field = 0;
+            var precise_invalid_amt = 0;
+            var precise_negative_amt = 0;
+            var precise_empty_amt = 0;
+            var fields_with_backgrounds = new Array();
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
                 "Please enter a date",
@@ -345,7 +350,7 @@
                 "Total debits do not equal total credits"
             ];
             var selected_err = list_of_errors.length;
-            var highlighted_field = 0;
+            var highlighted_field = 0; // default to first form field
 
         </script>
 
@@ -418,19 +423,29 @@
                 // Reset the debited and credited account lists
                 debited_accts = new Array();
                 credited_accts = new Array();
-
+                // Reset the fields with backgrounds
+                fields_with_backgrounds = new Array();
+                // Reset some other variables
+                precise_unselected_field = 0;
+                precise_invalid_amt = 0;
+                precise_negative_amt = 0;
+                precise_empty_amt = 0;
+                highlighted_field = 0;
 
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
                         set_index(elem.toString(), form);
+                        fields_with_backgrounds.push(elem.toString());
                     }
                 }
                 for (var elem in select_elems){
                     if (re.test(elem.toString())){
                         set_index(elem.toString(), form);
+                        fields_with_backgrounds.push(elem.toString());
                     }
                 }
                 // At this point, the 'filled' array has been set with the values of the form fields
+                make_fields_white();
                 if (!valid(document.getElementById("row_ct").value)){
                     if (selected_err < list_of_errors.length){
                         document.getElementById("error_msg").innerHTML = list_of_errors[selected_err];
@@ -438,11 +453,25 @@
                     else {
                         document.getElementById("error_msg").innerHTML = "Unhandled error";
                     }
+                    highlight_field(form);
                 }
                 else{
                     document.getElementById("error_msg").innerHTML = "Success!";
                 }
                 return false;
+            }
+
+            function make_fields_white(){
+                for (i = 0; i < fields_with_backgrounds.length; i++){
+                    document.forms["myForm"][fields_with_backgrounds[i]].style.backgroundColor = "#FFFFFF";
+                }
+                return 0;
+            }
+
+            function highlight_field(f){
+                var field_name = ("i[".concat(highlighted_field.toString()).concat("]"));
+                document.forms["myForm"][field_name].style.backgroundColor = "#FFCCCC";
+                return 0;
             }
 
             function valid(row_ct){
@@ -475,6 +504,12 @@
                     if (either_dr_or_cr != 0){
                         set_error(5);
                         err_ct++;
+                        if (isInArray(i, dr_rows)){
+                            precise_empty_amt = (i*6)+4;  
+                        }
+                        else{
+                            precise_empty_amt = (i*6)+5;  
+                        }
                         either_dr_or_cr = 0;
                     }
                 } 
@@ -498,7 +533,7 @@
             }
 
             function intersection_exists(a1, a2){
-                if (a1.length == 0 || a2.length == 0){
+                if (a1.length == 0 || a2.length == 0 || !a1 || !a2){
                     return false;
                 }
                 else {
@@ -511,7 +546,7 @@
             }
 
             function duplicates_exist(arr){
-                if (arr.length == 0){
+                if (arr.length == 0 || !arr){
                     return false;
                 }
                 else {
@@ -573,6 +608,7 @@
                 // Ensure we're not checking the description
                 if (filled[index] == "Select..." && index != 13){
                     set_error(2);
+                    precise_unselected_field = index;
                     return 1;
                 }
                 else {
@@ -621,12 +657,14 @@
                         else {
                             set_error(7);
                         }
+                        precise_invalid_amt = index;
                         return 1;
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
                         if (!money_re.test(filled[index]) || parseFloat(filled[index]) <= 0.00){
                             set_error(8);
+                            precise_negative_amt = index;
                             return 1;
                         }
                         else {
@@ -644,6 +682,30 @@
 
             function set_error(num){
                 selected_err = Math.min(num, selected_err);
+                if (selected_err == 0 || selected_err == 1){
+                    // Set it to the date field
+                    highlighted_field = 0;
+                }
+                else if(selected_err == 2){
+                    // Set it to the unselected account title field
+                    highlighted_field = precise_unselected_field;
+                }
+                else if(selected_err == 5){
+                    // Set it to the empty amount field
+                    highlighted_field = precise_empty_amt;
+                }
+                else if(selected_err == 6 || selected_err == 7){
+                    // Set it to the field that has an invalid amount
+                    highlighted_field = precise_invalid_amt;
+                }
+                else if(selected_err == 8){
+                    // Set it to the field with the negative amount
+                    highlighted_field = precise_negative_amt;
+                }
+                else if(selected_err == 9){
+                    // Set it to the first debit amount field
+                    highlighted_field = 4;
+                }
             }
 
             function isInArray(val, arr){
