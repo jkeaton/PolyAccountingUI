@@ -322,7 +322,7 @@
             var curr_row = 3;
             var last_dr_id = "debit_1";
             var last_cr_id = "credit_1";
-            var filled = null;
+            var filled = new Array();
             var either_dr_or_cr = 0;
             var dr_rows = [0];
             var cr_rows = [1];
@@ -460,6 +460,7 @@
                 }
                 // At this point, the 'filled' array has been set with the values of the form fields
                 make_fields_white();
+                submit_form = false;
                 if (!valid(document.getElementById("row_ct").value)){
                     document.getElementById("error_msg").style.color = "#FF0000";
                     if (selected_err < list_of_errors.length){
@@ -473,8 +474,17 @@
                 else{
                     document.getElementById("error_msg").style.color = "#009900";
                     document.getElementById("error_msg").innerHTML = "Success!";
+                    // Just show where we would go on successful submission, based on which button was pressed
+                    alert("Redirecting to "+document.getElementById("next_url").value);
+                    submit_form = true;
+                    //my_pause(); -- This was written in case we'd like to leave the success message on the screen for 2 seconds before we redirect
                 }
-                return false;
+                return submit_form;
+            }
+
+            function my_pause(){
+                setTimeout(function() { alert("Hello"); }, 2000);
+                return 0;
             }
 
             function Account(name, field){
@@ -592,12 +602,14 @@
             }
 
             function duplicates_exist(arr){
+                // There can be no duplicates if the size of the array is 0
                 if (arr.length == 0 || !arr){
                     return false;
                 }
                 else {
                     var tmp = new Array();
                     for (i = 0; i < arr.length; i++){
+                        // For some reason, firefox is mad at this method. We need to find out how to make it work in firefox
                         if (arr[i]){ 
                             if (tmp.indexOf(arr[i].toString()) == -1){
                                 tmp.push(arr[i].toString());
@@ -670,6 +682,9 @@
                     return 1;
                 }
                 else {
+                    // debited_accts and credited_accts only grow by adding valid account names.
+                    // when the selected option is still "Select..." this string is not added to these
+                    // arrays.
                     if (isInArray(Math.floor(index/6), dr_rows)){
                         debited_accts.push(filled[index]);        
                     }
@@ -806,7 +821,11 @@
             function inc_row_ct(){
                 document.getElementById("row_ct").setAttribute("value", curr_row)
             }
-            </script>
+
+            function set_next_url(url){
+                document.getElementById("next_url").setAttribute("value", url)
+            }
+        </script>
     </head>
 
     <body role="document">
@@ -863,7 +882,7 @@
         </nav>
 
         <div class="container">
-            <form role="form"  name="myForm" method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+            <form role="form"  id="myForm" name="myForm" method="post" onsubmit="return valid_fields()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="panel panel-primary col-centered form-group journalEntryPanel">
                 <div class="panel-heading panel-heading-lg text-center">
                     <h3 class="panel-title">Poly Accounting Information Group</h3>
@@ -887,6 +906,7 @@
                     <table class="table my_table">
                         <tbody id="debits">
                             <input type="number" value="3" id="row_ct" name="row_ct_for_php" style="visibility: hidden;"></input>
+                            <input type="text" value="" id="next_url" name="next_url" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
                                     <input type="text" name="i[0]" class="stored_val datepicker form-control" placeholder="Date">
@@ -951,10 +971,10 @@
                 <div class="panel-footer text-center">
                     <p id="error_msg" class="error"></p>
                     <div class="form-group" role="group">
-                        <button type="submit" id="attempt_post" class="attempt_post btn btn-success" name="submit">
+                        <button type="submit" id="attempt_post" onClick="set_next_url('http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php');" class="attempt_post btn btn-success" name="submit">
                             Save & Exit
                         </button>
-                        <button type="submit" id="attempt_post_2" class="attempt_post btn btn-success" name="submit">
+                        <button type="submit" id="attempt_post_2" onClick="set_next_url('#');" class="attempt_post btn btn-success" name="submit">
                             Save & New
                         </button>
                         <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger" name="clear">
