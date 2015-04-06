@@ -461,6 +461,7 @@
                 // At this point, the 'filled' array has been set with the values of the form fields
                 make_fields_white();
                 if (!valid(document.getElementById("row_ct").value)){
+                    document.getElementById("error_msg").style.color = "#FF0000";
                     if (selected_err < list_of_errors.length){
                         document.getElementById("error_msg").innerHTML = list_of_errors[selected_err];
                     }
@@ -470,6 +471,7 @@
                     highlight_field(form);
                 }
                 else{
+                    document.getElementById("error_msg").style.color = "#009900";
                     document.getElementById("error_msg").innerHTML = "Success!";
                 }
                 return false;
@@ -596,18 +598,20 @@
                 else {
                     var tmp = new Array();
                     for (i = 0; i < arr.length; i++){
-                        if (tmp.indexOf(arr[i].toString()) == -1){
-                            tmp.push(arr[i].toString());
-                        }
-                        else {
-                            for (j = 0; j < selected_accts.length; j++){
-                                if (selected_accts[j].name == arr[i].toString()){
-                                    field_name = selected_accts[j].field;
-                                    precise_duplicate_acct = get_index_from_fname(field_name);
-                                    break;
-                                }
+                        if (arr[i]){ 
+                            if (tmp.indexOf(arr[i].toString()) == -1){
+                                tmp.push(arr[i].toString());
                             }
-                            return true;
+                            else {
+                                for (j = 0; j < selected_accts.length; j++){
+                                    if (selected_accts[j].name == arr[i].toString()){
+                                        field_name = selected_accts[j].field;
+                                        precise_duplicate_acct = get_index_from_fname(field_name);
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
                         }
                     }
                     return false;
