@@ -355,6 +355,8 @@
             var highlighted_field = 0; // default to first form field
             var selected_accts = new Array();
             var unselected_field_unset = true;
+            var invalid_amt_field_unset = true;
+            var negative_amt_field_unset = true;
 
         </script>
 
@@ -439,6 +441,8 @@
                 precise_duplicate_acct = 0;
                 selected_accts = new Array();
                 unselected_field_unset = true;
+                invalid_amt_field_unset = true;
+                negative_amt_field_unset = true;
 
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
@@ -498,6 +502,7 @@
 
             function valid(row_ct){
                 var err_ct = 0;
+                var precise_empty_field_set = false;
                 dr_amt = 0;
                 cr_amt = 0;
                 // First Check the Date
@@ -524,14 +529,17 @@
                     }
 
                     if (either_dr_or_cr != 0){
-                        set_error(5);
                         err_ct++;
-                        if (isInArray(i, dr_rows)){
-                            precise_empty_amt = (i*6)+4;  
+                        if (!precise_empty_field_set){
+                            if (isInArray(i, dr_rows)){
+                                precise_empty_amt = (i*6)+4;  
+                            }
+                            else{
+                                precise_empty_amt = (i*6)+5;  
+                            }
+                            precise_empty_field_set = true;
                         }
-                        else{
-                            precise_empty_amt = (i*6)+5;  
-                        }
+                        set_error(5);
                         either_dr_or_cr = 0;
                     }
                 } 
@@ -697,20 +705,26 @@
                     }
                     // Find out if the value is a valid monetary amount
                     if (!negative_money_re.test(filled[index])){
-                        if (isDebit) {
-                            set_error(6);
+                        if (invalid_amt_field_unset){
+                            precise_invalid_amt = index;
+                            if (isDebit) {
+                                set_error(6);
+                            }
+                            else {
+                                set_error(7);
+                            }
+                            invalid_amt_field_unset = false;
                         }
-                        else {
-                            set_error(7);
-                        }
-                        precise_invalid_amt = index;
                         return 1;
                     }
                     // Now determine if the amount is greater than 0.00,
                     else{
                         if (!money_re.test(filled[index]) || parseFloat(filled[index]) <= 0.00){
-                            set_error(8);
-                            precise_negative_amt = index;
+                            if (negative_amt_field_unset){
+                                precise_negative_amt = index;
+                                set_error(8);
+                                negative_amt_field_unset = false;
+                            }
                             return 1;
                         }
                         else {
