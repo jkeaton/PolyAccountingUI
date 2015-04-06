@@ -335,6 +335,7 @@
             var precise_invalid_amt = 0;
             var precise_negative_amt = 0;
             var precise_empty_amt = 0;
+            var precise_intersection_acct = 0;
             var fields_with_backgrounds = new Array();
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
@@ -351,6 +352,8 @@
             ];
             var selected_err = list_of_errors.length;
             var highlighted_field = 0; // default to first form field
+            var selected_accts = new Array();
+            var unselected_field_unset = true;
 
         </script>
 
@@ -431,6 +434,9 @@
                 precise_negative_amt = 0;
                 precise_empty_amt = 0;
                 highlighted_field = 0;
+                precise_intersection_acct = 0;
+                selected_accts = new Array();
+                unselected_field_unset = true;
 
                 for (var elem in input_elems){
                     if (re.test(elem.toString())){
@@ -442,6 +448,8 @@
                     if (re.test(elem.toString())){
                         set_index(elem.toString(), form);
                         fields_with_backgrounds.push(elem.toString());
+                        var acct = new Account(form[elem.toString()].value, elem.toString());
+                        selected_accts.push(acct);
                     }
                 }
                 // At this point, the 'filled' array has been set with the values of the form fields
@@ -461,6 +469,11 @@
                 return false;
             }
 
+            function Account(name, field){
+                this.name = name;
+                this.field = field;
+            }
+
             function make_fields_white(){
                 for (i = 0; i < fields_with_backgrounds.length; i++){
                     document.forms["myForm"][fields_with_backgrounds[i]].style.backgroundColor = "#FFFFFF";
@@ -472,6 +485,13 @@
                 var field_name = ("i[".concat(highlighted_field.toString()).concat("]"));
                 document.forms["myForm"][field_name].style.backgroundColor = "#FFCCCC";
                 return 0;
+            }
+
+            function get_index_from_fname(fname){
+                var pos1 = fname.indexOf("[");
+                var pos2 = fname.indexOf("]");
+                var index = fname.substring(pos1+1, pos2);
+                return index;
             }
 
             function valid(row_ct){
@@ -537,11 +557,25 @@
                     return false;
                 }
                 else {
-                    return (a1.filter(
+                    intersection = a1.filter(
                         function(n) {
                             return a2.indexOf(n) != -1;
                         }
-                    )).length > 0;
+                    );
+                    if (intersection.length > 0){
+                        for (i = 0; i < selected_accts.length; i++){
+                            if (selected_accts[i].name == intersection[0]){
+                                field_name = selected_accts[i].field;
+                                precise_intersection_acct = get_index_from_fname(field_name);
+                                break;
+                            }
+                        }
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+
                 }
             }
 
@@ -608,7 +642,10 @@
                 // Ensure we're not checking the description
                 if (filled[index] == "Select..." && index != 13){
                     set_error(2);
-                    precise_unselected_field = index;
+                    if (unselected_field_unset){
+                        precise_unselected_field = index;
+                        unselected_field_unset = false;
+                    }
                     return 1;
                 }
                 else {
@@ -689,6 +726,10 @@
                 else if(selected_err == 2){
                     // Set it to the unselected account title field
                     highlighted_field = precise_unselected_field;
+                }
+                else if(selected_err == 3){
+                    // Set it to the first account listed in the intersection of debited and credited accounts
+                    highlighted_field = precise_intersection_acct;
                 }
                 else if(selected_err == 5){
                     // Set it to the empty amount field
