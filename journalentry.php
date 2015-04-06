@@ -336,6 +336,7 @@
             var precise_negative_amt = 0;
             var precise_empty_amt = 0;
             var precise_intersection_acct = 0;
+            var precise_duplicate_acct = 0;
             var fields_with_backgrounds = new Array();
             // List the errors by priority. The ones that will be displayed are the ones closest to the top of the list.
             var list_of_errors = [
@@ -435,6 +436,7 @@
                 precise_empty_amt = 0;
                 highlighted_field = 0;
                 precise_intersection_acct = 0;
+                precise_duplicate_acct = 0;
                 selected_accts = new Array();
                 unselected_field_unset = true;
 
@@ -590,6 +592,13 @@
                             tmp.push(arr[i].toString());
                         }
                         else {
+                            for (j = 0; j < selected_accts.length; j++){
+                                if (selected_accts[j].name == arr[i].toString()){
+                                    field_name = selected_accts[j].field;
+                                    precise_duplicate_acct = get_index_from_fname(field_name);
+                                    break;
+                                }
+                            }
                             return true;
                         }
                     }
@@ -730,6 +739,10 @@
                 else if(selected_err == 3){
                     // Set it to the first account listed in the intersection of debited and credited accounts
                     highlighted_field = precise_intersection_acct;
+                }
+                else if(selected_err == 4){
+                    // Set it to the first account selection that is duplicated
+                    highlighted_field = precise_duplicate_acct;
                 }
                 else if(selected_err == 5){
                     // Set it to the empty amount field
