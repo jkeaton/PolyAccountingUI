@@ -70,7 +70,7 @@ namespace AccountingJournal.Journal_and_Ledger
                             {
                                 sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
-                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td class='text-right'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
                             sb.Append(string.Format(@"<td class='text-center vcenter' rowspan='{1}'><button class='btn btn-primary form-control' value='{0}'>Post</button><br/><br /><button class='btn btn-danger form-control' value'{0}'>Reject</button></td>", Journalheader[i].id, Journalheader[i].TotalAccEff + 1));
@@ -87,7 +87,7 @@ namespace AccountingJournal.Journal_and_Ledger
                             {
                                 sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}' style='text-decoration:none; margin-left:20px;color:black'>{0}</a></td>", JournalLine[j].Account, JournalLine[j].AccNum));
                             }
-                            sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
+                            sb.Append(string.Format(@"<td class='text-right'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
                             sb.Append(string.Format(@"</tr>"));

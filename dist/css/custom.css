@@ -117,13 +117,10 @@ html, body {
     width: 6%;
 }
 .t_debit {
-    width: 9%;
+    width: 13%;
 }
 .t_credit {
-    width: 9%;
-}
-.t_action {
-    width: 8%;
+    width: 13%;
 }
 .debit_acct_name {
     width: 80%;
@@ -178,4 +175,15 @@ html, body {
 .no-gutter [class*="right-btn"] {
     padding-left: 10 !important;
     padding-right: 0px !important;
+}
+.tooltip-inner {
+	font-size: 16px;
+    background-color: #3e0074; /*purple, lighter purple is 460083*/
+}
+.tooltip.right .tooltip-arrow {
+    border-right: 5px solid #3e0074;
+}
+.tooltip.in {
+  filter: alpha(opacity=90);
+  opacity: 1.0;
 }

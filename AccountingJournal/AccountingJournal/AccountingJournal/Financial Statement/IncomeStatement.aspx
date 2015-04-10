@@ -6,6 +6,7 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
+                <h3>Poly Accounting Information</h3>
                 <h3 class="panel-title">
                     Income Statement
                     <br />
@@ -13,7 +14,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <table class="table" style="width:auto; margin-left:auto; margin-right:auto">
+                <table class="table" style="width: auto; margin-left: auto; margin-right: auto">
                     <asp:Label ID="IncState" runat="server" Text="Label"></asp:Label>
                     <tr>
                         <td></td>
@@ -39,5 +40,5 @@
                 </table>
             </div>
         </div>
-    </div>   
+    </div>
 </asp:Content>

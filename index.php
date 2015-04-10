@@ -91,6 +91,7 @@
 
 		<!-- Bootstrap -->
 		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="dist/css/bootstrap.css" rel="stylesheet">
         <!-- Custom Style sheet for moving the body down below nav bar -->
         <link href="dist/css/custom.css" rel="stylesheet">
 
@@ -129,7 +130,7 @@
                         </div>
                         <div class="row">
                             <label for="inputUsername" class="sr-only">Username</label>
-                            <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                            <input type="text" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="Your username is your first initial followed by your full last name. John Smith's username would be jsmith" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
                         </div>
                         <div class="row">
                             <label for="inputPassword" class="sr-only">Password</label>
@@ -166,5 +167,12 @@
 
 </html>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-tooltip.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function(){
+        $("[data-toggle='tooltip']").tooltip()
+    });
+</script>

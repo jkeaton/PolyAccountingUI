@@ -293,7 +293,7 @@ namespace AccountingJournal.Code
                                  + " , AccNumber"
                                  + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                  + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
-                                 + " , CASE WHEN IsDebit =1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
                                  + " , PostDate"
                                  + " , TranxID"
                                  + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
@@ -424,7 +424,7 @@ namespace AccountingJournal.Code
                                  + "   AND NOT EXISTS"
 		                         + "   ("
 		                         + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
-		                         + "   )");
+		                         + "   ) order by 1 desc");
             try
             {
                 conn.Open();
@@ -504,6 +504,37 @@ namespace AccountingJournal.Code
              {
                  conn.Close();
              }
+        }
+
+        public static ArrayList DisplayCashFlow()
+        {
+            ArrayList list = new ArrayList();
+            CashFlow cf = new CashFlow();
+            string query = string.Format("EXEC [DisplayCashFlow]");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cf = new CashFlow();
+                    cf.AccType = reader.GetString(0);
+                    cf.AccName = reader.GetString(1);
+                    cf.IsDebit = reader.GetString(2);
+                    cf.Amount = reader.GetDecimal(3);
+                    list.Add(cf);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
         }
     }
 

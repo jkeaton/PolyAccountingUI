@@ -31,7 +31,7 @@ namespace AccountingJournal.Journal_and_Legend
                 sb.Append(string.Format(@"<tr>"));
                 sb.Append(string.Format(@"<td>{0}</td>", l.date.ToShortDateString()));
                 sb.Append(string.Format(@"<td class='text-left'>{0}</td>", l.Description));
-                sb.Append(string.Format(@"<td><a href='../Journal and Ledger/General Journal.aspx?Accnum={1}'>{0}</a></td>", l.Ref, l.TranxID));
+                sb.Append(string.Format(@"<td style='text-align:left'><a href='../Journal and Ledger/General Journal.aspx?Accnum={1}'>{0}</a></td>", l.Ref, l.TranxID));
                 sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", l.Debit)));
                 sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", l.Credit)));
                 sb.Append(string.Format(@"<td class='text-right'>{0}</td>", l.Balance.ToString("#,##0.00")));

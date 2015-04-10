@@ -22,12 +22,12 @@
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:CheckBox ID="chkStatus" runat="server" AutoPostBack="true" OnCheckedChanged="chkStatus_OnCheckedChanged"
-                                            Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
+                                            Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                                <asp:BoundField DataField="Account Name" HeaderText="Account Name" SortExpression="Account Name" HeaderStyle-Width="400px" ItemStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="400px"></HeaderStyle>
+                                <asp:BoundField DataField="Account Name" HeaderText="Account Name" SortExpression="Account Name" HeaderStyle-Width="350px" ItemStyle-HorizontalAlign="Left">
+                                    <HeaderStyle Width="350px"></HeaderStyle>
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:BoundField>
