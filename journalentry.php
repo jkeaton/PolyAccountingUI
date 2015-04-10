@@ -502,6 +502,7 @@
             function highlight_field(f){
                 var field_name = ("i[".concat(highlighted_field.toString()).concat("]"));
                 document.forms["myForm"][field_name].style.backgroundColor = "#FFCCCC";
+                document.forms["myForm"][field_name].focus();
                 return 0;
             }
 
