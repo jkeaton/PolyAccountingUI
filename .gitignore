@@ -1,9 +1,5 @@
 *~
 *.swp
-*.cache
-*.pdb
-*.dll
-*.suo
 dist/*.swp
 dist/*~
 ASP_NET/*
