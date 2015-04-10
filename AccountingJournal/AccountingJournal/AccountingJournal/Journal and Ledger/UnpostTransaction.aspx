@@ -7,10 +7,11 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
-                Unpost Transaction
+                Unposted Transaction
             </div>
-            <div class="panel-body" style="background-color: #e3edf5">
+            <div class="panel-body">
                 <table class="table borderless" id="Jourtab">
+                    <thead>
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
                         <td class="text-center">Date</td>
                         <td>Account Titles and Explanation</td>
@@ -19,7 +20,10 @@
                         <td class="text-right">Credit</td>
                         <td class="text-center">Action</td>
                     </tr>
-                    <asp:Label ID="UnpostJour" runat="server"></asp:Label>
+                    </thead>
+                    <tbody>
+                        <asp:Label ID="UnpostJour" runat="server"></asp:Label>
+                    </tbody>
                 </table>
             </div>
         </div>

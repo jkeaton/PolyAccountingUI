@@ -38,14 +38,16 @@
                     </form>
                 </div>
                 <table class="table borderless" id="Jourtab">
-                    <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
-                        <td class="text-center">Date</td>
-                        <td>Account Titles and Explanation</td>
-                        <td class="text-right">Ref.</td>
-                        <td class="text-center">Debit</td>
-                        <td class="text-center">Credit</td>
-                        <td class="text-center">Posted Date</td>
-                    </tr>
+                    <thead>
+                        <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
+                            <td class="text-center">Date</td>
+                            <td>Account Titles and Explanation</td>
+                            <td class="text-right">Ref.</td>
+                            <td class="text-center">Debit</td>
+                            <td class="text-center">Credit</td>
+                            <td class="text-center">Posted Date</td>
+                        </tr>
+                    </thead>
                     <asp:Label ID="IndJour" runat="server"></asp:Label>
                 </table>
             </div>
