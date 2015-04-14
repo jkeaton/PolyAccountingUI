@@ -30,7 +30,6 @@ C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJour
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.dll
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.pdb
-C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll.config
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.dll
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\AccountingJournal.pdb

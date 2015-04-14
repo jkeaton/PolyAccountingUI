@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="General Journal.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.General_Journal" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -54,6 +55,8 @@
     </div>
 </asp:Content>
 =======
+=======
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="General Journal.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.General_Journal" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -110,4 +113,7 @@
         </div>
     </div>
 </asp:Content>
+<<<<<<< HEAD
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
+=======
 >>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936

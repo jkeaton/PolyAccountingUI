@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="ManageAccount.aspx.cs" Inherits="AccountingJournal.Financial_Statement.InActiveAccount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -60,6 +61,8 @@
 
 
 =======
+=======
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="ManageAccount.aspx.cs" Inherits="AccountingJournal.Financial_Statement.InActiveAccount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -120,4 +123,7 @@
 </asp:Content>
 
 
+<<<<<<< HEAD
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
+=======
 >>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936

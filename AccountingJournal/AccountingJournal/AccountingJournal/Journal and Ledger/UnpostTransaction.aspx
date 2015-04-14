@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="UnpostTransaction.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.UnpostTransaction" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -27,6 +28,8 @@
 
 </asp:Content>
 =======
+=======
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="UnpostTransaction.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.UnpostTransaction" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -59,4 +62,7 @@
     </div>
 
 </asp:Content>
+<<<<<<< HEAD
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
+=======
 >>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936
