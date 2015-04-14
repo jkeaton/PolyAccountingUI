@@ -10,7 +10,7 @@
             </div>
             <div class="panel-body">
                 <div class="container" style="width: 100%; height:500px;overflow:auto;">
-                    <form runat="server">
+<%--                    <form runat="server">--%>
                         <asp:GridView ID="GridView1" runat="server" DataKeyNames="AccountID" AutoGenerateColumns="False"
                             Style="margin-left: auto; margin-right: auto" CssClass="table" CellPadding="4" ForeColor="#333333"
                             GridLines="None">
@@ -50,7 +50,7 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                         </asp:GridView>
-                    </form>
+                    <%--</form>--%>
                 </div>
             </div>
         </div>

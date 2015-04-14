@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,6 +16,24 @@ namespace AccountingJournal.Journal_and_Ledger
         protected void Page_Load(object sender, EventArgs e)
         {
             DisplayUnpostTranx();
+            //if (!IsPostBack)
+            //{
+            //    Bind_Data();
+            //}
+        }
+
+        private void Bind_Data()
+        {
+            Table Journal = Page.FindControl("Jourtab") as Table; 
+            for (int i = 0; i < Journal.Rows.Count; i++)
+            {
+                Button btn = Journal.Rows[i].FindControl("Postbtn") as Button;
+                
+                    btn.Attributes.Add("OnClientClick", "if(!confirm('Do you want to post it?')){return false};;");
+                    btn.Attributes.Add("onclick", "Postbtn_ServerClick");
+                    btn.Attributes.Add("AutoPostBack", "True");
+                
+            }
         }
 
 
@@ -73,7 +92,7 @@ namespace AccountingJournal.Journal_and_Ledger
                             sb.Append(string.Format(@"<td class='text-right'><a href='../Journal and Ledger/General Ledger.aspx?ID={1}'style='color:black'>{0}</a></td>", JournalLine[j].AccNum, JournalLine[j].AccNum));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Debit)));
                             sb.Append(string.Format(@"<td class='text-right'>{0}</td>", string.Format("{0:#,##0.00}", JournalLine[j].Credit)));
-                            sb.Append(string.Format(@"<td class='text-center vcenter' rowspan='{1}'><button class='btn btn-primary form-control' value='{0}'>Post</button><br/><br /><button class='btn btn-danger form-control' value'{0}'>Reject</button></td>", Journalheader[i].id, Journalheader[i].TotalAccEff + 1));
+                            sb.Append(string.Format(@"<td class='text-center vcenter' rowspan='{1}'><button id='Postbtn' class='btn btn-primary form-control' runat='server' onserverclick='Postbtn_ServerClick'>Post</button><br/><br /><button id='Rejectedbtn' class='btn btn-danger form-control' runat='server' onserverclick='testbtn_ServerClick'>Reject</button></td>", Journalheader[i].id, Journalheader[i].TotalAccEff + 1));
                             sb.Append(string.Format(@"</tr>"));
                         }
                         else
@@ -110,6 +129,17 @@ namespace AccountingJournal.Journal_and_Ledger
                 sb.Append(string.Format(@"</tr>"));
             }
             UnpostJour.Text = sb.ToString();
+        }
+
+        protected void testbtn_ServerClick(object sender, EventArgs e)
+        {
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Activate the Account');", true);
+        }
+              
+        protected void Postbtn_ServerClick(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully call post function');", true);
         }
     }
 }

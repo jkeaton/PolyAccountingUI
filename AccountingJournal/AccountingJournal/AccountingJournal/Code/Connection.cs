@@ -92,14 +92,14 @@ namespace AccountingJournal.Code
             ArrayList list = new ArrayList();
             IncDetail income;
             string query = string.Format("SELECT ct.Type as AccountType, c.Name as AccountName, c.Balance as Total, "
-				                            +" ROW_NUMBER() OVER(PARTITION BY ct.type ORDER BY AccNumber) as [RANK], "
-                                            +" CASE WHEN c.[IsDebit] = 0 then 'Credit' else 'Debit' END as IsDebit"
-                                            +" FROM            Account c INNER JOIN"
-                                            +"                 AccType ct ON c.AccTypeID = ct.TypeID"
-                                            +" WHERE ct.Type IN('Expense','Revenue')"
-                                            +" AND isActive =1 "
-                                            +" AND c.Balance > 0"
-                                            +" Order BY ct.TypeID, 4 asc");
+                                            + " ROW_NUMBER() OVER(PARTITION BY ct.type ORDER BY AccNumber) as [RANK], "
+                                            + " CASE WHEN c.[IsDebit] = 0 then 'Credit' else 'Debit' END as IsDebit"
+                                            + " FROM            Account c INNER JOIN"
+                                            + "                 AccType ct ON c.AccTypeID = ct.TypeID"
+                                            + " WHERE ct.Type IN('Expense','Revenue')"
+                                            + " AND isActive =1 "
+                                            + " AND c.Balance > 0"
+                                            + " Order BY ct.TypeID, 4 asc");
             try
             {
                 conn.Open();
@@ -177,7 +177,7 @@ namespace AccountingJournal.Code
                 {
                     CAcc = new ChartofAcc();
                     CAcc.AccType = reader.GetString(0);
-                    CAcc.ID = reader.GetInt32(1);                  
+                    CAcc.ID = reader.GetInt32(1);
                     CAcc.AccNum = reader.GetInt32(2);
                     CAcc.Account = reader.GetString(3);
                     CAcc.AccDate = reader.GetDateTime(4);
@@ -219,7 +219,7 @@ namespace AccountingJournal.Code
                     if (!reader.IsDBNull(6))
                     {
                         G_Ledger.Debit = reader.GetDecimal(6);
-                    } 
+                    }
                     if (!reader.IsDBNull(7))
                     {
                         G_Ledger.Credit = reader.GetDecimal(7);
@@ -298,7 +298,8 @@ namespace AccountingJournal.Code
                                  + " , TranxID"
                                  + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
                                  + "   FROM [TransactionDB].[dbo].[Journal] j"
-                                 + "   WHERE PostDate IS NOT NULL");
+                                 + "   WHERE PostDate IS NOT NULL"
+                                 + "  order by 1 desc, 7 desc");
             try
             {
                 conn.Open();
@@ -422,9 +423,9 @@ namespace AccountingJournal.Code
                                  + "   FROM [TransactionDB].[dbo].[Journal] j"
                                  + "   WHERE PostDate IS NULL"
                                  + "   AND NOT EXISTS"
-		                         + "   ("
-		                         + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
-		                         + "   ) order by 1 desc");
+                                 + "   ("
+                                 + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
+                                 + "   ) order by 1 desc, 7 desc");
             try
             {
                 conn.Open();
@@ -489,28 +490,30 @@ namespace AccountingJournal.Code
 
         public static void UpdateActiveAcc(int ID, bool isactive)
         {
-             string query = string.Format("[ActivateAccount] {0}, {1}", ID, isactive == true ? 1 : 0 );
-             try
-             {
-                 conn.Open();
-                 cmd.CommandText = query;
-                 SqlDataReader reader = cmd.ExecuteReader();
-             }
-             //catch (Exception e)
-             //{
-             //    Console.WriteLine(e);
-             //}
-             finally
-             {
-                 conn.Close();
-             }
+            string query = string.Format("[ActivateAccount] {0}, {1}", ID, isactive == true ? 1 : 0);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+            }
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public static ArrayList DisplayCashFlow()
         {
             ArrayList list = new ArrayList();
             CashFlow cf = new CashFlow();
-            string query = string.Format("EXEC [DisplayCashFlow]");
+            string query = string.Format("select type, IsDebit, sum(amount) as Amount"
+                                            + " from DisplayCashFlowStatement"
+                                            + " group by type, IsDebit");
             try
             {
                 conn.Open();
@@ -520,10 +523,52 @@ namespace AccountingJournal.Code
                 {
                     cf = new CashFlow();
                     cf.AccType = reader.GetString(0);
-                    cf.AccName = reader.GetString(1);
-                    cf.IsDebit = reader.GetString(2);
-                    cf.Amount = reader.GetDecimal(3);
+                    cf.IsDebit = reader.GetString(1);
+                    cf.Amount = reader.GetDecimal(2);
                     list.Add(cf);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList DisplayRejectedTranx()
+        {
+            ArrayList list = new ArrayList();
+            RejectedTranx Rejected;
+            string query = string.Format("SELECT * , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].RejectedTranx j1 where j1.TranxID = j.TranxID) as totAccEff from RejectedTranx j order by TranxID, IsDebit desc");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Rejected = new RejectedTranx();
+                    Rejected.date = reader.GetDateTime(0);
+                    Rejected.Account = reader.GetString(1);
+                    Rejected.Desc = reader.GetString(2);
+                    Rejected.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Rejected.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Rejected.Credit = reader.GetDecimal(5);
+                    }
+                    Rejected.IsDebit = reader.GetString(6);
+                    Rejected.TranxID = reader.GetInt32(7);
+                    Rejected.RejectedUser = reader.GetString(8);
+                    Rejected.TotalAccEff = reader.GetInt32(10);
+                    list.Add(Rejected);
                 }
             }
             catch (Exception e)

@@ -17,7 +17,7 @@ namespace AccountingJournal.Financial_Statement
             if (!IsPostBack)
             {
                 Bind_Data();
-            }            
+            }
         }
         private void Bind_Data()
         {
@@ -29,14 +29,21 @@ namespace AccountingJournal.Financial_Statement
                 CheckBox chk = GridView1.Rows[i].FindControl("chkStatus") as CheckBox;
                 if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) != 0 && chk.Checked == true)
                 {
-                    chk.Attributes.Add("onclick", "if(!confirm('The Balance is not 0. Do you want to Deactivate it?')) {return false};");
+                    chk.Attributes.Add("onclick", "alert('The balance must be $0.00 to deactivate.');");
+                    //chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
+                    //chk.Attributes.Add("AutoPostBack", "True");
+                    chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
+                }
+                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && chk.Checked == true)
+                {
+                    chk.Attributes.Add("onclick", "if(!confirm('Do you want to Deactivate it?')){return false};;");
                     chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
                     chk.Attributes.Add("AutoPostBack", "True");
                     chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
                 }
-                else
+                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && chk.Checked == false)
                 {
-                    chk.Attributes.Add("onclick", "if(!confirm('Do you want to Activate/Deactivate it?')){return false};;");
+                    chk.Attributes.Add("onclick", "if(!confirm('Do you want to Activate it?')){return false};;");
                     chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
                     chk.Attributes.Add("AutoPostBack", "True");
                     chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
@@ -52,13 +59,6 @@ namespace AccountingJournal.Financial_Statement
             try
             {
                 Connection.UpdateActiveAcc(nID, chkStatus.Checked);
-            }
-            catch (Exception)
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Activation Unsucessfully');", true);
-            }
-            finally
-            {
                 if (chkStatus.Checked == true)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Activate the Account');", true);
@@ -67,8 +67,14 @@ namespace AccountingJournal.Financial_Statement
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Deactivate the Account');", true);
                 }
+                Bind_Data();
             }
-            Bind_Data();
+
+            catch (Exception ex)
+            {
+                //ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('The Account needs to be 0.00 in order to deactivate');", true);
+                Bind_Data();
+            }
         }
     }
 }

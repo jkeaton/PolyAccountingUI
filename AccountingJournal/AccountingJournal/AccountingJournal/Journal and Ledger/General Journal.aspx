@@ -11,7 +11,7 @@
             </div>
             <div class="panel-body">
                 <div id="filter" runat="server">
-                    <form runat="server">
+<%--                    <form runat="server">--%>
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-3">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="row" style='height: 15px;'></div>
                         </div>
-                    </form>
+                    <%--</form>--%>
                 </div>
                 <table class="table borderless" id="Jourtab">
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">

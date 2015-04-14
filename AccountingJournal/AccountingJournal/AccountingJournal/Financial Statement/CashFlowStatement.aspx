@@ -14,6 +14,14 @@
             </div>
             <div class="panel-body">
                 <table class="table" style="width: 800px; margin-left: auto; margin-right: auto">
+                    <asp:Label ID="cashflow" runat="server"></asp:Label>
+                    <tr>
+                        <td colspan="2">Net increase in cash</td>
+                        <td></td>
+                        <td>
+                            <asp:Label ID="netcash" runat="server"></asp:Label>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

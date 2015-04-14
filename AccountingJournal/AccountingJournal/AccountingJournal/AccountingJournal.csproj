@@ -143,6 +143,7 @@
     <Content Include="Images\CalBut.png" />
     <Content Include="Journal and Ledger\General Journal.aspx" />
     <Content Include="Journal and Ledger\General Ledger.aspx" />
+    <Content Include="Journal and Ledger\RejectedTransaction.aspx" />
     <Content Include="Journal and Ledger\UnpostTransaction.aspx" />
     <Content Include="journalentry.aspx" />
     <Content Include="packages.config" />
@@ -283,6 +284,15 @@
     <Compile Include="Journal and Ledger\Model\JourHeader.cs" />
     <Compile Include="Journal and Ledger\Model\JourLine.cs" />
     <Compile Include="Journal and Ledger\Model\Ledger.cs" />
+    <Compile Include="Journal and Ledger\Model\RejectedHeader.cs" />
+    <Compile Include="Journal and Ledger\Model\RejectedTranx.cs" />
+    <Compile Include="Journal and Ledger\RejectedTransaction.aspx.cs">
+      <DependentUpon>RejectedTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Journal and Ledger\RejectedTransaction.aspx.designer.cs">
+      <DependentUpon>RejectedTransaction.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Journal and Ledger\UnpostTransaction.aspx.cs">
       <DependentUpon>UnpostTransaction.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

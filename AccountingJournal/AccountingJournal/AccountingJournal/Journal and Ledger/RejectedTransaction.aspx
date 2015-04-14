@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="UnpostTransaction.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.UnpostTransaction" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="RejectedTransaction.aspx.cs" Inherits="AccountingJournal.Journal_and_Ledger.RejectedTransaction" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,7 +6,7 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
-                Unpost Transaction
+                Rejected Transaction
             </div>
             <div class="panel-body" style="background-color: #e3edf5; height: 500px; overflow: auto;">
                 <table class="table borderless" id="Jourtab">
@@ -16,12 +16,11 @@
                         <td class="text-right">Ref.</td>
                         <td class="text-right">Debit</td>
                         <td class="text-right">Credit</td>
-                        <td class="text-center">Action</td>
+                        <td class="text-center">Rejected User</td>
                     </tr>
-                    <asp:Label ID="UnpostJour" runat="server"></asp:Label>
+                    <asp:Label ID="RejTranx" runat="server"></asp:Label>
                 </table>
             </div>
         </div>
     </div>
-
 </asp:Content>

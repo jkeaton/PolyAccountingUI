@@ -20,8 +20,8 @@
             $('.datepicker').datepicker()
         });
     </script>
-    
-    
+
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -31,15 +31,14 @@
             <div class="container">
                 <div class="navbar-header">
                     <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
-                    alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
+                        alt="PAI Logo" height="30" width="30" class="logo-top nav" />
                     <a class="navbar-brand" href="http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php">Poly Accounting Information Group</a>
                 </div>
                 <%--<a href="fonts/">fonts/</a>--%>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                View
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
@@ -77,8 +76,7 @@
                             }
                         ?>-->
                         <li class="navbar-nav">
-                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">
-                                Inbox
+                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">Inbox
                                 <span class="badge"></span>
                             </a>
                         </li>
@@ -92,8 +90,11 @@
             </div>
         </nav>
         <div id="Content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <form runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </form>
         </div>
     </div>
 </body>
