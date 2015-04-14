@@ -16,7 +16,7 @@
                         <td class="text-right">Ref.</td>
                         <td class="text-right">Debit</td>
                         <td class="text-right">Credit</td>
-                        <td class="text-center">Rejected User</td>
+                        <td class="text-center">User</td>
                     </tr>
                     <asp:Label ID="RejTranx" runat="server"></asp:Label>
                 </table>
