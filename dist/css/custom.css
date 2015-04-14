@@ -65,7 +65,7 @@ html, body {
     float: right !important; 
 }
 .journalEntryPanel {
-    max-height: 80%;
+    max-height: 80% !important;
 }
 .main_div {
     overflow-y: scroll;
@@ -139,7 +139,7 @@ html, body {
 }
 #my_table_body {
     overflow-y: auto;
-    height: 380px;
+    height: 300px;
 }
 #header_table{
     padding-right: 20px;
