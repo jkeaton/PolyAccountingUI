@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GeneralSite.Master.cs" Inherits="AccountingJournal.Site1" %>
 
 <!DOCTYPE html>
@@ -99,3 +100,106 @@
     </div>
 </body>
 </html>
+=======
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GeneralSite.Master.cs" Inherits="AccountingJournal.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Poly Accounting Information Group</title>
+    <link rel="shortcut icon" href="~/Images/AppDomainFinalProjectLogo.png" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="http://test-mesbrook.cloudapp.net/dist/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/transition.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/collapse.js"></script>
+    <script type="text/javascript" src="http://test-mesbrook.cloudapp.net/dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker()
+        });
+    </script>
+    
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="wrapper" class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
+                    alt="PAI Logo" height="30" width="30" class="logo-top nav"/> 
+                    <a class="navbar-brand" href="http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php">Poly Accounting Information Group</a>
+                </div>
+                <%--<a href="fonts/">fonts/</a>--%>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                View
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
+                                <li><a href="#">Transactions by Date Range</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTransaction">All Pending Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
+                                <li><a href="#">Cash Flow Statement</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--
+                        <?php
+                            global $inbox_ct;
+                            if (isset($_SESSION['user'])){
+                                echo "<li class=\"navbar-left\">
+                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
+                                class=\"navbar-left\"><form role=\"form\"
+                                class=\"navbar-form navbar-left\" method=\"post\"
+                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
+                                type=\"submit\" class=\"btn btn-danger\"
+                                name=\"logout\">Log Out</button></form></li>";
+                            }
+                        ?>-->
+                        <li class="navbar-nav">
+                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">
+                                Inbox
+                                <span class="badge"></span>
+                            </a>
+                        </li>
+                        <li class="navbar-left">
+                            <form role="form" class="navbar-form navbar-left" method="post">
+                                <a class="btn btn-danger" name="logout" href="http://test-mesbrook.cloudapp.net/index.php" role="button">Log Out</a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="Content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+</body>
+</html>
+>>>>>>> b4fc1581393ed780d6d4bba029f85653d4e6c936

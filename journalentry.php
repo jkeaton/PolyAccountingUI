@@ -57,9 +57,12 @@
             $filled[$key] = $value;
         }
         if (valid($num_rows)){
-            $_POST = array();
-            insert_entry($num_rows);
-		    header('Location: journalentry.php');
+            if(isset($_POST['next_url'])){
+                $next = $_POST['next_url'];
+                $_POST = array();
+                insert_entry($num_rows);
+                header('Location: '.$next);
+            }
         }
     }
 
@@ -475,9 +478,7 @@
                     document.getElementById("error_msg").style.color = "#009900";
                     document.getElementById("error_msg").innerHTML = "Success!";
                     // Just show where we would go on successful submission, based on which button was pressed
-                    alert("Redirecting to "+document.getElementById("next_url").value);
                     submit_form = true;
-                    //my_pause(); -- This was written in case we'd like to leave the success message on the screen for 2 seconds before we redirect
                 }
                 return submit_form;
             }
@@ -502,6 +503,7 @@
             function highlight_field(f){
                 var field_name = ("i[".concat(highlighted_field.toString()).concat("]"));
                 document.forms["myForm"][field_name].style.backgroundColor = "#FFCCCC";
+                document.forms["myForm"][field_name].focus();
                 return 0;
             }
 
@@ -819,11 +821,11 @@
             }
 
             function inc_row_ct(){
-                document.getElementById("row_ct").setAttribute("value", curr_row)
+                document.getElementById("row_ct").setAttribute("value", curr_row);
             }
 
             function set_next_url(url){
-                document.getElementById("next_url").setAttribute("value", url)
+                document.getElementById("next_url").setAttribute("value", url);
             }
         </script>
     </head>
@@ -846,7 +848,8 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
                                 <li><a href="#">Transactions by Date Range</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Un-posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTransaction">All Pending Transactions</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
@@ -971,10 +974,10 @@
                 <div class="panel-footer text-center">
                     <p id="error_msg" class="error"></p>
                     <div class="form-group" role="group">
-                        <button type="submit" id="attempt_post" onClick="set_next_url('http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php');" class="attempt_post btn btn-success" name="submit">
+                        <button type="submit" id="attempt_post" onClick="set_next_url('http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTransaction');" class="attempt_post btn btn-success" name="submit">
                             Save & Exit
                         </button>
-                        <button type="submit" id="attempt_post_2" onClick="set_next_url('#');" class="attempt_post btn btn-success" name="submit">
+                        <button type="submit" id="attempt_post_2" onClick="set_next_url('http://test-mesbrook.cloudapp.net/journalentry.php');" class="attempt_post btn btn-success" name="submit">
                             Save & New
                         </button>
                         <button id="clear_entry" onClick="window.location.reload()" type="button" class="btn btn-danger" name="clear">
