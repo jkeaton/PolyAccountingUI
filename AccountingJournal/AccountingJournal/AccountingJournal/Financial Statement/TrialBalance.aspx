@@ -6,7 +6,7 @@
     <div class="container">
         <div class="panel panel-primary form-group text-center">
             <div class="panel-heading ">
-                <h3>Poly Accounting Information</h3>
+                <h3 class="panel-title">Poly Accounting Information</h3>
                 <h3 class="panel-title">Trial Balance
                 <br />
                     <asp:Label ID="CruDate" runat="server"></asp:Label>

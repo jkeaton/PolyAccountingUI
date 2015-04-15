@@ -6,7 +6,7 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
-                <h3>Poly Accounting Information</h3>
+                <h3 class="panel-title">Poly Accounting Information</h3>
                 <h3 class="panel-title">Owner's Equity Statement
                 <br />
                     For the Month Ended <%=Enddate.ToString("MMMM dd, yyyy") %>

@@ -63,3 +63,4 @@ C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJ
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.dll
 C:\xampp\htdocs\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.pdb
+C:\Users\Ritchie\Documents\Git\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache

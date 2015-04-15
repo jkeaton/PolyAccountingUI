@@ -6,11 +6,11 @@
     <div class="container">
         <div class="panel panel-primary form-group">
             <div class="panel-heading text-center">
-                <h3>Poly Accounting Information</h3>
+                <h3 class="panel-title">Poly Accounting Information</h3>
                 <h3 class="panel-title">
                     Balance Sheet
                     <br />
-                    <asp:Label ID="CurDate" runat="server"></asp:Label>
+                    As of <asp:Label ID="CurDate" runat="server"></asp:Label>
                 </h3>
             </div>
             <div class="panel-body">
