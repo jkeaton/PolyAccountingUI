@@ -117,5 +117,10 @@ namespace AccountingJournal.Journal_and_Ledger
             }
             IndJour.Text = sb.ToString();
         }
+
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
