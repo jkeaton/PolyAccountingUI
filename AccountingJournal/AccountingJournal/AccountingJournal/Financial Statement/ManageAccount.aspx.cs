@@ -27,21 +27,22 @@ namespace AccountingJournal.Financial_Statement
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
                 CheckBox chk = GridView1.Rows[i].FindControl("chkStatus") as CheckBox;
-                if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) != 0 && chk.Checked == true)
+                int totaltranx = Connection.numofTranx(Int32.Parse(GridView1.Rows[i].Cells[2].Text));
+                if ((Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) != 0 ||totaltranx >0 ) && chk.Checked == true)
                 {
-                    chk.Attributes.Add("onclick", "alert('The balance must be $0.00 to deactivate.');");
+                    chk.Attributes.Add("onclick", "alert('The Account is being used.');");
                     //chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
                     //chk.Attributes.Add("AutoPostBack", "True");
                     chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
                 }
-                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && chk.Checked == true)
+                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && totaltranx==0 && chk.Checked == true)
                 {
                     chk.Attributes.Add("onclick", "if(!confirm('Do you want to Deactivate it?')){return false};;");
                     chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
                     chk.Attributes.Add("AutoPostBack", "True");
                     chk.Attributes.Add("Checked", "<%# Convert.ToBoolean(Eval('IsActive')) %>");
                 }
-                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && chk.Checked == false)
+                else if (Convert.ToDouble(GridView1.Rows[i].Cells[4].Text) == 0 && totaltranx==0 && chk.Checked == false)
                 {
                     chk.Attributes.Add("onclick", "if(!confirm('Do you want to Activate it?')){return false};;");
                     chk.Attributes.Add("OnCheckedChanged", "chkStatus_OnCheckedChanged");
@@ -56,23 +57,32 @@ namespace AccountingJournal.Financial_Statement
         {
             CheckBox chkStatus = (CheckBox)sender;
             int nID = Convert.ToInt32(GridView1.DataKeys[((GridViewRow)chkStatus.NamingContainer).RowIndex].Value);
-            try
+            int totaltransaction = Connection.numofTranxbyid(nID);
+            double balance = (double)Connection.BalanceofTranxbyid(nID);
+            if (balance == 0 && totaltransaction == 0)
             {
-                Connection.UpdateActiveAcc(nID, chkStatus.Checked);
-                if (chkStatus.Checked == true)
+                try
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Activate the Account');", true);
+                    Connection.UpdateActiveAcc(nID, chkStatus.Checked);
+                    if (chkStatus.Checked == true)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Activate the Account');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Deactivate the Account');", true);
+                    }
+                    Bind_Data();
                 }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Sucessfully Deactivate the Account');", true);
-                }
-                Bind_Data();
-            }
 
-            catch (Exception ex)
+                catch (Exception ex)
+                {
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('The Account needs to be 0.00 in order to deactivate');", true);
+                    Bind_Data();
+                }
+            }
+            else
             {
-                //ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('The Account needs to be 0.00 in order to deactivate');", true);
                 Bind_Data();
             }
         }

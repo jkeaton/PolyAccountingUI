@@ -54,11 +54,11 @@
                                     </span>--%>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <label style="visibility: hidden">Search</label>
-                                <div class="input-group">
-                                    <asp:Button ID="Search" runat="server" Text="Search" OnClick="Search_Click" CssClass="btn btn-default" />
-                                </div>
+                        </div>
+                        <div class="col-sm-2 pull-right" style="margin-bottom:20px">
+                            <label style="visibility: hidden">Search</label>
+                            <div class="input-group">
+                                <asp:Button ID="Search" runat="server" Text="Search" OnClick="Search_Click" CssClass="btn btn-primary" />
                             </div>
                         </div>
                         <div class="row" style='height: 15px;'>
