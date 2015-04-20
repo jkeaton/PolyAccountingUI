@@ -14,7 +14,10 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null)
+            {
+                string session = Session["user"].ToString();
+            }
         }
         private bool IsValid(string emailaddress)
         {

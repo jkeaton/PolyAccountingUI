@@ -218,7 +218,8 @@ namespace AccountingJournal.Journal_and_Ledger
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
             Connection.RejectTranx(jourid,"student", "Spsu20!4");
-            DisplayUnpostTranx();
+            //DisplayUnpostTranx();
+            Response.Redirect(Request.RawUrl.ToString());
         }
 
         private void PostButton_Click(object sender, EventArgs e)
@@ -227,7 +228,8 @@ namespace AccountingJournal.Journal_and_Ledger
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
             Connection.PostTranx(jourid, "student", "Spsu20!4");
-            DisplayUnpostTranx();
+            //DisplayUnpostTranx();
+            Response.Redirect(Request.RawUrl.ToString());
         }
 
         private void Reference_Click(object sender, EventArgs e)

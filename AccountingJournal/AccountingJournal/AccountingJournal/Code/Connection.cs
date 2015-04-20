@@ -299,7 +299,7 @@ namespace AccountingJournal.Code
                                  + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[Journal] j1 where j1.TranxID = j.TranxID) as totAccEff"
                                  + "   FROM [TransactionDB].[dbo].[Journal] j"
                                  + "   WHERE PostDate IS NOT NULL"
-                                 + "  order by 1 desc, 7 desc");
+                                 + "  order by 8 desc, 7 desc");
             try
             {
                 conn.Open();
