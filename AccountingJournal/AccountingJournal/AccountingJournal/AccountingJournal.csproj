@@ -145,6 +145,7 @@
     <Content Include="Journal and Ledger\General Ledger.aspx" />
     <Content Include="Journal and Ledger\RejectedTransaction.aspx" />
     <Content Include="Journal and Ledger\UnpostTransaction.aspx" />
+    <Content Include="Journal and Ledger\UnpostTranx.aspx" />
     <Content Include="journalentry.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -299,6 +300,13 @@
     </Compile>
     <Compile Include="Journal and Ledger\UnpostTransaction.aspx.designer.cs">
       <DependentUpon>UnpostTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Journal and Ledger\UnpostTranx.aspx.cs">
+      <DependentUpon>UnpostTranx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Journal and Ledger\UnpostTranx.aspx.designer.cs">
+      <DependentUpon>UnpostTranx.aspx</DependentUpon>
     </Compile>
     <Compile Include="journalentry.aspx.cs">
       <DependentUpon>journalentry.aspx</DependentUpon>

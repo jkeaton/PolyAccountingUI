@@ -22,7 +22,7 @@ namespace AccountingJournal.Code
             conn = new SqlConnection(ConnectionString);
             cmd = new SqlCommand("", conn);
         }
-
+                
         public static int GetNumofUserByUsernameAndPassword(string usn, string pass)
         {
             string query = string.Format("SELECT count(*)"
@@ -828,6 +828,65 @@ namespace AccountingJournal.Code
                 conn.Close();
             }
             return list;
+        }
+
+        public static void PostTranx(int id, string username, string pass)
+        {
+            string query = string.Format("EXEC [PostEntry] {0}", id);
+            SqlConnection connection = new SqlConnection();
+
+            try
+            {
+                string Connstring = string.Format(@"Data Source=test-mesbrook.cloudapp.net,1433;
+                                                Initial Catalog=TransactionDB;
+                                                Persist Security Info=True;
+                                                User ID={0}
+                                                ;Password={1}", username, pass);
+                 connection = new SqlConnection(Connstring);
+                SqlCommand command = new SqlCommand("", connection);
+
+                connection.Open();
+                command.CommandText = query;
+                SqlDataReader reader = command.ExecuteReader();
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void RejectTranx(int id, string username, string pass)
+        {
+            string query = string.Format("EXEC [RejectEntry] {0}", id);
+            
+            SqlConnection connection = new SqlConnection();
+
+            try
+            {
+                string Connstring = string.Format(@"Data Source=test-mesbrook.cloudapp.net,1433;
+                                                Initial Catalog=TransactionDB;
+                                                Persist Security Info=True;
+                                                User ID={0}
+                                                ;Password={1}", username, pass);
+                connection = new SqlConnection(Connstring);
+                SqlCommand command = new SqlCommand("", connection);
+                connection.Open();
+                command.CommandText = query;
+                SqlDataReader reader = command.ExecuteReader();                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }﻿
