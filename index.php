@@ -1,12 +1,13 @@
 <?php
     session_start();
+    ob_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    $dbConnection = db_connect();
     $usernameErr = $passErr = "";
     $username = $pass = $hashed_pass = "";
     $utype = 100;
+    $uid = -1;
 
     // Deal with the form being submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -17,7 +18,7 @@
     }
 
     function validateFields(){
-        global $usernameErr, $passErr, $username, $pass, $hashed_pass, $utype;
+        global $usernameErr, $passErr, $username, $pass, $hashed_pass, $utype, $uid;
         $errCount = 0;
 
         // Get username 
@@ -48,7 +49,10 @@
                 // for now we are going directly to the journalentry.php screen
 		        //header('Location: journalentry.php');
                 $_SESSION['user'] = $username;
+                $_SESSION['db_uid'] = $username;
+                $_SESSION['db_pass'] = $pass;
                 $_SESSION['level'] = $utype;
+                setcookie('UserCookie', $uid, time()+3600, '/');
                 if ($_SESSION['level'] === 0){
 				    header('Location: /mark_landing/adminpanel.php');
                 }
@@ -66,9 +70,10 @@
     }
 
     function creds_match(){
-        global $dbConnection, $hashed_pass, $username, $utype;     
+        global $hashed_pass, $username, $pass, $utype, $uid;     
+        $dbConnection = db_connect($username, $pass);
         $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
-        $results = sqlsrv_query( $dbConnection, $sql);
+        $results = sqlsrv_query($dbConnection, $sql);
         // Only care about the first row (should be the only row)
         $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
         if ($hashed_pass !== $row['PWHash']){
@@ -76,6 +81,7 @@
         }
         else{
             $utype = $row['UType'];
+            $uid = $row['ID'];
             return true;
         }
     }

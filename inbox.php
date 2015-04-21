@@ -4,7 +4,12 @@
     include "dist/common.php";
 	bounce();
     // Attempt to connect to the SQL Server Database
-    $dbConnection = db_connect();
+    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
+        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+    }
+    else{
+        $dbConnection = db_connect('Noman', 'odysseus');
+    }
 
     $inbox = get_inbox($_SESSION['user']);
     $inbox_ct = count($inbox);

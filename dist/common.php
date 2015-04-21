@@ -13,7 +13,7 @@
     
     function submit_query($sql){
         global $dbConnection;
-        $result = sqlsrv_query( $dbConnection, $sql );
+        $result = sqlsrv_query($dbConnection, $sql );
         if (!$result){
             return false;
         }

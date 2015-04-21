@@ -3,7 +3,12 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    $dbConnection = db_connect();
+    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
+        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+    }
+    else{
+        $dbConnection = db_connect('Noman', 'odysseus');
+    }
     $emailErr = $fnameErr = $lnameErr = $passErr = "";
     $email = $fname = $lname = $pass = $hashed_pass = "";
 
