@@ -79,7 +79,7 @@ namespace AccountingJournal.Financial_Statement
                 sb.Append(string.Format(@"<tr>"));
                 sb.Append(string.Format(@"<td colspan=2>Net cash provided by operating activities</td>"));
                 sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", OperActivities.ToString("#,##0.00")));
+                sb.Append(string.Format(@"<td style='text-align:right; border-top:solid thin'>{0}</td>", OperActivities.ToString("#,##0.00")));
                 sb.Append(string.Format(@"</tr>"));
 
             }
@@ -137,13 +137,16 @@ namespace AccountingJournal.Financial_Statement
                 }
 
                 sb.Append(string.Format(@"<tr>"));
-                sb.Append(string.Format(@"<td colspan=2>Net cash provided by operating activities</td>"));
-                sb.Append(string.Format(@"<td></td>"));
-                sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", finanAcitivities.ToString("#,##0.00")));
+                sb.Append(string.Format(@"<td colspan=2>Net cash provided by financing activities</td>"));
+                sb.Append(string.Format(@"<td style='border-top:solid thin'></td>"));
+                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin'>{0}</td>", finanAcitivities.ToString("#,##0.00")));
                 sb.Append(string.Format(@"</tr>"));
             }
-
+            double cash_begin = Connection.BeginningCash();
+            cashbegin.Text = cash_begin.ToString("#,##0.00");
             cashflow.Text = sb.ToString();
+            netcash.Text = (finanAcitivities + InvestActivities + OperActivities).ToString("#,##0.00");
+            cashend.Text = (finanAcitivities + InvestActivities + OperActivities + cash_begin).ToString("#,##0.00");
         }
 
         public DateTime LastDayofMonth(DateTime dt)

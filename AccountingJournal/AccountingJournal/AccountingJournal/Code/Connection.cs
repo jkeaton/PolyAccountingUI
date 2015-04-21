@@ -22,7 +22,7 @@ namespace AccountingJournal.Code
             conn = new SqlConnection(ConnectionString);
             cmd = new SqlCommand("", conn);
         }
-                
+
         public static int GetNumofUserByUsernameAndPassword(string usn, string pass)
         {
             string query = string.Format("SELECT count(*)"
@@ -538,6 +538,37 @@ namespace AccountingJournal.Code
             return list;
         }
 
+        public static double BeginningCash()
+        {
+            double total = 0;
+            string query = string.Format("select isnull(sum(case when td.isdebit = a.isdebit then Amount else -Amount end),0) as total"
+                                        + " from [Transaction] t"
+                                        + " inner join TranxDetail td on t.tranxid = td.tranxid"
+                                        + " inner join Account a on a.accountid = td.accountid"
+                                        + " WHERE a.Accountid = 3 "
+                                        + " and PostDate is not null "
+                                        + " and PostDate < dateadd(year, DATEDIFF(year, 0, getdate()),0)");
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    total = (double)reader.GetDecimal(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return total;
+        }
+
         public static ArrayList DisplayRejectedTranx()
         {
             ArrayList list = new ArrayList();
@@ -583,7 +614,7 @@ namespace AccountingJournal.Code
 
         public static int numofTranx(int id)
         {
-            string query = string.Format("select count (*) from [Account] a Inner join [TranxDetail] td on a.accountid= td.accountid inner join [Transaction] t on t.tranxid = td.tranxid where a.AccNumber = {0}",id);
+            string query = string.Format("select count (*) from [Account] a Inner join [TranxDetail] td on a.accountid= td.accountid inner join [Transaction] t on t.tranxid = td.tranxid where a.AccNumber = {0}", id);
             try
             {
                 conn.Open();
@@ -659,27 +690,27 @@ namespace AccountingJournal.Code
             ArrayList list = new ArrayList();
             IndiJournal Journal;
             string query = "";
-            if (name != "")
-            {
-                query = string.Format("SELECT [Date] "
-                        + " ,[Name]"
-                        + " ,[Desc]"
-                        + " , AccNumber"
-                        + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
-                        + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
-                        + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
-                        + " , PostDate"
-                        + " , TranxID"
-                        + " , 1 as totAccEff"
-                        + " FROM [TransactionDB].[dbo].[Journal] j"
-                        + " WHERE PostDate IS NOT NULL"
-                        + " AND [name] like '%{2}%'"
-                        + " AND postdate between '{0}' "
-                        + " and '{1}'"
-                        + " Order by 1 desc, 7 desc", start, end, name);
-            }
-            else
-            {
+            //if (name != "")
+            //{
+            //    query = string.Format("SELECT [Date] "
+            //            + " ,[Name]"
+            //            + " ,[Desc]"
+            //            + " , AccNumber"
+            //            + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
+            //            + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+            //            + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
+            //            + " , PostDate"
+            //            + " , TranxID"
+            //            + " , 1 as totAccEff"
+            //            + " FROM [TransactionDB].[dbo].[Journal] j"
+            //            + " WHERE PostDate IS NOT NULL"
+            //            + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+            //            + " AND postdate between '{0}' "
+            //            + " and '{1}'"
+            //            + " Order by 1 desc, 7 desc", start, end, name);
+            //}
+            //else
+            //{
                 query = string.Format("SELECT [Date] "
                                     + " ,[Name]"
                                     + " ,[Desc]"
@@ -694,11 +725,11 @@ namespace AccountingJournal.Code
                                     + " where j1.TranxID = j.TranxID) as totAccEff"
                                     + " FROM [TransactionDB].[dbo].[Journal] j"
                                     + " WHERE PostDate IS NOT NULL"
-                                    + " AND [name] like '%{2}%'"
+                                    + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
                                     + " AND postdate between '{0}' "
                                     + " and '{1}'"
                                     + " Order by 1 desc, 7 desc", start, end, name);
-            }
+            //}
 
             try
             {
@@ -746,28 +777,28 @@ namespace AccountingJournal.Code
             ArrayList list = new ArrayList();
             IndiJournal Journal;
             string query = "";
-            if (name != "")
-            {
-                query = string.Format("SELECT [Date] "
-                        + " ,[Name]"
-                        + " ,[Desc]"
-                        + " , AccNumber"
-                        + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
-                        + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
-                        + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
-                        + " , PostDate"
-                        + " , TranxID"
-                        + " , 1 as totAccEff"
-                        + " FROM [TransactionDB].[dbo].[Journal] j"
-                        + " WHERE PostDate IS NOT NULL"
-                        + " AND Amount = {3}"
-                        + " AND [name] like '%{2}%'"
-                        + " AND postdate between '{0}' "
-                        + " and '{1}'"
-                        + " Order by 1 desc, 7 desc", start, end, name, price);
-            }
-            else
-            {
+            //if (name != "")
+            //{
+            //    query = string.Format("SELECT [Date] "
+            //            + " ,[Name]"
+            //            + " ,[Desc]"
+            //            + " , AccNumber"
+            //            + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
+            //            + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+            //            + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
+            //            + " , PostDate"
+            //            + " , TranxID"
+            //            + " , 1 as totAccEff"
+            //            + " FROM [TransactionDB].[dbo].[Journal] j"
+            //            + " WHERE PostDate IS NOT NULL"
+            //            + " AND Amount = {3}"
+            //            + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+            //            + " AND postdate between '{0}' "
+            //            + " and '{1}'"
+            //            + " Order by 1 desc, 7 desc", start, end, name, price);
+            //}
+            //else
+            //{
                 query = string.Format("SELECT [Date] "
                                     + " ,[Name]"
                                     + " ,[Desc]"
@@ -782,12 +813,12 @@ namespace AccountingJournal.Code
                                     + " where j1.TranxID = j.TranxID) as totAccEff"
                                     + " FROM [TransactionDB].[dbo].[Journal] j"
                                     + " WHERE PostDate IS NOT NULL"
-                                    + " AND Amount = {3}"
-                                    + " AND [name] like '%{2}%'"
+                                    + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where Amount = {3} and t.TranxID = j.TranxID)"
+                                    + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
                                     + " AND postdate between '{0}' "
                                     + " and '{1}'"
                                     + " Order by 1 desc, 7 desc", start, end, name, price);
-            }
+            //}
 
             try
             {
@@ -842,13 +873,13 @@ namespace AccountingJournal.Code
                                                 Persist Security Info=True;
                                                 User ID={0}
                                                 ;Password={1}", username, pass);
-                 connection = new SqlConnection(Connstring);
+                connection = new SqlConnection(Connstring);
                 SqlCommand command = new SqlCommand("", connection);
 
                 connection.Open();
                 command.CommandText = query;
                 SqlDataReader reader = command.ExecuteReader();
-                
+
             }
             catch (Exception e)
             {
@@ -863,7 +894,7 @@ namespace AccountingJournal.Code
         public static void RejectTranx(int id, string username, string pass)
         {
             string query = string.Format("EXEC [RejectEntry] {0}", id);
-            
+
             SqlConnection connection = new SqlConnection();
 
             try
@@ -877,7 +908,7 @@ namespace AccountingJournal.Code
                 SqlCommand command = new SqlCommand("", connection);
                 connection.Open();
                 command.CommandText = query;
-                SqlDataReader reader = command.ExecuteReader();                
+                SqlDataReader reader = command.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -889,4 +920,4 @@ namespace AccountingJournal.Code
             }
         }
     }
-}﻿
+}

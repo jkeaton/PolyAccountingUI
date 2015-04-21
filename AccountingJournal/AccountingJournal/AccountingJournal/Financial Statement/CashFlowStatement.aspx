@@ -18,8 +18,22 @@
                     <tr>
                         <td colspan="2">Net increase in cash</td>
                         <td></td>
-                        <td>
+                        <td class="text-right">
                             <asp:Label ID="netcash" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Cash at the beginning of the period</td>
+                        <td></td>
+                        <td class="text-right">
+                            <asp:Label ID="cashbegin" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Cash at the end of the period</td>
+                        <td></td>
+                        <td class="text-right" style="border-bottom:double; border-top:solid thin">
+                            <asp:Label ID="cashend" runat="server"></asp:Label>
                         </td>
                     </tr>
                 </table>

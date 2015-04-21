@@ -117,7 +117,7 @@ namespace AccountingJournal.Journal_and_Ledger
 
                             TableCell jourid = new TableCell();
                             jourid.Text = Journalheader[i].id.ToString();
-                            //jourid.Visible = false;
+                            jourid.Visible = false;
                             tempRow.Cells.Add(jourid);
                         }
                         else if (JournalLine[j].IsDebit == "Debit" && firstLine == false)
