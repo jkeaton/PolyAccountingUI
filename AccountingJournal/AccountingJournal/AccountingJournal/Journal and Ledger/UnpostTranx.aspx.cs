@@ -132,7 +132,7 @@ namespace AccountingJournal.Journal_and_Ledger
                             tempRow.Cells.Add(Accname);
                             TableCell Ref = new TableCell();
                             Ref.Attributes.Add("class", "text-right");
-                            LinkButton reference = new LinkButton();                            
+                            LinkButton reference = new LinkButton();
                             reference.Text = JournalLine[j].AccNum.ToString();
                             reference.Click += new EventHandler(Reference_Click);
                             Ref.Controls.Add(reference);
@@ -157,8 +157,8 @@ namespace AccountingJournal.Journal_and_Ledger
                             lbtn.Text = JournalLine[j].Account;
                             lbtn.Attributes.Add("ID", "name");
                             lbtn.Click += new EventHandler(LinkButton1_Click);
-                             HtmlGenericControl div1 = new HtmlGenericControl("div");
-                             div1.Controls.Add(lbtn);
+                            HtmlGenericControl div1 = new HtmlGenericControl("div");
+                            div1.Controls.Add(lbtn);
                             div1.Attributes.Add("style", " margin-left:20px");
                             Accname.Controls.Add(div1);
                             tempRow.Cells.Add(Accname);
@@ -192,7 +192,16 @@ namespace AccountingJournal.Journal_and_Ledger
                     {
                         tempRow = new TableRow();
                         HtmlGenericControl div1 = new HtmlGenericControl("div");
-                        div1.InnerText = "(" + JournalDes[j].Desc + ")";
+                        if (JournalDes[j].Desc == "")
+                        {
+                            div1.InnerText = " ";
+                            div1.Visible = false;
+                        }
+                        else
+                        {
+                            div1.InnerText = "(" + JournalDes[j].Desc + ")";
+                            div1.Visible = true;
+                        }
                         div1.Attributes.Add("style", " margin-left:40px");
                         TableCell Desc = new TableCell();
                         Desc.Controls.Add(div1);
@@ -217,7 +226,7 @@ namespace AccountingJournal.Journal_and_Ledger
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.RejectTranx(jourid,"student", "Spsu20!4");
+            Connection.RejectTranx(jourid, "student", "Spsu20!4");
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }
@@ -264,8 +273,8 @@ namespace AccountingJournal.Journal_and_Ledger
             {
                 row = accname.Parent.Parent.Parent as TableRow;
             }
-            if (row.Cells.Count ==4)
-            {                
+            if (row.Cells.Count == 4)
+            {
                 LinkButton REF = row.Cells[1].Controls[0] as LinkButton;
                 accnum = Int32.Parse(REF.Text);
             }

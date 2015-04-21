@@ -289,7 +289,7 @@ namespace AccountingJournal.Code
             IndiJournal Journal;
             string query = string.Format("SELECT [Date]"
                                  + " ,[Name]"
-                                 + " ,[Desc]"
+                                 + " ,isnull([Desc], '')"
                                  + " , AccNumber"
                                  + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                  + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
@@ -411,7 +411,7 @@ namespace AccountingJournal.Code
             IndiJournal Journal;
             string query = string.Format("SELECT [Date]"
                                  + " ,[Name]"
-                                 + " ,[Desc]"
+                                 + " ,isnull([Desc], '')"
                                  + " , AccNumber"
                                  + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                  + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
@@ -422,8 +422,7 @@ namespace AccountingJournal.Code
                                  + "   FROM [TransactionDB].[dbo].[GeneralJournal] j"
                                  + "   WHERE PostDate IS NULL"
                                  + "   AND NOT EXISTS"
-                                 + "   ("
-                                 + "   	SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
+                                 + "   (SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
                                  + "   ) order by 1 desc, 7 desc");
             try
             {
@@ -573,7 +572,19 @@ namespace AccountingJournal.Code
         {
             ArrayList list = new ArrayList();
             RejectedTranx Rejected;
-            string query = string.Format("SELECT * , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].RejectedTranx j1 where j1.TranxID = j.TranxID) as totAccEff from RejectedTranx j order by TranxID, IsDebit desc");
+            string query = string.Format("select "
+                                         +" Date,"
+                                         +" Name,"
+                                         +" isnull([Desc], ''),"
+                                         +" AccNumber,"
+                                         +" Debit, "
+                                         +" Credit, "
+                                         +" Isdebit,"
+                                         +" TranxID, "
+                                         +" RejectedUser,"
+                                         +" AccountID "
+                                         +" , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].RejectedTranx j1 where j1.TranxID = j.TranxID) as totAccEff "
+                                         +" from RejectedTranx j order by TranxID desc, IsDebit desc");
             try
             {
                 conn.Open();

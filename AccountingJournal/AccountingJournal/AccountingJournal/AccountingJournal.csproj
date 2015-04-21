@@ -133,7 +133,6 @@
     <Content Include="Financial Statement\BalanceSheet.aspx" />
     <Content Include="Financial Statement\CashFlowStatement.aspx" />
     <Content Include="Financial Statement\Chart of Account.aspx" />
-    <Content Include="Financial Statement\ManageAccount.aspx" />
     <Content Include="Financial Statement\IncomeStatement.aspx" />
     <Content Include="Financial Statement\OwnerEquityState.aspx" />
     <Content Include="Financial Statement\TrialBalance.aspx" />
@@ -147,6 +146,8 @@
     <Content Include="Journal and Ledger\UnpostTransaction.aspx" />
     <Content Include="Journal and Ledger\UnpostTranx.aspx" />
     <Content Include="journalentry.aspx" />
+    <Content Include="ManageAccount\ManageAccount.aspx" />
+    <Content Include="ManageAccount\NewAccount.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -229,13 +230,6 @@
     <Compile Include="Financial Statement\Chart of Account.aspx.designer.cs">
       <DependentUpon>Chart of Account.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Financial Statement\ManageAccount.aspx.cs">
-      <DependentUpon>ManageAccount.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Financial Statement\ManageAccount.aspx.designer.cs">
-      <DependentUpon>ManageAccount.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Financial Statement\IncomeStatement.aspx.cs">
       <DependentUpon>IncomeStatement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -314,6 +308,20 @@
     </Compile>
     <Compile Include="journalentry.aspx.designer.cs">
       <DependentUpon>journalentry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAccount\ManageAccount.aspx.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAccount\ManageAccount.aspx.designer.cs">
+      <DependentUpon>ManageAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAccount\NewAccount.aspx.cs">
+      <DependentUpon>NewAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAccount\NewAccount.aspx.designer.cs">
+      <DependentUpon>NewAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Mobile.Master.cs">

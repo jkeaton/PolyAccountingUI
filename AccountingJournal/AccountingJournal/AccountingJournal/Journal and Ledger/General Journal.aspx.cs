@@ -106,7 +106,15 @@ namespace AccountingJournal.Journal_and_Ledger
                 {
                     if (Journalheader[i].id == JournalDes[j].id)
                     {
-                        sb.Append(string.Format(@"<p style='text-decoration:none; margin-left:40px;'>({0})</p>", JournalDes[j].Desc));
+                        if (JournalDes[j].Desc == "")
+                        {
+                            sb.Append(string.Format(@"<p style='text-decoration:none; margin-left:40px;'>{0}</p>", JournalDes[j].Desc));
+
+                        }
+                        else
+                        {
+                            sb.Append(string.Format(@"<p style='text-decoration:none; margin-left:40px;'>({0})</p>", JournalDes[j].Desc));
+                        }
                     }
                 }
                 sb.Append(string.Format(@"</td>"));
