@@ -4,7 +4,12 @@
     include "../dist/common.php";
 	bounce();
 
-    $dbConnection = db_connect();
+    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
+        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+    }
+    else{
+        $dbConnection = db_connect('Noman', 'odysseus');
+    }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
