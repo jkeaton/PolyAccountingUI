@@ -146,12 +146,8 @@
 
     function valid_acct_title($index){
         global $filled, $input_err;
-        if ($filled[$index] === NULL || $filled[$index] == ""){
-            $input_err = "Must enter a description for the journal entry";
-            return 1;
-        }
         // Also here, ensure we're not checking the description
-        else if ($filled[$index] == "Select..." && $index != 13){
+        if ($filled[$index] == "Select..." && $index != 13){
             $input_err = "Must select an account name from the list";
             return 1;
         }
