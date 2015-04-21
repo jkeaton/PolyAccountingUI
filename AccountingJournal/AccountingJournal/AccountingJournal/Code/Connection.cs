@@ -724,7 +724,7 @@ namespace AccountingJournal.Code
             //{
                 query = string.Format("SELECT [Date] "
                                     + " ,[Name]"
-                                    + " ,[Desc]"
+                                    + " ,isnull([Desc], '')"
                                     + " , AccNumber"
                                     + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                     + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
@@ -812,7 +812,7 @@ namespace AccountingJournal.Code
             //{
                 query = string.Format("SELECT [Date] "
                                     + " ,[Name]"
-                                    + " ,[Desc]"
+                                    + " ,isnull([Desc],'')"
                                     + " , AccNumber"
                                     + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
                                     + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
