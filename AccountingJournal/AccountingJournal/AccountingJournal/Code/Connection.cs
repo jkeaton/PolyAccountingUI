@@ -861,6 +861,46 @@ namespace AccountingJournal.Code
             return list;
         }
 
+        public static Dictionary<string, string> GetUserInfo()
+        {
+            // Still working on this
+            Dictionary<string, string> user_info;
+            // Get the User ID from the cookie
+            if (HttpContext.Current != null){
+                var request = HttpContext.Current.Request;
+                var user_cookie = request.Cookies["UserCookie"];
+                user_info = new Dictionary<string, string>();
+
+                string query = string.Format("SELECT ID"
+                    + ", UserName"
+                    + ", FName"
+                    + ", Lname"
+                    + ", UType"
+                    + ", Email"
+                    + "FROM AppUser WHERE ID = ", int.Parse(user_cookie.Value));
+                decimal balance = 0;
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = query;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        balance = reader.GetDecimal(0);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return null;
+        }
+
         public static void PostTranx(int id, string username, string pass)
         {
             string query = string.Format("EXEC [PostEntry] {0}", id);
