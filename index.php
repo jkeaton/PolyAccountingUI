@@ -66,23 +66,43 @@
                     var_dump ($_SESSION['level']);
                 }
             }
+            else {
+                popup('creds_match returned false');
+            }
         } 
     }
 
     function creds_match(){
         global $hashed_pass, $username, $pass, $utype, $uid;     
-        $dbConnection = db_connect($username, $pass);
-        $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
-        $results = sqlsrv_query($dbConnection, $sql);
-        // Only care about the first row (should be the only row)
-        $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
-        if ($hashed_pass !== $row['PWHash']){
-            return false;
+        try{
+            if (isset($username) && isset($pass)){
+                $dbConnection = db_connect($username, $pass);
+                if (!$dbConnection){
+                    popup('$dbConnection was not created properly.');
+                }
+                else
+                $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
+                $results = sqlsrv_query($dbConnection, $sql);
+                // Only care about the first row (should be the only row)
+                $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
+                if ($hashed_pass !== $row['PWHash']){
+                    popup('hashed passwords do not match; '.$hashed_pass.' != '.$row['PWHash']);
+                    return false;
+                }
+                else{
+                    popup('Setting utype now');
+                    $utype = $row['UType'];
+                    $uid = $row['ID'];
+                    return true;
+                }
+            }
+            else {
+                popup('Either $username or $pass is not set');
+                return false;
+            }
         }
-        else{
-            $utype = $row['UType'];
-            $uid = $row['ID'];
-            return true;
+        catch (Exception $e) {
+            popup('Caught exception: '.$e->getMessage().'\n');
         }
     }
 ?>
