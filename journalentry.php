@@ -849,13 +849,14 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
                                 <li><a href="#">Transactions by Date Range</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">All Posted Transactions</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTransaction">All Pending Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">View All Posted Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTranx">View All Pending Transactions</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/RejectedTransaction.aspx">View All Rejected Transactions</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">Trial Balance</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">Income Statement</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
-                                <li><a href="#">Cash Flow Statement</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/CashFlowStatement">Cash Flow Statement</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -975,7 +976,7 @@
                 <div class="panel-footer text-center">
                     <p id="error_msg" class="error"></p>
                     <div class="form-group" role="group">
-                        <button type="submit" id="attempt_post" onClick="set_next_url('http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTransaction');" class="attempt_post btn btn-success" name="submit">
+                        <button type="submit" id="attempt_post" onClick="set_next_url('http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTranx');" class="attempt_post btn btn-success" name="submit">
                             Save & Exit
                         </button>
                         <button type="submit" id="attempt_post_2" onClick="set_next_url('http://test-mesbrook.cloudapp.net/journalentry.php');" class="attempt_post btn btn-success" name="submit">
