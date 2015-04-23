@@ -31,7 +31,7 @@
                             DataKeyNames="AccountID" CssClass="table" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
                                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' ForeColor="White" CssClass="text-center"></asp:Label>
                                     </EditItemTemplate>
@@ -62,7 +62,7 @@
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Normal Balance" SortExpression="NormalBalance" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
+                                <asp:TemplateField HeaderText="Normal Balance" SortExpression="NormalBalance" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
                                     <EditItemTemplate>
                                         <%--<asp:Label ID="Label1" runat="server" Text='<%# Eval("NormalBalance") %>'></asp:Label>--%>
                                         <asp:DropDownList ID="Label1" runat="server" DataValueField='<%# Eval("NormalBalance") %>' CssClass="form-control">
@@ -97,10 +97,6 @@
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
                                     </ItemTemplate>
-
-<HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-
-<ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False" HeaderText="Manage">
                                     <EditItemTemplate>
@@ -109,8 +105,7 @@
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Button ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" CssClass="btn btn-success"></asp:Button>
-                                    </ItemTemplate>
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                    </ItemTemplate>                                   
                                 </asp:TemplateField>
                             </Columns>
                             <EditRowStyle BackColor="#2461BF" />

@@ -920,7 +920,7 @@ namespace AccountingJournal.Code
 
             try
             {
-                string Connstring = string.Format(@"Data Source=test-mesbrook.cloudapp.net,1433;
+                string Connstring = string.Format(@"Data Source=localhost;
                                                 Initial Catalog=TransactionDB;
                                                 Persist Security Info=True;
                                                 User ID={0}
@@ -951,7 +951,7 @@ namespace AccountingJournal.Code
 
             try
             {
-                string Connstring = string.Format(@"Data Source=test-mesbrook.cloudapp.net,1433;
+                string Connstring = string.Format(@"Data Source=localhost;
                                                 Initial Catalog=TransactionDB;
                                                 Persist Security Info=True;
                                                 User ID={0}
