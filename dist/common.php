@@ -11,8 +11,8 @@
         echo "<p>".$input."</p><br/>";
     }
     
-    function submit_query($sql){
-        $result = sqlsrv_query($_SESSION['dbConnection'], $sql );
+    function submit_query($sql, $cxn){
+        $result = sqlsrv_query($cxn, $sql );
         if (!$result){
             return false;
         }
@@ -91,7 +91,7 @@
         return explode($delims[0], $formatted);
     }
 
-    function send_email(){
+    function send_email($cxn){
         global $recipients, $subject, $message;
         if (!isset($_POST['recipients'])){
             return -1;
@@ -111,7 +111,7 @@
                 if (strlen($recipient) > 0){
                     $formatted_datetime = $date->format("Y-m-d\TH:i:s");
                     $sql = "insert into Email (sender, recipient, [time], [subject], [message], deleted, seen) values ('".$_SESSION['user']."', '".$recipient."', CONVERT(datetime, '".$formatted_datetime."', 126), '".$subject."', '".$message."', 0, 0)";
-                    if (!submit_query($sql)){
+                    if (!submit_query($sql, $cxn)){
                         var_dump($sql);
                         die(php_print(print_r(sqlsrv_errors(), true)));
                     }

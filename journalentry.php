@@ -232,7 +232,7 @@
             }
         }
         $tmp_syntax .= "insert into Journal (AccountID,  [Date], [Desc], IsDebit, Amount) select AccountID,  [Date], [Desc], IsDebit, Amount from #tmp; ";
-        if (!submit_query($tmp_syntax)){
+        if (!submit_query($tmp_syntax, $dbConnection)){
             sqlsrv_rollback($dbConnection); 
             php_print(print_r( sqlsrv_errors(), true));
             $input_err = "Failed to submit a valid Journal Entry";

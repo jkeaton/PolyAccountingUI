@@ -12,7 +12,7 @@
             return logout();
         }
         if (isset($_POST['send'])){
-            send_email();
+            send_email($dbConnection);
             $_POST = array();
         }
     }
