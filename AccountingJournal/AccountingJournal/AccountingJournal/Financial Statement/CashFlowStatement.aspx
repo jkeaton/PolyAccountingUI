@@ -19,7 +19,7 @@
                         <td colspan="2">Net increase in cash</td>
                         <td></td>
                         <td class="text-right">
-                            <asp:Label ID="netcash" runat="server"></asp:Label>
+                           $ <asp:Label ID="netcash" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

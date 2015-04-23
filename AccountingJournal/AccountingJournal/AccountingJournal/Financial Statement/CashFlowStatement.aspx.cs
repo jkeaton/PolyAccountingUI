@@ -139,7 +139,7 @@ namespace AccountingJournal.Financial_Statement
                 sb.Append(string.Format(@"<tr>"));
                 sb.Append(string.Format(@"<td colspan=2>Net cash provided by financing activities</td>"));
                 sb.Append(string.Format(@"<td style='border-top:solid thin'></td>"));
-                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin'>$ {0}</td>", finanAcitivities.ToString("#,##0.00")));
+                sb.Append(string.Format(@"<td style='text-align:right; border-bottom:solid thin'>{0}</td>", finanAcitivities.ToString("#,##0.00")));
                 sb.Append(string.Format(@"</tr>"));
             }
             double cash_begin = Connection.BeginningCash();
