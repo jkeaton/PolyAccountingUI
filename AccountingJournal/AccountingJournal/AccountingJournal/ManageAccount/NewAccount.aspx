@@ -31,15 +31,15 @@
                             DataKeyNames="AccountID" CssClass="table" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px">
+                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="form-control text-center"></asp:TextBox>
+                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' ForeColor="White" CssClass="text-center"></asp:Label>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>'></asp:Label>
+                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="text-center"></asp:Label>
                                     </ItemTemplate>
 
-<ItemStyle Width="100px"></ItemStyle>
+                        <ItemStyle Width="100px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
                                     <EditItemTemplate>
@@ -51,7 +51,7 @@
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="right">
+                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right">
                                     <EditItemTemplate>
                                         <%--<asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Balance") %>' CssClass="form-control"></asp:TextBox> DataFormatString="{0:#,##0.00}"--%>
                                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
@@ -71,10 +71,10 @@
                                         </asp:DropDownList>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("NormalBalance") %>'></asp:Label>
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("NormalBalance") %>' CssClass="text-center"></asp:Label>
                                     </ItemTemplate>
 
-<ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
+                                <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Class" SortExpression="Class" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
                                     <EditItemTemplate>
@@ -85,9 +85,9 @@
                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("Class") %>'></asp:Label>
                                     </ItemTemplate>
 
-<HeaderStyle HorizontalAlign="Center"></HeaderStyle>
+                                <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
 
-<ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
+                                <ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Type" SortExpression="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
