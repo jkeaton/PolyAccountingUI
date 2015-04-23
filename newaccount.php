@@ -2,12 +2,8 @@
     session_start();
     include "dist/dbconnect.php";
     include "dist/common.php";
-    // Attempt to connect to the SQL Server Database
-    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
-        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
-    }
-    else{
-        $dbConnection = db_connect('Noman', 'odysseus');
+    if (!isset($_SESSION['dbConnection'])){
+        $_SESSION['dbConnection'] = db_connect('Noman', 'odysseus');
     }
     $emailErr = $fnameErr = $lnameErr = $passErr = "";
     $email = $fname = $lname = $pass = $hashed_pass = "";
@@ -88,12 +84,12 @@
     }
 
     function createUser(){
-        global $fname, $lname, $email, $hashed_pass, $dbConnection;
+        global $fname, $lname, $email, $hashed_pass;
         $similar_ct = 0;
         $userNameAttempt = (strtolower($fname)[0].strtolower($lname));
         $sql = "SELECT * FROM AppUser WHERE UserName LIKE '".$userNameAttempt."%'";
         // Ask the database how many usernames begin the same as this one
-        $results = sqlsrv_query( $dbConnection, $sql );
+        $results = sqlsrv_query($_SESSION['dbConnection'], $sql );
         // Modify the attempted username to account for similar ones
         while ($row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC)){
             ++$similar_ct;
@@ -102,7 +98,7 @@
             $userNameAttempt = ($userNameAttempt.strval($similar_ct));
         }
         $sql = "INSERT INTO AppUser (UserName, FName, LName, UType, Email, PWHash) VALUES ('".$userNameAttempt."', '".$fname."', '".$lname."', 0, '".$email."', '".$hashed_pass."')";
-        $results = sqlsrv_query( $dbConnection, $sql );
+        $results = sqlsrv_query($_SESSION['dbConnection'], $sql );
         return true;
     } 
 ?>

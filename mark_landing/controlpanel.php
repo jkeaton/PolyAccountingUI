@@ -4,12 +4,8 @@
     include "../dist/common.php";
 	bounce();
 
-    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
-        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
-    }
-    else{
-        $dbConnection = db_connect('Noman', 'odysseus');
-    }
+    // Attempt to connect to the database using current user's credentials
+    $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
@@ -24,7 +20,7 @@
     send_to_main();
 
     $welcome_msg = "Welcome ".$_SESSION['user'];
-    $inbox = get_inbox($_SESSION['user']);
+    $inbox = get_inbox($_SESSION['user'], $dbConnection);
     $inbox_ct = count($inbox);
     $recipients = array();
     $subject = $message = "";

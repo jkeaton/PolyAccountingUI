@@ -12,8 +12,7 @@
     }
     
     function submit_query($sql){
-        global $dbConnection;
-        $result = sqlsrv_query($dbConnection, $sql );
+        $result = sqlsrv_query($_SESSION['dbConnection'], $sql );
         if (!$result){
             return false;
         }
@@ -59,11 +58,10 @@
         return str_replace("'", "''", $input);
     }
 
-    function get_inbox($input){
-        global $dbConnection;
+    function get_inbox($input, $conn){
         $rows = array();
         $sql = ("SELECT * FROM Email WHERE recipient='".$input."' AND deleted=0;");
-        $results = sqlsrv_query( $dbConnection, $sql );
+        $results = sqlsrv_query($conn, $sql);
         if ($results === false){
             die (php_print( print_r( sqlsrv_errors(), true)));
         }
@@ -94,7 +92,7 @@
     }
 
     function send_email(){
-        global $recipients, $subject, $message, $dbConnection;
+        global $recipients, $subject, $message;
         if (!isset($_POST['recipients'])){
             return -1;
         }
