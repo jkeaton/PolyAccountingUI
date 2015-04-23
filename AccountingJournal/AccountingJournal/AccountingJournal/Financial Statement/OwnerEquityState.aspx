@@ -30,7 +30,7 @@
                         <td></td>
                         <td></td>
                         <td class="text-right" style="border-bottom: double">
-                            <asp:Label ID="Endtot" runat="server"></asp:Label>
+                           <asp:Label ID="Endtot" runat="server"></asp:Label>
                         </td>
                     </tr>
                 </table>

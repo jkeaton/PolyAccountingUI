@@ -10,6 +10,7 @@ namespace AccountingJournal.Financial_Statement.Statement_Model
         public string type { get; set; }
         public string Name { get; set; }
         public decimal Total { get; set; }
+        public string isdebit { get; set; }
         public int Rank { get; set; }
     }
 }

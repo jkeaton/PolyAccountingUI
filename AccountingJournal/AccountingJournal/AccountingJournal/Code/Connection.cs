@@ -391,6 +391,7 @@ namespace AccountingJournal.Code
                     bs.Name = reader.GetString(1);
                     bs.Total = reader.GetDecimal(2);
                     bs.Rank = Int32.Parse(reader.GetValue(3).ToString());
+                    bs.isdebit = reader.GetString(4);
                     list.Add(bs);
                 }
             }

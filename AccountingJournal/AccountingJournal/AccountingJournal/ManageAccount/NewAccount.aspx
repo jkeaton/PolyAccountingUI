@@ -15,6 +15,7 @@
                             Create New Account
                         </div>
                         <div class="panel-body">
+
                         </div>
                     </div>
                 </div>
@@ -50,13 +51,13 @@
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="right">
                                     <EditItemTemplate>
-                                        <%--<asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Balance") %>' CssClass="form-control"></asp:TextBox>--%>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance") %>'></asp:Label>
+                                        <%--<asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Balance") %>' CssClass="form-control"></asp:TextBox> DataFormatString="{0:#,##0.00}"--%>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance") %>'></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
                                     </ItemTemplate>
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>

@@ -29,7 +29,8 @@ namespace AccountingJournal.Financial_Statement
             {
                 if (b.type == "Asset")
                 {
-                    if(b.Rank == 1){
+                    if (b.Rank == 1)
+                    {
                         AssetSb.Append(string.Format(@"<tr>"));
                         AssetSb.Append(string.Format(@"<td>{0}</td>", b.Name));
                         AssetSb.Append(string.Format(@"<td style='text-align:right'>$ {0}</td>", b.Total.ToString("#,##0.00")));
@@ -42,12 +43,20 @@ namespace AccountingJournal.Financial_Statement
                         AssetSb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", b.Total.ToString("#,##0.00")));
                         AssetSb.Append(string.Format(@"</tr>"));
                     }
-                    totalAsset+=(float)b.Total;
+                    if (b.isdebit == "Yes")
+                    {
+                        totalAsset += (float)b.Total;
+                    }
+                    else
+                    {
+                        totalAsset -= (float)b.Total;
+                    }
                 }
 
                 else if (b.type == "Liability")
                 {
-                    if(b.Rank == 1){
+                    if (b.Rank == 1)
+                    {
                         LiaSb.Append(string.Format(@"<tr>"));
                         LiaSb.Append(string.Format(@"<td>Liabilities</td>"));
                         LiaSb.Append(string.Format(@"<td></td>"));
@@ -70,22 +79,22 @@ namespace AccountingJournal.Financial_Statement
                 else
                 {
 
-                        LiaSb.Append(string.Format(@"<tr>"));
-                        LiaSb.Append(string.Format(@"<td>Owner's Equity</td>"));
-                        LiaSb.Append(string.Format(@"<td></td>"));
-                        LiaSb.Append(string.Format(@"</tr>"));
+                    LiaSb.Append(string.Format(@"<tr>"));
+                    LiaSb.Append(string.Format(@"<td>Owner's Equity</td>"));
+                    LiaSb.Append(string.Format(@"<td></td>"));
+                    LiaSb.Append(string.Format(@"</tr>"));
 
-                        LiaSb.Append(string.Format(@"<tr>"));
-                        LiaSb.Append(string.Format(@"<td><div style='margin-left:20px'>{0}</div></td>", b.Name));
-                        LiaSb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", b.Total.ToString("#,##0.00")));
-                        LiaSb.Append(string.Format(@"</tr>"));
-                    
+                    LiaSb.Append(string.Format(@"<tr>"));
+                    LiaSb.Append(string.Format(@"<td><div style='margin-left:20px'>{0}</div></td>", b.Name));
+                    LiaSb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", b.Total.ToString("#,##0.00")));
+                    LiaSb.Append(string.Format(@"</tr>"));
+
                     totalLia += (float)b.Total;
                 }
             }
             AssetList.Text = AssetSb.ToString();
             LiaOWList.Text = LiaSb.ToString();
-            TotalAssets.Text = "$ "+ totalAsset.ToString("#,##0.00");
+            TotalAssets.Text = "$ " + totalAsset.ToString("#,##0.00");
             TotalLiaOE.Text = "$ " + totalLia.ToString("#,##0.00");
         }
     }

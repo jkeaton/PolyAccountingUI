@@ -50,7 +50,7 @@ namespace AccountingJournal.Financial_Statement
                     sb.Append(string.Format(@"<td></td>"));
                     sb.Append(string.Format(@"<td></td>"));
                     sb.Append(string.Format(@"<td class='text-right'>"));
-                    sb.Append(string.Format(@"{0}",(e.Investment + e.Net + e.StartAmount).ToString("#,##0.00")));
+                    sb.Append(string.Format(@"$ {0}",(e.Investment + e.Net + e.StartAmount).ToString("#,##0.00")));
                     sb.Append(string.Format(@"</td>"));
                     sb.Append(string.Format(@"</tr>"));
                     sb.Append(string.Format(@"<tr>"));
@@ -81,7 +81,7 @@ namespace AccountingJournal.Financial_Statement
                     sb.Append(string.Format(@"<td></td>"));
                     sb.Append(string.Format(@"<td></td>"));
                     sb.Append(string.Format(@"<td class='text-right'>"));
-                    sb.Append(string.Format(@"{0}", (e.Investment + e.StartAmount).ToString("#,##0.00")));
+                    sb.Append(string.Format(@"$ {0}", (e.Investment + e.StartAmount).ToString("#,##0.00")));
                     sb.Append(string.Format(@"</td>"));
                     sb.Append(string.Format(@"</tr>"));
                     sb.Append(string.Format(@"<tr>"));
@@ -106,7 +106,7 @@ namespace AccountingJournal.Financial_Statement
                     sb.Append(string.Format(@"</tr>"));
                 }
                 OEDetail.Text = sb.ToString();
-                Endtot.Text = (e.Investment + e.Net + e.StartAmount - e.Drawing).ToString("#,##0.00");
+                Endtot.Text = "$ "+(e.Investment + e.Net + e.StartAmount - e.Drawing).ToString("#,##0.00");
                 Enddate = e.EndPeriod;
                 EndDat.Text = e.EndPeriod.ToString("MMMM dd, yyyy");
                 if ((e.Investment + e.Net + e.StartAmount - e.Drawing) < 0)

@@ -61,7 +61,7 @@ namespace AccountingJournal.Financial_Statement
                         sb.Append(string.Format(@"<td stype='width:30px'></td>"));
                         sb.Append(string.Format(@"<td>Cash receipts from revenues</td>"));
                         sb.Append(string.Format(@"<td></td>"));
-                        sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", operating[i].Amount.ToString("#,##0.00")));
+                        sb.Append(string.Format(@"<td style='text-align:right'>$ {0}</td>", operating[i].Amount.ToString("#,##0.00")));
                         sb.Append(string.Format(@"</tr>"));
                     }
                     else
@@ -120,7 +120,7 @@ namespace AccountingJournal.Financial_Statement
                         sb.Append(string.Format(@"<tr>"));
                         sb.Append(string.Format(@"<td stype='width:30px'></td>"));
                         sb.Append(string.Format(@"<td>Investments by owner</td>"));
-                        sb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", financing[i].Amount.ToString("#,##0.00")));
+                        sb.Append(string.Format(@"<td style='text-align:right'>$ {0}</td>", financing[i].Amount.ToString("#,##0.00")));
                         sb.Append(string.Format(@"<td></td>"));
                         sb.Append(string.Format(@"</tr>"));
                     }
@@ -146,7 +146,7 @@ namespace AccountingJournal.Financial_Statement
             cashbegin.Text = cash_begin.ToString("#,##0.00");
             cashflow.Text = sb.ToString();
             netcash.Text = (finanAcitivities + InvestActivities + OperActivities).ToString("#,##0.00");
-            cashend.Text = (finanAcitivities + InvestActivities + OperActivities + cash_begin).ToString("#,##0.00");
+            cashend.Text = "$ " +(finanAcitivities + InvestActivities + OperActivities + cash_begin).ToString("#,##0.00");
         }
 
         public DateTime LastDayofMonth(DateTime dt)
