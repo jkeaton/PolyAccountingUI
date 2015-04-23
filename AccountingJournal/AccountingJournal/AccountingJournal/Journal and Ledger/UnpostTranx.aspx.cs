@@ -226,7 +226,7 @@ namespace AccountingJournal.Journal_and_Ledger
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.RejectTranx(jourid, "student", "Spsu20!4");
+            Connection.RejectTranx(jourid, "Noman", "odysseus");
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }
@@ -236,7 +236,7 @@ namespace AccountingJournal.Journal_and_Ledger
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.PostTranx(jourid, "student", "Spsu20!4");
+            Connection.PostTranx(jourid, "Noman", "odysseus");
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }
