@@ -13,6 +13,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         // Handle insert event attempt
         if (isset($_POST['submit'])) {
+            //header('Location: http://test-mesbrook.cloudapp.net/mark_landing/startScreen.html');
             validateFields();
         }
     }
@@ -52,7 +53,7 @@
                 $_SESSION['db_uid'] = $username;
                 $_SESSION['db_pass'] = $pass;
                 $_SESSION['level'] = $utype;
-                setcookie('UserCookie', $uid, time()+3600, '/');
+                //setcookie('UserCookie', $uid, time()+3600, '/');
                 if ($_SESSION['level'] === 0){
 				    header('Location: /mark_landing/adminpanel.php');
                 }
@@ -66,9 +67,6 @@
                     var_dump ($_SESSION['level']);
                 }
             }
-            else {
-                popup('creds_match returned false');
-            }
         } 
     }
 
@@ -76,15 +74,23 @@
         global $hashed_pass, $username, $pass, $utype, $uid;     
         try{
             if (isset($username) && isset($pass)){
+                $t1 = microtime(true);
                 $dbConnection = db_connect($username, $pass);
-                if (!$dbConnection){
-                    popup('$dbConnection was not created properly.');
+                if (!isset($dbConnection)){
+                    $t2 = microtime(true);
+                    $dbConnection = db_connect('Noman', 'odysseus');
+                    if (!isset($dbConnection)){
+                        $t3 = microtime(true);
+                        echo ('<script>alert("t2 - t1 = '.$t2-$t1.'; t3 - t2 = '.$t3-$t2.'")</script>');
+                        return false;
+                    }
                 }
                 else
                 $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
                 $results = sqlsrv_query($dbConnection, $sql);
                 // Only care about the first row (should be the only row)
-                $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
+                $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC)
+                    or die('Index page unable to get results from database');
                 if ($hashed_pass !== $row['PWHash']){
                     popup('hashed passwords do not match; '.$hashed_pass.' != '.$row['PWHash']);
                     return false;

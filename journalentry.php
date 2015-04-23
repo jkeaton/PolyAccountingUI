@@ -3,16 +3,12 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
 	bounce();
-    // Attempt to connect to the SQL Server Database
-    if (isset($_SESSION['db_uid']) && isset($_SESSION['db_pass'])){
-        $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
-    }
-    else{
-        $dbConnection = db_connect('Noman', 'odysseus');
-    }
-    $acct_names = get_acct_names();
 
-    $inbox = get_inbox($_SESSION['user']);
+    // Attempt to connect to the database using current user's credentials
+    $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+
+    $acct_names = get_acct_names();
+    $inbox = get_inbox($_SESSION['user'], $dbConnection);
     $inbox_ct = count($inbox);
     
     $input_err = "";
@@ -33,7 +29,7 @@
         global $dbConnection;
         $sql = "SELECT * FROM Account where IsActive = 1 "
                 . "order by AccTypeID, SortOrder, AccNumber";
-        $result = sqlsrv_query( $dbConnection, $sql);
+        $result = sqlsrv_query($dbConnection, $sql);
         $output = array();
         while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ){
             array_push($output, $row['Name']); 
@@ -198,7 +194,7 @@
     }
 
     function insert_entry($row_ct){
-        global $dbConnection, $filled, $input_err;
+        global $filled, $input_err, $dbConnection;
         // Start a transaction so we can rollback if something fails
         sqlsrv_begin_transaction($dbConnection);
         // -- At this point we have all the fields necessary for the insertion
