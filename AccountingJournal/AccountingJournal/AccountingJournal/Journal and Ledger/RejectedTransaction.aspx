@@ -8,7 +8,7 @@
             <div class="panel-heading text-center">
                 Rejected Transaction
             </div>
-            <div class="panel-body" style="background-color: #e3edf5; height: 500px; overflow: auto;">
+            <div class="panel-body" style="height: 500px; overflow: auto;">
                 <table class="table borderless" id="Jourtab">
                     <tr style="font-weight: bolder; border-bottom: solid; border-color: black; background-color: white">
                         <td class="text-center">Date</td>
