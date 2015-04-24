@@ -65,7 +65,6 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
-                                <li><a href="#">Transactions by Date Range</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">View All Posted Transactions</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTranx">View All Pending Transactions</a></li>
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/RejectedTransaction.aspx">View All Rejected Transactions</a></li>
@@ -80,8 +79,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Closing Entry</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -120,7 +119,7 @@
                                         <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">View Chart of Accounts</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">View Transactions by Date Range</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">View Statement of Owner's Equity</a>
                                     </div>  
                                 </div>
                                 <div class="row">
@@ -141,7 +140,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">View Income Statement</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/RejectedTransaction">View All Rejected Transactions</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
                                         <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">View Balance Sheet</a>
@@ -149,7 +148,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">View Statement of Owner's Equity</a>
+                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">View Income Statement</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
                                     </div>  
@@ -166,12 +165,12 @@
                                         <a href="../journalentry.php">Record a Journal Entry</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Record an Adjusting Journal Entry</a>
+                                        <a href="../closing_or_adjusting_journal_entry.php">Record an Adjusting Journal Entry</a>
                                     </div>  
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Record a Closing Journal Entry</a>
+                                        <a href="../closing_or_adjusting_journal_entry.php">Record a Closing Journal Entry</a>
                                     </div>  
                                 </div>
                             </div>

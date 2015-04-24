@@ -15,7 +15,6 @@
     $filled = array();
     $either_dr_or_cr = 0;
     $welcome_msg = "Welcome ".$_SESSION['user'];
-    $today = date('m/d/Y');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['submit'])) {
@@ -910,7 +909,7 @@
                             <input type="text" value="" id="next_url" name="next_url" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                <input type="text" name="i[0]" class="stored_val form-control" value="<?php echo $today;?>" readonly>
+                                    <input type="text" name="i[0]" class="stored_val datepicker form-control" placeholder="Date">
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
