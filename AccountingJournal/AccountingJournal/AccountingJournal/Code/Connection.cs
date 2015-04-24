@@ -50,14 +50,14 @@ namespace AccountingJournal.Code
             return count;
         }
 
-        public static ArrayList GetUserByUsernameAndPassword(string usn, string pass)
+        public static User GetUserByID(int ID)
         {
-            ArrayList list = new ArrayList();
+           // ArrayList list = new ArrayList();
             User user = new User();
-            string query = string.Format("SELECT [User].ID, [User].FName, [User].LName, [User].UserName, [User].PWHash, isnull([User].Email,''), UserType.Name "
-                                        + " FROM         [User] INNER JOIN UserType ON [User].UType = UserType.TypeID "
-                                        + " WHERE		[User].UserName = '{0}' "
-                                        + " AND			[User].PWHash = '{1}'", usn, pass);
+            string query = string.Format("select u.ID, UserName, FName, LName, isnull(Email,''), Type, IsLoginDisabled  from [user] u "
+                            +" inner join UserTypeList ul on ul.f_UserID = u.ID "
+                            +" inner join UserType ut on ut.TypeID = ul.f_TypeID "
+                            +" where u.ID = {0}", ID);
             try
             {
                 conn.Open();
@@ -66,14 +66,14 @@ namespace AccountingJournal.Code
                 while (reader.Read())
                 {
                     user.ID = reader.GetInt32(0);
-                    user.FirstName = reader.GetString(1);
-                    user.LastName = reader.GetString(2);
-                    user.Username = reader.GetString(3);
-                    user.Password = reader.GetString(4);
-                    user.Email = reader.GetString(5);
-                    user.UserType = reader.GetString(6);
+                    user.Username = reader.GetString(1);
+                    user.FirstName = reader.GetString(2);
+                    user.LastName = reader.GetString(3);
+                    user.Email = reader.GetString(4);
+                    user.UserType = reader.GetString(5);
+                    user.isDisabled = reader.GetInt32(6);
 
-                    list.Add(user);
+                    //list.Add(user);
                 }
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace AccountingJournal.Code
             {
                 conn.Close();
             }
-            return list;
+            return user;
         }
 
         public static ArrayList DisplayIncomeStatement()

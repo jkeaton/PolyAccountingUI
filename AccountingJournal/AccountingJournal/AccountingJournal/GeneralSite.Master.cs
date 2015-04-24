@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingJournal.Code;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,9 +15,51 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] != null)
+            if (Session["userid"] == null)
             {
-                string session = Session["user"].ToString();
+                HttpCookie cookie = Request.Cookies.Get("uid");
+
+                if (cookie != null)
+                {
+                    int id = Int32.Parse(cookie.Value);
+                    User user = Connection.GetUserByID(id);
+                    Session["userid"] = user.ID;
+                    Session["username"] = user.Username;
+                    Session["usertype"] = user.UserType;
+                    Session["isdisable"] = user.isDisabled;
+                }
+                else
+                {
+                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                }
+                if (Int32.Parse(Session["isdisable"].ToString()) == 1)
+                {
+                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                }
+                welcome_msg.Text = "Welcome " + Session["username"].ToString();
+            }
+            else
+            {
+                if (Session["userid"] != null)
+                {
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                }
+                else
+                {
+
+                        int id = Int32.Parse(Session["userid"].ToString());
+                        User user = Connection.GetUserByID(id);
+                        Session["userid"] = user.ID;
+                        Session["username"] = user.Username;
+                        Session["usertype"] = user.UserType;
+                        Session["isdisable"] = user.isDisabled;
+
+                    if (Int32.Parse(Session["isdisable"].ToString()) == 1)
+                    {
+                        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                    }
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                }
             }
         }
         private bool IsValid(string emailaddress)

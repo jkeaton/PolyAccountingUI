@@ -77,6 +77,11 @@
                                 name=\"logout\">Log Out</button></form></li>";
                             }
                         ?>-->
+                        <li class="navbar-left">
+                                <a>
+                                    <asp:Label ID="welcome_msg" runat="server"></asp:Label>
+                                </a>
+                        </li>
                         <li class="navbar-nav">
                             <a href="http://test-mesbrook.cloudapp.net/inbox.php">Inbox
                                 <span class="badge"></span>
