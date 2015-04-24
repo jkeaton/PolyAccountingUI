@@ -911,7 +911,7 @@
                             <input type="text" value="" id="next_url" name="next_url" style="visibility: hidden;"></input>
                             <tr id="debit_1">
                                 <td class="t_date">
-                                    <input type="text" name="i[0]" class="stored_val datepicker form-control" placeholder="Date">
+                                <input type="text" name="i[0]" class="stored_val form-control" value="<?php echo $today;?>" readonly>
                                 </td>
                                 <td class="t_acct_title">
                                     <div class="form-group">
