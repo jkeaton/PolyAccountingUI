@@ -79,8 +79,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Adjusting Entry</a></li>
+                                <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Closing Entry</a></li>
                             </ul>
                         </li>
                     </ul>
