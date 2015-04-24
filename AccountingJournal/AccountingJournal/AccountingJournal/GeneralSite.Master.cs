@@ -17,11 +17,11 @@ namespace AccountingJournal
         {
             if (Session["userid"] == null)
             {
-                HttpCookie cookie = Request.Cookies.Get("uid");
+                HttpCookie cookie = Request.Cookies["UserInfo"];
 
                 if (cookie != null)
                 {
-                    int id = Int32.Parse(cookie.Value);
+                    int id = Int32.Parse(cookie["uid"]);
                     User user = Connection.GetUserByID(id);
                     Session["userid"] = user.ID;
                     Session["username"] = user.Username;
