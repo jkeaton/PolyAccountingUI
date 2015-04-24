@@ -165,12 +165,12 @@
                                         <a href="../journalentry.php">Record a Journal Entry</a>
                                     </div>  
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Record an Adjusting Journal Entry</a>
+                                        <a href="../closing_or_adjusting_journal_entry.php">Record an Adjusting Journal Entry</a>
                                     </div>  
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <a href="">Record a Closing Journal Entry</a>
+                                        <a href="../closing_or_adjusting_journal_entry.php">Record a Closing Journal Entry</a>
                                     </div>  
                                 </div>
                             </div>

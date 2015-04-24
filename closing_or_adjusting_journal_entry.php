@@ -15,7 +15,6 @@
     $filled = array();
     $either_dr_or_cr = 0;
     $welcome_msg = "Welcome ".$_SESSION['user'];
-    $today = date('m/d/Y');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['submit'])) {
