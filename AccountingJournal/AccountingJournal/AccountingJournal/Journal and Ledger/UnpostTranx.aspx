@@ -10,7 +10,7 @@
            
             </div>
             <div class="panel-body">
-<div id="filter" runat="server">
+<%--<div id="filter" runat="server">
                   
                     <div class="container">
                         <div class="row">
@@ -54,7 +54,7 @@
                         <div class="row" style='height: 15px;'>
                         </div>
                     </div>
-                </div>
+                </div>--%>
                 <asp:Table class="table borderless" ID="Jourtab" runat="server">
                     <asp:TableHeaderRow ID="Table1HeaderRow"
                         BackColor="LightBlue"

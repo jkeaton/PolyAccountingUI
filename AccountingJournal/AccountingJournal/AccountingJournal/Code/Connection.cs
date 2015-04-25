@@ -18,7 +18,7 @@ namespace AccountingJournal.Code
         private static int count;
         static Connection()
         {
-            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDB"].ToString();
+            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDBConnectionString"].ToString();
             conn = new SqlConnection(ConnectionString);
             cmd = new SqlCommand("", conn);
         }
