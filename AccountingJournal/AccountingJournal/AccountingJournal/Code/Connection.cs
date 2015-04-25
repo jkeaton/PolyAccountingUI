@@ -18,7 +18,7 @@ namespace AccountingJournal.Code
         private static int count;
         static Connection()
         {
-            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDBConnectionString"].ToString();
+            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDB"].ToString();
             conn = new SqlConnection(ConnectionString);
             cmd = new SqlCommand("", conn);
         }
@@ -406,6 +406,136 @@ namespace AccountingJournal.Code
             return list;
         }
 
+        public static ArrayList SearchUnpostEntry(DateTime start, DateTime end, string name)
+        {
+            ArrayList list = new ArrayList();
+            IndiJournal Journal;
+            string query = string.Format("SELECT [Date],[Name],isnull([Desc], ''), AccNumber, CASE WHEN IsDebit = 1 then Amount end as Debit"
+                                 + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+                                 + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , PostDate"
+                                 + " , TranxID"
+                                 + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[GeneralJournal] j1 where j1.TranxID = j.TranxID) as totAccEff"
+                                 + "   FROM [TransactionDB].[dbo].[GeneralJournal] j"
+                                 + "   WHERE PostDate IS NULL"
+                                 + "   AND NOT EXISTS"
+                                 + "   (SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
+                                 + "   )"                                
+                                 + " AND EXISTS( select 1 from [TransactionDB].[dbo].[GeneralJournal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+                                 + " AND date between '{0}' "
+                                 + " and '{1}'"
+                                 + " Order by 9 desc, 7 desc", start, end, name);
+            
+
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Journal = new IndiJournal();
+                    Journal.date = reader.GetDateTime(0);
+                    Journal.Account = reader.GetString(1);
+                    Journal.Desc = reader.GetString(2);
+                    Journal.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Journal.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Journal.Credit = reader.GetDecimal(5);
+                    }
+                    Journal.IsDebit = reader.GetString(6);
+                    if (!reader.IsDBNull(7))
+                    {
+                        Journal.postdate = reader.GetDateTime(7);
+                    }
+                    Journal.TranxID = reader.GetInt32(8);
+                    Journal.TotalAccEff = reader.GetInt32(9);
+                    list.Add(Journal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList SearchUnpostEntryryWithPrice(DateTime start, DateTime end, string name, double price)
+        {
+            ArrayList list = new ArrayList();
+            IndiJournal Journal;
+            string query = "";
+            query = string.Format("SELECT [Date]"
+                                 + " ,[Name]"
+                                 + " ,isnull([Desc], '')"
+                                 + " , AccNumber"
+                                 + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
+                                 + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
+                                 + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
+                                 + " , PostDate"
+                                 + " , TranxID"
+                                 + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].[GeneralJournal] j1 where j1.TranxID = j.TranxID) as totAccEff"
+                                 + "   FROM [TransactionDB].[dbo].[GeneralJournal] j"
+                                 + "   WHERE PostDate IS NULL"
+                                 + "   AND NOT EXISTS"
+                                 + "   (SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
+                                 + "   )"
+                                + " AND EXISTS( select 1 from [TransactionDB].[dbo].[GeneralJournal] t where Amount = {3} and t.TranxID = j.TranxID)"
+                                + " AND EXISTS( select 1 from [TransactionDB].[dbo].[GeneralJournal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+                                + " AND date between '{0}' "
+                                + " and '{1}'"
+                                + " Order by 1 desc, 7 desc", start, end, name, price);
+            //}
+
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Journal = new IndiJournal();
+                    Journal.date = reader.GetDateTime(0);
+                    Journal.Account = reader.GetString(1);
+                    Journal.Desc = reader.GetString(2);
+                    Journal.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Journal.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Journal.Credit = reader.GetDecimal(5);
+                    }
+                    Journal.IsDebit = reader.GetString(6);
+                    if (!reader.IsDBNull(7))
+                    {
+                        Journal.postdate = reader.GetDateTime(7);
+                    }
+                    Journal.TranxID = reader.GetInt32(8);
+                    Journal.TotalAccEff = reader.GetInt32(9);
+                    list.Add(Journal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
         public static ArrayList DisplayUnpostTranx()
         {
             ArrayList list = new ArrayList();
@@ -624,6 +754,134 @@ namespace AccountingJournal.Code
             return list;
         }
 
+        public static ArrayList SearchRejectedEntry(DateTime start, DateTime end, string name)
+        {
+            ArrayList list = new ArrayList();
+            RejectedTranx Rejected;
+            string query = "";
+
+            query = string.Format("select "
+                                         +" Date,"
+                                         +" Name,"
+                                         +" isnull([Desc], ''),"
+                                         +" AccNumber,"
+                                         +" Debit, "
+                                         +" Credit, "
+                                         +" Isdebit,"
+                                         +" TranxID, "
+                                         +" RejectedUser,"
+                                         +" AccountID "
+                                         +" , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].RejectedTranx j1 where j1.TranxID = j.TranxID) as totAccEff "
+                                         +" from RejectedTranx j"
+                                         + " WHERE EXISTS( select 1 from [TransactionDB].[dbo].[RejectedTranx] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+                                         + " AND date between '{0}' "
+                                         + " and '{1}'"
+                                         + " Order by TranxID desc, IsDebit desc", start, end, name);
+ 
+
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Rejected = new RejectedTranx();
+                    Rejected.date = reader.GetDateTime(0);
+                    Rejected.Account = reader.GetString(1);
+                    Rejected.Desc = reader.GetString(2);
+                    Rejected.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Rejected.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Rejected.Credit = reader.GetDecimal(5);
+                    }
+                    Rejected.IsDebit = reader.GetString(6);
+                    Rejected.TranxID = reader.GetInt32(7);
+                    Rejected.RejectedUser = reader.GetString(8);
+                    Rejected.TotalAccEff = reader.GetInt32(10);
+                    list.Add(Rejected);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static ArrayList SearchRejectedEntryWithPrice(DateTime start, DateTime end, string name, double price)
+        {
+            ArrayList list = new ArrayList();
+            RejectedTranx Rejected;
+            string query = "";
+
+            query = string.Format("SELECT Date,"
+                                         + " Name,"
+                                         + " isnull([Desc], ''),"
+                                         + " AccNumber,"
+                                         + " Debit, "
+                                         + " Credit, "
+                                         + " Isdebit,"
+                                         + " TranxID, "
+                                         + " RejectedUser,"
+                                         + " AccountID "
+                                         + " , (select count(distinct j1.AccountID) from [TransactionDB].[dbo].RejectedTranx j1 where j1.TranxID = j.TranxID) as totAccEff "
+                                         + " from RejectedTranx j"
+                                + " WHERE EXISTS( select 1 from [TransactionDB].[dbo].[RejectedTranx] t where (Credit = {3} OR Debit = {3}) and t.TranxID = j.TranxID)"
+                                + " AND EXISTS( select 1 from [TransactionDB].[dbo].[RejectedTranx] t where name like '%{2}%' and t.TranxID = j.TranxID)"
+                                + " AND date between '{0}' "
+                                + " and '{1}'"
+                                + " Order by 1 desc, 7 desc", start, end, name, price);
+            //}
+
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Rejected = new RejectedTranx();
+                    Rejected.date = reader.GetDateTime(0);
+                    Rejected.Account = reader.GetString(1);
+                    Rejected.Desc = reader.GetString(2);
+                    Rejected.AccNum = reader.GetInt32(3);
+                    if (!reader.IsDBNull(4))
+                    {
+                        Rejected.Debit = reader.GetDecimal(4);
+                    }
+                    if (!reader.IsDBNull(5))
+                    {
+                        Rejected.Credit = reader.GetDecimal(5);
+                    }
+                    Rejected.IsDebit = reader.GetString(6);
+                    Rejected.TranxID = reader.GetInt32(7);
+                    Rejected.RejectedUser = reader.GetString(8);
+                    Rejected.TotalAccEff = reader.GetInt32(10);
+                    list.Add(Rejected);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return list;
+        }
+
+
+
         public static int numofTranx(int id)
         {
             string query = string.Format("select count (*) from [Account] a Inner join [TranxDetail] td on a.accountid= td.accountid inner join [Transaction] t on t.tranxid = td.tranxid where a.AccNumber = {0}", id);
@@ -789,28 +1047,6 @@ namespace AccountingJournal.Code
             ArrayList list = new ArrayList();
             IndiJournal Journal;
             string query = "";
-            //if (name != "")
-            //{
-            //    query = string.Format("SELECT [Date] "
-            //            + " ,[Name]"
-            //            + " ,[Desc]"
-            //            + " , AccNumber"
-            //            + " , CASE WHEN IsDebit = 1 then Amount end as Debit"
-            //            + " , CASE WHEN IsDebit = 0 then Amount end as Crebit"
-            //            + " , CASE WHEN IsDebit = 1 then 'Debit' else 'Credit' end as IsDebit"
-            //            + " , PostDate"
-            //            + " , TranxID"
-            //            + " , 1 as totAccEff"
-            //            + " FROM [TransactionDB].[dbo].[Journal] j"
-            //            + " WHERE PostDate IS NOT NULL"
-            //            + " AND Amount = {3}"
-            //            + " AND EXISTS( select 1 from [TransactionDB].[dbo].[Journal] t where name like '%{2}%' and t.TranxID = j.TranxID)"
-            //            + " AND postdate between '{0}' "
-            //            + " and '{1}'"
-            //            + " Order by 1 desc, 7 desc", start, end, name, price);
-            //}
-            //else
-            //{
                 query = string.Format("SELECT [Date] "
                                     + " ,[Name]"
                                     + " ,isnull([Desc],'')"

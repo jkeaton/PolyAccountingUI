@@ -31,15 +31,15 @@
                             DataKeyNames="AccountID" CssClass="table" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px">
                                     <EditItemTemplate>
-                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' ForeColor="White" CssClass="text-center"></asp:Label>
+                                        <asp:TextBox ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="form-control text-center"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="text-center"></asp:Label>
                                     </ItemTemplate>
-
-                        <ItemStyle Width="100px"></ItemStyle>
+                                    <HeaderStyle CssClass="text-center" />
+                                    <ItemStyle Width="100px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
                                     <EditItemTemplate>
@@ -51,16 +51,16 @@
 
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right">
+                                <asp:TemplateField HeaderText="Balance" SortExpression="Balance">
                                     <EditItemTemplate>
                                         <%--<asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Balance") %>' CssClass="form-control"></asp:TextBox> DataFormatString="{0:#,##0.00}"--%>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>' ForeColor="White"></asp:Label>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
                                     </ItemTemplate>
-
-                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
+                                    <HeaderStyle cssclass="text-right" />
+                                    <ItemStyle HorizontalAlign="Right"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Normal Balance" SortExpression="NormalBalance" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
                                     <EditItemTemplate>
@@ -73,8 +73,8 @@
                                     <ItemTemplate>
                                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("NormalBalance") %>' CssClass="text-center"></asp:Label>
                                     </ItemTemplate>
-
-                                <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
+                                    <HeaderStyle CssClass="text-center" />
+                                    <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Class" SortExpression="Class" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
                                     <EditItemTemplate>
@@ -85,11 +85,11 @@
                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("Class") %>'></asp:Label>
                                     </ItemTemplate>
 
-                                <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
+                                    <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
 
-                                <ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
+                                    <ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type" SortExpression="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="Type" SortExpression="Type" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
                                         <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Type") %>'></asp:TextBox>--%>
                                         <asp:DropDownList ID="TextBox1" runat="server" DataSourceID="SqlDataSource2" DataTextField="Type" DataValueField="Type" CssClass="form-control" SelectedValue='<%# Bind("Type") %>'></asp:DropDownList>
@@ -97,6 +97,8 @@
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
                                     </ItemTemplate>
+                                    <HeaderStyle CssClass="text-center" />
+                                    <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False" HeaderText="Manage">
                                     <EditItemTemplate>
@@ -105,7 +107,8 @@
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Button ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" CssClass="btn btn-success"></asp:Button>
-                                    </ItemTemplate>                                   
+                                    </ItemTemplate>
+                                    <HeaderStyle CssClass="text-center" />
                                 </asp:TemplateField>
                             </Columns>
                             <EditRowStyle BackColor="#2461BF" />
@@ -127,7 +130,12 @@ FROM [Account] a
 inner join AccClass ac on a.AccClassID = ac.ClassID
 inner join AccType at on at.TypeID = a.AccTypeID
 ORDER BY [AccNumber]"
-                            UpdateCommand="UPDATE [Account] SET [AccNumber] = @AccNumber, [Name] = @Name, [Desc] = @Desc, [IsActive] = @IsActive, [AccTypeID] = @AccTypeID, [IsDebit] = (CASE WHEN @IsDebit = 'Yes' then 1 else 0 end), [AccClassID] = @AccClassID, [SortOrder] = @SortOrder, [Cre_Date] = @Cre_Date, [Cre_User] = @Cre_User, [Balance] = @Balance WHERE [AccountID] = @AccountID">
+                            UpdateCommand="UPDATE [Account] SET [AccNumber] = @AccNumber
+                            ,[Name] = @Name
+, [AccTypeID] = (SELECT TypeID from AccType where Type = @Type)
+, [IsDebit] = (CASE WHEN @IsDebit = 'Yes' then 1 else 0 end)
+, [AccClassID] = (SELECT ClassID from AccClass where Class = @Class)
+ WHERE [AccountID] = @AccountID">
                             <DeleteParameters>
                                 <asp:Parameter Name="AccountID" Type="Int32" />
                             </DeleteParameters>
@@ -147,19 +155,12 @@ ORDER BY [AccNumber]"
                             <UpdateParameters>
                                 <asp:Parameter Name="AccNumber" Type="Int32" />
                                 <asp:Parameter Name="Name" Type="String" />
-                                <asp:Parameter Name="Desc" Type="String" />
-                                <asp:Parameter Name="IsActive" Type="Boolean" />
-                                <asp:Parameter Name="AccTypeID" Type="Int32" />
-                                <asp:Parameter Name="IsDebit" Type="Boolean" />
-                                <asp:Parameter Name="AccClassID" Type="Int32" />
-                                <asp:Parameter Name="SortOrder" Type="Int32" />
-                                <asp:Parameter Name="Cre_Date" Type="DateTime" />
-                                <asp:Parameter Name="Cre_User" Type="Int32" />
-                                <asp:Parameter Name="Balance" Type="Decimal" />
-                                <asp:Parameter Name="AccountID" Type="Int32" />
+                                <asp:Parameter Name="Type" Type="String" />
+                                <asp:Parameter Name="IsDebit" Type="String" />
+                                <asp:Parameter Name="Class" Type="String" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT DISTINCT [Type] FROM [AccType]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString%>" SelectCommand="SELECT DISTINCT [Type] FROM [AccType]"></asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT DISTINCT [Class] FROM [AccClass]"></asp:SqlDataSource>
 
                     </div>

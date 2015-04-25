@@ -15,52 +15,52 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userid"] == null)
-            {
-                HttpCookie cookie = Request.Cookies["UserInfo"];
+            //if (Session["userid"] == null)
+            //{
+            //    HttpCookie cookie = Request.Cookies["UserInfo"];
 
-                if (cookie != null)
-                {
-                    int id = Int32.Parse(cookie["uid"]);
-                    User user = Connection.GetUserByID(id);
-                    Session["userid"] = user.ID;
-                    Session["username"] = user.Username;
-                    Session["usertype"] = user.UserType;
-                    Session["isdisable"] = user.isDisabled;
-                }
-                else
-                {
-                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-                }
-                if (Int32.Parse(Session["isdisable"].ToString()) == 1)
-                {
-                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-                }
-                welcome_msg.Text = "Welcome " + Session["username"].ToString();
-            }
-            else
-            {
-                if (Session["userid"] != null)
-                {
-                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
-                }
-                else
-                {
+            //    if (cookie != null)
+            //    {
+            //        int id = Int32.Parse(cookie["uid"]);
+            //        User user = Connection.GetUserByID(id);
+            //        Session["userid"] = user.ID;
+            //        Session["username"] = user.Username;
+            //        Session["usertype"] = user.UserType;
+            //        Session["isdisable"] = user.isDisabled;
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+            //    }
+            //    if (Int32.Parse(Session["isdisable"].ToString()) == 1)
+            //    {
+            //        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+            //    }
+            //    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+            //}
+            //else
+            //{
+            //    if (Session["userid"] != null)
+            //    {
+            //        welcome_msg.Text = "Welcome " + Session["username"].ToString();
+            //    }
+            //    else
+            //    {
 
-                        int id = Int32.Parse(Session["userid"].ToString());
-                        User user = Connection.GetUserByID(id);
-                        Session["userid"] = user.ID;
-                        Session["username"] = user.Username;
-                        Session["usertype"] = user.UserType;
-                        Session["isdisable"] = user.isDisabled;
+            //            int id = Int32.Parse(Session["userid"].ToString());
+            //            User user = Connection.GetUserByID(id);
+            //            Session["userid"] = user.ID;
+            //            Session["username"] = user.Username;
+            //            Session["usertype"] = user.UserType;
+            //            Session["isdisable"] = user.isDisabled;
 
-                    if (Int32.Parse(Session["isdisable"].ToString()) == 1)
-                    {
-                        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-                    }
-                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
-                }
-            }
+            //        if (Int32.Parse(Session["isdisable"].ToString()) == 1)
+            //        {
+            //            Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+            //        }
+            //        welcome_msg.Text = "Welcome " + Session["username"].ToString();
+            //    }
+            //}
         }
         private bool IsValid(string emailaddress)
         {
