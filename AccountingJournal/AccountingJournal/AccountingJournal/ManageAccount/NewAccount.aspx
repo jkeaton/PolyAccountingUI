@@ -188,7 +188,7 @@
                                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             </asp:GridView>
                         </div>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDB %>" DeleteCommand="DELETE FROM [Account] WHERE [AccountID] = @AccountID" InsertCommand="INSERT INTO [Account] ([AccNumber], [Name], [Desc], [IsActive], [AccTypeID], [IsDebit], [AccClassID], [SortOrder], [Cre_Date], [Cre_User], [Balance]) VALUES (@AccNumber, @Name, @Desc, @IsActive, @AccTypeID, @IsDebit, @AccClassID, @SortOrder, @Cre_Date, @Cre_User, @Balance)" SelectCommand="SELECT 
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" DeleteCommand="DELETE FROM [Account] WHERE [AccountID] = @AccountID" InsertCommand="INSERT INTO [Account] ([AccNumber], [Name], [Desc], [IsActive], [AccTypeID], [IsDebit], [AccClassID], [SortOrder], [Cre_Date], [Cre_User], [Balance]) VALUES (@AccNumber, @Name, @Desc, @IsActive, @AccTypeID, @IsDebit, @AccClassID, @SortOrder, @Cre_Date, @Cre_User, @Balance)" SelectCommand="SELECT 
 AccountID, AccNumber, a.Name, Balance , case when IsDebit = 1 then 'Debit' else 'Credit' end as NormalBalance,
 ac.Class
 , at.Type 
@@ -226,10 +226,10 @@ ORDER BY [AccNumber]"
                                 <asp:Parameter Name="Class" Type="String" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDB %>" SelectCommand="SELECT DISTINCT [Type] FROM [AccType]"></asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDB %>" SelectCommand="SELECT DISTINCT [Class] FROM [AccClass]"></asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDB %>" SelectCommand="SELECT * FROM [AccType]"></asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDB %>" SelectCommand="SELECT * FROM [AccClass]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT DISTINCT [Type] FROM [AccType]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT DISTINCT [Class] FROM [AccClass]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT * FROM [AccType]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" SelectCommand="SELECT * FROM [AccClass]"></asp:SqlDataSource>
 
                     </div>
                 </div>
