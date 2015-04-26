@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingJournal.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,43 @@ namespace AccountingJournal.ManageAccount
         {
 
         }
+        int id;
+        protected void Create_Click(object sender, EventArgs e)
+        {
+            int n;
+            if (!Int32.TryParse(AccountNumber.Text, out n))
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Invalid Account Number');", true);
+            }
+            else if (Connection.numofAcc(Int32.Parse(AccountNumber.Text)) > 0)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Account Number already exists');", true);
+            }
+            else if (Connection.numofAccbyname(Acc_Name.Text) > 0)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Account name already exists');", true);
+            }
+            else
+            {
+                HttpCookie cookie = Request.Cookies["UserInfo"];
+
+                if (cookie != null)
+                {
+                    id = Int32.Parse(cookie["uid"]);
+                }
+                else
+                {
+                    id = 1;
+                }
+                int result = Connection.CreateAcc(Int32.Parse(AccountNumber.Text), Acc_Name.Text, Description.Text, Int32.Parse(Acc_Type.SelectedValue), Int32.Parse(NorBal.SelectedValue), Int32.Parse(Acc_Class.SelectedValue), DateTime.Now, id);
+                if (result == 1)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Account is created successfully');", true);
+                    Response.Redirect(Request.RawUrl.ToString());
+                }
+            }
+        }
+
+      
     }
 }

@@ -18,7 +18,7 @@ namespace AccountingJournal.Code
         private static int count;
         static Connection()
         {
-            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDBConnectionString"].ToString();
+            string ConnectionString = ConfigurationManager.ConnectionStrings["TransactionDB"].ToString();
             conn = new SqlConnection(ConnectionString);
             cmd = new SqlCommand("", conn);
         }
@@ -1206,6 +1206,82 @@ namespace AccountingJournal.Code
             {
                 connection.Close();
             }
+        }
+
+        public static int numofAcc(int Accnum)
+        {
+            string query = string.Format("SELECT count(*) FROM [TransactionDB].[dbo].[Account] Where AccNumber = {0}", Accnum);
+            int num = 0;
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    num = reader.GetInt32(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return num;
+        }
+
+        public static int numofAccbyname(string Accname)
+        {
+            string query = string.Format("SELECT count(*) FROM [TransactionDB].[dbo].[Account] Where name = '{0}'", Accname);
+            int num = 0;
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    num = reader.GetInt32(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return num;
+        }
+
+
+        public static int CreateAcc(int Accnum, string Accname, string desc, int Type, int debit, int AccClass, DateTime Date, int user)
+        {
+            string query = string.Format("EXEC CreateAcc {0},'{1}', '{2}', {3}, {4}, {5}, '{6}', {7}", Accnum, Accname, desc, Type, debit, AccClass,Date, user);
+            int num = 0;
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    num = reader.GetInt32(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return num;
         }
     }
 }
