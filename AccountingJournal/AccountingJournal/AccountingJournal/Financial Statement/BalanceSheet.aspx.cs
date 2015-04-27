@@ -35,22 +35,29 @@ namespace AccountingJournal.Financial_Statement
                         AssetSb.Append(string.Format(@"<td>{0}</td>", b.Name));
                         AssetSb.Append(string.Format(@"<td style='text-align:right'>$ {0}</td>", b.Total.ToString("#,##0.00")));
                         AssetSb.Append(string.Format(@"</tr>"));
-                    }
-                    else
-                    {
-                        AssetSb.Append(string.Format(@"<tr>"));
-                        AssetSb.Append(string.Format(@"<td>{0}</td>", b.Name));
-                        AssetSb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", b.Total.ToString("#,##0.00")));
-                        AssetSb.Append(string.Format(@"</tr>"));
-                    }
-                    if (b.isdebit == "Yes")
-                    {
                         totalAsset += (float)b.Total;
                     }
                     else
                     {
-                        totalAsset -= (float)b.Total;
+                        if (b.isdebit == "Yes")
+                        {
+                            AssetSb.Append(string.Format(@"<tr>"));
+                            AssetSb.Append(string.Format(@"<td>{0}</td>", b.Name));
+                            AssetSb.Append(string.Format(@"<td style='text-align:right'>{0}</td>", b.Total.ToString("#,##0.00")));
+                            AssetSb.Append(string.Format(@"</tr>"));
+                            totalAsset += (float)b.Total;
+                        }
+                        else
+                        {
+                            AssetSb.Append(string.Format(@"<tr>"));
+                            AssetSb.Append(string.Format(@"<td>{0}</td>", b.Name));
+                            AssetSb.Append(string.Format(@"<td style='text-align:right'>({0})</td>", b.Total.ToString("#,##0.00")));
+                            AssetSb.Append(string.Format(@"</tr>"));
+                            totalAsset -= (float)b.Total;
+                        }
+
                     }
+                    
                 }
 
                 else if (b.type == "Liability")

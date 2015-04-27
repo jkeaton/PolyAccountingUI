@@ -1,6 +1,7 @@
 ﻿using AccountingJournal.Code;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,20 +19,37 @@ namespace AccountingJournal.ManageAccount
         protected void Create_Click(object sender, EventArgs e)
         {
             int n;
-            if (!Int32.TryParse(AccountNumber.Text, out n))
+            if (AccountNumber.Text == "")
             {
+                AccountNumber.BackColor = Color.FromName("#ff9999");
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Please Enter Account Number');", true);
+            }
+            else if (!Int32.TryParse(AccountNumber.Text, out n))
+            {
+                AccountNumber.BackColor = Color.FromName("#ff9999");
                 Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Invalid Account Number');", true);
             }
             else if (Connection.numofAcc(Int32.Parse(AccountNumber.Text)) > 0)
             {
+                AccountNumber.BackColor = Color.FromName("#ff9999");
                 Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Account Number already exists');", true);
+            }
+            else if (Acc_Name.Text == "")
+            {
+                Acc_Name.BackColor = Color.FromName("#ff9999");
+                AccountNumber.BackColor = Color.White;
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Please Enter Name of Account');", true);
             }
             else if (Connection.numofAccbyname(Acc_Name.Text) > 0)
             {
+                Acc_Name.BackColor = Color.FromName("#ff9999");
+                AccountNumber.BackColor = Color.White;
                 Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Account name already exists');", true);
             }
             else
             {
+                Acc_Name.BackColor = Color.White;
+                AccountNumber.BackColor = Color.White;
                 HttpCookie cookie = Request.Cookies["UserInfo"];
 
                 if (cookie != null)

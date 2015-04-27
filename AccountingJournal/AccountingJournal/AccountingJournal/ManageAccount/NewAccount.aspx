@@ -19,16 +19,14 @@
                                 <tr>
                                     <td style="width: 150px">
                                         <div class="text-left">Account #:</div>
-                                        <div>
-                                            <asp:TextBox ID="AccountNumber" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="AccountNumber"></asp:RequiredFieldValidator>
+                                        <div style="width:200px">
+                                            <asp:TextBox ID="AccountNumber" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>
                                         </div>
                                     </td>
                                     <td style="width: 250px">
                                         <div class="text-left">Account Name:</div>
                                         <div>
-                                            <asp:TextBox ID="Acc_Name" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="Acc_Name"></asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="Acc_Name" runat="server" CssClass="form-control" Width="250px"></asp:TextBox>
                                         </div>
                                     </td>
                                     <td style="width: 350px">
@@ -42,7 +40,7 @@
                                     <td>
                                         <div class="text-left">Normal Balance:</div>
                                         <div>
-                                            <asp:DropDownList ID="NorBal" runat="server" CssClass="form-control">
+                                            <asp:DropDownList ID="NorBal" runat="server" CssClass="form-control" Width="150px">
                                                 <asp:ListItem Value="1">Debit</asp:ListItem>
                                                 <asp:ListItem Value="0">Credit</asp:ListItem>
                                             </asp:DropDownList>
@@ -51,7 +49,7 @@
                                     <td>
                                         <div class="text-left">Account Type:</div>
                                         <div>
-                                            <asp:DropDownList ID="Acc_Type" runat="server" DataSourceID="SqlDataSource4" CssClass="form-control" DataTextField="Type" DataValueField="TypeID"></asp:DropDownList>
+                                            <asp:DropDownList ID="Acc_Type" runat="server" DataSourceID="SqlDataSource4" CssClass="form-control" DataTextField="Type" DataValueField="TypeID" Width="250px"></asp:DropDownList>
                                         </div>
                                     </td>
                                     <td>
@@ -64,8 +62,9 @@
                                 <tr>
                                     <td></td>
                                     <td></td>
-                                    <td>
-                                        <asp:Button ID="Create" runat="server" Text="Create" CssClass="btn btn-primary" OnClick="Create_Click" Width="100px" />
+                                    <td style="text-align:right">
+                                        <div style="visibility:hidden">Create</div>
+                                        <asp:Button ID="Create" runat="server" Text="Create" CssClass="btn btn-primary" OnClick="Create_Click" />
                                     </td>
                                 </tr>
                             </table>
@@ -82,9 +81,9 @@
                         <table class="table" style="margin-bottom:0">
                             <tr>
                                 <th class="text-center" style="width: 100px">Account #</th>
-                                <th class="text-left" style="width: 300px">Name</th>
-                                <th class="text-right" style="width: 90px">Balance</th>
-                                <th class="text-center" style="width: 100px">Normal Balance</th>
+                                <th class="text-left" style="width: 290px">Name</th>
+                                <th class="text-right" style="width: 120px">Balance</th>
+                                <th class="text-center" style="width: 110px">Normal Balance</th>
                                 <th class="text-left" style="width: 200px">Class</th>
                                 <th class="text-center" style="width: 100px">Type</th>
                                 <th class="text-center">Manage</th>
@@ -96,7 +95,7 @@
                                 DataKeyNames="AccountID" CssClass="table" CellPadding="4" ForeColor="#333333" GridLines="None" ShowHeader="false">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px" HeaderStyle-Width="100px">
+                                    <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="form-control text-center"></asp:TextBox>
                                         </EditItemTemplate>
@@ -106,37 +105,37 @@
                                         <HeaderStyle CssClass="text-center" />
                                         <ItemStyle Width="100px"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px" HeaderStyle-Width="300px">
+                                    <asp:TemplateField HeaderText="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left">
                                         <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Name") %>' CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Name") %>' CssClass="form-control" Width="250px"></asp:TextBox>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="Label5" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                                            <asp:Label ID="Label5" runat="server" Text='<%# Bind("Name") %>' Width="290px"></asp:Label>
                                         </ItemTemplate>
-
-                                        <ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
+                                        <ItemStyle HorizontalAlign="Left" Width="290px"></ItemStyle>
+                                        <ControlStyle Width="250px" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Balance" SortExpression="Balance" HeaderStyle-Width="90px">
+                                    <asp:TemplateField HeaderText="Balance" SortExpression="Balance">
                                         <EditItemTemplate>
                                             <%--<asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Balance") %>' CssClass="form-control"></asp:TextBox> DataFormatString="{0:#,##0.00}"--%>
-                                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>' ForeColor="White"></asp:Label>
+                                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>' ForeColor="White" Width="100px"></asp:Label>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>'></asp:Label>
+                                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Balance", "{0:#,##0.00}") %>' Width="100px"></asp:Label>
                                         </ItemTemplate>
                                         <HeaderStyle CssClass="text-right" />
-                                        <ItemStyle HorizontalAlign="Right"></ItemStyle>
+                                        <ItemStyle HorizontalAlign="Right" Width="100px"></ItemStyle>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Normal Balance" SortExpression="NormalBalance" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" HeaderStyle-Width="100px">
                                         <EditItemTemplate>
                                             <%--<asp:Label ID="Label1" runat="server" Text='<%# Eval("NormalBalance") %>'></asp:Label>--%>
-                                            <asp:DropDownList ID="Label1" runat="server" DataValueField='<%# Eval("NormalBalance") %>' CssClass="form-control">
+                                            <asp:DropDownList ID="Label1" runat="server" CssClass="form-control" SelectedValue='<%# Bind("NormalBalance") %>' Width="100px">
                                                 <asp:ListItem>Debit</asp:ListItem>
                                                 <asp:ListItem>Credit</asp:ListItem>
                                             </asp:DropDownList>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("NormalBalance") %>' CssClass="text-center"></asp:Label>
+                                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("NormalBalance") %>' CssClass="text-center" Width="100px"></asp:Label>
                                         </ItemTemplate>
                                         <HeaderStyle CssClass="text-center" />
                                         <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
@@ -144,7 +143,7 @@
                                     <asp:TemplateField HeaderText="Class" SortExpression="Class" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px" HeaderStyle-Width="200px">
                                         <EditItemTemplate>
                                             <%--<asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Class") %>'></asp:TextBox>--%>
-                                            <asp:DropDownList ID="TextBox2" runat="server" DataSourceID="SqlDataSource3" DataTextField="Class" DataValueField="Class" CssClass="form-control" SelectedValue='<%# Bind("Class") %>'></asp:DropDownList>
+                                            <asp:DropDownList ID="TextBox2" runat="server" DataSourceID="SqlDataSource3" DataTextField="Class" DataValueField="Class" CssClass="form-control" SelectedValue='<%# Bind("Class") %>' ></asp:DropDownList>
                                         </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("Class") %>'></asp:Label>
@@ -154,7 +153,7 @@
 
                                         <ItemStyle HorizontalAlign="Left" Width="200px"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Type" SortExpression="Type" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                                    <asp:TemplateField HeaderText="Type" SortExpression="Type" ItemStyle-HorizontalAlign="Center">
                                         <EditItemTemplate>
                                             <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Type") %>'></asp:TextBox>--%>
                                             <asp:DropDownList ID="TextBox1" runat="server" DataSourceID="SqlDataSource2" DataTextField="Type" DataValueField="Type" CssClass="form-control" SelectedValue='<%# Bind("Type") %>'></asp:DropDownList>
@@ -165,15 +164,17 @@
                                         <HeaderStyle CssClass="text-center" />
                                         <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ShowHeader="False" HeaderText="Manage">
+                                    <asp:TemplateField ShowHeader="False" HeaderText="Manage" ItemStyle-HorizontalAlign="Center">
                                         <EditItemTemplate>
-                                            <asp:Button ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update" CssClass="btn btn-primary"></asp:Button>
+                                            <asp:Button ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update" CssClass="btn btn-primary" OnClientClick="return confirm('Do you want to update this account?')"></asp:Button>
                                             <asp:Button ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" CssClass="btn btn-default"></asp:Button>
                                         </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Button ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" CssClass="btn btn-success"></asp:Button>
                                         </ItemTemplate>
-                                        <HeaderStyle CssClass="text-center" Width="140px" />
+                                        
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
                                     </asp:TemplateField>
                                 </Columns>
                                 <EditRowStyle BackColor="#2461BF" />
@@ -189,19 +190,19 @@
                             </asp:GridView>
                         </div>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TransactionDBConnectionString %>" DeleteCommand="DELETE FROM [Account] WHERE [AccountID] = @AccountID" InsertCommand="INSERT INTO [Account] ([AccNumber], [Name], [Desc], [IsActive], [AccTypeID], [IsDebit], [AccClassID], [SortOrder], [Cre_Date], [Cre_User], [Balance]) VALUES (@AccNumber, @Name, @Desc, @IsActive, @AccTypeID, @IsDebit, @AccClassID, @SortOrder, @Cre_Date, @Cre_User, @Balance)" SelectCommand="SELECT 
-AccountID, AccNumber, a.Name, Balance , case when IsDebit = 1 then 'Debit' else 'Credit' end as NormalBalance,
-ac.Class
-, at.Type 
-FROM [Account] a
-inner join AccClass ac on a.AccClassID = ac.ClassID
-inner join AccType at on at.TypeID = a.AccTypeID
-ORDER BY [AccNumber]"
+                                                                            AccountID, AccNumber, a.Name, Balance , case when IsDebit = 1 then 'Debit' WHEN ISdebit = 0 then 'Credit' else convert(varchar(1),isdebit) end as NormalBalance,
+                                                                            ac.Class
+                                                                            , at.Type 
+                                                                            FROM [Account] a
+                                                                            inner join AccClass ac on a.AccClassID = ac.ClassID
+                                                                            inner join AccType at on at.TypeID = a.AccTypeID
+                                                                            ORDER BY [AccNumber]"
                             UpdateCommand="UPDATE [Account] SET [AccNumber] = @AccNumber
                             ,[Name] = @Name
-, [AccTypeID] = (SELECT TypeID from AccType where Type = @Type)
-, [IsDebit] = (CASE WHEN @IsDebit = 'Yes' then 1 else 0 end)
-, [AccClassID] = (SELECT ClassID from AccClass where Class = @Class)
- WHERE [AccountID] = @AccountID">
+                            , [AccTypeID] = (SELECT TypeID from AccType where Type = @Type)
+                            , [IsDebit] = (CASE WHEN @NormalBalance = 'Debit' then 1 else 0 end)
+                            , [AccClassID] = (SELECT ClassID from AccClass where Class = @Class)
+                             WHERE [AccountID] = @AccountID">
                             <DeleteParameters>
                                 <asp:Parameter Name="AccountID" Type="Int32" />
                             </DeleteParameters>
@@ -222,7 +223,7 @@ ORDER BY [AccNumber]"
                                 <asp:Parameter Name="AccNumber" Type="Int32" />
                                 <asp:Parameter Name="Name" Type="String" />
                                 <asp:Parameter Name="Type" Type="String" />
-                                <asp:Parameter Name="IsDebit" Type="String" />
+                                <asp:Parameter Name="NormalBalance" Type="String" />
                                 <asp:Parameter Name="Class" Type="String" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
