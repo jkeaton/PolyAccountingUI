@@ -481,11 +481,6 @@
                 return submit_form;
             }
 
-            function my_pause(){
-                setTimeout(function() { alert("Hello"); }, 2000);
-                return 0;
-            }
-
             function Account(name, field){
                 this.name = name;
                 this.field = field;
@@ -825,10 +820,52 @@
             function set_next_url(url){
                 document.getElementById("next_url").setAttribute("value", url);
             }
+
+            function reset_cal(){
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+
+                if(dd<10) {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) {
+                    mm='0'+mm;
+                } 
+
+                today = mm+'/'+dd+'/'+yyyy;
+                var elem = document.getElementById('cal_input');
+                elem.value = today;
+            }
+
+            function select_cal(){
+                var elem = document.getElementById('cal_input');
+                elem.focus();
+            }
         </script>
     </head>
 
     <body role="document">
+        <div id="calendarModal" class="modal fade" role="dialog" aria-labelledby="calendar" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="sized_modal">
+                    <div class="modal-body">
+                        <label for="cal_input">Today's Date: </label>
+                        <div class='input-group input-ammend'>
+                            <input type="text" id="cal_input" name="cal_input" onchange="alert('changed!');" value="<?php echo $today;?>" class="datepicker form-control"/>
+                            <span id="dpickSpan" onclick="select_cal();" class="btn input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -863,6 +900,20 @@
                                 <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Closing Entry</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
+                                <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
+                                    <i style="color: #A4A4A4;" class="image glyphicon glyphicon-calendar navbar-header"></i>
+                                </a>
+                            </span>
+                        </li>        
+                        <li>
+                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
+                                <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
+                                    <i style="color: #A4A4A4;" class="image glyphicon glyphicon-modal-window navbar-header"></i>
+                                </a>
+                            </span>
+                        </li>        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <?php
