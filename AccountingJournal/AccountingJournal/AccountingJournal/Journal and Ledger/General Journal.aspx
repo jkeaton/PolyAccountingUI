@@ -17,7 +17,7 @@
                             <div class="col-sm-3">
                                 <label for="startDate">Start Date: </label>
                                 <div class="input-group">
-                                    <asp:TextBox ID="StartDate" runat="server" CssClass="datepicker form-control" placeholder="Start Date" name="startDate"></asp:TextBox>
+                                    <asp:TextBox ID="StartDate" runat="server" CssClass="datepicker form-control" style="z-index: 1000 !important;" placeholder="Start Date" name="startDate"></asp:TextBox>
                                     <%--<input type='text' class="datepicker form-control" placeholder="Start Date" name='startDate'/>--%>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -27,7 +27,7 @@
                             <div class="col-sm-3">
                                 <label for="endDate">End Date: </label>
                                 <div class="input-group">
-                                    <asp:TextBox ID="Enddate" runat="server" CssClass="datepicker form-control" placeholder="End Date" name="endDate"></asp:TextBox>
+                                    <asp:TextBox ID="Enddate" runat="server" CssClass="datepicker form-control" style="z-index: 1000 !important;" placeholder="End Date" name="endDate"></asp:TextBox>
                                     <%--<input type='text' class="datepicker form-control" placeholder="End Date" name='endDate'/>--%>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
