@@ -313,7 +313,7 @@
                         </li>
                         <li style="margin-right: 20px;">
                             <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper3">
-                                <a href="https://polyaccounting.wordpress.com/">
+                                <a href="https://polyaccounting.wordpress.com/" target="_blank">
                                     <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image3 glyphicon glyphicon-question-sign navbar-header"></i>
                                 </a>
                             </span>

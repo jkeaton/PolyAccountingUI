@@ -53,7 +53,7 @@
                 $_SESSION['db_uid'] = $username;
                 $_SESSION['db_pass'] = $pass;
                 $_SESSION['level'] = $utype;
-                //setcookie('UserCookie', $uid, time()+3600, '/');
+                setcookie('UserCookie', $uid, time()+3600, '/');
                 if ($_SESSION['level'] === 0){
 				    header('Location: /mark_landing/adminpanel.php');
                 }
