@@ -276,7 +276,7 @@
                         <button type='button' style="color: #000000;" class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
                         <label for="cal_input">Today's Date: </label>
                         <div class='input-group input-ammend'>
-                            <input type="text" id="cal_input" name="cal_input" onchange="alert('changed!');" value="<?php echo $today;?>" class="datepicker form-control"/>
+                            <input type="text" id="cal_input" name="cal_input" onchange="alert('changed!');" value="<?php echo $today;?>" class="modal-datepicker datepicker form-control"/>
                             <span id="dpickSpan" onclick="select_cal();" class="btn input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
