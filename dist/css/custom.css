@@ -216,7 +216,7 @@ i {
     right: 25%;
     bottom: 19%;
 }
-.datepicker {
+.modal-datepicker {
     z-index:1151 !important;
     border: 1px solid #ccc !important;
     border-top-left-radius: 4px !important;
