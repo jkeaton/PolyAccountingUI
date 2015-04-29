@@ -299,7 +299,7 @@ i {
     background-image: -webkit-radial-gradient(left top, ellipse farthest-corner, #CD29FF 0%, #2A18A1 100%);
 
     /* W3C Markup, IE10 Release Preview */ 
-    background-image: radial-gradient(ellipse farthest-corner at left top, #CD29FF 0%, #2A18A1 100%);;
+    background-image: radial-gradient(ellipse farthest-corner at left top, #CD29FF 0%, #2A18A1 100%);
 }
 .button_font {
     text-align: center;
