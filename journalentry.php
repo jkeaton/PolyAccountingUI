@@ -291,11 +291,8 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <link href="dist/css/datepicker.css" rel="stylesheet">
         <link href="dist/css/bootstrap-timepicker.css" rel="stylesheet">
-	    <link href="dist/css/CalcSS3.css" rel="stylesheet" type="text/css" />
-    	<link href="dist/css/index.css" rel="stylesheet" type="text/css" />
 
         <!-- External Javascript Files -->
-	    <script type="text/javascript" src="dist/js/CalcSS3.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
    	    <script src="dist/js/main.js"></script>
@@ -824,6 +821,8 @@
                 document.getElementById("next_url").setAttribute("value", url);
             }
 
+            // The Calculator and Calendar Functions ---------------------------------->
+            
             function reset_cal(){
                 var today = new Date();
                 var dd = today.getDate();
@@ -847,86 +846,185 @@
                 var elem = document.getElementById('cal_input');
                 elem.focus();
             }
+
+            var operand_val = 0;
+            var in_string = '';
+            var answer = 0;
+            var start_new = false;
+
+            function calculate(){
+                var elem = document.getElementById('calc_input');
+                try{
+                    answer = eval(in_string);
+                    if (!isNaN(answer)){
+                        // if answer is a valid integer display it as one
+                        if (Math.floor(answer) == answer){
+                            answer = parseInt(answer);
+                            in_string = answer.toString();
+                        }
+                        // otherwise let it be accurate to 10 decimal places
+                        else {
+                            in_string = answer.toFixed(10);
+                        }
+                    }
+                    else {
+                        in_string = 'Error';
+                        start_new = true;
+                    }
+                }
+                catch (e){
+                    in_string = 'Error'
+                    start_new = true;
+                }
+                elem.value = in_string;
+            }
+
+            function myClear(){
+                var elem = document.getElementById('calc_input');
+                in_string = '';
+                answer = 0;
+                elem.value = in_string;    
+            }
+
+            function input_append(val){
+                var elem = document.getElementById('calc_input');
+                if (start_new){
+                    in_string = val;
+                    start_new = false;
+                }
+                else {
+                    in_string += val;    
+                }
+                elem.value = in_string;    
+            }
+
+            /*-------------------End of Calculator and Calendar Functions--------------*/
         </script>
     </head>
 
     <body role="document">
-        <div id="calculatorModal" class="modal fade" role="dialog" aria-labelledby="calendar" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" id="calc_sized_modal">
-                    <div class="modal-body">
-	                    <div class="calc-main">
-		                    <div class="calc-display">
-			                    <span>0</span>
-			                    <div class="calc-rad">Rad</div>
-			                    <div class="calc-hold"></div>
-			                    <div class="calc-buttons">
-				                    <div class="calc-info">?</div>
-    				                <div class="calc-smaller">&gt;</div>
-	    			                <div class="calc-ln">.</div>
-		    	                </div>
-		                    </div>
-		                    <div class="calc-left">
-			                    <div><div>2nd</div></div>
-    			                <div><div>(</div></div>
-    	    		            <div><div>)</div></div>
-	    	    	            <div><div>%</div></div>
-		    	                <div><div>1/x</div></div>
-			                    <div><div>x<sup>2</sup></div></div>
-			                    <div><div>x<sup>3</sup></div></div>
-    			                <div><div>y<sup>x</sup></div></div>
-	    		                <div><div>x!</div></div>
-                			    <div><div>&radic;</div></div>
-    			                <div><div class="calc-radxy">
-                	    			<sup>x</sup><em>&radic;</em><span>y</span>
-		    	                </div></div>
-                    			<div><div>log</div></div>
-                    			<div><div>sin</div></div>
-		    	                <div><div>cos</div></div>
-                		    	<div><div>tan</div></div>
-			                    <div><div>ln</div></div>
-                		    	<div><div>sinh</div></div>
-	    		                <div><div>cosh</div></div>
-                    			<div><div>tanh</div></div>
-	    	    	            <div><div>e<sup>x</sup></div></div>
-                    			<div><div>Deg</div></div>
-	    		                <div><div>&pi;</div></div>
-                		    	<div><div>EE</div></div>
-			                    <div><div>Rand</div></div>
-                	    	</div>
-                		    <div class="calc-right">
-    	    		            <div><div>mc</div></div>
-                    			<div><div>m+</div></div>
-		    	                <div><div>m-</div></div>
-                	    		<div><div>mr</div></div>
-			                    <div class="calc-brown"><div >AC</div></div>
-            		    	    <div class="calc-brown"><div>+/&#8211;</div></div>
-    			                <div class="calc-brown calc-f19"><div>&divide;</div></div>
-                    			<div class="calc-brown calc-f21"><div>&times;</div></div>
-	        		            <div class="calc-black"><div>7</div></div>
-                    			<div class="calc-black"><div>8</div></div>
-			                    <div class="calc-black"><div>9</div></div>
-            	        		<div class="calc-brown calc-f18"><div>&#8211;</div></div>
-    			                <div class="calc-black"><div>4</div></div>
-                			    <div class="calc-black"><div >5</div></div>
-    		    	            <div class="calc-black"><div>6</div></div>
-                    			<div class="calc-brown calc-f18"><div>+</div></div>
-		    	                <div class="calc-black"><div>1</div></div>
-                		    	<div class="calc-black"><div>2</div></div>
-			                    <div class="calc-black"><div>3</div></div>
-                	    		<div class="calc-blank"><textarea></textarea></div>
-	    		                <div class="calc-orange calc-eq calc-f17"><div>
-            				        <div class="calc-down">=</div>
-                    			</div></div>
-                	    		<div class="calc-black calc-zero"><div>
-		    	    	            <span>0</span>
-                			    </div></div>
-    			                <div class="calc-black calc-f21"><div>.</div></div>
-                	    	</div>
-                	    </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        <!-- Calculator and Calendar Modals -->
+        <div id="calculatorModal" class="modal fade" role="dialog" aria-labelledby="calculator" aria-hidden="true">
+            <div class="modal-dialog" style="width: 300px;">
+                <div class="modal-content calc" id="sized_modal">
+                    <div class="modal-body calc">
+                        <div class="container-fluid">
+                        <div class="row text-center">
+                            <button type='button' style="color: #000000;" class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                            <h2 style="color: #000000;"><b>Calculator</b></h2>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-sm-12">
+                            <input type="text" id="calc_input" name="calc_input" value="<?php echo $calc_val; ?>" class="form-control"/>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button onclick="input_append('1');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>1</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('2');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>2</b>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('3');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>3</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('+');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>+</b>         
+                                </button>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button onclick="input_append('4');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>4</b>           
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('5');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>5</b>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('6');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>6</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('-');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>-</b>         
+                                </button>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button onclick="input_append('7');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>7</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('8');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>8</b>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('9');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>9</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('*');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>x</b>         
+                                </button>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button onclick="myClear();" class="button_font form-control btn btn-sm other_btn">
+                                    <b>CL</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('0');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>0</b>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('.');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>.</b>          
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append('/');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>/</b>       
+                                </button>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button onclick="input_append('(');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>(</b>         
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button onclick="input_append(')');" class="button_font form-control btn btn-sm other_btn">
+                                    <b>)</b>
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button onclick="calculate();" class="button_font form-control btn btn-sm equals_btn">
+                                    =
+                                </button>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -935,6 +1033,7 @@
             <div class="modal-dialog">
                 <div class="modal-content" id="sized_modal">
                     <div class="modal-body">
+                        <button type='button' style="color: #000000;" class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
                         <label for="cal_input">Today's Date: </label>
                         <div class='input-group input-ammend'>
                             <input type="text" id="cal_input" name="cal_input" onchange="alert('changed!');" value="<?php echo $today;?>" class="datepicker form-control"/>
@@ -943,12 +1042,10 @@
                             </span>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
                 </div>
             </div>
         </div>
+        <!-- End Calculator and Calendar Modals -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -983,6 +1080,7 @@
                                 <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Closing Entry</a></li>
                             </ul>
                         </li>
+                        <!-- Links for Calculator and Calendar Modals and Wiki-->
                         <li style="margin-right: 20px;">
                             <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
                                 <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
@@ -992,11 +1090,19 @@
                         </li>        
                         <li style="margin-right: 20px;">
                             <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper2">
-                                <a href="#" data-toggle="modal" data-target="#calculatorModal" onclick="reset_cal();">
-                                    <img src="dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
+                                <a href="#" data-toggle="modal" data-target="#calculatorModal">
+                                    <img src="http://test-mesbrook.cloudapp.net/dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
                                 </a>
                             </span>
-                        </li>        
+                        </li>
+                        <li style="margin-right: 20px;">
+                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper3">
+                                <a href="https://polyaccounting.wordpress.com/">
+                                    <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image3 glyphicon glyphicon-question-sign navbar-header"></i>
+                                </a>
+                            </span>
+                        </li>
+                        <!-- End Links for Calculator and Calendar Modals -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <?php

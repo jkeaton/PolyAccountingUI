@@ -190,7 +190,7 @@ html, body {
 i {
     text-align: center;
 }
-.wrapper, .wrapper2 {
+.wrapper, .wrapper2 , .wrapper3{
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -209,6 +209,13 @@ i {
     right: 25%;
     bottom: 21%;
 }
+.wrapper3 .image3 {
+    position: absolute;
+    top: 31%;
+    left: 25%;
+    right: 25%;
+    bottom: 19%;
+}
 .datepicker {
     z-index:1151 !important;
     border: 1px solid #ccc !important;
@@ -222,4 +229,78 @@ i {
     left: 50%;
     top: 50%;
     margin-left: -150px;
+}
+.equals_btn {
+    color: black;
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-radial-gradient(center, ellipse farthest-corner, #FFC403 0%, #EF5800 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(center, ellipse farthest-corner, #FFC403 0%, #EF5800 100%);
+
+    /* Opera */ 
+    background-image: -o-radial-gradient(center, ellipse farthest-corner, #FFC403 0%, #EF5800 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, center center, 0, center center, 506, color-stop(0, #FFC403), color-stop(1, #EF5800));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #FFC403 0%, #EF5800 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: radial-gradient(ellipse farthest-corner at center, #FFC403 0%, #EF5800 100%);
+}
+.other_btn {
+    color: black;
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-radial-gradient(center, ellipse farthest-corner, #EBEBEB 0%, #828282 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(center, ellipse farthest-corner, #EBEBEB 0%, #828282 100%);
+
+    /* Opera */ 
+    background-image: -o-radial-gradient(center, ellipse farthest-corner, #EBEBEB 0%, #828282 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, center center, 0, center center, 506, color-stop(0, #EBEBEB), color-stop(1, #828282));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #EBEBEB 0%, #828282 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: radial-gradient(ellipse farthest-corner at center, #EBEBEB 0%, #828282 100%);
+}
+.calc {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-radial-gradient(left top, ellipse farthest-corner, #CD29FF 0%, #2A18A1 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(left top, ellipse farthest-corner, #CD29FF 0%, #2A18A1 100%);
+
+    /* Opera */ 
+    background-image: -o-radial-gradient(left top, ellipse farthest-corner, #CD29FF 0%, #2A18A1 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, left top, 0, left top, 1011, color-stop(0, #CD29FF), color-stop(1, #2A18A1));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(left top, ellipse farthest-corner, #CD29FF 0%, #2A18A1 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: radial-gradient(ellipse farthest-corner at left top, #CD29FF 0%, #2A18A1 100%);;
+}
+.button_font {
+    text-align: center;
+    vertical-align: middle;
+    font-family: sans-serif;
+    font-size: 20px;
+    padding: 0px;
+}
+#calc_input {
+    font-size: 18px;
+    text-align: right;
 }
