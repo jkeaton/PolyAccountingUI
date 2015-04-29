@@ -230,6 +230,14 @@ i {
     top: 50%;
     margin-left: -150px;
 }
+#sized_modal2 {
+    width: 300px;
+    height: 360px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+}
 .equals_btn {
     color: black;
     /* IE10 Consumer Preview */ 

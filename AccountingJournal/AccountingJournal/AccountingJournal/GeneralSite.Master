@@ -141,7 +141,7 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-sm-12">
-                            <input type="text" id="calc_input" name="calc_input" value="<?php echo $calc_val; ?>" class="form-control"/>
+                            <input type="text" id="calc_input" name="calc_input" value="" class="form-control"/>
                             </div>
                         </div><br/>
                         <div class="row">
@@ -298,7 +298,7 @@
                                 <li><a href="../Financial%20Statement/CashFlowStatement">Cash Flow Statement</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown" style="margin-right: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
