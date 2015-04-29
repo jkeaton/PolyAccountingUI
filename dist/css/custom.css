@@ -190,9 +190,9 @@ html, body {
 i {
     text-align: center;
 }
-.wrapper {
+.wrapper, .wrapper2 {
     position: relative;
-    width: 80px;
+    width: 100%;
     overflow: hidden;
 }
 .wrapper .image {
@@ -201,6 +201,13 @@ i {
     left: 25%;
     right: 25%;
     bottom: 25%;
+}
+.wrapper2 .image2 {
+    position: absolute;
+    top: 29%;
+    left: 25%;
+    right: 25%;
+    bottom: 21%;
 }
 .datepicker {
     z-index:1151 !important;

@@ -80,7 +80,7 @@
                         <h3 class="panel-title centered-y">Control Panel</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="panel panel-success">
+                        <div class="panel panel-info">
                             <div class="panel-heading panel-heading-sm text-center">
                                 <h3 class="panel-title centered-y-sm">Users</h3>
                             </div>

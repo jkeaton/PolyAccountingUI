@@ -291,8 +291,11 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <link href="dist/css/datepicker.css" rel="stylesheet">
         <link href="dist/css/bootstrap-timepicker.css" rel="stylesheet">
+	    <link href="dist/css/CalcSS3.css" rel="stylesheet" type="text/css" />
+    	<link href="dist/css/index.css" rel="stylesheet" type="text/css" />
 
         <!-- External Javascript Files -->
+	    <script type="text/javascript" src="dist/js/CalcSS3.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
    	    <script src="dist/js/main.js"></script>
@@ -848,6 +851,86 @@
     </head>
 
     <body role="document">
+        <div id="calculatorModal" class="modal fade" role="dialog" aria-labelledby="calendar" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="calc_sized_modal">
+                    <div class="modal-body">
+	                    <div class="calc-main">
+		                    <div class="calc-display">
+			                    <span>0</span>
+			                    <div class="calc-rad">Rad</div>
+			                    <div class="calc-hold"></div>
+			                    <div class="calc-buttons">
+				                    <div class="calc-info">?</div>
+    				                <div class="calc-smaller">&gt;</div>
+	    			                <div class="calc-ln">.</div>
+		    	                </div>
+		                    </div>
+		                    <div class="calc-left">
+			                    <div><div>2nd</div></div>
+    			                <div><div>(</div></div>
+    	    		            <div><div>)</div></div>
+	    	    	            <div><div>%</div></div>
+		    	                <div><div>1/x</div></div>
+			                    <div><div>x<sup>2</sup></div></div>
+			                    <div><div>x<sup>3</sup></div></div>
+    			                <div><div>y<sup>x</sup></div></div>
+	    		                <div><div>x!</div></div>
+                			    <div><div>&radic;</div></div>
+    			                <div><div class="calc-radxy">
+                	    			<sup>x</sup><em>&radic;</em><span>y</span>
+		    	                </div></div>
+                    			<div><div>log</div></div>
+                    			<div><div>sin</div></div>
+		    	                <div><div>cos</div></div>
+                		    	<div><div>tan</div></div>
+			                    <div><div>ln</div></div>
+                		    	<div><div>sinh</div></div>
+	    		                <div><div>cosh</div></div>
+                    			<div><div>tanh</div></div>
+	    	    	            <div><div>e<sup>x</sup></div></div>
+                    			<div><div>Deg</div></div>
+	    		                <div><div>&pi;</div></div>
+                		    	<div><div>EE</div></div>
+			                    <div><div>Rand</div></div>
+                	    	</div>
+                		    <div class="calc-right">
+    	    		            <div><div>mc</div></div>
+                    			<div><div>m+</div></div>
+		    	                <div><div>m-</div></div>
+                	    		<div><div>mr</div></div>
+			                    <div class="calc-brown"><div >AC</div></div>
+            		    	    <div class="calc-brown"><div>+/&#8211;</div></div>
+    			                <div class="calc-brown calc-f19"><div>&divide;</div></div>
+                    			<div class="calc-brown calc-f21"><div>&times;</div></div>
+	        		            <div class="calc-black"><div>7</div></div>
+                    			<div class="calc-black"><div>8</div></div>
+			                    <div class="calc-black"><div>9</div></div>
+            	        		<div class="calc-brown calc-f18"><div>&#8211;</div></div>
+    			                <div class="calc-black"><div>4</div></div>
+                			    <div class="calc-black"><div >5</div></div>
+    		    	            <div class="calc-black"><div>6</div></div>
+                    			<div class="calc-brown calc-f18"><div>+</div></div>
+		    	                <div class="calc-black"><div>1</div></div>
+                		    	<div class="calc-black"><div>2</div></div>
+			                    <div class="calc-black"><div>3</div></div>
+                	    		<div class="calc-blank"><textarea></textarea></div>
+	    		                <div class="calc-orange calc-eq calc-f17"><div>
+            				        <div class="calc-down">=</div>
+                    			</div></div>
+                	    		<div class="calc-black calc-zero"><div>
+		    	    	            <span>0</span>
+                			    </div></div>
+    			                <div class="calc-black calc-f21"><div>.</div></div>
+                	    	</div>
+                	    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="calendarModal" class="modal fade" role="dialog" aria-labelledby="calendar" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="sized_modal">
@@ -892,7 +975,7 @@
                                 <li><a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/CashFlowStatement">Cash Flow Statement</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown" style="margin-right: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
@@ -900,17 +983,17 @@
                                 <li><a href="http://test-mesbrook.cloudapp.net/closing_or_adjusting_journal_entry.php">Closing Entry</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li style="margin-right: 20px;">
                             <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
                                 <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
-                                    <i style="color: #A4A4A4;" class="image glyphicon glyphicon-calendar navbar-header"></i>
+                                    <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image glyphicon glyphicon-calendar navbar-header"></i>
                                 </a>
                             </span>
                         </li>        
-                        <li>
-                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
-                                <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
-                                    <i style="color: #A4A4A4;" class="image glyphicon glyphicon-modal-window navbar-header"></i>
+                        <li style="margin-right: 20px;">
+                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper2">
+                                <a href="#" data-toggle="modal" data-target="#calculatorModal" onclick="reset_cal();">
+                                    <img src="dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
                                 </a>
                             </span>
                         </li>        
