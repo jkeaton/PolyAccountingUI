@@ -14,19 +14,19 @@ namespace AccountingJournal.Journal_and_Ledger
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                DisplayUnpostTranx();
+            DisplayUnpostTranx();
         }
         string username;
         string pass;
         private void DisplayUnpostTranx()
         {
-             var request = HttpContext.Current.Request;
-            var username_cookie = request.Cookies["UserCookie"];
-            var pass_cookie = request.Cookies["PassCookie"];
-            if (username_cookie != null && pass_cookie != null)
+            var request = HttpContext.Current.Request;
+            var user_cookie = request.Cookies["UserCookie"];
+            if (user_cookie != null)
             {
-                username = username_cookie.Value.ToString();
-                pass = pass_cookie.Value.ToString();
+                string[] userinfo = user_cookie.ToString().Split('&');
+                username = userinfo[0];
+                pass = userinfo[1];
             }
             else
             {
@@ -238,11 +238,11 @@ namespace AccountingJournal.Journal_and_Ledger
         {
             var request = HttpContext.Current.Request;
             var username_cookie = request.Cookies["UserCookie"];
-            var pass_cookie = request.Cookies["PassCookie"];
-            if (username_cookie != null && pass_cookie != null)
+            if (user_cookie != null)
             {
-                username = username_cookie.Value.ToString();
-                pass = pass_cookie.Value.ToString();
+                string[] userinfo = user_cookie.ToString().Split('&');
+                username = userinfo[0];
+                pass = userinfo[1];
             }
             else
             {
@@ -259,12 +259,12 @@ namespace AccountingJournal.Journal_and_Ledger
         private void PostButton_Click(object sender, EventArgs e)
         {
             var request = HttpContext.Current.Request;
-            var username_cookie = request.Cookies["UserCookie"];
-            var pass_cookie = request.Cookies["PassCookie"];
-            if (username_cookie != null && pass_cookie != null)
+            var user_cookie = request.Cookies["UserCookie"];
+            if (user_cookie != null)
             {
-                username = username_cookie.Value.ToString();
-                pass = pass_cookie.Value.ToString();
+                string[] userinfo = user_cookie.ToString().Split('&');
+                username = userinfo[0];
+                pass = userinfo[1];
             }
             else
             {
