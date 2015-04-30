@@ -573,7 +573,7 @@ namespace AccountingJournal.Code
             return list;
         }
 
-        public static ArrayList DisplayUnpostTranx()
+        public static ArrayList DisplayUnpostTranx(string username, string pass)
         {
             ArrayList list = new ArrayList();
             IndiJournal Journal;
@@ -594,9 +594,24 @@ namespace AccountingJournal.Code
                                  + "   ) order by 1 desc, 7 desc");
             try
             {
-                conn.Open();
-                cmd.CommandText = query;
-                SqlDataReader reader = cmd.ExecuteReader();
+                 SqlConnection connection = new SqlConnection();
+            
+            try
+            {
+                string Connstring = string.Format(@"Data Source=localhost;
+                                                Initial Catalog=TransactionDB;
+                                                Persist Security Info=True;
+                                                User ID={0}
+                                                ;Password={1}", username, pass);
+                connection = new SqlConnection(Connstring);
+                SqlCommand command = new SqlCommand("", connection);
+                connection.Open();
+                command.CommandText = query;
+                SqlDataReader reader = command.ExecuteReader();
+
+                //conn.Open();
+                //cmd.CommandText = query;
+                //SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     Journal = new IndiJournal();

@@ -16,10 +16,23 @@ namespace AccountingJournal.Journal_and_Ledger
         {
                 DisplayUnpostTranx();
         }
-
+        string username;
+        string pass;
         private void DisplayUnpostTranx()
         {
-            List<IndiJournal> unpost = Connection.DisplayUnpostTranx().Cast<IndiJournal>().ToList();
+             var request = HttpContext.Current.Request;
+            var username_cookie = request.Cookies["UserCookie"];
+            var pass_cookie = request.Cookies["PassCookie"];
+            if (username_cookie != null && pass_cookie != null)
+            {
+                username = username_cookie.Value.ToString();
+                pass = pass_cookie.Value.ToString();
+            }
+            else
+            {
+                return;
+            }
+            List<IndiJournal> unpost = Connection.DisplayUnpostTranx(username, pass).Cast<IndiJournal>().ToList();
             List<String> dr_html = new List<String>();
             List<String> cr_html = new List<String>();
             List<int> id = new List<int>();
@@ -220,8 +233,7 @@ namespace AccountingJournal.Journal_and_Ledger
                 }
             }
         }
-        string username;
-        string pass;
+
         private void RejectButton_Click(object sender, EventArgs e)
         {
             var request = HttpContext.Current.Request;
