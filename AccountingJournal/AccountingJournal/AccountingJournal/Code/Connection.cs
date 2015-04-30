@@ -1171,6 +1171,7 @@ namespace AccountingJournal.Code
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
                 var user_cookie = request.Cookies["UserCookie"];
+                var pass_cookie = request.Cookies["PassCookie"];
                 string query = string.Format(
                     "SELECT [TransactionDB].[dbo].[User].[ID]"
 	                    + ",[TransactionDB].[dbo].[AppUser].[UserName]"
@@ -1198,6 +1199,7 @@ namespace AccountingJournal.Code
                         user_info["LName"] = reader.GetString(3);
                         user_info["UType"] = reader.GetInt32(4).ToString();
                         user_info["Email"] = reader.GetString(5);
+                        user_info["Password"] = pass_cookie.Value.ToString();
                         user_info["IsLoginDisabled"] = Convert.ToInt32(reader.GetBoolean(6)).ToString();
                     }
                 }

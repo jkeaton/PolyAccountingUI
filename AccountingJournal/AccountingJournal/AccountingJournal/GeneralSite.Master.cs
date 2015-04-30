@@ -31,6 +31,7 @@ namespace AccountingJournal
                     Session["username"] = curr_user["UserName"];
                     Session["usertype"] = Int32.Parse(curr_user["UType"]);
                     Session["isdisabled"] = Int32.Parse(curr_user["IsLoginDisabled"]);
+                    Session["pass"] = curr_user["Password"];
                 }
                 else
                 {
@@ -40,13 +41,13 @@ namespace AccountingJournal
                 {
                     Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
                 }
-                welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                welcome_msg.Text = "Welcome " + Session["username"].ToString() + "/"+ Session["pass"].ToString();
             }
             else
             {
                 if (Session["userid"] != null)
                 {
-                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString() + "/" + Session["pass"].ToString();
                 }
                 else
                 {
@@ -59,7 +60,7 @@ namespace AccountingJournal
                     {
                         Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
                     }
-                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString() + "/" + Session["pass"].ToString();
                 }
             }
         }
