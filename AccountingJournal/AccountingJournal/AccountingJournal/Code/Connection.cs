@@ -1203,9 +1203,13 @@ namespace AccountingJournal.Code
             if (!(keyList.Contains("ID") && keyList.Contains("UserName") && keyList.Contains("FName")
                     && keyList.Contains("LName") && keyList.Contains("UType") && keyList.Contains("Email")
                     && keyList.Contains("IsLoginDisabled"))){
-                        ex_string += string.Format("\n{0}", keyList.ToString());
+                        ex_string += "\nKeys included: \n";
+                        foreach (String s in keyList)
+                        {
+                            ex_string += string.Format("\n{0}", s);
+                        }
                         ex = new System.ApplicationException(ex_string);
-                throw ex;
+                        throw ex;
             }
             return user_info;
         }
