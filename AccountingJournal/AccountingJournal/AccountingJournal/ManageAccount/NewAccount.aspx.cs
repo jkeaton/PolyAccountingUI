@@ -50,11 +50,11 @@ namespace AccountingJournal.ManageAccount
             {
                 Acc_Name.BackColor = Color.White;
                 AccountNumber.BackColor = Color.White;
-                HttpCookie cookie = Request.Cookies["UserInfo"];
+                HttpCookie cookie = Request.Cookies["UserCookie"];
 
                 if (cookie != null)
                 {
-                    id = Int32.Parse(cookie["uid"]);
+                    id = Int32.Parse(cookie.Value);
                 }
                 else
                 {

@@ -87,6 +87,43 @@ namespace AccountingJournal.Code
             return user;
         }
 
+        public static User GetAppUserByID(int ID)
+        {
+            // ArrayList list = new ArrayList();
+            User user = new User();
+            string query = string.Format("select u.ID, UserName, FName, LName, isnull(Email,''), Type, IsLoginDisabled  from [user] u "
+                            + " inner join UserTypeList ul on ul.f_UserID = u.ID "
+                            + " inner join UserType ut on ut.TypeID = ul.f_TypeID "
+                            + " where u.ID = {0}", ID);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    user.ID = reader.GetInt32(0);
+                    user.Username = reader.GetString(1);
+                    user.FirstName = reader.GetString(2);
+                    user.LastName = reader.GetString(3);
+                    user.Email = reader.GetString(4);
+                    user.UserType = reader.GetString(5);
+                    user.isDisabled = reader.GetInt32(6);
+
+                    //list.Add(user);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return user;
+        }
+
         public static ArrayList DisplayIncomeStatement()
         {
             ArrayList list = new ArrayList();
@@ -1112,29 +1149,38 @@ namespace AccountingJournal.Code
         public static Dictionary<string, string> GetUserInfo()
         {
             // Still working on this
-            Dictionary<string, string> user_info;
+            Dictionary<string, string> user_info = new Dictionary<string, string>();
             // Get the User ID from the cookie
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
                 var user_cookie = request.Cookies["UserCookie"];
-                user_info = new Dictionary<string, string>();
-
-                string query = string.Format("SELECT ID"
-                    + ", UserName"
-                    + ", FName"
-                    + ", Lname"
-                    + ", UType"
-                    + ", Email"
-                    + "FROM AppUser WHERE ID = ", int.Parse(user_cookie.Value));
-                decimal balance = 0;
+                string query = string.Format(
+                    "SELECT [TransactionDB].[dbo].[User].[ID]"
+	                    + ",[TransactionDB].[dbo].[AppUser].[UserName]"
+                        + ",[TransactionDB].[dbo].[AppUser].[FName]"
+                        + ",[TransactionDB].[dbo].[AppUser].[LName]"
+                        + ",[TransactionDB].[dbo].[AppUser].[UType]"
+                        + ",[TransactionDB].[dbo].[AppUser].[Email]"
+                        + ",[TransactionDB].[dbo].[User].[IsLoginDisabled]"
+                        + "FROM [TransactionDB].[dbo].[AppUser], [TransactionDB].[dbo].[User]"
+                        + "WHERE [TransactionDB].[dbo].[AppUser].[UserName] = [TransactionDB].[dbo].[User].[UserName]"
+                        + "AND"
+	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", user_cookie.Value);
                 try
                 {
                     conn.Open();
                     cmd.CommandText = query;
                     SqlDataReader reader = cmd.ExecuteReader();
+                    // There should only be one result returned from the database and that's our user
                     while (reader.Read())
-                    {
-                        balance = reader.GetDecimal(0);
+                    {   
+                        user_info["ID"] = reader.GetString(0);
+                        user_info["UserName"] = reader.GetString(1);
+                        user_info["FName"] = reader.GetString(2);
+                        user_info["LName"] = reader.GetString(3);
+                        user_info["UType"] = reader.GetString(4);
+                        user_info["Email"] = reader.GetString(5);
+                        user_info["IsLoginDisabled"] = reader.GetString(6);
                     }
                 }
                 catch (Exception e)
@@ -1146,7 +1192,7 @@ namespace AccountingJournal.Code
                     conn.Close();
                 }
             }
-            return null;
+            return user_info;
         }
 
         public static void PostTranx(int id, string username, string pass)

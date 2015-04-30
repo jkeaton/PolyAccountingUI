@@ -16,52 +16,46 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["userid"] == null)
-            //{
-            //    HttpCookie cookie = Request.Cookies["UserInfo"];
+            Dictionary<string, string> curr_user = Connection.GetUserInfo();
+            if (Session["userid"] == null)
+            {
+                if (curr_user != null)
+                {
+                    Session["userid"] = curr_user["ID"];
+                    Session["username"] = curr_user["UserName"];
+                    Session["usertype"] = Int32.Parse(curr_user["UType"]);
+                    Session["isdisabled"] = Int32.Parse(curr_user["IsLoginDisabled"]);
+                }
+                else
+                {
+                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                }
+                if (Int32.Parse(Session["isdisabled"].ToString()) == 1)
+                {
+                    Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                }
+                welcome_msg.Text = "Welcome " + Session["username"].ToString();
+            }
+            else
+            {
+                if (Session["userid"] != null)
+                {
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                }
+                else
+                {
+                    Session["userid"] = curr_user["ID"];
+                    Session["username"] = curr_user["UserName"];
+                    Session["usertype"] = Int32.Parse(curr_user["UType"]);
+                    Session["isdisabled"] = Int32.Parse(curr_user["IsLoginDisabled"]);
 
-            //    if (cookie != null)
-            //    {
-            //        int id = Int32.Parse(cookie["uid"]);
-            //        User user = Connection.GetUserByID(id);
-            //        Session["userid"] = user.ID;
-            //        Session["username"] = user.Username;
-            //        Session["usertype"] = user.UserType;
-            //        Session["isdisable"] = user.isDisabled;
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-            //    }
-            //    if (Int32.Parse(Session["isdisable"].ToString()) == 1)
-            //    {
-            //        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-            //    }
-            //    welcome_msg.Text = "Welcome " + Session["username"].ToString();
-            //}
-            //else
-            //{
-            //    if (Session["userid"] != null)
-            //    {
-            //        welcome_msg.Text = "Welcome " + Session["username"].ToString();
-            //    }
-            //    else
-            //    {
-
-            //            int id = Int32.Parse(Session["userid"].ToString());
-            //            User user = Connection.GetUserByID(id);
-            //            Session["userid"] = user.ID;
-            //            Session["username"] = user.Username;
-            //            Session["usertype"] = user.UserType;
-            //            Session["isdisable"] = user.isDisabled;
-
-            //        if (Int32.Parse(Session["isdisable"].ToString()) == 1)
-            //        {
-            //            Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
-            //        }
-            //        welcome_msg.Text = "Welcome " + Session["username"].ToString();
-            //    }
-            //}
+                    if (Int32.Parse(Session["isdisabled"].ToString()) == 1)
+                    {
+                        Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+                    }
+                    welcome_msg.Text = "Welcome " + Session["username"].ToString();
+                }
+            }
         }
         private bool IsValid(string emailaddress)
         {
