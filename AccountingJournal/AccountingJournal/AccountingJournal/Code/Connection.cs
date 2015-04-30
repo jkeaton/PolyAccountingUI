@@ -1171,7 +1171,9 @@ namespace AccountingJournal.Code
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
                 var user_cookie = request.Cookies["UserCookie"];
-                var pass_cookie = request.Cookies["PassCookie"];
+            string [] userinfo = user_cookie.ToString().Split('&');
+            string username = userinfo[0];
+            string password = userinfo[1];
                 string query = string.Format(
                     "SELECT [TransactionDB].[dbo].[User].[ID]"
 	                    + ",[TransactionDB].[dbo].[AppUser].[UserName]"
@@ -1183,7 +1185,7 @@ namespace AccountingJournal.Code
                         + "FROM [TransactionDB].[dbo].[AppUser], [TransactionDB].[dbo].[User]"
                         + "WHERE [TransactionDB].[dbo].[AppUser].[UserName] = [TransactionDB].[dbo].[User].[UserName]"
                         + "AND"
-	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", (user_cookie.Value.ToString()));
+	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", (username));
                 try
                 {
                     conn.Open();
@@ -1199,7 +1201,7 @@ namespace AccountingJournal.Code
                         user_info["LName"] = reader.GetString(3);
                         user_info["UType"] = reader.GetInt32(4).ToString();
                         user_info["Email"] = reader.GetString(5);
-                        user_info["Password"] = pass_cookie.Value.ToString();
+                        user_info["Password"] = password;
                         user_info["IsLoginDisabled"] = Convert.ToInt32(reader.GetBoolean(6)).ToString();
                     }
                 }

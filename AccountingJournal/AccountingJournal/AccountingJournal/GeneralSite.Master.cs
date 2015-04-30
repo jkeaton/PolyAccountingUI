@@ -18,6 +18,7 @@ namespace AccountingJournal
         {
             var request = HttpContext.Current.Request;
             var user_cookie = request.Cookies["UserCookie"];
+
             if (user_cookie == null)
             {
                 Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
