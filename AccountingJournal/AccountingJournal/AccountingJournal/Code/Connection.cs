@@ -1183,7 +1183,7 @@ namespace AccountingJournal.Code
                         user_info["LName"] = reader.GetString(3);
                         user_info["UType"] = reader.GetInt32(4).ToString();
                         user_info["Email"] = reader.GetString(5);
-                        user_info["IsLoginDisabled"] = reader.GetInt32(6).ToString();
+                        user_info["IsLoginDisabled"] = reader.GetString(6);
                     }
                 }
                 finally
