@@ -1149,7 +1149,8 @@ namespace AccountingJournal.Code
         public static Dictionary<string, string> GetUserInfo()
         {
             // Still working on this
-            Dictionary<string, string> user_info = new Dictionary<string, string>();
+            Dictionary<string, string> user_info = null;
+            System.ApplicationException ex = null;
             // Get the User ID from the cookie
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
@@ -1172,8 +1173,9 @@ namespace AccountingJournal.Code
                     cmd.CommandText = query;
                     SqlDataReader reader = cmd.ExecuteReader();
                     // There should only be one result returned from the database and that's our user
+                    user_info = new Dictionary<string, string>();
                     while (reader.Read())
-                    {   
+                    {
                         user_info["ID"] = reader.GetString(0);
                         user_info["UserName"] = reader.GetString(1);
                         user_info["FName"] = reader.GetString(2);
@@ -1191,6 +1193,16 @@ namespace AccountingJournal.Code
                 {
                     conn.Close();
                 }
+                ex = new System.ApplicationException(
+                    string.Format("Error: Unable to retrieve user information from database. Username from cookie is {0}"
+                    , user_cookie.Value));
+            }
+            List<string> keyList = new List<string>(user_info.Keys);
+            // If ANY of the necessary keys in this dictionary have not been set, thrown the appropriate exception
+            if (!(keyList.Contains("ID") && keyList.Contains("UserName") && keyList.Contains("FName")
+                    && keyList.Contains("LName") && keyList.Contains("UType") && keyList.Contains("Email")
+                    && keyList.Contains("IsLoginDisabled"))){
+                throw ex;
             }
             return user_info;
         }
