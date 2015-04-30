@@ -1177,7 +1177,7 @@ namespace AccountingJournal.Code
                     user_info = new Dictionary<String, String>();
                     while (reader.Read())
                     {
-                        user_info["ID"] = reader.GetString(0);
+                        user_info["ID"] = reader.GetInt32(0).ToString();
                         user_info["UserName"] = reader.GetString(1);
                         user_info["FName"] = reader.GetString(2);
                         user_info["LName"] = reader.GetString(3);
