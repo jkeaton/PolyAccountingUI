@@ -272,6 +272,7 @@
         </div>
         <!-- End Calculator and Calendar Modals -->
     <div id="wrapper" class="container">
+        <form runat="server">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -355,16 +356,13 @@
                             </a>
                         </li>
                         <li class="navbar-left">
-                            <form role="form" class="navbar-form navbar-left" method="post" runat="server">
-                                <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
-                            </form>
+                            <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div id="Content">
-            <form runat="server">
                 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
@@ -477,9 +475,8 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-            </form>
         </div>
-
+    </form>
     </div>
 </body>
 </html>
