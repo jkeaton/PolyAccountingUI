@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GeneralSite.Master" AutoEventWireup="true" CodeBehind="NewAccount.aspx.cs" Inherits="AccountingJournal.ManageAccount.NewAccount" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.Master" AutoEventWireup="true" CodeBehind="NewAccount.aspx.cs" Inherits="AccountingJournal.ManageAccount.NewAccount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

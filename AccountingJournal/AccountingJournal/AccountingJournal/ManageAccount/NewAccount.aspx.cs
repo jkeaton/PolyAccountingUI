@@ -52,9 +52,9 @@ namespace AccountingJournal.ManageAccount
                 AccountNumber.BackColor = Color.White;
                 HttpCookie cookie = Request.Cookies["UserCookie"];
 
-                if (cookie != null)
+                if (Session["userid"] != null)
                 {
-                    id = Int32.Parse(cookie.Value);
+                    id = Int32.Parse(Session["userid"].ToString());
                 }
                 else
                 {
