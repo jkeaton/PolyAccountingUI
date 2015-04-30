@@ -220,23 +220,48 @@ namespace AccountingJournal.Journal_and_Ledger
                 }
             }
         }
-
+        string username;
+        string pass;
         private void RejectButton_Click(object sender, EventArgs e)
         {
+            var request = HttpContext.Current.Request;
+            var username_cookie = request.Cookies["UserCookie"];
+            var pass_cookie = request.Cookies["PassCookie"];
+            if (username_cookie != null && pass_cookie != null)
+            {
+                username = username_cookie.Value.ToString();
+                pass = pass_cookie.Value.ToString();
+            }
+            else
+            {
+                return;
+            }
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.RejectTranx(jourid, "Noman", "odysseus");
+            Connection.RejectTranx(jourid, username, pass);
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }
 
         private void PostButton_Click(object sender, EventArgs e)
         {
+            var request = HttpContext.Current.Request;
+            var username_cookie = request.Cookies["UserCookie"];
+            var pass_cookie = request.Cookies["PassCookie"];
+            if (username_cookie != null && pass_cookie != null)
+            {
+                username = username_cookie.Value.ToString();
+                pass = pass_cookie.Value.ToString();
+            }
+            else
+            {
+                return;
+            }
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.PostTranx(jourid, "Noman", "odysseus");
+            Connection.PostTranx(jourid, username, pass);
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }

@@ -295,7 +295,7 @@
                             <li style="margin-right: 20px;">
                                 <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper2">
                                     <a href="#" data-toggle="modal" data-target="#calculatorModal">
-                                        <img src="http://test-mesbrook.cloudapp.net/dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
+                                        <img src="http://test-mesbrook.cloudapp.net/dist/images/calculator.png" style="color:#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
                                     </a>
                                 </span>
                             </li>
