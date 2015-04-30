@@ -1149,7 +1149,7 @@ namespace AccountingJournal.Code
         public static Dictionary<string, string> GetUserInfo()
         {
             // Still working on this
-            Dictionary<string, string> user_info = null;
+            Dictionary<String, String> user_info = null;
             System.ApplicationException ex = null;
             // Get the User ID from the cookie
             if (HttpContext.Current != null){
