@@ -312,3 +312,31 @@ i {
     font-size: 18px;
     text-align: right;
 }
+.dashboard_panel {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.ratio_panel {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    background-color: black;
+    height: 100%;
+    padding: 10px;
+}
+.ratio_name {
+    font-family: sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #D0D0D0;
+}
+.ratio_output {
+    font-family: sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #D0D0D0;
+}
+.ratio_content {
+    background-color: black;
+}

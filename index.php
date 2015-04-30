@@ -8,13 +8,20 @@
     $username = $pass = $hashed_pass = "";
     $utype = 100;
     $uid = -1;
+    clear_cookie();
 
     // Deal with the form being submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         // Handle insert event attempt
         if (isset($_POST['submit'])) {
-            //header('Location: http://test-mesbrook.cloudapp.net/mark_landing/startScreen.html');
             validateFields();
+        }
+    }
+
+    function clear_cookie(){
+        if(isset($_COOKIE['UserCookie'])) {
+            unset($_COOKIE['UserCookie']);
+            setcookie('UserCookie', '', time() - 3600); // empty value and old timestamp
         }
     }
 

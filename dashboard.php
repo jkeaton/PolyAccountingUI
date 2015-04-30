@@ -1,11 +1,11 @@
 <?php
     session_start();
-    include "../dist/dbconnect.php";
-    include "../dist/common.php";
-	bounce();
+    include "dist/dbconnect.php";
+    include "dist/common.php";
 
     // Attempt to connect to the database using current user's credentials
     $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+    $ratio_array = array();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
@@ -17,13 +17,124 @@
         }
     }
 
-    send_to_main();
-
     $welcome_msg = "Welcome ".$_SESSION['user'];
     $inbox = get_inbox($_SESSION['user'], $dbConnection);
     $inbox_ct = count($inbox);
     $recipients = array();
     $subject = $message = "";
+    $levels = array(
+        'green' => 'http://test-mesbrook.cloudapp.net/dist/images/circ2.png',
+        'yellow' => 'http://test-mesbrook.cloudapp.net/dist/images/circ3.png',
+        'red' => 'http://test-mesbrook.cloudapp.net/dist/images/circ1.png'
+    );
+    set_ratio_array();
+    
+    function get_main_menu(){
+        if ($_SESSION['level'] === 0){
+            return './mark_landing/adminpanel.php';
+        }
+        elseif ($_SESSION['level'] === 1){
+            return './mark_landing/controlpanel.php';
+        }
+        elseif ($_SESSION['level'] === 2){
+            return './mark_landing/controlpanel.php';
+        }
+        else{
+            var_dump($_SESSION['level']);
+        }
+    }
+
+    function set_ratio_array(){
+        global $dbConnection, $ratio_array;
+        $sql = 'EXEC ratio';
+        $results = sqlsrv_query($dbConnection, $sql);
+        $ratio_array = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC);
+        return 0;
+    }
+
+    function generateRatioPanel($metric, $low_mark, $high_mark){
+        global $levels, $ratio_array;
+        $val = 0;
+        $f_url = '';
+        $output = '';
+        switch ($metric){
+            case 'CR':
+                $val = $ratio_array['CurrentRatio'];
+                if ($val > $high_mark){
+                    $f_url = $levels['green'];
+                }
+                elseif ($val > $low_mark){
+                    $f_url = $levels['yellow'];
+                }
+                else{
+                    $f_url = $levels['red'];
+                }
+                $out = sprintf('%.1f:1', $val);
+                $output = get_ratio_html('Current Ratio', $out, $f_url);
+                break;
+            case 'DA':
+                $val = $ratio_array['Debt-to-assetRatio'];
+                if ($val < $low_mark){
+                    $f_url = $levels['green'];
+                }
+                elseif ($val < $high_mark){
+                    $f_url = $levels['yellow'];
+                }
+                else{
+                    $f_url = $levels['red'];
+                }
+                $out = sprintf('%.1f:1', $val);
+                $output = get_ratio_html('Debt-to-Asset Ratio', $out, $f_url);
+                break;
+            case 'ROA':
+                $val = ($ratio_array['Revenue']-$ratio_array['Expense'])/($ratio_array['Asset'] * 1.0);
+                if ($val > $high_mark){
+                    $f_url = $levels['green'];
+                }
+                elseif ($val > $low_mark){
+                    $f_url = $levels['yellow'];
+                }
+                else{
+                    $f_url = $levels['red'];
+                }
+                $out = sprintf('%.1f:1', $val);
+                $output = get_ratio_html('Return on Assets (ROA)', $out, $f_url);
+                break;
+            case 'EM':
+                $val = ($ratio_array['Asset']/($ratio_array["Owner's Equity"] * 1.0));
+                if ($val < $low_mark){
+                    $f_url = $levels['green'];
+                }
+                elseif ($val < $high_mark){
+                    $f_url = $levels['yellow'];
+                }
+                else{
+                    $f_url = $levels['red'];
+                }
+                $out = sprintf('%.1f:1', $val);
+                $output = get_ratio_html('Equity Multiplier (EM)', $out, $f_url);
+                break;
+            default:
+                // do nothing           
+        }
+        return $output;
+    }
+
+    function get_ratio_html($name, $out, $url){
+        return ('<div class="container-fluid">'
+            . '<div class="col-sm-4">'
+            . '<img src="'.$url.'" class="image navbar-header" height="120" width="120"></img>'
+            . '</div>'
+            . '<div class="col-sm-8 ratio_content">'
+            . '<div class="container-fluid">'
+            . '<div class="row" style="width: 100%;">'
+            . '<label class="ratio_name">'.$name.'</label></div>'
+            . '<div class="row" style="width: 100%;">'
+            . '<label class="ratio_output">'.$out.'</label></div>'
+            . '</div>'
+            . '</div>'
+            . '</div>');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +142,7 @@
 
     <head>
         <title>
-            Control Panel
+            Dashboard
         </title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -291,7 +402,7 @@
                 <div class="navbar-header">
                     <img src="../dist/images/AppDomainFinalProjectLogo.png"
                     alt="PAI Logo" height="30" width="30" class="logo-top nav"> 
-                    <a class="navbar-brand" href="#">Poly Accounting Information Group</a>
+                    <a class="navbar-brand" href="<?php echo get_main_menu(); ?>">Poly Accounting Information Group</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -369,118 +480,46 @@
             </div>
         </nav>
         
-        <div class="panel-group" id="main-page" role="tablist">
+        <div class="panel-group" id="main-page">
             <div class="container">
-                <div class="panel panel-primary col-centered form-group">
+                <div class="panel panel-primary col-centered form-group dashboard_panel">
                     <div class="panel-heading text-center">
-                        <h3 class="panel-title centered-y">Control Panel</h3>
+                        <h3 class="panel-title centered-y">Dash Board</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="panel panel-info">
-                            <div class="panel-heading panel-heading-sm text-center">
-                                <h3 class="panel-title centered-y-sm">View Financial Statements</h3>
-                            </div>
-                            <div class="panel-body container-fluid">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/Chart%20of%20Account">View Chart of Accounts</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/OwnerEquityState">View Statement of Owner's Equity</a>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/General%20Journal">View All Posted Transactions</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/TrialBalance">View Trial Balance</a>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/UnpostTranx">View All Pending Transactions</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/CashFlowStatement">View Cash Flow Statement</a>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Journal%20and%20Ledger/RejectedTransaction">View All Rejected Transactions</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/BalanceSheet.aspx">View Balance Sheet</a>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="http://test-mesbrook.cloudapp.net/ASP_NET/Financial%20Statement/IncomeStatement">View Income Statement</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                    </div>  
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-info panel-buffer">
-                            <div class="panel-heading panel-heading-sm text-center">
-                                <h3 class="panel-title centered-y-sm">Record Transactions</h3>
-                            </div>
-                            <div class="panel-body container-fluid">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="../journalentry.php">Record a Journal Entry</a>
-                                    </div>  
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="../closing_or_adjusting_journal_entry.php">Record an Adjusting Journal Entry</a>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <a href="../closing_or_adjusting_journal_entry.php">Record a Closing Journal Entry</a>
-                                    </div>  
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-danger form-group col-centered panel-buffer">
-                            <div class="panel-heading panel-heading-sm text-center">
-                                <h3 class="panel-title centered-y-sm">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#main-page" href="#email-panel" aria-expanded="false" aria-controls="email-panel">
-                                        Send Message
-                                    </a>
-                                </h3>
-                            </div>
-                            <!-- Side Panel for sending Email -->
-                            <div role="tabpanel" id="email-panel" class="panel-collapse collapse panel-body">
-                                <form role="form" class="form-signin container-fluid" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-                                    <div class="row top-buffer">
-                                        <input type="text" class="form-control" id="recipients" name="recipients" placeholder="Recipients">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default ratio_panel">
+                                        <div class="row">
+                                            <?php echo generateRatioPanel('CR', .75, 2.00); ?>
+                                        </div> 
                                     </div>
-                                    <div class="row top-buffer">
-                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default ratio_panel">
+                                        <div class="row">
+                                            <?php echo generateRatioPanel('DA', .50, 1.25); ?>
+                                        </div> 
                                     </div>
-                                    <div class="row top-buffer">
-                                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Message"></textarea>
+                                </div>
+                            </div><br/>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default ratio_panel">
+                                        <div class="row ">
+                                            <?php echo generateRatioPanel('ROA', .9, 1.4); ?>
+                                        </div> 
                                     </div>
-                                    <div class="row top-buffer no-gutter">
-                                        <div class="col-xs-6 col-sm-3 left-btn">
-                                            <button id="contacts" type="button" class="btn btn-primary form-control" name="contacts">
-                                                Find Recipients
-                                            </button>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-3 left-btn">
-                                            <button id="attach" type="button" class="btn btn-primary form-control" name="attach">
-                                                Upload Attachment
-                                            </button>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-3 col-sm-offset-3 right-btn">
-                                            <button id="send" type="submit" class="btn btn-primary form-control" name="send">
-                                                Send
-                                            </button>
-                                        </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default ratio_panel">
+                                        <div class="row">
+                                            <?php echo generateRatioPanel('EM', .95, 1.50); ?>
+                                        </div> 
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </div><br/>
                         </div>
                     </div>
                 </div>
