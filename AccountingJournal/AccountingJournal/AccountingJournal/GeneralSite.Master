@@ -350,7 +350,9 @@
                                 </a>
                             </li>
                             <li class="navbar-left">
-                                <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
+                                <div class="navbar-form">
+                                    <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
+                                </div>
                             </li>
                         </ul>
                     </div>
