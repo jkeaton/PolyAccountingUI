@@ -1185,21 +1185,14 @@ namespace AccountingJournal.Code
                         + "FROM [TransactionDB].[dbo].[AppUser], [TransactionDB].[dbo].[User]"
                         + "WHERE [TransactionDB].[dbo].[AppUser].[UserName] = [TransactionDB].[dbo].[User].[UserName]"
                         + "AND"
-	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", (username));
-                 SqlConnection connection = new SqlConnection();
+	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", username);
 
-            try
-            {
-                string Connstring = string.Format(@"Data Source=localhost;
-                                                Initial Catalog=TransactionDB;
-                                                Persist Security Info=True;
-                                                User ID={0}
-                                                ;Password={1}", username, password);
-                connection = new SqlConnection(Connstring);
-                SqlCommand command = new SqlCommand("", connection);
-                connection.Open();
-                command.CommandText = query;
-                SqlDataReader reader = command.ExecuteReader();    // There should only be one result returned from the database and that's our user
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = query;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    // There should only be one result returned from the database and that's our user
                     user_info = new Dictionary<String, String>();
                     while (reader.Read())
                     {
@@ -1217,8 +1210,8 @@ namespace AccountingJournal.Code
                 {
                     conn.Close();
                 }
-                ex_string += string.Format("Error: Unable to retrieve user information from database. Username from cookie is {0}"
-                    , user_cookie.Value);
+                ex_string += string.Format("Error: Unable to retrieve user information from database. Username from cookie is {0} and {1}"
+                    , username, password);
                 
             }
             List<String> keyList = new List<String>(user_info.Keys);
