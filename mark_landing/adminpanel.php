@@ -6,6 +6,7 @@
 
     // Attempt to connect to the database using current user's credentials
     $dbConnection = db_connect($_SESSION['db_uid'], $_SESSION['db_pass']);
+    $user_array = array();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['logout'])){
@@ -15,13 +16,106 @@
             send_email($dbConnection);
             $_POST = array();
         }
+        if (isset($_POST['save'])){
+            save_changes();
+            $_POST = array();
+        }
     }
 
     send_to_main();
-
+    set_users();
     $welcome_msg = "Welcome ".$_SESSION['user'];
     $inbox = get_inbox($_SESSION['user'], $dbConnection);
     $inbox_ct = count($inbox);
+    $today = date('m/d/Y');
+
+    function set_users(){
+        global $dbConnection, $user_array;
+        $sql = ('SELECT [ID]'
+            . ',[UserName]'
+            . ',[FName]'
+            . ',[LName]'
+	        . ',[Type]'
+            . ',[Email]'
+            . ',[IsLoginDisabled]'
+            . 'FROM [TransactionDB].[dbo].[UserList]');
+        $results = sqlsrv_query($dbConnection, $sql);
+        // Add all users indexed by ID
+        while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
+            $user_array[$row['ID']] = $row;
+        }
+    }
+
+    function disable_user($un){
+        global $dbConnection;
+        if ($un != 'admin'){
+            $sql = "UPDATE [TransactionDB].[dbo].[User] SET [IsLoginDisabled] = 1 "
+                . "WHERE UserName = '".$un."';";
+            $results = sqlsrv_query($dbConnection, $sql);
+        }
+        return 0;
+    }
+
+    function enable_user($un){
+        global $dbConnection;
+        if ($un != 'admin'){
+            $sql = "UPDATE [TransactionDB].[dbo].[User] SET [IsLoginDisabled] = 0 "
+                . "WHERE UserName = '".$un."';";
+            $results = sqlsrv_query($dbConnection, $sql);
+        }
+        return 0;
+    }
+
+    function get_users(){
+        global $user_array;
+        $output = '<tbody class="tbody">';
+        $count = 0;
+        foreach ($user_array as $val){
+            $output .= ("<tr>"
+                . "<td class='col-sm-1 text-center'>". $val['ID'] ."</td>"
+                . "<td class='col-sm-2 text-left'>"
+                . "<input type='hidden' value='". $val['UserName'] ."' name='un[".$count."]'/>"
+                . $val['UserName']
+                . "</td>"
+                . "<td class='col-sm-2 text-left'>". $val['FName'] ."</td>"
+                . "<td class='col-sm-2 text-left'>". $val['LName'] ."</td>"
+                . "<td class='col-sm-2 text-left'>". $val['Type'] ."</td>"
+                . "<td class='col-sm-2 text-left'>". $val['Email'] ."</td>"
+                . "<td class='col-sm-1 text-center'>"
+                . "<input type='checkbox' onchange='set_val(\"cb_".$count."\");' id='cb_".$count."' name='cb[".$count."]' value='". $val['IsLoginDisabled'] ."'/>"
+                . "</td>"
+                . "</tr>");
+            $count++;
+        }
+        $output .= '</tbody>';
+        return $output;
+    }
+
+    function save_changes(){
+        var_dump($_POST);
+        if (isset($_POST['un'])){
+            // enable the users for whom the disable checkbox isn't set
+            // disable the ones where it is set
+            if (isset($_POST['cb'])){
+                foreach ($_POST['un'] as $key => $val){
+                    if (isset($_POST['cb'][$key])){
+                        disable_user($_POST['un'][$key]);
+                    }
+                    else{
+                        enable_user($_POST['un'][$key]);
+                    }
+                }
+            }
+            // enable all users here
+            else{
+                foreach ($_POST['un'] as $key => $val){
+                    enable_user($_POST['un'][$key]);
+                }
+            }
+        }
+        $_POST = array();
+        header('Location: http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +126,6 @@
             Admin Control Panel
         </title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <!-- CSS Style Sheets -->
 		<link href="../dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="../dist/css/bootstrap.css" rel="stylesheet">
@@ -139,6 +232,18 @@
                 elem.value = in_string;    
             }
 
+            $('input:checkbox[value=1]').attr('checked', 'checked');
+
+            function set_val(id){
+                var elem = document.getElementById(id);
+                if (elem.checked){
+                    elem.value = 1;
+                }
+                else {
+                    elem.value = 0;
+                }
+            }
+
             /*-------------------End of Calculator and Calendar Functions--------------*/
         </script>
     </head>
@@ -156,7 +261,7 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-sm-12">
-                            <input type="text" id="calc_input" name="calc_input" value="<?php echo $calc_val; ?>" class="form-control" readonly/>
+                            <input type="text" id="calc_input" name="calc_input" value="" class="form-control" readonly/>
                             </div>
                         </div><br/>
                         <div class="row">
@@ -344,7 +449,6 @@
                 </div>
             </div>
         </nav>
-        
         <div class="panel-group" id="main-page" role="tablist">
             <div class="container">
                 <div class="panel panel-primary col-centered form-group">
@@ -352,11 +456,60 @@
                         <h3 class="panel-title centered-y">Control Panel</h3>
                     </div>
                     <div class="panel-body">
+                        <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                         <div class="panel panel-info">
                             <div class="panel-heading panel-heading-sm text-center">
                                 <h3 class="panel-title centered-y-sm">Users</h3>
                             </div>
                             <div class="panel-body container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-1 text-center">
+                                        <label class='my_th'>
+                                            ID 
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 text-left">
+                                        <label class='my_th'>
+                                            User Name 
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 text-left">
+                                        <label class="my_th">
+                                            First Name 
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 text-left">
+                                        <label class='my_th'>
+                                            Last Name
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 text-left">
+                                        <label class='my_th'>
+                                            User Type
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 text-left">
+                                        <label class='my_th'>
+                                            Email
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-1 text-center">
+                                        <label class='my_th'>
+                                            Disabled 
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row" id="table_portion">
+                                    <table class="table table-hover">
+                                        <?php echo get_users(); ?>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-offset-9 col-sm-3 text-right">
+                                        <button type="submit" name="save" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
                                         <a href="">Create New User</a>
@@ -372,6 +525,7 @@
                                 </div>
                             </div>
                         </div>
+                        </form>
                         <div class="panel panel-info panel-buffer">
                             <div class="panel-heading panel-heading-sm text-center">
                                 <h3 class="panel-title centered-y-sm">Account</h3>

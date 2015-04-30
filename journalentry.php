@@ -916,7 +916,7 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-sm-12">
-                            <input type="text" id="calc_input" name="calc_input" value="<?php echo $calc_val; ?>" class="form-control" readonly/>
+                            <input type="text" id="calc_input" name="calc_input" value="" class="form-control" readonly/>
                             </div>
                         </div><br/>
                         <div class="row">

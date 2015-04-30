@@ -27,6 +27,7 @@
         'yellow' => 'http://test-mesbrook.cloudapp.net/dist/images/circ3.png',
         'red' => 'http://test-mesbrook.cloudapp.net/dist/images/circ1.png'
     );
+    $today = date('m/d/Y');
     set_ratio_array();
     
     function get_main_menu(){
@@ -266,7 +267,7 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-sm-12">
-                            <input type="text" id="calc_input" name="calc_input" value="<?php echo $calc_val; ?>" class="form-control" readonly/>
+                            <input type="text" id="calc_input" name="calc_input" value="" class="form-control" readonly/>
                             </div>
                         </div><br/>
                         <div class="row">

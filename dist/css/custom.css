@@ -340,3 +340,10 @@ i {
 .ratio_content {
     background-color: black;
 }
+.my_th{
+    font-size: 14px;
+    font-weight: bold;
+}
+#table_portion {
+    overflow-y: auto;
+}
