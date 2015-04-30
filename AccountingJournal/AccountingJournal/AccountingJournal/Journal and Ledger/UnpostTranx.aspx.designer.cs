@@ -29,5 +29,14 @@ namespace AccountingJournal.Journal_and_Ledger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderRow Table1HeaderRow;
+        
+        /// <summary>
+        /// TESTLABEL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TESTLABEL;
     }
 }

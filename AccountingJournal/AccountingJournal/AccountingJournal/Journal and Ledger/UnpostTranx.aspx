@@ -38,6 +38,9 @@
                     </asp:TableHeaderRow>
                 </asp:Table>
             </div>
+            <div>
+                <asp:Label ID="TESTLABEL" runat="server"></asp:Label>
+            </div>
         </div>
     </div>
 </asp:Content>

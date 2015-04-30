@@ -261,7 +261,7 @@ namespace AccountingJournal.Journal_and_Ledger
             Button rejected = (Button)sender;
             TableRow row = rejected.Parent.Parent as TableRow;
             int jourid = Int32.Parse(row.Cells[6].Text);
-            Connection.PostTranx(jourid, username, pass);
+            TESTLABEL.Text = Connection.PostTranx(jourid, username, pass);
             //DisplayUnpostTranx();
             Response.Redirect(Request.RawUrl.ToString());
         }

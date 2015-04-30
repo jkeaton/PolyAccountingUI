@@ -97,7 +97,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Account #" SortExpression="AccNumber" ItemStyle-Width="100px">
                                         <EditItemTemplate>
-                                            <asp:TextBox ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="form-control text-center"></asp:TextBox>
+                                            <asp:TextBox ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="form-control text-center" TextMode="Number"></asp:TextBox>
                                         </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label6" runat="server" Text='<%# Bind("AccNumber") %>' CssClass="text-center"></asp:Label>

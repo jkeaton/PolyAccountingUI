@@ -1210,11 +1210,12 @@ namespace AccountingJournal.Code
             return user_info;
         }
 
-        public static void PostTranx(int id, string username, string pass)
+        public static string PostTranx(int id, string username, string pass)
         {
-            string query = string.Format("EXEC [PostEntry] {0}", id);
+            //string query = string.Format("EXEC [PostEntry] {0}", id);
+            string query = string.Format("PRINT CURRENT_USER");
             SqlConnection connection = new SqlConnection();
-
+            string test = "";
             try
             {
                 string Connstring = string.Format(@"Data Source=localhost;
@@ -1224,11 +1225,13 @@ namespace AccountingJournal.Code
                                                 ;Password={1}", username, pass);
                 connection = new SqlConnection(Connstring);
                 SqlCommand command = new SqlCommand("", connection);
-
                 connection.Open();
                 command.CommandText = query;
                 SqlDataReader reader = command.ExecuteReader();
-
+                while (reader.Read())
+                {
+                    test = reader.GetString(0);
+                }
             }
             catch (Exception e)
             {
@@ -1238,6 +1241,7 @@ namespace AccountingJournal.Code
             {
                 connection.Close();
             }
+            return test;
         }
 
         public static void RejectTranx(int id, string username, string pass)
