@@ -237,7 +237,7 @@ namespace AccountingJournal.Journal_and_Ledger
         private void RejectButton_Click(object sender, EventArgs e)
         {
             var request = HttpContext.Current.Request;
-            var username_cookie = request.Cookies["UserCookie"];
+            var user_cookie = request.Cookies["UserCookie"];
             if (user_cookie != null)
             {
                 string[] userinfo = user_cookie.ToString().Split('&');

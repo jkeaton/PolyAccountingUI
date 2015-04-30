@@ -1171,7 +1171,7 @@ namespace AccountingJournal.Code
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
                 var user_cookie = request.Cookies["UserCookie"];
-            string [] userinfo = user_cookie.ToString().Split('&');
+            string [] userinfo = user_cookie.ToString().Split('.');
             string username = userinfo[0];
             string password = userinfo[1];
                 string query = string.Format(
