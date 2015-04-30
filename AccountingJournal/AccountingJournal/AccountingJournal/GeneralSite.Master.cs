@@ -16,6 +16,12 @@ namespace AccountingJournal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var request = HttpContext.Current.Request;
+            var user_cookie = request.Cookies["UserCookie"];
+            if (user_cookie == null)
+            {
+                Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
+            }
             Dictionary<string, string> curr_user = Connection.GetUserInfo();
             if (Session["userid"] == null)
             {
