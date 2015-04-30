@@ -1151,6 +1151,7 @@ namespace AccountingJournal.Code
             // Still working on this
             Dictionary<String, String> user_info = null;
             System.ApplicationException ex = null;
+            string ex_string = "";
             // Get the User ID from the cookie
             if (HttpContext.Current != null){
                 var request = HttpContext.Current.Request;
@@ -1166,7 +1167,7 @@ namespace AccountingJournal.Code
                         + "FROM [TransactionDB].[dbo].[AppUser], [TransactionDB].[dbo].[User]"
                         + "WHERE [TransactionDB].[dbo].[AppUser].[UserName] = [TransactionDB].[dbo].[User].[UserName]"
                         + "AND"
-	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", user_cookie.Value);
+	                    + "[TransactionDB].[dbo].[AppUser].[UserName] = '{0}';", (user_cookie.Value.ToString()));
                 try
                 {
                     conn.Open();
@@ -1193,15 +1194,17 @@ namespace AccountingJournal.Code
                 {
                     conn.Close();
                 }
-                ex = new System.ApplicationException(
-                    string.Format("Error: Unable to retrieve user information from database. Username from cookie is {0}"
-                    , user_cookie.Value));
+                ex_string += string.Format("Error: Unable to retrieve user information from database. Username from cookie is {0}"
+                    , user_cookie.Value);
+                
             }
             List<string> keyList = new List<string>(user_info.Keys);
             // If ANY of the necessary keys in this dictionary have not been set, thrown the appropriate exception
             if (!(keyList.Contains("ID") && keyList.Contains("UserName") && keyList.Contains("FName")
                     && keyList.Contains("LName") && keyList.Contains("UType") && keyList.Contains("Email")
                     && keyList.Contains("IsLoginDisabled"))){
+                        ex_string += string.Format("\n{0}", keyList.ToString());
+                        ex = new System.ApplicationException(ex_string);
                 throw ex;
             }
             return user_info;
