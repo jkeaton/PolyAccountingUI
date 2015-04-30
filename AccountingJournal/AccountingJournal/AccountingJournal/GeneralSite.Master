@@ -273,210 +273,196 @@
         <!-- End Calculator and Calendar Modals -->
     <div id="wrapper" class="container">
         <form runat="server">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
-                        alt="PAI Logo" height="30" width="30" class="logo-top nav" />
-                    <a class="navbar-brand" href="http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php">Poly Accounting Information Group</a>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <img src="http://test-mesbrook.cloudapp.net/dist/images/AppDomainFinalProjectLogo.png"
+                            alt="PAI Logo" height="30" width="30" class="logo-top nav" />
+                        <a class="navbar-brand" href="http://test-mesbrook.cloudapp.net/mark_landing/controlpanel.php">Poly Accounting Information Group</a>
+                    </div>
+                    <%--<a href="fonts/">fonts/</a>--%>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="../Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
+                                    <li><a href="../Journal%20and%20Ledger/General%20Journal">View All Posted Transactions</a></li>
+                                    <li><a href="../Journal%20and%20Ledger/UnpostTranx.aspx">View All Pending Transactions</a></li>
+                                    <li><a href="../Journal%20and%20Ledger/RejectedTransaction.aspx">View All Rejected Transactions</a></li>
+                                    <li><a href="../Financial%20Statement/TrialBalance">Trial Balance</a></li>
+                                    <li><a href="../Financial%20Statement/IncomeStatement">Income Statement</a></li>
+                                    <li><a href="../Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
+                                    <li><a href="../Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
+                                    <li><a href="../Financial%20Statement/CashFlowStatement">Cash Flow Statement</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" style="margin-right: 20px;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
+                                    <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
+                                    <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
+                                </ul>
+                            </li>
+                            <!-- Links for Calculator and Calendar Modals and Wiki-->
+                            <li style="margin-right: 20px;">
+                                <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
+                                    <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
+                                        <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image glyphicon glyphicon-calendar navbar-header"></i>
+                                    </a>
+                                </span>
+                            </li>        
+                            <li style="margin-right: 20px;">
+                                <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper2">
+                                    <a href="#" data-toggle="modal" data-target="#calculatorModal">
+                                        <img src="http://test-mesbrook.cloudapp.net/dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
+                                    </a>
+                                </span>
+                            </li>
+                            <li style="margin-right: 20px;">
+                                <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper3">
+                                    <a href="https://polyaccounting.wordpress.com/">
+                                        <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image3 glyphicon glyphicon-question-sign navbar-header"></i>
+                                    </a>
+                                </span>
+                            </li>
+                            <!-- End Links for Calculator and Calendar Modals -->
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-left">
+                                <a>
+                                    <asp:Label ID="welcome_msg" runat="server"></asp:Label>
+                                </a>
+                            </li>
+                            <li class="navbar-nav">
+                                <a href="http://test-mesbrook.cloudapp.net/inbox.php">Inbox
+                                    <span class="badge"></span>
+                                </a>
+                            </li>
+                            <li class="navbar-left">
+                                <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <%--<a href="fonts/">fonts/</a>--%>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="../Financial%20Statement/Chart%20of%20Account">Chart of Accounts</a></li>
-                                <li><a href="../Journal%20and%20Ledger/General%20Journal">View All Posted Transactions</a></li>
-                                <li><a href="../Journal%20and%20Ledger/UnpostTranx.aspx">View All Pending Transactions</a></li>
-                                <li><a href="../Journal%20and%20Ledger/RejectedTransaction.aspx">View All Rejected Transactions</a></li>
-                                <li><a href="../Financial%20Statement/TrialBalance">Trial Balance</a></li>
-                                <li><a href="../Financial%20Statement/IncomeStatement">Income Statement</a></li>
-                                <li><a href="../Financial%20Statement/BalanceSheet.aspx">Balance Sheet</a></li>
-                                <li><a href="../Financial%20Statement/OwnerEquityState">Statement of Owner's Equity</a></li>
-                                <li><a href="../Financial%20Statement/CashFlowStatement">Cash Flow Statement</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown" style="margin-right: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Record<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Journal Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Adjusting Entry</a></li>
-                                <li><a href="http://test-mesbrook.cloudapp.net/journalentry.php">Closing Entry</a></li>
-                            </ul>
-                        </li>
-                        <!-- Links for Calculator and Calendar Modals and Wiki-->
-                        <li style="margin-right: 20px;">
-                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper">
-                                <a href="#" data-toggle="modal" data-target="#calendarModal" onclick="reset_cal();">
-                                    <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image glyphicon glyphicon-calendar navbar-header"></i>
-                                </a>
-                            </span>
-                        </li>        
-                        <li style="margin-right: 20px;">
-                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper2">
-                                <a href="#" data-toggle="modal" data-target="#calculatorModal">
-                                    <img src="http://test-mesbrook.cloudapp.net/dist/images/calculator.png" color="#A4A4A4" class="image2 navbar-header" height="19" width="19"></img>
-                                </a>
-                            </span>
-                        </li>
-                        <li style="margin-right: 20px;">
-                            <span class="input-group btn navbar-left navbar-brand nav navbar-header wrapper3">
-                                <a href="https://polyaccounting.wordpress.com/">
-                                    <i style="color: #A4A4A4; height: 22px; width: 22px;" class="image3 glyphicon glyphicon-question-sign navbar-header"></i>
-                                </a>
-                            </span>
-                        </li>
-                        <!-- End Links for Calculator and Calendar Modals -->
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--
-                        <?php
-                            global $inbox_ct;
-                            if (isset($_SESSION['user'])){
-                                echo "<li class=\"navbar-left\">
-                                <a>".$welcome_msg."</a></li><li class=\"navbar-nav\"><a href=\"http://test-mesbrook.cloudapp.net/inbox.php">Inbox <span class=\"badge\">".$inbox_ct."</span></a></li><li
-                                class=\"navbar-left\"><form role=\"form\"
-                                class=\"navbar-form navbar-left\" method=\"post\"
-                                action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "\"><button
-                                type=\"submit\" class=\"btn btn-danger\"
-                                name=\"logout\">Log Out</button></form></li>";
-                            }
-                        ?>-->
-                        <li class="navbar-left">
-                            <a>
-                                <asp:Label ID="welcome_msg" runat="server"></asp:Label>
-                            </a>
-                        </li>
-                        <li class="navbar-nav">
-                            <a href="http://test-mesbrook.cloudapp.net/inbox.php">Inbox
-                                <span class="badge"></span>
-                            </a>
-                        </li>
-                        <li class="navbar-left">
-                            <asp:Button ID="logout" runat="server" Text="Log Out" OnClick="logout_Click" CssClass="btn btn-danger" />
-                        </li>
-                    </ul>
-                </div>
+            </nav>
+            <div id="Content">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <div id="Panel" class="container text-center">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <div class="container">
+                                                <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" TitleFormat="Month" Width="400px">
+                                                    <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
+                                                    <DayStyle Width="14%" />
+                                                    <NextPrevStyle Font-Size="8pt" ForeColor="White" />
+                                                    <OtherMonthDayStyle ForeColor="#999999" />
+                                                    <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
+                                                    <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
+                                                    <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
+                                                    <TodayDayStyle BackColor="#CCCC99" />
+                                                </asp:Calendar>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="container" style="width: 320px; height: 310px; background-color: white">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <asp:HiddenField ID="Operation" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <asp:TextBox ID="Result" runat="server" CssClass="form-control text-right"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="Butt7" runat="server" Text="7" CssClass="btn" OnClick="Butt7_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt8" runat="server" Text="8" CssClass="btn" OnClick="Butt8_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt9" runat="server" Text="9" CssClass="btn" OnClick="Butt9_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Divide" runat="server" Text="/" CssClass="btn" OnClick="Divide_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Clear" runat="server" Text="CLR" CssClass="btn" OnClick="Clear_Click" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="Butt4" runat="server" Text="4" CssClass="btn" OnClick="Butt4_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt5" runat="server" Text="5" CssClass="btn" OnClick="Butt5_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt6" runat="server" Text="6" CssClass="btn" OnClick="Butt6_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Time" runat="server" Text="*" CssClass="btn" OnClick="Time_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Del" runat="server" Text="DEL" CssClass="btn" OnClick="Del_Click" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="Butt1" runat="server" Text="1" CssClass="btn" OnClick="Butt1_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt2" runat="server" Text="2" CssClass="btn" OnClick="Butt2_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Butt3" runat="server" Text="3" CssClass="btn" OnClick="Butt3_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Subtr" runat="server" Text="-" CssClass="btn" OnClick="Subtr_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="ButtLef" runat="server" Text="(" CssClass="btn" OnClick="ButtLef_Click" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="Butt0" runat="server" Text="0" CssClass="btn" OnClick="Butt0_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Buttdot" runat="server" Text="." CssClass="btn" OnClick="Buttdot_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Buttequal" runat="server" Text="=" CssClass="btn" OnClick="Buttequal_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="Plus" runat="server" Text="+" CssClass="btn" OnClick="Plus_Click" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:Button ID="ButtRight" runat="server" Text=")" CssClass="btn" OnClick="ButtRight_Click" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
             </div>
-        </nav>
-        <div id="Content">
-                <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-                <div id="Panel" class="container text-center">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <div class="container">
-                                            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" TitleFormat="Month" Width="400px">
-                                                <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
-                                                <DayStyle Width="14%" />
-                                                <NextPrevStyle Font-Size="8pt" ForeColor="White" />
-                                                <OtherMonthDayStyle ForeColor="#999999" />
-                                                <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
-                                                <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
-                                                <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
-                                                <TodayDayStyle BackColor="#CCCC99" />
-                                            </asp:Calendar>
-                                        </div>
-
-                                    </td>
-                                    <td>
-                                        <div class="container" style="width: 320px; height: 310px; background-color: white">
-                                            <table class="table">
-                                                <tr>
-                                                    <td colspan="5">
-                                                        <asp:HiddenField ID="Operation" runat="server" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5">
-                                                        <asp:TextBox ID="Result" runat="server" CssClass="form-control text-right"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="Butt7" runat="server" Text="7" CssClass="btn" OnClick="Butt7_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt8" runat="server" Text="8" CssClass="btn" OnClick="Butt8_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt9" runat="server" Text="9" CssClass="btn" OnClick="Butt9_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Divide" runat="server" Text="/" CssClass="btn" OnClick="Divide_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Clear" runat="server" Text="CLR" CssClass="btn" OnClick="Clear_Click" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="Butt4" runat="server" Text="4" CssClass="btn" OnClick="Butt4_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt5" runat="server" Text="5" CssClass="btn" OnClick="Butt5_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt6" runat="server" Text="6" CssClass="btn" OnClick="Butt6_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Time" runat="server" Text="*" CssClass="btn" OnClick="Time_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Del" runat="server" Text="DEL" CssClass="btn" OnClick="Del_Click" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="Butt1" runat="server" Text="1" CssClass="btn" OnClick="Butt1_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt2" runat="server" Text="2" CssClass="btn" OnClick="Butt2_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Butt3" runat="server" Text="3" CssClass="btn" OnClick="Butt3_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Subtr" runat="server" Text="-" CssClass="btn" OnClick="Subtr_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="ButtLef" runat="server" Text="(" CssClass="btn" OnClick="ButtLef_Click" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="Butt0" runat="server" Text="0" CssClass="btn" OnClick="Butt0_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Buttdot" runat="server" Text="." CssClass="btn" OnClick="Buttdot_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Buttequal" runat="server" Text="=" CssClass="btn" OnClick="Buttequal_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="Plus" runat="server" Text="+" CssClass="btn" OnClick="Plus_Click" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:Button ID="ButtRight" runat="server" Text=")" CssClass="btn" OnClick="ButtRight_Click" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-        </div>
-    </form>
+        </form>
     </div>
 </body>
 </html>
