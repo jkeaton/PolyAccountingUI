@@ -1146,7 +1146,7 @@ namespace AccountingJournal.Code
             return list;
         }
 
-        public static Dictionary<string, string> GetUserInfo()
+        public static Dictionary<String, String> GetUserInfo()
         {
             // Still working on this
             Dictionary<String, String> user_info = null;
@@ -1174,7 +1174,7 @@ namespace AccountingJournal.Code
                     cmd.CommandText = query;
                     SqlDataReader reader = cmd.ExecuteReader();
                     // There should only be one result returned from the database and that's our user
-                    user_info = new Dictionary<string, string>();
+                    user_info = new Dictionary<String, String>();
                     while (reader.Read())
                     {
                         user_info["ID"] = reader.GetString(0);
@@ -1198,7 +1198,7 @@ namespace AccountingJournal.Code
                     , user_cookie.Value);
                 
             }
-            List<string> keyList = new List<string>(user_info.Keys);
+            List<String> keyList = new List<String>(user_info.Keys);
             // If ANY of the necessary keys in this dictionary have not been set, thrown the appropriate exception
             if (!(keyList.Contains("ID") && keyList.Contains("UserName") && keyList.Contains("FName")
                     && keyList.Contains("LName") && keyList.Contains("UType") && keyList.Contains("Email")
