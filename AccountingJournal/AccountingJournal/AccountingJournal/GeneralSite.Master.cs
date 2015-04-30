@@ -73,6 +73,7 @@ namespace AccountingJournal
 
         protected void logout_Click(object sender, EventArgs e)
         {
+            Response.Cookies["userId"].Expires = DateTime.Now.AddDays(-1);
             Session.Clear();
             Response.Redirect("http://test-mesbrook.cloudapp.net/index.php");
         }
