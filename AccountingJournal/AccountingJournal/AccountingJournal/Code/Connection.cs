@@ -1186,10 +1186,6 @@ namespace AccountingJournal.Code
                         user_info["IsLoginDisabled"] = reader.GetString(6);
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
                 finally
                 {
                     conn.Close();
