@@ -96,8 +96,10 @@
                 $sql = ("SELECT * FROM AppUser WHERE UserName = '".$username."'");
                 $results = sqlsrv_query($dbConnection, $sql);
                 // Only care about the first row (should be the only row)
-                $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC)
-                    or die('Index page unable to get results from database');
+                $row = sqlsrv_fetch_array( $results, SQLSRV_FETCH_ASSOC);
+                if (!$row){
+                    header('Location: http://test-mesbrook.cloudapp.net/index.php'); 
+                }
                 if ($hashed_pass !== $row['PWHash']){
                     popup('hashed passwords do not match; '.$hashed_pass.' != '.$row['PWHash']);
                     return false;
