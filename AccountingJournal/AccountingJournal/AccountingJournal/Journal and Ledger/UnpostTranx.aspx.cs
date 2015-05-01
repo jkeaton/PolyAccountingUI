@@ -32,7 +32,7 @@ namespace AccountingJournal.Journal_and_Ledger
             {
                 return;
             }
-            List<IndiJournal> unpost = Connection.DisplayUnpostTranx(username, pass).Cast<IndiJournal>().ToList();
+            List<IndiJournal> unpost = Connection.DisplayUnpostTranx().Cast<IndiJournal>().ToList();
             List<String> dr_html = new List<String>();
             List<String> cr_html = new List<String>();
             List<int> id = new List<int>();
@@ -44,7 +44,6 @@ namespace AccountingJournal.Journal_and_Ledger
                 if (!id.Contains(j.TranxID))
                 {
                     id.Add(j.TranxID);
-
                 }
                 JourHeader newJournal = new JourHeader(j.TranxID, j.date, j.postdate, j.TotalAccEff);
                 if (!Journalheader.Contains(newJournal))
@@ -116,13 +115,19 @@ namespace AccountingJournal.Journal_and_Ledger
                             post.Attributes.Add("class", "btn btn-primary");
                             post.Attributes.Add("style", "width:80px");
                             post.Text = "Post";
-                            post.Click += new EventHandler(PostButton_Click);
+                            if (Int32.Parse(Session["usertype"].ToString()) == 2)
+                            {
+                                post.Click += new EventHandler(PostButton_Click);
+                            }
                             Action.Controls.Add(post);
                             Button Reject = new Button();
                             Reject.Attributes.Add("class", "btn btn-danger");
                             Reject.Attributes.Add("style", "width:80px");
                             Reject.Text = "Reject";
-                            Reject.Click += new EventHandler(RejectButton_Click);
+                            if (Int32.Parse(Session["usertype"].ToString()) == 2)
+                            {
+                                Reject.Click += new EventHandler(RejectButton_Click);
+                            }
                             Action.Controls.Add(Reject);
                             Action.Attributes.Add("rowspan", (Journalheader[i].TotalAccEff + 1).ToString());
                             tempRow.Cells.Add(Action);
