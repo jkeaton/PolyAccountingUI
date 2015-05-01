@@ -15,7 +15,9 @@
                             Create New Account
                         </div>
                         <div class="panel-body">
-                            <table class="container" style="width: 100%">
+                            <div class="container" >
+                                 <table style="width: 100%">
+                                
                                 <tr>
                                     <td style="width: 150px">
                                         <div class="text-left">Account #:</div>
@@ -68,6 +70,8 @@
                                     </td>
                                 </tr>
                             </table>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -77,7 +81,7 @@
                     <div class="panel-heading">
                         Edit Account
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body container">
                         <table class="table" style="margin-bottom:0">
                             <tr>
                                 <th class="text-center" style="width: 100px">Account #</th>
