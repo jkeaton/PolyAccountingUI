@@ -573,7 +573,7 @@ namespace AccountingJournal.Code
             return list;
         }
 
-        public static ArrayList DisplayUnpostTranx(string username, string pass)
+        public static ArrayList DisplayUnpostTranx()
         {
             ArrayList list = new ArrayList();
             IndiJournal Journal;
@@ -592,62 +592,47 @@ namespace AccountingJournal.Code
                                  + "   AND NOT EXISTS"
                                  + "   (SELECT 1 FROM [dbo].[Rejected] WHERE TranxID = j.TranxID"
                                  + "   ) order by 1 desc, 7 desc");
-            try
-            {
-                 SqlConnection connection = new SqlConnection();
-            
-            try
-            {
-                string Connstring = string.Format(@"Data Source=localhost;
-                                                Initial Catalog=TransactionDB;
-                                                Persist Security Info=True;
-                                                User ID={0}
-                                                ;Password={1}", username, pass);
-                connection = new SqlConnection(Connstring);
-                SqlCommand command = new SqlCommand("", connection);
-                connection.Open();
-                command.CommandText = query;
-                SqlDataReader reader = command.ExecuteReader();
-
-                //conn.Open();
-                //cmd.CommandText = query;
-                //SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    Journal = new IndiJournal();
-                    Journal.date = reader.GetDateTime(0);
-                    Journal.Account = reader.GetString(1);
-                    Journal.Desc = reader.GetString(2);
-                    Journal.AccNum = reader.GetInt32(3);
-                    if (!reader.IsDBNull(4))
+                    conn.Open();
+                    cmd.CommandText = query;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        Journal.Debit = reader.GetDecimal(4);
+                        Journal = new IndiJournal();
+                        Journal.date = reader.GetDateTime(0);
+                        Journal.Account = reader.GetString(1);
+                        Journal.Desc = reader.GetString(2);
+                        Journal.AccNum = reader.GetInt32(3);
+                        if (!reader.IsDBNull(4))
+                        {
+                            Journal.Debit = reader.GetDecimal(4);
+                        }
+                        if (!reader.IsDBNull(5))
+                        {
+                            Journal.Credit = reader.GetDecimal(5);
+                        }
+                        Journal.IsDebit = reader.GetString(6);
+                        if (!reader.IsDBNull(7))
+                        {
+                            Journal.postdate = reader.GetDateTime(7);
+                        }
+                        Journal.TranxID = reader.GetInt32(8);
+                        Journal.TotalAccEff = reader.GetInt32(9);
+                        list.Add(Journal);
                     }
-                    if (!reader.IsDBNull(5))
-                    {
-                        Journal.Credit = reader.GetDecimal(5);
-                    }
-                    Journal.IsDebit = reader.GetString(6);
-                    if (!reader.IsDBNull(7))
-                    {
-                        Journal.postdate = reader.GetDateTime(7);
-                    }
-                    Journal.TranxID = reader.GetInt32(8);
-                    Journal.TotalAccEff = reader.GetInt32(9);
-                    list.Add(Journal);
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return list;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return list;
-        }
-
+        
         public static DataTable ManageAccDisplay()
         {
             string query = string.Format("EXEC [ManageAccount]");
@@ -661,7 +646,7 @@ namespace AccountingJournal.Code
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
+           }
             finally
             {
                 conn.Close();

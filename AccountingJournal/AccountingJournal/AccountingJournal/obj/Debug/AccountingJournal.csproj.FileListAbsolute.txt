@@ -94,6 +94,5 @@ C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJourn
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Antlr3.Runtime.pdb
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Newtonsoft.Json.xml
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\bin\Microsoft.AspNet.FriendlyUrls.xml
-C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.csprojResolveAssemblyReference.cache
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.dll
 C:\Users\Ritchie\Documents\Git\PolyAccountingUI\PolyAccountingUI\AccountingJournal\AccountingJournal\AccountingJournal\obj\Debug\AccountingJournal.pdb

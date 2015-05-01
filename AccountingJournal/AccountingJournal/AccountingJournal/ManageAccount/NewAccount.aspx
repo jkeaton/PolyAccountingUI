@@ -9,7 +9,7 @@
                 Accounts
             </div>
             <div class="panel-body">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="panel panel-primary form-group text-center">
                         <div class="panel-heading">
                             Create New Account
