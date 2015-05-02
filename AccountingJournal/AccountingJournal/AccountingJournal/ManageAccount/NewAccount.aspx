@@ -9,70 +9,66 @@
                 Accounts
             </div>
             <div class="panel-body">
-                <div class="container">
-                    <div class="panel panel-primary form-group text-center">
-                        <div class="panel-heading">
-                            Create New Account
-                        </div>
-                        <div class="panel-body">
-                            <table class="container" style="width: 100%">
-                                <tr>
-                                    <td style="width: 150px">
-                                        <div class="text-left">Account #:</div>
-                                        <div style="width:200px">
-                                            <asp:TextBox ID="AccountNumber" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>
-                                        </div>
-                                    </td>
-                                    <td style="width: 250px">
-                                        <div class="text-left">Account Name:</div>
-                                        <div>
-                                            <asp:TextBox ID="Acc_Name" runat="server" CssClass="form-control" Width="250px"></asp:TextBox>
-                                        </div>
-                                    </td>
-                                    <td style="width: 350px">
-                                        <div class="text-left">Description:</div>
-                                        <div>
-                                            <asp:TextBox ID="Description" runat="server" CssClass="form-control"></asp:TextBox>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="text-left">Normal Balance:</div>
-                                        <div>
-                                            <asp:DropDownList ID="NorBal" runat="server" CssClass="form-control" Width="150px">
-                                                <asp:ListItem Value="1">Debit</asp:ListItem>
-                                                <asp:ListItem Value="0">Credit</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-left">Account Type:</div>
-                                        <div>
-                                            <asp:DropDownList ID="Acc_Type" runat="server" DataSourceID="SqlDataSource4" CssClass="form-control" DataTextField="Type" DataValueField="TypeID" Width="250px"></asp:DropDownList>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-left">Class:</div>
-                                        <div>
-                                            <asp:DropDownList ID="Acc_Class" runat="server" DataSourceID="SqlDataSource5" CssClass="form-control" DataTextField="Class" DataValueField="ClassID"></asp:DropDownList>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align:right">
-                                        <div style="visibility:hidden">Create</div>
-                                        <asp:Button ID="Create" runat="server" Text="Create" CssClass="btn btn-primary" OnClick="Create_Click" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                <div class="panel panel-primary form-group text-center">
+                    <div class="panel-heading">
+                        Create New Account
+                    </div>
+                    <div class="panel-body container-fluid">
+                        <table class="container" style="width: 100%">
+                            <tr>
+                                <td style="width: 150px">
+                                    <div class="text-left">Account #:</div>
+                                    <div style="width:200px">
+                                        <asp:TextBox ID="AccountNumber" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>
+                                    </div>
+                                </td>
+                                <td style="width: 250px">
+                                    <div class="text-left">Account Name:</div>
+                                    <div>
+                                        <asp:TextBox ID="Acc_Name" runat="server" CssClass="form-control" Width="250px"></asp:TextBox>
+                                    </div>
+                                </td>
+                                <td style="width: 350px">
+                                    <div class="text-left">Description:</div>
+                                    <div>
+                                        <asp:TextBox ID="Description" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="text-left">Normal Balance:</div>
+                                    <div>
+                                        <asp:DropDownList ID="NorBal" runat="server" CssClass="form-control" Width="150px">
+                                            <asp:ListItem Value="1">Debit</asp:ListItem>
+                                            <asp:ListItem Value="0">Credit</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-left">Account Type:</div>
+                                    <div>
+                                        <asp:DropDownList ID="Acc_Type" runat="server" DataSourceID="SqlDataSource4" CssClass="form-control" DataTextField="Type" DataValueField="TypeID" Width="250px"></asp:DropDownList>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-left">Class:</div>
+                                    <div>
+                                        <asp:DropDownList ID="Acc_Class" runat="server" DataSourceID="SqlDataSource5" CssClass="form-control" DataTextField="Class" DataValueField="ClassID"></asp:DropDownList>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align:right">
+                                    <div style="visibility:hidden">Create</div>
+                                    <asp:Button ID="Create" runat="server" Text="Create" CssClass="btn btn-primary" OnClick="Create_Click" />
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <div class="container">
                 <div class="panel panel-primary form-group text-center">
                     <div class="panel-heading">
                         Edit Account
