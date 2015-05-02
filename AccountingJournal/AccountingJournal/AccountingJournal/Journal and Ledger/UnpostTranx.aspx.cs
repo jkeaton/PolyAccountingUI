@@ -23,7 +23,7 @@ namespace AccountingJournal.Journal_and_Ledger
             Boolean printButtons;
             try
             {
-                printButtons = Connection.isManager(this.Session["username"].ToString());
+                printButtons = Connection.isManager();
             }
             catch (NullReferenceException)
             {

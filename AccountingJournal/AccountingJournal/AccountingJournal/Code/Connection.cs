@@ -50,8 +50,10 @@ namespace AccountingJournal.Code
             return count;
         }
 
-        public static Boolean isManager(string uname)
+        public static Boolean isManager()
         {
+            Dictionary<string, string> curr_user = Connection.GetUserInfo();
+            string uname = curr_user["UserName"];
             int typeID = 0;
             string query = string.Format("SELECT [TypeID] "
                                         + "FROM [TransactionDB].[dbo].[UserList] "
