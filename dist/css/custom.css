@@ -345,5 +345,6 @@ i {
     font-weight: bold;
 }
 #table_portion {
+    height: 250px;
     overflow-y: auto;
 }

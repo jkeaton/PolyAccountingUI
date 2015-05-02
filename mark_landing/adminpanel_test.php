@@ -119,7 +119,7 @@
         if ($errCount == 0){
             if (createUser()){
                 $_POST = array();
-		        header('Location: http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php');
+		        //header('Location: http://test-mesbrook.cloudapp.net/mark_landing/adminpanel.php');
             }
         } 
     }
@@ -782,3 +782,4 @@
         </div>
     </body>
 </html>
+
