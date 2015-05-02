@@ -20,7 +20,15 @@ namespace AccountingJournal.Journal_and_Ledger
         private void DisplayUnpostTranx()
         {
             List<IndiJournal> unpost = Connection.DisplayUnpostTranx().Cast<IndiJournal>().ToList();
-            Boolean printButtons = Connection.isManager(Session["username"].ToString());
+            Boolean printButtons;
+            try
+            {
+                printButtons = Connection.isManager(this.Session["username"].ToString());
+            }
+            catch (NullReferenceException)
+            {
+                printButtons = true;
+            }
             List<String> dr_html = new List<String>();
             List<String> cr_html = new List<String>();
             List<int> id = new List<int>();
