@@ -575,7 +575,7 @@
                                     <select name="utype" class="form-control">
                                         <option value="Normal">Normal</option>
                                         <option value="Manager">Manager</option>
-                                        <option value="Admin">Admin</option>
+                                        <!--<option value="Admin">Admin</option>-->
                                     </select>
                                 </div>
                             </div>

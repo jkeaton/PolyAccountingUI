@@ -89,8 +89,7 @@
                     .",[TypeID] "
                     ."FROM [TransactionDB].[dbo].[UserList] "
                     ."WHERE UserName = '".$username."'");
-                echo $sql;
-                $results = sqlsrv_query($dbConnection, $sql);
+                $results = sqlsrv_query($dbConnection, $sql) or header('Location: http://test-mesbrook.cloudapp.net/index.php');
                 $row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC);
                 $utype = $row['TypeID'];
                 $uid = $row['ID'];
@@ -167,7 +166,7 @@
                             </div>
                             <div id="helpLinks" class="col-xs-6 col-sm-6 col-sm-offset-3 text-right right-btn">
                                 <a href="passwordreset.php">Forgot my Password</a></br>
-                                <a href="newaccount.php">Create new Account</a>
+                                <!--<a href="newaccount.php">Create new Account</a>-->
                             </div>
                         </div>
                         <div class="row">

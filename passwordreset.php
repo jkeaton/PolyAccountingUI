@@ -3,8 +3,8 @@
     include "dist/dbconnect.php";
     include "dist/common.php";
     // Attempt to connect to the SQL Server Database
-    if (!isset($_SESSION['dbConnection'])){
-        $_SESSION['dbConnection'] = db_connect('Noman', 'odysseus');
+    if (!isset($dbConnection)){
+        $dbConnection = db_connect('Noman', 'odysseus');
     }
     $currUser = $username = $usernameErr = "";
     
@@ -35,11 +35,11 @@
     } 
 
     function send_reset_request(){
-        global $username;
+        global $username, $dbConnection;
         $date = new DateTime("now");
         $formatted_datetime = $date->format("Y-m-d\TH:i:s");
         $sql = "insert into Email (sender, recipient, [time], [subject], [message], deleted, seen) values ('".$username."', 'admin', CONVERT(datetime, '".$formatted_datetime."', 126), 'password reset', 'Please reset the password for user ''".$username."''.', 0, 0)";
-        if (!submit_query($sql)){
+        if (!submit_query($sql, $dbConnection)){
             die(php_print(print_r(sqlsrv_errors(), true)));
         }
     }   

@@ -21,13 +21,13 @@
     }
 
     function get_main_menu(){
-        if ($_SESSION['level'] === 0){
+        if ($_SESSION['level'] === 3){
             return './mark_landing/adminpanel.php';
         }
-        elseif ($_SESSION['level'] === 1){
+        elseif ($_SESSION['level'] === 2){
             return './mark_landing/controlpanel.php';
         }
-        elseif ($_SESSION['level'] === 2){
+        elseif ($_SESSION['level'] === 1){
             return './mark_landing/controlpanel.php';
         }
         else{
