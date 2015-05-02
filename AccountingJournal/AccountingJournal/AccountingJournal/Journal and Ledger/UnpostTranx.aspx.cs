@@ -20,6 +20,7 @@ namespace AccountingJournal.Journal_and_Ledger
         private void DisplayUnpostTranx()
         {
             List<IndiJournal> unpost = Connection.DisplayUnpostTranx().Cast<IndiJournal>().ToList();
+            Boolean printButtons = Connection.isManager(Session["username"].ToString());
             List<String> dr_html = new List<String>();
             List<String> cr_html = new List<String>();
             List<int> id = new List<int>();
@@ -104,13 +105,19 @@ namespace AccountingJournal.Journal_and_Ledger
                             post.Attributes.Add("style", "width:80px");
                             post.Text = "Post";
                             post.Click += new EventHandler(PostButton_Click);
-                            Action.Controls.Add(post);
+                            if (printButtons)
+                            {
+                                Action.Controls.Add(post);
+                            }
                             Button Reject = new Button();
                             Reject.Attributes.Add("class", "btn btn-danger");
                             Reject.Attributes.Add("style", "width:80px");
                             Reject.Text = "Reject";
                             Reject.Click += new EventHandler(RejectButton_Click);
-                            Action.Controls.Add(Reject);
+                            if (printButtons)
+                            {
+                                Action.Controls.Add(Reject);
+                            }
                             Action.Attributes.Add("rowspan", (Journalheader[i].TotalAccEff + 1).ToString());
                             tempRow.Cells.Add(Action);
                             firstLine = false;

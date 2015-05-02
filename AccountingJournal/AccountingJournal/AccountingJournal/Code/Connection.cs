@@ -50,6 +50,33 @@ namespace AccountingJournal.Code
             return count;
         }
 
+        public static Boolean isManager(string uname)
+        {
+            int typeID = 0;
+            string query = string.Format("SELECT [TypeID] "
+                                        + "FROM [TransactionDB].[dbo].[UserList] "
+                                        + "WHERE [UserName] = '{0}'", uname);
+            try
+            {
+                conn.Open();
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    typeID = reader.GetInt32(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return (typeID == 2);
+        }
+
         public static User GetUserByID(int ID)
         {
            // ArrayList list = new ArrayList();
